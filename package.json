@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "node build/server.js",
-    "pretest": "eslint . --ext .js --ignore-path .gitignore --fix",
+    "pretest": "eslint . --ext .js --ignore-path .gitignore",
     "test": "echo \"No tests\"",
     "clean": "rm -rf build",
     "build-server": "babel -d ./build ./server",
