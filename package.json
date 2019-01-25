@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node build/server.js",
     "pretest": "eslint . --ext .js --ignore-path .gitignore",
-    "test": "echo \"No tests\"",
+    "test": "jest",
     "clean": "rm -rf build",
     "build-server": "babel -d ./build ./server",
     "build": "npm run clean && npm run build-server",
@@ -31,16 +31,26 @@
     "@babel/core": "^7.2.2",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
+    "babel-core": "^7.0.0-bridge.0",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.15.0"
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-jest": "^22.1.3",
+    "jest": "^23.6.0"
   },
   "eslintConfig": {
-    "extends": "airbnb-base",
+    "extends": [
+      "airbnb-base",
+      "plugin:jest/recommended"
+    ],
     "env": {
       "node": true,
-      "jest": true
-    }
+      "jest": true,
+      "jest/globals": true
+    },
+    "plugins": [
+      "jest"
+    ]
   },
   "eslintIgnore": [
     "node_modules"
