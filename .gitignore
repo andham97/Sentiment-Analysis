@@ -59,3 +59,8 @@ typings/
 
 # next.js build output
 .next
+
+server/localdev-config.json
+vcap-local.js
+credentials.json
+localdev-config.json
