@@ -2,19 +2,33 @@
   "name": "sentiment-analysis",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "standard && jest",
-    "start": "node server/server.js"
+    "start": "node build/server.js",
+    "clean": "rm -rf build",
+    "build-server": "babel -d ./build ./server",
+    "build": "npm run clean && npm run build-server",
+    "debug": "babel-node server/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andham97/Sentiment-Analysis.git"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": []
+  },
   "author": "Andreas Hammer, Dina Rosvoll, Oda Steinland Skaug",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/andham97/Sentiment-Analysis/issues"
+  "dependencies": {
+    "express": "^4.16.4"
   },
-  "homepage": "https://github.com/andham97/Sentiment-Analysis#readme"
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1"
+  }
 }
