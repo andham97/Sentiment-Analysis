@@ -65,3 +65,4 @@ vcap-local.js
 credentials.json
 localdev-config.json
 .DS_Store
+package-lock.json
