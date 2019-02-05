@@ -15,6 +15,8 @@ RUN cd /app; npm install; npm install --only=dev
 
 COPY . /app
 
+RUN npm run build
+
 ENV NODE_ENV production
 ENV PORT 3000
 
