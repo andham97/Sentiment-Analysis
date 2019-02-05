@@ -11,7 +11,7 @@ RUN apt-get update \
 
 # Install npm production packages
 COPY package.json /app/
-RUN cd /app; npm install
+RUN cd /app; npm install; npm install --only=dev
 
 COPY . /app
 
