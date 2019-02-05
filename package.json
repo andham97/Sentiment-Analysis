@@ -1,4 +1,8 @@
 {
+  "engines": {
+    "node": "9.3.0",
+    "npm": "6.5.0"
+  },
   "name": "sentiment-analysis",
   "version": "1.0.0",
   "description": "",
