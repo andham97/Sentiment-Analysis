@@ -15,7 +15,7 @@ RUN cd /app; npm install; npm install --only=dev
 
 COPY . /app
 
-RUN npm run build
+RUN npm run build; ls build; ls build/server; cat build/server/server.js
 
 ENV NODE_ENV production
 ENV PORT 3000
