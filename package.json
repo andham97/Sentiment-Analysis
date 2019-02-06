@@ -13,7 +13,7 @@
     "clean": "rm -rf build && mkdir build",
     "build-server": "babel -d ./build/server ./src/server",
     "build-client": "webpack",
-    "build": "npm run clean && npm run build-server && npm run build-client",
+    "build": "npm run clean && npm install && npm install --only=dev && npm run build-server && npm run build-client",
     "debug-server": "nodemon --exec babel-node src/server/server.js",
     "debug-client": "webpack --watch"
   },
