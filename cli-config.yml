@@ -35,14 +35,14 @@ image-name-run : "sentimentanalysis-express-run"
 image-name-tools : "sentimentanalysis-express-tools"
 
 # The command to build the code and docker image for RUN
-build-cmd-run : "npm install"
+build-cmd-run : "npm run build"
 # The command to execute tests for the code in the tools container
 test-cmd : "npm run test"
 # The command to build the code and docker image for DEBUG
 build-cmd-debug : "npm install"
 
 # The command to run the code in the run container
-run-cmd : ""
+run-cmd : "npm start"
 # The command to execute debug of the code in the tools container
 debug-cmd : "npm run debug"
 # The command to stop the code
