@@ -11,6 +11,7 @@ if (appEnv.isLocal) {
   nluParameters = JSON.parse(fs.readFileSync('.ibm-credentials', 'utf8'))['natural-language-understanding'][0].credentials;
 }
 else {
+  console.log(JSON.parse(process.env.VCAP_SERVICES));
   nluParameters = JSON.parse(process.env.VCAP_SERVICES)['natural-language-understanding'][0].credentials;
 }
 nluParameters.version = '2018-11-16';
