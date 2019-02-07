@@ -78,7 +78,7 @@
     "rules": {
       "class-methods-use-this": 0,
       "prefer-destructuring": 0,
-      "brace-style": [1, "stroustrup"]
+      "brace-style": [2, "stroustrup"]
     },
     "settings": {
       "react": {

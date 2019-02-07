@@ -1,23 +1,22 @@
 import express from 'express';
 import path from 'path';
-import NaturalLanguageUnderstandingV1 from 'watson-developer-cloud/natural-language-understanding/v1';
+import NLUV1 from 'watson-developer-cloud/natural-language-understanding/v1';
 import cfenv from 'cfenv';
 import fs from 'fs';
 
 const appEnv = cfenv.getAppEnv();
 
-let nluParameters = {};
+let nluParameters;
 if (appEnv.isLocal) {
-  const services = JSON.parse(fs.readFileSync('./.ibm-credentials', 'utf8'));
-  nluParameters = services['natural-language-understanding'][0].credentials;
-  nluParameters.version = '2018-11-16';
+  nluParameters = fs.readFileSync('.ibm-credentials', 'utf8');
 }
 else {
   nluParameters = process.env.VCAP_SERVICES['natural-language-understanding'][0].credentials;
-  nluParameters.version = '2018-11-16';
 }
+nluParameters.version = '2018-11-16';
 nluParameters.iam_apikey = nluParameters.apikey;
-const nlu = new NaturalLanguageUnderstandingV1(nluParameters);
+
+const nlu = new NLUV1(nluParameters);
 
 const app = express();
 
