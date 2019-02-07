@@ -33,7 +33,8 @@
   "dependencies": {
     "express": "^4.16.4",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "watson-developer-cloud": "^3.17.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
