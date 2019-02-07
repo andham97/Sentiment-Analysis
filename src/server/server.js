@@ -8,7 +8,7 @@ const appEnv = cfenv.getAppEnv();
 
 let nluParameters;
 if (appEnv.isLocal) {
-  nluParameters = fs.readFileSync('.ibm-credentials', 'utf8');
+  nluParameters = JSON.parse(fs.readFileSync('.ibm-credentials', 'utf8'))['natural-language-understanding'][0].credentials;
 }
 else {
   nluParameters = process.env.VCAP_SERVICES['natural-language-understanding'][0].credentials;
@@ -44,6 +44,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(process.cwd(), '/src/client/index.html'));
 });
 
-const server = app.listen(process.env.PORT || 3000);
+const server = app.listen(process.env.PORT || 3000, () => {
+  console.log(`listening on port ${process.env.PORT || 3000}`);
+});
 
 export default server;
