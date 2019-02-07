@@ -66,3 +66,4 @@ credentials.json
 localdev-config.json
 .DS_Store
 package-lock.json
+.ibm-credentials
