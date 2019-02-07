@@ -11,10 +11,8 @@ if (appEnv.isLocal) {
   nluParameters = JSON.parse(fs.readFileSync('.ibm-credentials', 'utf8'))['natural-language-understanding'][0].credentials;
 }
 else {
-  console.log(appEnv.VCAP_SERVICES);
-  console.log(appEnv.services);
-  console.log(appEnv.getService('natural-language-understanding'));
-  nluParameters = appEnv.getService('natural-language-understanding')[0].credentials;
+  console.log(appEnv.services['natural-language-understanding']);
+  nluParameters = appEnv.services['natural-language-understanding'][0].credentials;
 }
 nluParameters.version = '2018-11-16';
 nluParameters.iam_apikey = nluParameters.apikey;
