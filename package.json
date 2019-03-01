@@ -110,6 +110,6 @@
     "node_modules"
   ],
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/enzyme.config.js"
+    "setupFilesAfterEnv": ["<rootDir>/enzyme.config.js"]
   }
 }
