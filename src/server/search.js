@@ -31,6 +31,17 @@ export default {
               }
               result.push(elem);
             }
+            result.sort((a, b) => {
+              if (a.value < b.value)
+                return 1;
+              if (a.value > b.value)
+                return -1;
+              if (a.key < b.key)
+                return -1;
+              if (a.key > b.key)
+                return 1;
+              return 0;
+            });
             if (cachable.rows && cachable.rows.length > 0)
               cache.wordcloud = {
                 value: cachable.rows[0].value,

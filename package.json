@@ -17,7 +17,8 @@
     "debug-server": "nodemon --exec babel-node src/server/server.js",
     "debug-client": "webpack --watch",
     "debug-ws": "nodemon --exec babel-node src/server/ws/webscraper.js",
-    "ws": "babel-node src/server/ws/webscraper.js"
+    "ws": "babel-node src/server/ws/webscraper.js",
+    "prod-ws": "node build/server/ws/webscraper.js"
   },
   "repository": {
     "type": "git",
