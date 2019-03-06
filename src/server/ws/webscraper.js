@@ -3,7 +3,7 @@ import rp from 'request-promise';
 import url from 'url';
 import { cloudant } from '../ics';
 
-const db = cloudant.use('sa-index');
+const db = cloudant.use('sa-meta');
 
 let index;
 
