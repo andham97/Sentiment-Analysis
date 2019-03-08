@@ -13,4 +13,5 @@ else {
 export default {
   getService: service => serviceParameters[service],
   getServiceCredentials: (service, index) => serviceParameters[service][index || 0].credentials,
+  isLocal: appEnv.isLocal,
 };

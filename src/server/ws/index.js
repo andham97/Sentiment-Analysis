@@ -1,4 +1,5 @@
 import { spawn } from 'child_process';
+import appEnv from '../app-env';
 
 const isJSON = (string) => {
   try {
@@ -12,7 +13,7 @@ const isJSON = (string) => {
 
 export default urls => new Promise((resolve) => {
   const data = [];
-  const ws = spawn('npm', ['run', 'ws', '--'].concat(urls));
+  const ws = spawn('npm', ['run', (appEnv.isLocal ? 'ws' : 'prod-ws'), '--'].concat(urls));
   let buffer = '';
   let finished = false;
 
