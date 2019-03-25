@@ -25,6 +25,6 @@ const cloudant = Cloudant({
   ],
 });
 
-const newsapi = new NP('8bb920aa355b41349e02c706ddb277b5');
+const newsapi = new NP(env.getServiceCredentials('newsapi').apikey);
 
 export { nlu, cloudant, newsapi };
