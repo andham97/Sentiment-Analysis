@@ -37,6 +37,8 @@ else {
   serviceParameters = appEnv.services;
 }
 
+console.log(serviceParameters);
+
 export default {
   getService: service => serviceParameters[service],
   getServiceCredentials: (service, index) => serviceParameters[service][index || 0].credentials,
