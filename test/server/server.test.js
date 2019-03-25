@@ -6,20 +6,20 @@ describe('test route for server', () => {
     server.close(done);
   });
 
-  it('should respond with ok', (done) => {
+  it('should respond with data', (done) => {
     let data = '';
 
     http.request({
       host: 'localhost',
       port: process.env.PORT || 3000,
-      path: '/test',
+      path: '/api/wordcloud',
     }, (res) => {
       res.on('data', (chunk) => {
         data += chunk;
       });
 
       res.on('end', () => {
-        expect(data).toBe('test ok');
+        expect(data.length).toBeGreaterThanOrEqual(0);
         done();
       });
     }).end();
