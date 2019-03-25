@@ -12,6 +12,7 @@ const isJSON = (string) => {
 };
 
 export default urls => new Promise((resolve) => {
+  console.log('Starting scraping of valid URLs');
   const data = [];
   const ws = spawn('npm', ['run', (appEnv.isLocal ? 'ws' : 'prod-ws'), '--'].concat(urls));
   let buffer = '';
@@ -25,8 +26,10 @@ export default urls => new Promise((resolve) => {
     if (isJSON(buffer)) {
       data.push(JSON.parse(buffer));
       buffer = '';
-      if (finished)
+      if (finished) {
+        console.log('Scraping finished');
         resolve(data);
+      }
     }
   });
 
@@ -35,7 +38,9 @@ export default urls => new Promise((resolve) => {
   ws.on('close', () => {
     if (buffer !== '')
       finished = true;
-    else
+    else {
+      console.log('Scraping finished');
       resolve(data);
+    }
   });
 });

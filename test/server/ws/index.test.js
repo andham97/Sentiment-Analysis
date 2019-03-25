@@ -7,7 +7,7 @@ const path = 'https://www.bbc.co.uk/news/technology-46790221';
 
 describe('testing of the webscraper', () => {
   beforeAll((done) => {
-    cloudant.use('sa-index').find({ selector: { type: 'ws' } }, (err, result) => {
+    cloudant.use('sa-meta').find({ selector: { type: 'ws' } }, (err, result) => {
       if (!err)
         index = result.docs[0];
       done();
