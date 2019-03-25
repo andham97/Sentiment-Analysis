@@ -35,6 +35,7 @@ if (appEnv.isLocal) {
 }
 else {
   serviceParameters = appEnv.services;
+  console.log(appEnv);
 }
 
 console.log(serviceParameters);
