@@ -1,0 +1,19 @@
+body span{
+  -webkit-transition: font-size 2s;
+      -moz-transition: font-size 2s;
+        -o-transition: font-size 2s;
+           transition: font-size 2s;
+}
+
+.tag-cloud-tag {
+  padding: 2px;
+}
+
+.tag-cloud {
+  text-align: center;
+  padding-top: 34%;
+}
+
+span.tag-cloud-tag:hover, span.tag-cloud-tag:active {
+  font-size: 3.5em ! important;
+}

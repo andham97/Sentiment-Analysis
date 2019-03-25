@@ -1,0 +1,121 @@
+.flexContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.flexItem {
+  flex: 1;
+}
+
+.buttons {
+  margin-top: 1%;
+  margin-left: 22.5%;
+  margin-right: 22.5%;
+}
+
+.searchfield {
+  margin-top: 25%;
+  width: 42%;
+  height: 33px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 4px;
+}
+
+.add_filter {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, .1);
+  color: #3D70B2;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 93px;
+  margin-right: 13%;
+  border-radius: 4px;
+  height: 33px;
+}
+
+.title {
+  padding: 30px;
+  text-align: left;
+  font-size: 25px;
+  color: #3D70B2;
+}
+
+.searchfield_filter {
+  width: 42%;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 4px;
+}
+
+.input_filter {
+  margin-top: 4%;
+  margin-bottom: 4%;
+  margin-left: 2%;
+}
+
+.analysis-check {
+  margin-top: 6%;
+}
+
+.title_Analysis {
+  text-align: left;
+  font-size: 22px;
+  margin-bottom: 13%;
+}
+
+.container_filter{
+  align-self: flex-start;
+}
+
+.apply_filter {
+  margin-top: 3%;
+}
+
+.exit_filter {
+  float: right;
+  margin-top: 1%;
+  margin-right: 1%;
+}
+
+.analysis-check-input-checkbox {
+  margin-top: 5%;
+  margin-left: 12%;
+}
+
+.datePickerFrom{
+  float: right;
+  width: 65%;
+}
+
+.datePickerTo{
+  float: right;
+  margin-left: 18px;
+  width: 57.5%;
+}
+
+.analysis-check-input{
+  margin-right: 10px;
+}
+
+.analysis-check-input-news{
+  margin-top: 4%
+}
+
+.searchNews{
+  width: 85%;
+  height: 21px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 4px;
+  margin-bottom: 8%;
+}
+
+p {
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 2px;
+}

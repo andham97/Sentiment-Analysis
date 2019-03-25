@@ -1,0 +1,31 @@
+.wrapper {
+  display: grid;
+  grid-template-rows: 590px; /*Må endres når data taes inn*/
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-gap: 40px;
+  grid-template-areas:
+    "NewSearch"
+    "WordCloud";
+  padding: 70px;
+  justify-content: center;
+}
+
+@media (min-width: 700px) {
+ .leading {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.new_search {
+  gird-area: 'NewSearch';
+  display: inline;
+  background-color: white;
+
+}
+
+.wordcloud {
+  grid-area: 'WordCloud';
+  display: inline;
+  background-color: white;
+}

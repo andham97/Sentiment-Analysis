@@ -1,0 +1,10 @@
+text[fill="#F7E8D9"] {
+  display: none;
+}
+
+div.label_anger {
+  padding-top: 20px;
+  color: #CC6600;
+  font-size: 16px;
+  font-family: 'sans-serif';
+}

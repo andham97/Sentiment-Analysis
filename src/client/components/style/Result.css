@@ -1,0 +1,79 @@
+.result {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 30px 290px 30px 180px 30px 180px 30px 180px 30px 180px 30px 180px 30px;
+  height: 100px;
+  justify-content: center;
+  grid-row-gap: 15px;
+}
+
+.result > .result_filter {
+  grid-column: 2 / 13;
+  grid-row: 1 / 2;
+  background-color: white;
+  height: 50px;
+}
+
+.result > .result_parameters {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  background-color: white;
+  height: 220px;
+}
+
+.result > .result_graphs_joy {
+  grid-column: 4 / 5;
+  grid-row: 3 / 4;
+  height: 220px;
+  background-color: white;
+}
+
+.result > .result_graphs_anger {
+  grid-column: 6 / 7;
+  grid-row: 3 / 4;
+  height: 220px;
+  background-color: white;
+}
+
+.result > .result_graphs_disgust {
+  grid-column: 8 / 9;
+  grid-row: 3 / 4;
+  height: 220px;
+  background-color: white;
+}
+
+.result > .result_graphs_sadness {
+  grid-column: 10 / 11;
+  grid-row: 3 / 4;
+  height: 220px;
+  background-color: white;
+}
+
+.result > .result_graphs_fear {
+  grid-column: 12 / 13;
+  grid-row: 3 / 4;
+  height: 220px;
+  background-color: white;
+}
+
+.result > .result_graph{
+  grid-column: 2 / 3;
+  grid-row: 5 / 6;
+  background-color: white;
+  height: 330px;
+}
+
+.result > .result_news {
+  grid-column: 4 / 13;
+  grid-row: 5 / 6;
+  background-color: white;
+  height: 330px;
+}
+
+.graphs {
+  margin: 20px;
+}
+
+.graph {
+  margin: 20%;
+}

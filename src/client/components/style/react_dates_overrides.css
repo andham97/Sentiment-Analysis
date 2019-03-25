@@ -1,0 +1,21 @@
+.DateInput_input{
+  font-size: 10px;
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.DateRangePickerInput_arrow_svg{
+  width: 10px;
+  height: 10px;
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+.DateInput{
+  width: 56px;
+}
+.DateRangePickerInput__withBorder{
+  min-width: 138px;
+}
