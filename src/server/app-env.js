@@ -35,7 +35,12 @@ if (appEnv.isLocal) {
 }
 else {
   serviceParameters = appEnv.services;
-  console.log(appEnv);
+  serviceParameters.newsapi = [{
+    credentials: {
+      apikey: process.env.np_apikey,
+    },
+  }];
+  console.log(process.env);
 }
 
 console.log(serviceParameters);
