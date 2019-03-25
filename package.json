@@ -18,7 +18,8 @@
     "debug-client": "webpack --watch",
     "debug-ws": "nodemon --exec babel-node src/server/ws/webscraper.js",
     "ws": "babel-node src/server/ws/webscraper.js",
-    "prod-ws": "node build/server/ws/webscraper.js"
+    "prod-ws": "node build/server/ws/webscraper.js",
+    "nf": "babel-node src/server/news-fetch.js"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "cfenv": "^1.1.0",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",
+    "newsapi": "^2.4.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "request-promise": "^4.2.4",
@@ -92,6 +94,7 @@
       "consistent-return": 0,
       "nonblock-statement-body-position": 0,
       "curly": 0,
+      "no-console": 0,
       "no-shadow": [
         "error",
         {
@@ -111,6 +114,8 @@
     "node_modules"
   ],
   "jest": {
-    "setupFilesAfterEnv": ["<rootDir>/enzyme.config.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/enzyme.config.js"
+    ]
   }
 }

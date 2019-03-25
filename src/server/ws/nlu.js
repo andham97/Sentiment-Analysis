@@ -21,6 +21,9 @@ export default (urlData, cb) => {
   loadExclude((err) => {
     if (err)
       return cb(err);
+    console.log(`Analysing pages ${urlData.length}`);
+    if (urlData.length === 0)
+      return cb(null);
     urlData.forEach((page) => {
       nlu.analyze({
         text: page.body,
@@ -33,26 +36,28 @@ export default (urlData, cb) => {
       }, (err, data) => {
         if (err)
           return cb(err);
-        let entities = data.entities.filter(entry => excludes
-          .indexOf(entry.type.toLowerCase()) === -1);
-        const keys = entities.map(entry => entry.text);
-        entities = entities.map(entry => ({
-          text: entry.text,
-          sentiment: entry.sentiment,
-          relevance: entry.relevance,
-          emotion: entry.emotion,
-          count: entry.count,
-        }));
-        dbIndex.insert({
-          headline: page.headline,
-          url: page.url,
-          keys,
-          analysis: entities,
-        }, (err, result) => {
-          if (err)
-            return cb(err);
-          cb(null, result);
-        });
+        data.entities.filter(entry => excludes
+          .indexOf(entry.type.toLowerCase()) === -1)
+          .forEach((entry) => {
+            const e = {
+              text: entry.text,
+              sentiment: entry.sentiment,
+              relevance: entry.relevance,
+              emotion: entry.emotion,
+              count: entry.count,
+            };
+            dbIndex.insert({
+              headline: page.headline,
+              url: page.url,
+              analysis: e,
+            }, (err) => {
+              if (err)
+                console.log(err);
+              else
+                console.log(`Finished analysing page: ${e.text} ${page.url}`);
+            });
+          });
+        cb(null);
       });
     });
   });

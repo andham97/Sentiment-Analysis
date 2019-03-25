@@ -32,7 +32,7 @@ const ws = (path, cb) => {
           hostname = key;
       });
       if (index[hostname] === undefined)
-        cb(new Error(`Error: Hostname not recognized '${hostname}' `));
+        return cb(new Error(`Error: Hostname not recognized '${hostname}' `));
     }
     rp(path).then((html) => {
       const page = cheerio.load(html);
@@ -51,11 +51,12 @@ const ws = (path, cb) => {
         }
       });
       if (body.length < 500)
-        return cb(new Error('Error: Not sufficient text to analyze'));
+        return cb(new Error(`Error: Not sufficient text to analyze: ${path}`));
       cb(null, {
         headline,
         body,
         url: path,
+        sourceID: index.sourceID,
       });
     }).catch((err) => {
       cb(new Error(`Error: ${err}`));
