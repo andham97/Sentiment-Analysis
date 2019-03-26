@@ -8,6 +8,10 @@ module.exports = {
       use: {
         loader: 'babel-loader',
       },
+    },
+    {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader'],
     }],
   },
   entry: path.resolve(__dirname, 'src/client/client.js'),

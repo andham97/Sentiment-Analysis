@@ -1,0 +1,11 @@
+body {
+  background-color: #F4F7FB;
+  margin: 0px;
+}
+
+.dashboard_header {
+  padding: 30px;
+  text-align: left;
+  background: white;
+  font-size: 28px;
+}

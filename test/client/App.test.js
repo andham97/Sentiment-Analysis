@@ -5,6 +5,7 @@ import App from '../../src/client/App';
 
 describe('Test App component', () => {
   it('should render a simple div', () => {
-    expect(render(<App />).text()).toBe('App');
+    const app = render(<App />);
+    expect(app.find('.add_filter').length).toBe(1);
   });
 });
