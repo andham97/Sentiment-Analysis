@@ -110,6 +110,9 @@
     "node_modules"
   ],
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/enzyme.config.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/enzyme.config.js",
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   }
 }
