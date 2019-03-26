@@ -67,3 +67,4 @@ localdev-config.json
 .DS_Store
 package-lock.json
 .ibm-credentials
+src/server/news-fetch.js
