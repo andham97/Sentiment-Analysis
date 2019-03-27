@@ -119,3 +119,12 @@ p {
   font-style: italic;
   margin-top: 2px;
 }
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.ProgressBar {
+  flex: 1;
+}

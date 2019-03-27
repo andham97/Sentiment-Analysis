@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 class Header extends Component {
   render() {
-    const { name } = this.props;
+    const { name, children } = this.props;
     return (
       <div className="header">
-        <div>{ name }</div>
+        <div>{ name } { children }</div>
       </div>
     );
   }
@@ -15,6 +15,7 @@ class Header extends Component {
 
 Header.propTypes = {
   name: PropTypes.any,
+  children: PropTypes.any,
 };
 
 export default Header;

@@ -67,7 +67,8 @@
   grid-column: 4 / 13;
   grid-row: 5 / 6;
   background-color: white;
-  height: 330px;
+  max-height: 330px;
+  overflow-y:scroll;
 }
 
 .graphs {
@@ -76,4 +77,27 @@
 
 .graph {
   margin: 20%;
+}
+
+.exportPDF {
+  margin-top: 8px;
+  float: right;
+  padding-top: 4px;
+  margin-right: 10px;
+  width: 7.5%;
+}
+
+.param_card {
+  margin: 5%;
+  width: 85%;
+}
+
+.title_param {
+  font-size: 21px;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+li {
+  margin-top: 2%;
 }
