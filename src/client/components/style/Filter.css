@@ -1,0 +1,17 @@
+.filter {
+  height: 50px;
+  width: 220px;
+  border-right: 0.1px solid rgba(0, 0, 0, .5);
+  margin: 0px;
+}
+
+.filter_name{
+  margin-top: 7%;
+  margin-left: 8%;
+}
+
+.arrowDown{
+  float: right;
+  margin-top: 7%;
+  margin-right: 8%;
+}

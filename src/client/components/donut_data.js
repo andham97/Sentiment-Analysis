@@ -23,7 +23,7 @@ const anger = [
     title: 'Joy',
     value: 18,
     color: '#D3C0CD',
-  }
+  },
 ];
 
 export default anger;

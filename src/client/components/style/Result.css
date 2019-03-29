@@ -1,7 +1,7 @@
 .result {
   margin-top: 30px;
   display: grid;
-  grid-template-columns: 30px 290px 30px 180px 30px 180px 30px 180px 30px 180px 30px 180px 30px;
+  grid-template-columns: 10px 380px 30px 170px 30px 170px 30px 170px 30px 170px 30px 170px 10px;
   height: 100px;
   justify-content: center;
   grid-row-gap: 15px;
@@ -83,8 +83,8 @@
   margin-top: 8px;
   float: right;
   padding-top: 4px;
-  margin-right: 10px;
-  width: 7.5%;
+  margin-right: auto;
+
 }
 
 .param_card {
@@ -100,4 +100,32 @@
 
 li {
   margin-top: 2%;
+}
+
+.recharts-default-legend{
+  visibility: hidden;
+}
+
+.recharts-legend-item{
+  visibility: hidden;
+}
+
+.recharts-legend-item-text{
+  visibility: hidden;
+}
+
+.emotionalTone{
+  font-size: 21px;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.filter_bar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filter_bar div {
+  float: left;
 }

@@ -17,6 +17,7 @@ class DonutChart extends Component {
           fontFamily: 'sans-serif',
         }}
         labelPosition={0}
+        animate
       />
       <div className={this.props.label} align='center'>{this.props.name}</div>
     </React.Fragment>);

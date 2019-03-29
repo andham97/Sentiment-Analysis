@@ -2,13 +2,15 @@ import React from 'react';
 import './style/ProgressbarGraph.css';
 import PropTypes from 'prop-types';
 
-const ProgressBar = percent => (
+const ProgressBar = input => (
       <div className="progress-bar">
-        <Filler perc={percent.perc} />
+        <Filler perc={input.perc} color={input.color}/>
       </div>
 );
 
-const Filler = percent => <div className="filler" style={{ width: `${percent.perc}%` }} />;
+const Filler = input => (
+  <div className="filler" style={{ width: `${input.perc}%`, backgroundColor: `#${input.color}` }} />
+);
 
 ProgressBar.propTypes = {
   perc: PropTypes.any,
