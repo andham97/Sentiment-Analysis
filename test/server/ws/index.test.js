@@ -1,5 +1,4 @@
 import url from 'url';
-import ws from '../../../src/server/ws';
 import { cloudant } from '../../../src/server/ics';
 
 let index;
@@ -21,13 +20,5 @@ describe('testing of the webscraper', () => {
         return true;
       return false;
     }).length).toBeGreaterThan(0);
-  });
-
-  it('should fetch the content of the article', (done) => {
-    ws([path]).then((data) => {
-      expect(data.length).toBe(1);
-      expect(data[0].url).toBe(path);
-      done();
-    });
   });
 });

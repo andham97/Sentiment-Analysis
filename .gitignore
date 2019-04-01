@@ -68,3 +68,7 @@ localdev-config.json
 package-lock.json
 .ibm-credentials
 src/server/news-fetch.js
+src/twitterFetch.js
+src/twitterAnalyze.js
+dataset.txt
+cache/

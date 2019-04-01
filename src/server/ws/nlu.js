@@ -49,6 +49,7 @@ export default (urlData, cb) => {
             dbIndex.insert({
               headline: page.headline,
               url: page.url,
+              date: page.date,
               analysis: e,
             }, (err) => {
               if (err)

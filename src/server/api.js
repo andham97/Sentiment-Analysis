@@ -1,6 +1,7 @@
 import { cloudant } from './ics';
 
 const db = cloudant.db.use('sa-index');
+const dbMeta = cloudant.db.use('sa-meta');
 
 export default () => new Promise((resolve) => {
   resolve('Default import not supported');
@@ -10,7 +11,7 @@ export const getWordCloud = () => new Promise((resolve, reject) => {
   db.search('searches', 'basic-search', {
     q: '*:*',
     counts: ['key'],
-    limit: 1,
+    limit: 0,
   }).then((data) => {
     const arr = data.counts.key;
     const result = [];
@@ -74,4 +75,52 @@ export const fetchAll = (query, options) => new Promise((resolve, reject) => {
     search(query, options).then(cb).catch(reject);
   };
   search(query, options).then(cb).catch(reject);
+});
+
+export const addWebScraperHost = entry => new Promise((resolve, reject) => {
+  dbMeta.find({ selector: { type: 'ws' } }, (err, result) => {
+    if (err)
+      return reject(err);
+    const index = result.docs[0];
+    if (index[entry.hostname])
+      return reject(new Error('Error: Hostname already exsists'));
+    index[entry.hostname] = {
+      headline: entry.headline,
+      body: entry.body,
+      exclude: entry.exclude,
+      sourceID: entry.sourceID,
+      date: entry.date,
+    };
+    dbMeta.insert(index, (err) => {
+      if (err)
+        return reject(err);
+      resolve();
+    });
+  });
+});
+
+export const getWebScraperHosts = () => new Promise((resolve, reject) => {
+  dbMeta.find({ selector: { type: 'ws' } }, (err, result) => {
+    if (err)
+      return reject(err);
+    resolve(result.docs[0]);
+  });
+});
+
+export const updateWebScraperHost = host => new Promise((resolve, reject) => {
+  dbMeta.find({ selector: { type: 'ws' } }, (err, result) => {
+    if (err)
+      return reject(err);
+    const index = result.docs[0];
+    if (!index[host.hostname])
+      return reject(new Error('Error: Hostname not recognized'));
+    Object.keys(host).filter(e => e !== 'hostname').forEach((key) => {
+      index[host.hostname][key] = host[key];
+    });
+    dbMeta.insert(index, (err) => {
+      if (err)
+        return reject(err);
+      resolve();
+    });
+  });
 });

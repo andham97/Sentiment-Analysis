@@ -1,6 +1,7 @@
 import cheerio from 'cheerio';
 import rp from 'request-promise';
 import url from 'url';
+import Module from 'module';
 import { cloudant } from '../ics';
 
 const db = cloudant.use('sa-meta');
@@ -32,11 +33,14 @@ const ws = (path, cb) => {
           hostname = key;
       });
       if (index[hostname] === undefined)
-        return cb(new Error(`Error: Hostname not recognized '${hostname}' `));
+        return cb(new Error(`Error: Hostname not recognized '${hostname}'`));
     }
     rp(path).then((html) => {
       const page = cheerio.load(html);
       const headline = page(index[hostname].headline).text();
+      const m = new Module();
+      m._compile(`module.exports = ${index[hostname].date.function}`, '');
+      const date = m.exports(page(index[hostname].date.sel).text());
       let p = page(index[hostname].body);
       index[hostname].exclude.forEach((sel) => {
         p = p.not(sel);
@@ -57,6 +61,7 @@ const ws = (path, cb) => {
         body,
         url: path,
         sourceID: index.sourceID,
+        date,
       });
     }).catch((err) => {
       cb(new Error(`Error: ${err}`));
@@ -87,5 +92,14 @@ const processInput = (i) => {
 };
 
 processInput(2);
+
+const parser = (date) => {
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+    'August', 'September', 'October', 'November', 'Desember'];
+  const month = months.filter(elem => date.indexOf(elem) > -1)[0];
+  const year = date.slice(-5).slice(0, 4);
+  const day = date.slice(date.indexOf(month)).split(', ')[0].slice(month.length + 1);
+  return new Date(`${year}-${months.indexOf(month) + 1}-${day} 12:00:00`);
+};
 
 export default ws;

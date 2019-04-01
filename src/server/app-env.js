@@ -40,10 +40,7 @@ else {
       apikey: process.env.np_apikey,
     },
   }];
-  console.log(process.env);
 }
-
-console.log(serviceParameters);
 
 export default {
   getService: service => serviceParameters[service],
