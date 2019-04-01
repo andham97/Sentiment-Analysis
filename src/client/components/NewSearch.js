@@ -20,15 +20,15 @@ class NewSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false,
       checkedItems: new Map(),
+      show: false,
       startDate: moment(),
       endDate: moment(),
       search: '',
     };
+    this.handleChangeCheckbox = this.handleChangeCheckbox.bind(this);
     this.handleFilterClick = this.handleFilterClick.bind(this);
     this.dateChange = this.dateChange.bind(this);
-    this.handleChangeCheckbox = this.handleChangeCheckbox.bind(this);
   }
 
   updateSearch(event) {
@@ -51,6 +51,7 @@ class NewSearch extends Component {
     const isChecked = e.target.checked;
     this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(item, isChecked) }));
   }
+
 
   dateChange(startDate, endDate) {
     this.setState({
