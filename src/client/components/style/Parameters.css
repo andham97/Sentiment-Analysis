@@ -1,0 +1,11 @@
+.search_text {
+  font-weight: bold;
+}
+
+.applied_filters {
+  font-style: italic;
+}
+
+.parameters {
+  font-size: 16px;
+}

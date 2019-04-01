@@ -1,0 +1,32 @@
+.react-datepicker-popper{
+  width: 250px;
+}
+
+.react-datepicker__current-month{
+  margin-left: 35%;
+}
+
+.react-datepicker__today-button{
+  width: 100%;
+}
+
+.react-datepicker-ignore-onclickoutside{
+  width: 100%;
+  padding: 5%;
+}
+
+.react-datepicker__input-container{
+  width: 100%;
+  padding: 5%;
+}
+
+.react-datepicker__input-container input{
+  width: 100%;
+  padding: 5%;
+}
+
+.chooseDate{
+  font-style: italic;
+  margin-left: 5%;
+  margin-top: 2%
+}
