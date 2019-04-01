@@ -1,5 +1,6 @@
 const newsArticles = [
   {
+    id: 1,
     date: '24.03.19',
     title: 'Trump does something not good',
     newssource: 'BBC',
@@ -17,6 +18,7 @@ const newsArticles = [
     },
   },
   {
+    id: 2,
     date: '25.03.19',
     title: 'USA is going down',
     newssource: 'New York Times',
@@ -34,6 +36,7 @@ const newsArticles = [
     },
   },
   {
+    id: 3,
     date: '26.03.19',
     title: 'Testing',
     newssource: 'New York Times',
@@ -57,6 +60,7 @@ const newsArticles = [
     },
   },
   {
+    id: 4,
     date: '27.03.19',
     title: 'Testing part 2',
     newssource: 'New York Times',

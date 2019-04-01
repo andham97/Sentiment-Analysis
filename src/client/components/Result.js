@@ -9,7 +9,8 @@ import Parameteres from './Parameters';
 import './style/Result.css';
 import Exportpdf from './ExportPDF';
 import NewsArticle from './NewsArticle';
-import Filter from './Filter';
+import Dropdown from './Dropdown';
+import Datepicker from './DatePicker';
 import data from './donut_data';
 import newsArticles from './news_articles';
 
@@ -43,18 +44,16 @@ class Result extends Component {
         <Header class='result_header' name='Sentiment Analysis' />
         <div className = 'result'>
           <div className = 'result_filter'>
-            <Card>
               <div className= 'filter_bar'>
                 <div className='test'>
-                  <Filter name={'Date'}/>
-                  <Filter name={'Emotion'}/>
-                  <Filter name={'Time Interval'}/>
+                  <Dropdown titleList='Date' items={ <Datepicker /> }/>
+                  <Dropdown titleList='Emotion' items={data.map((item, i) => <ul key={i}>{item.title}</ul>)} />
+                  <Dropdown titleList='Time Interval' items={ data }/>
                 </div>
                 <div>
                   <Exportpdf className='exportpdf'/>
                 </div>
               </div>
-            </Card>
           </div>
 
           <div className = 'result_parameters'>
