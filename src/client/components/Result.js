@@ -11,6 +11,7 @@ import Exportpdf from './ExportPDF';
 import NewsArticle from './NewsArticle';
 import Dropdown from './Dropdown';
 import Datepicker from './DatePicker';
+import Checkbox from './Checkbox';
 import data from './donut_data';
 import newsArticles from './news_articles';
 
@@ -47,8 +48,15 @@ class Result extends Component {
               <div className= 'filter_bar'>
                 <div className='test'>
                   <Dropdown titleList='Date' items={ <Datepicker /> }/>
-                  <Dropdown titleList='Emotion' items={data.map((item, i) => <ul key={i}>{item.title}</ul>)} />
-                  <Dropdown titleList='Time Interval' items={ data }/>
+                  <Dropdown titleList='Emotion' items={
+                    data.map((item, i) => <Checkbox
+                        key={i}
+                        value={item.title}
+                      />)
+                  } />
+                  <Dropdown titleList='Time Interval' items={
+                    data.map((item, i) => <ul key={i}>{item.title}</ul>)
+                  } />
                 </div>
                 <div>
                   <Exportpdf className='exportpdf'/>
