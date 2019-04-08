@@ -11,9 +11,9 @@ body span{
 
 .tag-cloud {
   text-align: center;
-  padding-top: 34%;
+  margin: 10%;
 }
 
 span.tag-cloud-tag:hover, span.tag-cloud-tag:active {
-  font-size: 3.5em ! important;
+  font-weight: bold ! important;
 }
