@@ -1,22 +1,63 @@
 import express from 'express';
+import session from 'express-session';
+import morgan from 'morgan';
 import path from 'path';
-import Wordcloud from './api/wordcloud';
-import Search from './api/search';
-import WebScraper from './api/webscraper';
+import dotenv from 'dotenv';
+import passport from 'passport';
+import Auth0Security from 'passport-auth0';
+import Wordcloud from './routes/wordcloud';
+import Search from './routes/search';
+import WebScraper from './routes/webscraper';
+import Auth from './routes/auth';
+
+dotenv.config();
+
+passport.use(new Auth0Security({
+  domain: process.env.AUTH0_DOMAIN,
+  clientID: process.env.AUTH0_CLIENT_ID,
+  clientSecret: process.env.AUTH0_CLIENT_SECRET,
+  callbackURL: process.env.AUTH0_CALLBACK_URL,
+}, (accessToken, refreshToken, extraParams, profile, done) => done(null, profile)));
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((user, done) => done(null, user));
 
 const app = express();
 
 app.use(express.static(path.resolve(process.cwd(), 'build/client')));
 app.use(express.json());
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  cookie: app.get('env') === 'production' ? { secure: true } : {},
+  resave: false,
+  saveUninitialized: true,
+}));
+app.use(morgan('dev'));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api/wordcloud', Wordcloud);
 
 app.use('/api/search', Search);
 
+app.use('/api/auth', Auth);
+app.use('/api', (req, res, next) => {
+  if (req.user)
+    return next();
+  req.session.returnTo = req.originalUrl;
+  res.redirect('/api/auth/login');
+});
+
 app.use('/api/ws', WebScraper);
 
 app.use('/api', (req, res) => {
   res.status(404).send('API endpoint not found');
+});
+
+app.get('/admin', (req, res, next) => {
+  if (req.user)
+    return next();
+  req.session.returnTo = req.originalUrl;
+  res.redirect('/api/auth/login');
 });
 
 app.get('*', (req, res) => {

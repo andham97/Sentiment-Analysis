@@ -14,7 +14,7 @@
     "build-server": "babel -d ./build/server ./src/server",
     "build-client": "webpack",
     "build": "npm run clean && npm run build-server && npm run build-client",
-    "debug-server": "nodemon --exec babel-node src/server/server.js",
+    "debug-server": "nodemon --exec babel-node src/server/server.js --watch ./src/server",
     "debug-client": "webpack --watch",
     "debug-ws": "nodemon --exec babel-node src/server/ws/webscraper.js",
     "ws": "babel-node src/server/ws/webscraper.js",
@@ -38,15 +38,23 @@
   "license": "MIT",
   "dependencies": {
     "@cloudant/cloudant": "^3.0.2",
+    "auth0": "^2.16.0",
     "bootstrap": "^4.3.1",
     "cfenv": "^1.2.1",
     "cheerio": "^1.0.0-rc.2",
     "cli-progress": "^2.1.1",
+    "dotenv": "^7.0.0",
     "emoji-sentiment": "^3.0.2",
     "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "express-session": "^1.15.6",
+    "jwks-rsa": "^1.4.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
+    "morgan": "^1.9.1",
     "newsapi": "^2.4.0",
+    "passport": "^0.4.0",
+    "passport-auth0": "^1.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.7.0",
     "react-autocomplete": "^1.8.1",
@@ -128,7 +136,8 @@
           ]
         }
       ],
-      "no-underscore-dangle": 0
+      "no-underscore-dangle": 0,
+      "import/named": 0
     },
     "settings": {
       "react": {
