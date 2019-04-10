@@ -15,12 +15,38 @@ const search = (query, options) => new Promise((resolve, reject) => {
   catch (e) {
     return reject({ code: 400, err: new Error('Error: Invalid query parameters') });
   }
+  let sources = '';
+  let sourceRegex = '';
+  if (options && options.sources && typeof options.sources === 'string') {
+    sources = options.sources;
+    sources = sources.split(',').join(' ');
+  }
+  else if (options && options.sources && options.sources.join)
+    sources = options.sources.join(' ');
+  if (sources === '')
+    sourceRegex = '.+';
+  else {
+    const sTokens = stt(sources);
+    const sourceList = sTokens.filter(token => !token.exclude).map(token => token.term.replace(/[^a-zA-Z-]/g, ''));
+    sourceRegex = sourceList.reduce((acc, val, i) => `${i === 0 ? '(' : ''}${acc + val}${i === sourceList.length - 1 ? ')' : '|'}`, '');
+    try {
+      RegExp(sourceRegex);
+    }
+    catch (e) {
+      return reject({ code: 400, err: new Error('Error: Invalid query parameters') });
+    }
+  }
   const opts = {
     selector: {
-      $or: [
+      $and: [
         {
           'analysis.text': {
             $regex: `(?i)${regex}`,
+          },
+        },
+        {
+          sourceID: {
+            $regex: `(?i)${sourceRegex}`,
           },
         },
       ],
@@ -42,7 +68,6 @@ const search = (query, options) => new Promise((resolve, reject) => {
   if (options.bookmark)
     opts.bookmark = options.bookmark;
   db.find(opts).then((data) => {
-    console.log(`${regex} => ${data.docs.length}`);
     resolve({ ...data, params: includes });
   }).catch(reject);
 });
