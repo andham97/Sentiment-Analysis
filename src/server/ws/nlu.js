@@ -51,6 +51,7 @@ export default (urlData, cb) => {
               url: page.url,
               date: page.date,
               analysis: e,
+              sourceID: page.sourceID,
             }, (err) => {
               if (err)
                 console.log(err);

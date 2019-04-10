@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      res.status(500).send(JSON.stringify(err));
+      res.status(err.code || 500).send(err.err ? (err.err.message || 'ERROR') : 'ERROR');
     });
 });
 

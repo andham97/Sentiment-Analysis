@@ -33,18 +33,25 @@ router.post('/', (req, res) => {
       ws(list).then((data) => {
         nluProcess(data, (err) => {
           if (err)
-            console.error(JSON.stringify(err));
+            return console.error(JSON.stringify(err));
           console.log('NLU processing finished');
+          setTimeout(() => {
+            if (!res.headersSent)
+              res.status(200).send('Success');
+          }, 500);
         });
       });
     }
     else {
       console.log('No new articles');
+      setTimeout(() => {
+        if (!res.headersSent)
+          res.status(200).send('Success');
+      }, 500);
     }
   }).catch((err) => {
     console.error(err);
   });
-  res.status(200).send('Success');
 });
 
 export default router;

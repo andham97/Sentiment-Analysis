@@ -40,7 +40,16 @@ const ws = (path, cb) => {
       const headline = page(index[hostname].headline).text();
       const m = new Module();
       m._compile(`module.exports = ${index[hostname].date.function}`, '');
-      const date = m.exports(page(index[hostname].date.sel).text());
+      const months = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'Desember'];
+      const element = page(index[hostname].date.sel);
+      let date = m.exports(index[hostname].date.attribute
+        ? element.attr(index[hostname].date.attribute)
+        : element.text(), months);
+      if (typeof date !== 'number')
+        date = date.getTime();
+      if (!date)
+        date = new Date().getTime();
       let p = page(index[hostname].body);
       index[hostname].exclude.forEach((sel) => {
         p = p.not(sel);
@@ -60,7 +69,7 @@ const ws = (path, cb) => {
         headline,
         body,
         url: path,
-        sourceID: index.sourceID,
+        sourceID: index[hostname].sourceID,
         date,
       });
     }).catch((err) => {
@@ -92,14 +101,5 @@ const processInput = (i) => {
 };
 
 processInput(2);
-
-const parser = (date) => {
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-    'August', 'September', 'October', 'November', 'Desember'];
-  const month = months.filter(elem => date.indexOf(elem) > -1)[0];
-  const year = date.slice(-5).slice(0, 4);
-  const day = date.slice(date.indexOf(month)).split(', ')[0].slice(month.length + 1);
-  return new Date(`${year}-${months.indexOf(month) + 1}-${day} 12:00:00`);
-};
 
 export default ws;

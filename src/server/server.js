@@ -41,7 +41,7 @@ app.use('/api/search', Search);
 
 app.use('/api/auth', Auth);
 app.use('/api', (req, res, next) => {
-  if (req.user)
+  if (req.user || req.body.api_key === process.env.SCRAPER_API_KEY)
     return next();
   req.session.returnTo = req.originalUrl;
   res.redirect('/api/auth/login');
