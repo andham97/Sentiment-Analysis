@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Dashboard from './components/Dashboard';
-import Result from './components/Result';
+import Dashboard from './components/dashboard/Dashboard';
+import Result from './components/result/Result';
 import AdminPanel from './components/admin/AdminPanel';
 import AdminPanelStore from './components/admin/AdminPanelStore';
-import DashboardStore from './components/DashboardStore';
+import SearchStore from './components/dashboard/SearchStore';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <DashboardStore>
+        <SearchStore>
           <Route exact path='/' component={Dashboard} />
-        </DashboardStore>
-        <Route path='/result' component={Result} />
+          <Route path='/result' component={Result} />
+        </SearchStore>
         <AdminPanelStore>
           <Route path='/admin' component={AdminPanel} />
         </AdminPanelStore>

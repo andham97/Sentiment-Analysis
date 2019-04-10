@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Card from './Card';
-import './style/Dashboard.css';
+import Card from '../Card';
+import '../style/Dashboard.css';
 import NewSearch from './NewSearch';
 import WordCloud from './WordCloud';
-import Header from './Header';
+import Header from '../Header';
 
 class Dashboard extends Component {
   render() {

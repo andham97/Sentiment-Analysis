@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './style/Parameters.css';
+import '../style/Parameters.css';
 
 class Paramteres extends Component {
   render() {

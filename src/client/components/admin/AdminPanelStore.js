@@ -26,6 +26,7 @@ class AdminPanelStore extends React.Component {
         return acc;
       }, []);
       this.setState({ ...this.state, hosts });
+      console.log(data);
     });
   }
 

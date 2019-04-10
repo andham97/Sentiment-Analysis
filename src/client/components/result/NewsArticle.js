@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import './style/NewsArticle.css';
+import '../style/NewsArticle.css';
 import Proptypes from 'prop-types';
-import ProgressBar from './ProgressbarGraph';
+import ProgressBar from './graph/ProgressbarGraph';
 
 class NewsArticle extends Component {
   render() {
     const {
-      title, newssource, domFeeling, date, feelings,
+      title, newssource, domFeeling, date, feelings, onClick,
     } = this.props;
+
     return (
       <div className='newssource'>
         <div className='newsarticle_date'>{ date }</div>
@@ -18,29 +19,29 @@ class NewsArticle extends Component {
         <div className='newsarticle_emotions'>
           <div className='row'>
           Joy: <br /><ProgressBar
-            perc={ feelings.Joy ? feelings.Joy.perc : 0 }
-            color={ feelings.Joy ? 'D3C0CD' : 0 }
+            perc={ feelings.joy * 100 ? feelings.joy * 100 : 0 }
+            color={ feelings.joy * 100 ? 'D3C0CD' : 0 }
           />
           Anger: <br /><ProgressBar
-            perc={ feelings.Anger ? feelings.Anger.perc : 0 }
-            color={ feelings.Anger ? 'E26D5A' : 0 }
+            perc={ feelings.anger * 100 ? feelings.anger * 100 : 0 }
+            color={ feelings.anger * 100 ? 'E26D5A' : 0 }
           />
           Disgust: <br /><ProgressBar
-            perc={ feelings.Disgust ? feelings.Disgust.perc : 0 }
-            color={ feelings.Disgust ? '9FAF90' : 0 }
+            perc={ feelings.disgust * 100 ? feelings.disgust * 100 : 0 }
+            color={ feelings.disgust * 100 ? '9FAF90' : 0 }
           />
           Sad: <br /><ProgressBar
-            perc={ feelings.Sad ? feelings.Sad.perc : 0 }
-            color={ feelings.Sad ? '3D70B2' : 0 }
+            perc={ feelings.sadness * 100 ? feelings.sadness * 100 : 0 }
+            color={ feelings.sadness * 100 ? '3D70B2' : 0 }
           />
           Fear: <br /><ProgressBar
-            perc={ feelings.Fear ? feelings.Fear.perc : 0 }
-            color={ feelings.Fear ? '3A405A' : 0 }
+            perc={ feelings.fear * 100 ? feelings.fear * 100 : 0 }
+            color={ feelings.fear * 100 ? '3A405A' : 0 }
           />
           </div>
           <br />
         </div>
-        <button className='to_article'>To Article</button>
+        <button onClick = { onClick } className='to_article'>To Article</button>
         <br />
         <hr />
       </div>
@@ -56,6 +57,7 @@ NewsArticle.propTypes = {
   emotions: Proptypes.any,
   feelings: Proptypes.any,
   persProgress: Proptypes.any,
+  onClick: Proptypes.any,
 };
 
 export default NewsArticle;

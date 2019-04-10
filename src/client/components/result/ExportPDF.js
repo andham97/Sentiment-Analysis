@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './style/ExportPDF.css';
+import '../style/ExportPDF.css';
 import PropTypes from 'prop-types';
 
 export class ExportPDF extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactMinimalPieChart from 'react-minimal-pie-chart';
-import './style/DonutChart.css';
+import '../../style/DonutChart.css';
 import Proptypes from 'prop-types';
 
 class DonutChart extends Component {
