@@ -13,7 +13,6 @@ import Dropdown from '../Dropdown';
 import Datepicker from './DatePicker';
 import Checkbox from '../Checkbox';
 import { SearchContext } from '../dashboard/SearchStore';
-import newsArticles from './news_articles';
 
 const classNameMap = (name) => {
   switch (name) {
@@ -42,7 +41,7 @@ class Result extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      averageArray: []
+      averageArray: [],
     };
   }
 
@@ -77,16 +76,19 @@ class Result extends Component {
       anger: 0,
     });
 
-    Object.keys(average).forEach(
-      key => (typeof average[key] === 'number' ? average[key] /= search.rows.length : Object.keys(average[key]).forEach(
-        key2 => average[key][key2] /= search.rows.length,
-      )),
-    );
+    Object.keys(average).forEach((key) => {
+      if (typeof average[key] === 'number')
+        average[key] /= search.rows.length;
+      else
+        Object.keys(average[key]).forEach((key2) => {
+          average[key][key2] /= search.rows.length;
+        });
+    });
 
     const data = Object.keys(average).filter(
       e => e !== 'sentiment',
     ).map(
-      (key, i) => ({ title: key, value: Math.floor(average[key] * 100), color: colors[i] })
+      (key, i) => ({ title: key, value: Math.floor(average[key] * 100), color: colors[i] }),
     );
 
     return (
