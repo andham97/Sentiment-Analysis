@@ -2,6 +2,7 @@ import stt from 'search-text-tokenizer';
 import { cloudant } from '../ics';
 
 const db = cloudant.db.use('sa-index');
+const meta = cloudant.db.use('sa-meta');
 
 const search = (query, options) => new Promise((resolve, reject) => {
   if (query === '')
@@ -68,6 +69,18 @@ const search = (query, options) => new Promise((resolve, reject) => {
   };
   if (options.bookmark)
     opts.bookmark = options.bookmark;
+  if (options.intervalStart)
+    opts.selector.$and.push({
+      date: {
+        $gte: Number(options.intervalStart),
+      },
+    });
+  if (options.intervalEnd)
+    opts.selector.$and.push({
+      date: {
+        $lte: Number(options.intervalEnd),
+      },
+    });
   const find = () => {
     db.find(opts).then((data) => {
       resolve({ ...data, params: includes });
@@ -81,17 +94,38 @@ const search = (query, options) => new Promise((resolve, reject) => {
   find();
 });
 
-const fetchAll = (query, options) => new Promise((resolve, reject) => {
-  let data = [];
-  options.limit = 200;
-  const cb = (d) => {
-    data = data.concat(d.rows);
-    if (data.length === d.total_rows)
-      return resolve(data);
-    options.bookmark = d.bookmark;
-    search(query, options).then(cb).catch(reject);
+const getSources = () => new Promise((resolve, reject) => {
+  const find = () => {
+    db.view('searches', 'source-view', {
+      group: true,
+    }).then((data) => {
+      const find2 = () => {
+        meta.find({ selector: { type: 'ws' } }).then(({ docs }) => {
+          const hosts = Object.keys(docs[0]).filter(key => docs[0][key].sourceID);
+          const keys = data.rows.map(e => e.key);
+          resolve(keys.map((key) => {
+            const ret = {};
+            ret[key] = docs[0][hosts.filter(k => docs[0][k].sourceID === key)[0]].name;
+            return ret;
+          }));
+        }).catch((err) => {
+          if (!err.reason)
+            return reject(err);
+          if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
+            find2();
+          else
+            reject(err);
+        });
+      };
+      find2();
+    }).catch((err) => {
+      if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
+        find();
+      else
+        reject(err);
+    });
   };
-  search(query, options).then(cb).catch(reject);
+  find();
 });
 
-export default { search, fetchAll };
+export default { search, getSources };
