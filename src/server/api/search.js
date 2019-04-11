@@ -57,6 +57,7 @@ const search = (query, options) => new Promise((resolve, reject) => {
       'headline',
       'analysis',
       'url',
+      'sourceID',
     ],
     sort: [
       {
@@ -67,9 +68,17 @@ const search = (query, options) => new Promise((resolve, reject) => {
   };
   if (options.bookmark)
     opts.bookmark = options.bookmark;
-  db.find(opts).then((data) => {
-    resolve({ ...data, params: includes });
-  }).catch(reject);
+  const find = () => {
+    db.find(opts).then((data) => {
+      resolve({ ...data, params: includes });
+    }).catch((err) => {
+      if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
+        find();
+      else
+        reject(err);
+    });
+  };
+  find();
 });
 
 const fetchAll = (query, options) => new Promise((resolve, reject) => {
