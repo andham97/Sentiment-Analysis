@@ -14,7 +14,7 @@
     "build-server": "babel -d ./build/server ./src/server",
     "build-client": "webpack",
     "build": "npm run clean && npm run build-server && npm run build-client",
-    "debug-server": "nodemon --exec babel-node src/server/server.js --watch ./src/server",
+    "debug-server": "babel-node src/server/server.js",
     "debug-client": "webpack --watch",
     "debug-ws": "nodemon --exec babel-node src/server/ws/webscraper.js",
     "ws": "babel-node src/server/ws/webscraper.js",
@@ -46,8 +46,10 @@
     "dotenv": "^7.0.0",
     "emoji-sentiment": "^3.0.2",
     "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
     "express-jwt": "^5.3.1",
     "express-session": "^1.15.6",
+    "graphql": "^14.2.1",
     "jwks-rsa": "^1.4.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
@@ -72,6 +74,7 @@
     "react-tagcloud": "^1.4.0",
     "recharts": "^1.5.0",
     "request-promise": "^4.2.4",
+    "search-text-tokenizer": "^2.1.1",
     "validator": "^10.11.0",
     "watson-developer-cloud": "^3.17.0"
   },
@@ -137,7 +140,9 @@
         }
       ],
       "no-underscore-dangle": 0,
-      "import/named": 0
+      "import/named": 0,
+      "no-plusplus": 0,
+      "prefer-promise-reject-errors": 0
     },
     "settings": {
       "react": {

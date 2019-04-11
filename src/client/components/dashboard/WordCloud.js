@@ -26,11 +26,6 @@ class WordCloud extends Component {
       luminosity: 'light',
       hue: 'blue',
     };
-    let words = {};
-    if (this.context && this.context.words)
-      words = this.context.words;
-    if (!words.value)
-      words.value = [];
     return (
       <SearchContext.Consumer>
       {({ words }) => (

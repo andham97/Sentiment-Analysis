@@ -93,7 +93,7 @@ class SearchStore extends React.Component {
         emotions,
       });
     });
-    console.log(ret)
+    console.log(ret);
     return ret;
   }
 
