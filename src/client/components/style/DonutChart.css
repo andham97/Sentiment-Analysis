@@ -36,3 +36,24 @@ div.label_disgust {
   font-size: 20px;
   font-family: 'sans-serif';
 }
+
+div.label_negative {
+  padding-top: 20px;
+  color: #FF5C54;
+  font-size: 20px;
+  font-family: 'sans-serif';
+}
+
+div.label_neutral {
+  padding-top: 20px;
+  color: #AFBE8F;
+  font-size: 20px;
+  font-family: 'sans-serif';
+}
+
+div.label_positive {
+  padding-top: 20px;
+  color: #5EA3DB;
+  font-size: 20px;
+  font-family: 'sans-serif';
+}

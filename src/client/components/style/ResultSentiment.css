@@ -59,3 +59,46 @@ body {
   height: 330px;
   background-color: white;
 }
+
+.filterSentiment_bar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filterSentiment_bar div {
+  float: left;
+}
+
+.exportPDF {
+  margin-top: 8px;
+  float: right;
+  padding-top: 4px;
+  margin-right: 8px;
+
+}
+
+.graphs {
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px
+}
+
+.graph {
+  margin: 20%;
+}
+
+.param_card {
+  margin: 5%;
+  width: 85%;
+}
+
+.title_param {
+  font-size: 21px;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+li {
+  margin-top: 2%;
+}

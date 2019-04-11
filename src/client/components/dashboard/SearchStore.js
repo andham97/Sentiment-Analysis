@@ -7,17 +7,18 @@ class SearchStore extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: {},
       words: [],
       searchword: '',
     };
     this.getSearch = this.getSearch.bind(this);
     this.getWords = this.getWords.bind(this);
     this.getEmotionalTone = this.getEmotionalTone.bind(this);
+    this.getEmotionalToneSentiment = this.getEmotionalToneSentiment.bind(this);
   }
 
   getSearch(opts) {
     return new Promise((resolve, reject) => {
+      localStorage.setItem('prev-search', opts);
       fetch(`/api/search?q=${opts}`, {
         method: 'GET',
         headers: {
@@ -43,32 +44,35 @@ class SearchStore extends React.Component {
   }
 
   getEmotionalTone() {
-    const sortArr = this.state.search.rows.sort(
-      (a, b) => a.doc.date - b.doc.date,
-    ).map((element) => {
-      const date = new Date(element.doc.date);
+    const sortArr = this.state.search.docs.sort(
+      (a, b) => a.date - b.date,
+    ).filter(a => a.date > 0).map((element) => {
+      const date = new Date(element.date);
       date.setHours(12);
       date.setMinutes(0);
       date.setSeconds(0);
       date.setMilliseconds(0);
-      element.doc.date = date.getTime();
+      element.date = date.getTime();
       return element;
     });
     const days = {};
     sortArr.forEach((element) => {
-      if (days[element.doc.date])
-        days[element.doc.date].push(element);
+      if (days[element.date])
+        days[element.date].push(element);
       else
-        days[element.doc.date] = [element];
+        days[element.date] = [element];
     });
     const ret = [];
     Object.keys(days).forEach((key, i) => {
       const emotions = days[key].reduce((acc, val) => {
-        acc.anger.perc += val.doc.analysis.emotion.anger;
-        acc.joy.perc += val.doc.analysis.emotion.joy;
-        acc.disgust.perc += val.doc.analysis.emotion.disgust;
-        acc.fear.perc += val.doc.analysis.emotion.fear;
-        acc.sadness.perc += val.doc.analysis.emotion.sadness;
+        const emotion = val.analysis.emotion;
+        if (!emotion)
+          return acc;
+        acc.anger.perc += emotion.anger;
+        acc.joy.perc += emotion.joy;
+        acc.disgust.perc += emotion.disgust;
+        acc.fear.perc += emotion.fear;
+        acc.sadness.perc += emotion.sadness;
         return acc;
       }, {
         anger: { perc: 0 },
@@ -89,12 +93,56 @@ class SearchStore extends React.Component {
       emotions.sadness.perc *= 100;
       ret.push({
         id: i,
-        date: new Date((+key)).toLocaleDateString(),
+        date: new Date(Number(key)).toLocaleDateString(),
         emotions,
       });
     });
-    console.log(ret);
     return ret;
+  }
+
+  getEmotionalToneSentiment() {
+    const sortArr = this.state.search.docs.sort(
+      (a, b) => a.date - b.date,
+    ).filter(a => a.date > 0).map((element) => {
+      const date = new Date(element.date);
+      date.setHours(12);
+      date.setMinutes(0);
+      date.setSeconds(0);
+      date.setMilliseconds(0);
+      element.date = date.getTime();
+      return element;
+    });
+    const days = {};
+    sortArr.forEach((element) => {
+      if (days[element.date])
+        days[element.date].push(element);
+      else
+        days[element.date] = [element];
+    });
+    const ret = Object.keys(days).map((key) => {
+      const sentiments = days[key].reduce((acc, val) => {
+        const sentiment = val.analysis.sentiment;
+        if (!sentiment)
+          return acc;
+        if (sentiment.score > 0.2)
+          acc.positive.score++;
+        if (sentiment.score > -0.2)
+          acc.neutral.score++;
+        else
+          acc.negative.score++;
+        return acc;
+      }, {
+        negative: { score: 0 },
+        neutral: { score: 0 },
+        positive: { score: 0 },
+      });
+      return { sentiments, key };
+    });
+    return ret.map((val, i) => ({
+      id: i,
+      date: new Date(Number(val.key)).toLocaleDateString(),
+      sentiments: val.sentiments,
+    }));
   }
 
   render() {
@@ -104,6 +152,7 @@ class SearchStore extends React.Component {
         getSearch: this.getSearch,
         getWords: this.getWords,
         getEmotionalTone: this.getEmotionalTone,
+        getEmotionalToneSentiment: this.getEmotionalToneSentiment,
       }}>
       {this.props.children}
       </SearchContext.Provider>

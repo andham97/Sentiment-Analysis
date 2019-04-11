@@ -52,20 +52,33 @@ class Result extends Component {
   }
 
   render() {
+    if (!this.context.search) {
+      return 'Loading';
+    }
     const colors = ['#D3C0CD', '#9FAF90', '#3A405A', '#3D70B2', '#E26D5A'];
     this.context.getEmotionalTone();
     let search = {};
     if (this.context && this.context.search)
       search = this.context.search;
-    if (!search.rows)
-      search.rows = [];
-    const average = search.rows.reduce((acc, val) => {
-      acc.joy += val.doc.analysis.emotion.joy;
-      acc.anger += val.doc.analysis.emotion.anger;
-      acc.sadness += val.doc.analysis.emotion.sadness;
-      acc.disgust += val.doc.analysis.emotion.disgust;
-      acc.fear += val.doc.analysis.emotion.fear;
-      acc.sentiment[val.doc.analysis.sentiment.label]++;
+    if (!search.docs)
+      search.docs = [];
+    const average = search.docs.reduce((acc, val) => {
+      let emotion = val.analysis.emotion;
+      if (!emotion) {
+        emotion = {
+          anger: 0,
+          joy: 0,
+          disgust: 0,
+          fear: 0,
+          sadness: 0,
+        };
+      }
+      acc.joy += emotion.joy;
+      acc.anger += emotion.anger;
+      acc.sadness += emotion.sadness;
+      acc.disgust += emotion.disgust;
+      acc.fear += emotion.fear;
+      acc.sentiment[val.analysis.sentiment.label]++;
       return acc;
     }, {
       sentiment: { positive: 0, negative: 0, neutral: 0 },
@@ -78,10 +91,10 @@ class Result extends Component {
 
     Object.keys(average).forEach((key) => {
       if (typeof average[key] === 'number')
-        average[key] /= search.rows.length;
+        average[key] /= search.docs.length;
       else
         Object.keys(average[key]).forEach((key2) => {
-          average[key][key2] /= search.rows.length;
+          average[key][key2] /= search.docs.length;
         });
     });
 
@@ -124,6 +137,7 @@ class Result extends Component {
                   sentiment='Sentiment: Positive, Neagtive, Neutral'
                   date='Date: 23.05.19'
                   timeinterval='Time Interval: 23.05.19-25.05.19'
+                  amount='Amount: 1000'
                 />
               </div>
             </Card>
@@ -162,25 +176,24 @@ class Result extends Component {
 
           <div className = 'result_news'>
             <Card>
-            { search.rows.map((article, i) => {
-              if (!article.doc)
+            { search.docs.map((article, i) => {
+              if (!article)
                 return '';
               let analysis = {};
-              if (article.doc.analysis)
-                analysis = article.doc.analysis;
+              if (article.analysis)
+                analysis = article.analysis;
               return (
                 <NewsArticle
                   key={i}
-                  date={new Date(article.doc.date).toLocaleDateString()} // ER HARD KODET
-                  title={article.doc.headline}
-                  newssource={article.doc.sourceID}
-                  domFeeling={Object.keys(
-                    analysis.emotion,
-                  ).sort(
-                    (a, b) => analysis.emotion[b] - analysis.emotion[a],
-                  )[0]}
-                  feelings= {analysis.emotion}
-                  onClick= {() => this.makeRedirect(article.doc.url)}
+                  date={new Date(article.date).toLocaleDateString()} // ER HARD KODET
+                  title={article.headline}
+                  newssource={article.sourceID}
+                  domFeeling={analysis.emotion ? Object.keys(analysis.emotion)
+                    .sort((a, b) => analysis.emotion[b] - analysis.emotion[a])[0] : 'None'}
+                  feelings= {analysis.emotion ? analysis.emotion : {
+                    anger: 0, joy: 0, disgust: 0, fear: 0, sadness: 0,
+                  }}
+                  onClick= {() => this.makeRedirect(article.url)}
                 />
               );
             }) }

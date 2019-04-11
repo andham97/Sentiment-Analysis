@@ -72,6 +72,7 @@ const search = (query, options) => new Promise((resolve, reject) => {
     db.find(opts).then((data) => {
       resolve({ ...data, params: includes });
     }).catch((err) => {
+      console.log(err);
       if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
         find();
       else
