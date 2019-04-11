@@ -13,7 +13,6 @@ import Dropdown from '../Dropdown';
 import Datepicker from './DatePicker';
 import Checkbox from '../Checkbox';
 import { SearchContext } from '../dashboard/SearchStore';
-import newsArticles from './news_articles';
 
 const classNameMap = (name) => {
   switch (name) {
@@ -42,7 +41,7 @@ class Result extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      averageArray: []
+      averageArray: [],
     };
   }
 
@@ -86,7 +85,7 @@ class Result extends Component {
     const data = Object.keys(average).filter(
       e => e !== 'sentiment',
     ).map(
-      (key, i) => ({ title: key, value: Math.floor(average[key] * 100), color: colors[i] })
+      (key, i) => ({ title: key, value: Math.floor(average[key] * 100), color: colors[i] }),
     );
 
     return (
@@ -126,6 +125,7 @@ class Result extends Component {
               </div>
             </Card>
           </div>
+
             {data.map((element, i) => {
               const name = classNameMap(element.title);
               return (<div key={i} className = {`result_graphs_${name}`}>
@@ -136,6 +136,7 @@ class Result extends Component {
                 </Card>
               </div>);
             })}
+
           <div className = 'result_graph'>
             <Card>
             <div className='emotionalTone'>Emotional Tone </div>
@@ -150,7 +151,7 @@ class Result extends Component {
                 <Line type="monotone" name="Anger" dataKey="emotions.anger.perc" stroke={coloranger} activeDot={{ r: 8 }}/>
                 <Line type="monotone" name="Joy" dataKey="emotions.joy.perc" stroke={colorjoy} />
                 <Line type="monotone" name="Fear" dataKey="emotions.fear.perc" stroke={colorfear} />
-                <Line type="monotone" name="Sad" dataKey="emotions.sad.perc" stroke={colorsad} />
+                <Line type="monotone" name="Sadness" dataKey="emotions.sadness.perc" stroke={colorsad} />
                 <Line type="monotone" name="Disgust" dataKey="emotions.disgust.perc" stroke={colordisgust} />
               </LineChart>
             </Card>

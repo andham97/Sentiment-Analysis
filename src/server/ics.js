@@ -23,6 +23,9 @@ const cloudant = Cloudant({
       },
     },
   ],
+}, (err, c, reply) => {
+  console.log(err);
+  console.log(reply);
 });
 
 const newsapi = new NP(env.getServiceCredentials('newsapi').apikey);
