@@ -12,6 +12,7 @@ import Parameteres from './Parameters';
 import Card from '../Card';
 import DonutChart from './graph/DonutChart';
 import { SearchContext } from '../dashboard/SearchStore';
+import NewsArticleSentiment from './NewsArticleSentiment';
 
 const className = (name) => {
   switch (name) {
@@ -157,7 +158,30 @@ class ResultSentiment extends Component {
             </Card>
           </div>
 
-          <div className='resultSentiment_articles'></div>
+          <div className='resultSentiment_articles'>
+          <Card>
+          { search.docs.map((article, i) => {
+            if (!article)
+              return '';
+            let analysis = {};
+            if (article.analysis)
+              analysis = article.analysis;
+            return (
+              <NewsArticleSentiment
+                key={i}
+                date={new Date(article.date).toLocaleDateString()} // ER HARD KODET
+                title={article.headline}
+                newssource={article.sourceID}
+                domSentiment={analysis.sentiment.label}
+                sentiments= {analysis.sentiment ? analysis.sentiment : {
+                  negative: 0, neutral: 0, positive: 0,
+                }}
+                onClick= {() => this.makeRedirect(article.url)}
+              />
+            );
+          }) }
+          </Card>
+          </div>
         </div>
       </React.Fragment>
     );

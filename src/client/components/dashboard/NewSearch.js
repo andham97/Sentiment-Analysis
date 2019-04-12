@@ -67,7 +67,7 @@ class NewSearch extends Component {
   handleSearch(searchdata) {
     console.log(searchdata);
     this.context.getSearch(this.state.search).then(() => {
-      this.props.history.push('/resultSentiment');
+      this.props.history.push('/result');
     }).catch(console.error);
   }
 
