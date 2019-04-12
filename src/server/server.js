@@ -5,11 +5,13 @@ import path from 'path';
 import dotenv from 'dotenv';
 import passport from 'passport';
 import Auth0Security from 'passport-auth0';
+import appenv from './app-env';
 import Wordcloud from './routes/wordcloud';
 import Search from './routes/search';
 import WebScraper from './routes/webscraper';
 import Auth from './routes/auth';
 import { getCloudant } from './ics';
+
 
 dotenv.config();
 
@@ -59,12 +61,12 @@ app.use('/api/wordcloud', Wordcloud);
 
 app.use('/api/search', Search);
 
-/* app.use('/api', (req, res, next) => {
+app.use('/api', (req, res, next) => {
   if (req.user || req.body.api_key === process.env.SCRAPER_API_KEY)
     return next();
   req.session.returnTo = req.originalUrl;
   res.redirect('/api/auth/login');
-}); */
+});
 
 app.use('/api/ws', WebScraper);
 
