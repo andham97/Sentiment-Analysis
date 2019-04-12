@@ -1,7 +1,7 @@
 const newsArticles = [
   {
     id: 1,
-    date: '24.03.19',
+    date: '24.03.2019',
     title: 'Trump does something not good',
     newssource: 'BBC',
     domFeeling: 'Anger',

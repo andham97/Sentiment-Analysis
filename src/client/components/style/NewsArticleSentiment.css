@@ -10,12 +10,12 @@
   margin-left: 2%;
 }
 
-.newsarticle_highest_feeling_text {
+.newsarticle_highest_sentiment_text {
   font-style: italic;
   font-size: 14px;
 }
 
-.newsarticle_highest_feeling{
+.newsarticle_highest_sentiment{
   margin-top: 4px;
   margin-left: 2%;
   font-size: 14px;
@@ -26,7 +26,7 @@
   font-size: 14px;
 }
 
-.newsarticle_emotions {
+.newsarticle_sentiment {
   margin-top: 4px;
   font-style: italic;
   margin-left: 2%;
@@ -39,7 +39,7 @@ hr {
   height:1px;
 }
 
-.button {
+button {
   float: right;
   margin-right: 2%;
   background-color: #3D70B2;

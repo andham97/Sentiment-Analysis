@@ -1,5 +1,5 @@
 import React from 'react';
-import './style/ProgressbarGraph.css';
+import '../../style/ProgressbarGraph.css';
 import PropTypes from 'prop-types';
 
 const ProgressBar = input => (
@@ -7,6 +7,7 @@ const ProgressBar = input => (
         <Filler perc={input.perc} color={input.color}/>
       </div>
 );
+
 
 const Filler = input => (
   <div className="filler" style={{ width: `${input.perc}%`, backgroundColor: `#${input.color}` }} />
