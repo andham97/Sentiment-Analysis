@@ -1,10 +1,11 @@
-import { cloudant } from '../ics';
-
-const db = cloudant.db.use('sa-index');
+import { getCloudant } from '../ics';
 
 const getWordcloud = () => new Promise((resolve, reject) => {
+  const cloudant = getCloudant();
+  if (!cloudant)
+    reject();
   const find = () => {
-    db.search('searches', 'basic-search', {
+    cloudant.db.use('sa-index').search('searches', 'basic-search', {
       q: '*:*',
       counts: ['key'],
       limit: 0,

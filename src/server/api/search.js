@@ -1,10 +1,10 @@
 import stt from 'search-text-tokenizer';
-import { cloudant } from '../ics';
-
-const db = cloudant.db.use('sa-index');
-const meta = cloudant.db.use('sa-meta');
+import { getCloudant } from '../ics';
 
 const search = (query, options) => new Promise((resolve, reject) => {
+  const cloudant = getCloudant();
+  if (!cloudant)
+    return reject();
   if (query === '')
     return reject({ code: 400, err: new Error('Error: Empty query not supported') });
   const tokens = stt(query);
@@ -82,7 +82,7 @@ const search = (query, options) => new Promise((resolve, reject) => {
       },
     });
   const find = () => {
-    db.find(opts).then((data) => {
+    cloudant.db.use('sa-index').find(opts).then((data) => {
       resolve({ ...data, params: includes });
     }).catch((err) => {
       console.log(err);
@@ -96,12 +96,15 @@ const search = (query, options) => new Promise((resolve, reject) => {
 });
 
 const getSources = () => new Promise((resolve, reject) => {
+  const cloudant = getCloudant();
+  if (!cloudant)
+    return reject();
   const find = () => {
-    db.view('searches', 'source-view', {
+    cloudant.db.use('sa-index').view('searches', 'source-view', {
       group: true,
     }).then((data) => {
       const find2 = () => {
-        meta.find({ selector: { type: 'ws' } }).then(({ docs }) => {
+        cloudant.db.use('sa-meta').find({ selector: { type: 'ws' } }).then(({ docs }) => {
           const hosts = Object.keys(docs[0]).filter(key => docs[0][key].sourceID);
           const keys = data.rows.map(e => e.key);
           resolve(keys.map((key) => {

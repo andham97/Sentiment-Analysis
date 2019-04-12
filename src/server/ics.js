@@ -8,6 +8,7 @@ nluParameters.version = '2018-11-16';
 nluParameters.iam_apikey = nluParameters.apikey;
 const nlu = new NLUV1(nluParameters);
 
+let cloudantReady = false;
 const cloudant = Cloudant({
   account: env.getServiceCredentials('cloudantNoSQLDB').username,
   plugins: [
@@ -23,11 +24,13 @@ const cloudant = Cloudant({
       },
     },
   ],
-}, (err, c, reply) => {
-  console.log(err);
-  console.log(reply);
+}, (err) => {
+  if (!err)
+    cloudantReady = true;
 });
 
 const newsapi = new NP(env.getServiceCredentials('newsapi').apikey);
 
-export { nlu, cloudant, newsapi };
+const getCloudant = () => (cloudantReady ? cloudant : undefined);
+
+export { nlu, getCloudant, newsapi };

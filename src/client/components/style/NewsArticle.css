@@ -39,7 +39,7 @@ hr {
   height:1px;
 }
 
-button {
+.button {
   float: right;
   margin-right: 2%;
   background-color: #3D70B2;

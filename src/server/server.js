@@ -9,6 +9,7 @@ import Wordcloud from './routes/wordcloud';
 import Search from './routes/search';
 import WebScraper from './routes/webscraper';
 import Auth from './routes/auth';
+import { getCloudant } from './ics';
 
 dotenv.config();
 
@@ -35,17 +36,32 @@ app.use(morgan('dev'));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/api/auth', Auth);
+
+app.use('/api', (req, res, next) => {
+  const start = new Date().getTime();
+  const timeLimit = 5000;
+  const cb = () => {
+    if (!getCloudant())
+      setTimeout(cb, 100);
+    else if (new Date().getTime() - start >= timeLimit)
+      res.status(500).send('Error');
+    else
+      setTimeout(next, 100);
+  };
+  cb();
+});
+
 app.use('/api/wordcloud', Wordcloud);
 
 app.use('/api/search', Search);
 
-app.use('/api/auth', Auth);
-app.use('/api', (req, res, next) => {
+/* app.use('/api', (req, res, next) => {
   if (req.user || req.body.api_key === process.env.SCRAPER_API_KEY)
     return next();
   req.session.returnTo = req.originalUrl;
   res.redirect('/api/auth/login');
-});
+}); */
 
 app.use('/api/ws', WebScraper);
 

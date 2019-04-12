@@ -1,13 +1,11 @@
-import { nlu, cloudant } from '../ics';
-
-const db = cloudant.db.use('sa-meta');
-const dbIndex = cloudant.db.use('sa-index');
+import { nlu, getCloudant } from '../ics';
 
 let excludes;
+let cloudant;
 
 const loadExclude = (cb) => {
   if (excludes === undefined)
-    db.find({ selector: { type: 'nlu' } }, (err, result) => {
+    cloudant.db.use('sa-meta').find({ selector: { type: 'nlu' } }, (err, result) => {
       if (err)
         return cb(err);
       excludes = result.docs[0].excludeType.map(entry => entry.toLowerCase());
@@ -18,6 +16,9 @@ const loadExclude = (cb) => {
 };
 
 export default (urlData, cb) => {
+  cloudant = getCloudant();
+  if (!cloudant)
+    return cb(new Error('Cloudant not connected'));
   loadExclude((err) => {
     if (err)
       return cb(err);
@@ -46,7 +47,7 @@ export default (urlData, cb) => {
               emotion: entry.emotion,
               count: entry.count,
             };
-            dbIndex.insert({
+            cloudant.db.use('sa-index').insert({
               headline: page.headline,
               url: page.url,
               date: page.date,

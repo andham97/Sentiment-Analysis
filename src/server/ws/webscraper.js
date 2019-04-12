@@ -2,9 +2,9 @@ import cheerio from 'cheerio';
 import rp from 'request-promise';
 import url from 'url';
 import Module from 'module';
-import { cloudant } from '../ics';
+import { getCloudant } from '../ics';
 
-const db = cloudant.use('sa-meta');
+const db = getCloudant().use('sa-meta');
 
 let index;
 

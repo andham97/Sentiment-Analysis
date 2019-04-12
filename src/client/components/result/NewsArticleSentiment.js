@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../style/NewsArticle.css';
 import Proptypes from 'prop-types';
 import ProgressBar from './graph/ProgressbarGraph';
 import '../style/NewsArticleSentiment.css';

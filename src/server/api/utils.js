@@ -1,13 +1,14 @@
-import { cloudant } from '../ics';
-
-const db = cloudant.db.use('sa-index');
+import { getCloudant } from '../ics';
 
 const urlCheck = urls => new Promise((resolve, reject) => {
+  const cloudant = getCloudant();
+  if (!cloudant)
+    return reject();
   let arr = urls;
   if (typeof arr === 'string')
     arr = [arr];
   const find = () => {
-    db.view('searches', 'url-view', {
+    cloudant.db.use('sa-index').view('searches', 'url-view', {
       group: true,
     }).then((data) => {
       const u = data.rows.map(row => row.key);
