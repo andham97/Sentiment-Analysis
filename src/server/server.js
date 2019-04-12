@@ -5,7 +5,6 @@ import path from 'path';
 import dotenv from 'dotenv';
 import passport from 'passport';
 import Auth0Security from 'passport-auth0';
-import appenv from './app-env';
 import Wordcloud from './routes/wordcloud';
 import Search from './routes/search';
 import WebScraper from './routes/webscraper';
