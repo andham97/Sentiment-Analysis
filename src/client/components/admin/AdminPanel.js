@@ -83,7 +83,7 @@ class AdminPanel extends Component {
           <button onClick={() => this.context.saveHost()}>Save host</button>
           <button onClick={() => this.context.clearActiveHost()}>Clear fields</button>
         </Card>
-        <Card cName='admin'>
+        <Card>
           <AceEditor
             placeholder='Create function with signatur (date: string, months: array)'
             mode='javascript'
@@ -109,6 +109,7 @@ class AdminPanel extends Component {
               showLineNumbers: true,
               tabSize: 2,
             }}
+            className='admin'
             editorProps={{ $blockScrolling: Infinity }}/>
         </Card>
         <Card>
