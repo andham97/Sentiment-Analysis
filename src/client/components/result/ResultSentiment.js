@@ -10,6 +10,7 @@ import Datepicker from './DatePicker';
 import Exportpdf from './ExportPDF';
 import Parameteres from './Parameters';
 import Card from '../Card';
+import Checkbox from '../Checkbox';
 import DonutChart from './graph/DonutChart';
 import { SearchContext } from '../dashboard/SearchStore';
 import NewsArticleSentiment from './NewsArticleSentiment';
@@ -59,7 +60,12 @@ class ResultSentiment extends Component {
               <div className= 'filterSentiment_bar'>
                 <div className='test'>
                   <Dropdown titleList='Date' items={ <Datepicker /> }/>
-                  <Dropdown titleList='Emotion' items={'test'} />
+                  <Dropdown titleList='Sentiment' items={
+                    this.context.graphData.map((item, i) => <Checkbox
+                        key={i}
+                        value={item.title}
+                      />)
+                  } />
                   <Dropdown titleList='Time Interval' items={'test'} />
                 </div>
                 <div>

@@ -117,7 +117,7 @@ class NewSearch extends Component {
           : (
             <div className='container_filter'>
               <div className = 'flexContainer input_filter'>
-                <input className ='searchfield_filter' type='text' placeholder='  Search...'></input>
+                <input className ='searchfield_filter' type='text' placeholder='  Search...' onChange={this.handleInput}></input>
                 <SearchButton onClick={() => this.handleSearch(searchdata)} />
               </div>
                 <hr style = {{ margin: '0px', opacity: '0.2' }} />
