@@ -16,9 +16,8 @@ class WordCloud extends Component {
   }
 
   performSearchOnClick(searchword) {
-    this.context.getSearch(searchword).then(() => {
-      this.props.history.push('/result');
-    }).catch(console.error);
+    this.context.getSearch(searchword);
+    this.props.history.push('/result');
   }
 
   render() {

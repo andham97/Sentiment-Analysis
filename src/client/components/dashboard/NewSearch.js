@@ -21,14 +21,16 @@ class NewSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checkedItems: new Map(),
+      checkedItemsNews: new Map(),
+      checkedItemsEmotion: new Map(),
       show: false,
       startDate: moment(),
       endDate: moment(),
       news_search: '',
       search: '',
     };
-    this.handleChangeCheckbox = this.handleChangeCheckbox.bind(this);
+    this.handleChangeCheckboxNews = this.handleChangeCheckboxNews.bind(this);
+    this.handleChangeCheckboxEmotion = this.handleChangeCheckboxEmotion.bind(this);
     this.handleFilterClick = this.handleFilterClick.bind(this);
     this.dateChange = this.dateChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -47,13 +49,24 @@ class NewSearch extends Component {
   handleChecked() {
     this.setState({
       show: !this.state.show,
+      checkedItemsEmotion: new Map(),
     });
   }
 
-  handleChangeCheckbox(e) {
+  handleChangeCheckboxNews(e) {
     const item = e.target.value;
     const isChecked = e.target.checked;
-    this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(item, isChecked) }));
+    this.setState(prevState => (
+      { checkedItemsNews: prevState.checkedItemsNews.set(item, isChecked) }
+    ));
+  }
+
+  handleChangeCheckboxEmotion(e) {
+    const item = e.target.value;
+    const isChecked = e.target.checked;
+    this.setState(prevState => (
+      { checkedItemsEmotion: prevState.checkedItemsEmotion.set(item, isChecked) }
+    ));
   }
 
 
@@ -65,10 +78,8 @@ class NewSearch extends Component {
   }
 
   handleSearch(searchdata) {
-    console.log(searchdata);
-    this.context.getSearch(this.state.search).then(() => {
-      this.props.history.push('/result');
-    }).catch(console.error);
+    this.context.getSearch(searchdata);
+    this.props.history.push('/result');
   }
 
   handleInput(event) {
@@ -149,8 +160,8 @@ class NewSearch extends Component {
                             <div key={item.key}>
                               <Checkbox
                                 value={item.value}
-                                checked={this.state.checkedItems.get(item.value) || false}
-                                onChange={e => this.handleChangeCheckbox(e)}
+                                checked={this.state.checkedItemsEmotion.get(item.value) || false}
+                                onChange={e => this.handleChangeCheckboxEmotion(e)}
                                 className='checkbox_emotion'
                                 name='emotion'
                               />
@@ -176,8 +187,8 @@ class NewSearch extends Component {
                           filterNews.map(item => <Checkbox
                               key={item.key}
                               value={item.value}
-                              checked={this.state.checkedItems.get(item.value) || false}
-                              onChange={e => this.handleChangeCheckbox(e)}
+                              checked={this.state.checkedItemsNews.get(item.value) || false}
+                              onChange={e => this.handleChangeCheckboxNews(e)}
                             />)
                         }
                     </div>

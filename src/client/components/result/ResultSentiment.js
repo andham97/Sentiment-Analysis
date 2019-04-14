@@ -51,48 +51,6 @@ class ResultSentiment extends Component {
   }
 
   render() {
-    if (!this.context.search) {
-      return 'Loading';
-    }
-    const colors = ['#5EA3DB', '#FF5C54', '#AFBE8F'];
-    this.context.getEmotionalTone();
-    let search = {};
-    if (this.context && this.context.search)
-      search = this.context.search;
-    if (!search.docs)
-      search.docs = [];
-    const average = search.docs.reduce((acc, val) => {
-      let sentiment = val.analysis.sentiment;
-      console.log(sentiment);
-      if (!sentiment) {
-        sentiment = {
-          score: 0,
-          label: 'neutral',
-        };
-      }
-      acc.sentiment[val.analysis.sentiment.label]++;
-      return acc;
-    }, {
-      sentiment: { positive: 0, negative: 0, neutral: 0 },
-    });
-
-    Object.keys(average).forEach((key) => {
-      if (typeof average[key] === 'number')
-        average[key] /= search.docs.length;
-      else
-        Object.keys(average[key]).forEach((key2) => {
-          average[key][key2] /= search.docs.length;
-        });
-    });
-    const data = Object.keys(average.sentiment ? average.sentiment : {}).map(
-      (key, i) => (
-        {
-          title: key,
-          value: Math.floor(average.sentiment[key] * 100),
-          color: colors[i],
-        }),
-    );
-
     return (
       <React.Fragment>
         <Header class='resultSentiment_header' name='Sentiment Analysis' />
@@ -115,7 +73,7 @@ class ResultSentiment extends Component {
               <div className='title_param'>Parameters</div>
               <div className='param_card'>
                 <Parameteres
-                  searchtext={this.context.searchword}
+                  searchtext={this.context.searchOpts.search}
                   sentiment='Sentiment: Positive, Neagtive, Neutral'
                   date='Date: 23.05.19'
                   timeinterval='Time Interval: 23.05.19-25.05.19'
@@ -125,7 +83,7 @@ class ResultSentiment extends Component {
             </Card>
           </div>
 
-          {data.map((element, i) => {
+          {this.context.graphData.map((element, i) => {
             const name = className(element.title);
             return (<div key={i} className = {`resultSentiment_graphs_${name}`}>
               <Card>
@@ -142,7 +100,7 @@ class ResultSentiment extends Component {
               <LineChart
                 width={350}
                 height={300}
-                data={this.context.getEmotionalToneSentiment()}
+                data={this.context.emotionalTone}
                 margin={{
                   top: 20,
                 }}>
@@ -160,7 +118,7 @@ class ResultSentiment extends Component {
 
           <div className='resultSentiment_articles'>
           <Card>
-          { search.docs.map((article, i) => {
+          { this.context.search.docs.map((article, i) => {
             if (!article)
               return '';
             let analysis = {};

@@ -52,58 +52,6 @@ class Result extends Component {
   }
 
   render() {
-    if (!this.context.search) {
-      return 'Loading';
-    }
-    const colors = ['#D3C0CD', '#9FAF90', '#3A405A', '#3D70B2', '#E26D5A'];
-    this.context.getEmotionalTone();
-    let search = {};
-    if (this.context && this.context.search)
-      search = this.context.search;
-    if (!search.docs)
-      search.docs = [];
-    const average = search.docs.reduce((acc, val) => {
-      let emotion = val.analysis.emotion;
-      if (!emotion) {
-        emotion = {
-          anger: 0,
-          joy: 0,
-          disgust: 0,
-          fear: 0,
-          sadness: 0,
-        };
-      }
-      acc.joy += emotion.joy;
-      acc.anger += emotion.anger;
-      acc.sadness += emotion.sadness;
-      acc.disgust += emotion.disgust;
-      acc.fear += emotion.fear;
-      acc.sentiment[val.analysis.sentiment.label]++;
-      return acc;
-    }, {
-      sentiment: { positive: 0, negative: 0, neutral: 0 },
-      joy: 0,
-      disgust: 0,
-      fear: 0,
-      sadness: 0,
-      anger: 0,
-    });
-
-    Object.keys(average).forEach((key) => {
-      if (typeof average[key] === 'number')
-        average[key] /= search.docs.length;
-      else
-        Object.keys(average[key]).forEach((key2) => {
-          average[key][key2] /= search.docs.length;
-        });
-    });
-
-    const data = Object.keys(average).filter(
-      e => e !== 'sentiment',
-    ).map(
-      (key, i) => ({ title: key, value: Math.floor(average[key] * 100), color: colors[i] }),
-    );
-
     return (
       <React.Fragment>
         <Header class='result_header' name='Sentiment Analysis' />
@@ -113,13 +61,13 @@ class Result extends Component {
                 <div className='test'>
                   <Dropdown titleList='Date' items={ <Datepicker /> }/>
                   <Dropdown titleList='Emotion' items={
-                    data.map((item, i) => <Checkbox
+                    this.context.graphData.map((item, i) => <Checkbox
                         key={i}
                         value={item.title}
                       />)
                   } />
                   <Dropdown titleList='Time Interval' items={
-                    data.map((item, i) => <ul key={i}>{item.title}</ul>)
+                    this.context.graphData.map((item, i) => <ul key={i}>{item.title}</ul>)
                   } />
                 </div>
                 <div>
@@ -133,7 +81,7 @@ class Result extends Component {
               <div className='title_param'>Parameters</div>
               <div className='param_card'>
                 <Parameteres
-                  searchtext={this.context.searchword}
+                  searchtext={this.context.searchOpts.search}
                   sentiment='Sentiment: Positive, Neagtive, Neutral'
                   date='Date: 23.05.19'
                   timeinterval='Time Interval: 23.05.19-25.05.19'
@@ -143,7 +91,7 @@ class Result extends Component {
             </Card>
           </div>
 
-            {data.map((element, i) => {
+            {this.context.graphData.map((element, i) => {
               const name = classNameMap(element.title);
               return (<div key={i} className = {`result_graphs_${name}`}>
                 <Card>
@@ -157,7 +105,7 @@ class Result extends Component {
           <div className = 'result_graph'>
             <Card>
             <div className='emotionalTone'>Emotional Tone </div>
-              <LineChart width={350} height={300} data={this.context.getEmotionalTone()} margin={{
+              <LineChart width={350} height={300} data={this.context.emotionalTone} margin={{
                 top: 20,
               }}>
                 <XAxis dataKey="date"/>
@@ -176,7 +124,7 @@ class Result extends Component {
 
           <div className = 'result_news'>
             <Card>
-            { search.docs.map((article, i) => {
+            { this.context.search.docs.map((article, i) => {
               if (!article)
                 return '';
               let analysis = {};

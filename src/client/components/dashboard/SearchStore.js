@@ -8,7 +8,8 @@ class SearchStore extends React.Component {
     super(props);
     this.state = {
       words: [],
-      searchword: '',
+      searchOpts: {},
+      searchType: '',
     };
     this.getSearch = this.getSearch.bind(this);
     this.getWords = this.getWords.bind(this);
@@ -17,18 +18,102 @@ class SearchStore extends React.Component {
   }
 
   getSearch(opts) {
-    return new Promise((resolve, reject) => {
-      localStorage.setItem('prev-search', opts);
-      fetch(`/api/search?q=${opts}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then(response => response.json()).then((data) => {
-        this.setState({ ...this.state, search: data, searchword: opts });
-        resolve();
-      }).catch(reject);
+    localStorage.setItem('prev-search', opts.search);
+    this.setState({
+      ...this.state, search: undefined, searchOpts: opts, searchType: opts.show ? 'emotion' : 'sentiment',
     });
+    fetch(`/api/search?q=${opts.search}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(response => response.json()).then((data) => {
+      const search = data;
+      if (this.state.searchType === 'sentiment') {
+        const colors = ['#5EA3DB', '#FF5C54', '#AFBE8F'];
+        const average = search.docs.reduce((acc, val) => {
+          let sentiment = val.analysis.sentiment;
+          if (!sentiment) {
+            sentiment = {
+              score: 0,
+              label: 'neutral',
+            };
+          }
+          acc.sentiment[val.analysis.sentiment.label]++;
+          return acc;
+        }, {
+          sentiment: { positive: 0, negative: 0, neutral: 0 },
+        });
+
+        Object.keys(average).forEach((key) => {
+          if (typeof average[key] === 'number')
+            average[key] /= search.docs.length;
+          else
+            Object.keys(average[key]).forEach((key2) => {
+              average[key][key2] /= search.docs.length;
+            });
+        });
+        this.setState({
+          ...this.state,
+          graphData: Object.keys(average.sentiment ? average.sentiment : {}).map(
+            (key, i) => (
+              {
+                title: key,
+                value: Math.floor(average.sentiment[key] * 100),
+                color: colors[i],
+              }),
+          ),
+          search: data,
+          emotionalTone: this.getEmotionalToneSentiment(search),
+        });
+      }
+      else if (this.state.searchType === 'emotion') {
+        const colors = ['#D3C0CD', '#9FAF90', '#3A405A', '#3D70B2', '#E26D5A'];
+        const average = search.docs.reduce((acc, val) => {
+          let emotion = val.analysis.emotion;
+          if (!emotion) {
+            emotion = {
+              anger: 0,
+              joy: 0,
+              disgust: 0,
+              fear: 0,
+              sadness: 0,
+            };
+          }
+          acc.joy += emotion.joy;
+          acc.anger += emotion.anger;
+          acc.sadness += emotion.sadness;
+          acc.disgust += emotion.disgust;
+          acc.fear += emotion.fear;
+          acc.sentiment[val.analysis.sentiment.label]++;
+          return acc;
+        }, {
+          sentiment: { positive: 0, negative: 0, neutral: 0 },
+          joy: 0,
+          disgust: 0,
+          fear: 0,
+          sadness: 0,
+          anger: 0,
+        });
+
+        Object.keys(average).forEach((key) => {
+          if (typeof average[key] === 'number')
+            average[key] /= search.docs.length;
+          else
+            Object.keys(average[key]).forEach((key2) => {
+              average[key][key2] /= search.docs.length;
+            });
+        });
+        this.setState({
+          ...this.state,
+          graphData: Object.keys(average).filter(e => e !== 'sentiment').map(
+            (key, i) => ({ title: key, value: Math.floor(average[key] * 100), color: colors[i] }),
+          ),
+          search: data,
+          emotionalTone: this.getEmotionalTone(search),
+        });
+      }
+    }).catch(console.error);
   }
 
   getWords() {
@@ -43,8 +128,9 @@ class SearchStore extends React.Component {
     });
   }
 
-  getEmotionalTone() {
-    const sortArr = this.state.search.docs.sort(
+  getEmotionalTone(search) {
+    console.log(search);
+    const sortArr = search.docs.sort(
       (a, b) => a.date - b.date,
     ).filter(a => a.date > 0).map((element) => {
       const date = new Date(element.date);
@@ -100,8 +186,9 @@ class SearchStore extends React.Component {
     return ret;
   }
 
-  getEmotionalToneSentiment() {
-    const sortArr = this.state.search.docs.sort(
+  getEmotionalToneSentiment(search) {
+    console.log(search);
+    const sortArr = search.docs.sort(
       (a, b) => a.date - b.date,
     ).filter(a => a.date > 0).map((element) => {
       const date = new Date(element.date);

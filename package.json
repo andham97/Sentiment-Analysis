@@ -76,6 +76,7 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "search-text-tokenizer": "^2.1.1",
+    "url-loader": "^1.1.2",
     "validator": "^10.11.0",
     "watson-developer-cloud": "^3.17.0"
   },
