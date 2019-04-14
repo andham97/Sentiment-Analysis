@@ -12,6 +12,10 @@ module.exports = {
     {
       test: /\.css$/,
       use: ['style-loader', 'css-loader'],
+    },
+    {
+      test: /\.(gif)$/,
+      use: [{ loader: 'url-loader' }],
     }],
   },
   entry: path.resolve(__dirname, 'src/client/client.js'),
