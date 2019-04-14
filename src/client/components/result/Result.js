@@ -45,6 +45,11 @@ class Result extends Component {
     };
   }
 
+  componentWillMount() {
+    if (!this.context.search && localStorage.getItem('prev-search'))
+      this.context.getSearch(localStorage.getItem('prev-search'));
+  }
+
   makeRedirect(url) {
     if (typeof url !== 'undefined') {
       window.open(url, '_blank');
@@ -105,9 +110,13 @@ class Result extends Component {
           <div className = 'result_graph'>
             <Card>
             <div className='emotionalTone'>Emotional Tone </div>
-              <LineChart width={350} height={300} data={this.context.emotionalTone} margin={{
-                top: 20,
-              }}>
+              <LineChart
+                width={350}
+                height={300}
+                data={this.context.emotionalTone}
+                margin={{
+                  top: 20,
+                }}>
                 <XAxis dataKey="date"/>
                 <YAxis/>
                 <CartesianGrid strokeDasharray="3 3"/>

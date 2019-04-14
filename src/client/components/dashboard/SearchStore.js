@@ -18,6 +18,7 @@ class SearchStore extends React.Component {
   }
 
   getSearch(opts) {
+    console.log(opts);
     localStorage.setItem('prev-search', opts.search);
     this.setState({
       ...this.state, search: undefined, searchOpts: opts, searchType: opts.show ? 'emotion' : 'sentiment',
