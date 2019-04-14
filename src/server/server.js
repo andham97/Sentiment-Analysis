@@ -14,9 +14,6 @@ import { getCloudant } from './ics';
 
 dotenv.config();
 
-console.log('PROCESS ENV');
-console.log(process.env);
-
 passport.use(new Auth0Security({
   domain: process.env.AUTH0_DOMAIN,
   clientID: process.env.AUTH0_CLIENT_ID,
@@ -41,6 +38,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api/auth', Auth);
+app.use('/api/auth', (err, req, res) => {
+  res.status(500).send(JSON.stringify(err, null, 2));
+});
 
 app.use('/api', (req, res, next) => {
   const start = new Date().getTime();
