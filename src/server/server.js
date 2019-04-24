@@ -29,7 +29,7 @@ app.use(express.static(path.resolve(process.cwd(), 'build/client')));
 app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  cookie: app.get('env') === 'production' ? { secure: true } : {},
+  cookie: {},
   resave: false,
   saveUninitialized: true,
 }));
