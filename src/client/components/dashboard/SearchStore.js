@@ -10,6 +10,7 @@ class SearchStore extends React.Component {
       words: [],
       searchOpts: {},
       searchType: '',
+      sources: [],
     };
     this.getSearch = this.getSearch.bind(this);
     this.getWords = this.getWords.bind(this);
@@ -18,7 +19,6 @@ class SearchStore extends React.Component {
   }
 
   getSearch(opts) {
-    console.log(opts);
     localStorage.setItem('prev-search', opts.search);
     this.setState({
       ...this.state, search: undefined, searchOpts: opts, searchType: opts.show ? 'emotion' : 'sentiment',
@@ -115,6 +115,15 @@ class SearchStore extends React.Component {
         });
       }
     }).catch(console.error);
+  }
+
+  getSources() {
+    fetch('/api/search/sources').then(res => res.json()).then((data) => {
+      this.setState({
+        ...this.state,
+        sources: data,
+      });
+    });
   }
 
   getWords() {

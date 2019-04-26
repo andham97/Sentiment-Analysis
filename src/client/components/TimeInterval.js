@@ -22,8 +22,8 @@ class TimeInterval extends Component {
   render() {
     return (
       <div><br /> <span className='chooseDate'>Choose prefered date: </span>
-        <DatePicker todayButton={'Today'} selected={this.state.startDate} onChange={this.handleChange()}/>
-        <DatePicker todayButton={'Today'} selected={this.state.endDate} onChange={this.handleChange()}/>
+        From: <DatePicker todayButton={'Today'} selected={this.state.startDate} onChange={this.handleChange()}/>
+        To: <DatePicker todayButton={'Today'} selected={this.state.endDate} onChange={this.handleChange()}/>
       </div>
     );
   }

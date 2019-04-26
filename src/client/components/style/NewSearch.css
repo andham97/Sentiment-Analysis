@@ -8,14 +8,14 @@
 }
 
 .buttons {
-  margin-top: 1%;
-  margin-left: 22.5%;
-  margin-right: 22.5%;
+  margin-top: 3%;
+  margin-left: 22%;
+  margin-right: 22%;
 }
 
 .searchfield {
   margin-top: 25%;
-  width: 42%;
+  width: 18rem;
   height: 33px;
   border: 1px solid rgba(0, 0, 0, .1);
   border-radius: 4px;
@@ -25,23 +25,20 @@
   background-color: white;
   border: 1px solid rgba(0, 0, 0, .1);
   color: #3D70B2;
-  padding: 8px 16px;
-  text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 12px;
-  margin: 4px 2px;
+  font-size: 0.7rem;
   cursor: pointer;
   width: 93px;
-  margin-right: 13%;
   border-radius: 4px;
   height: 33px;
+  float: left;
 }
 
 .title {
   padding: 30px;
   text-align: left;
-  font-size: 25px;
+  font-size: 1.5rem;
   color: #3D70B2;
 }
 
@@ -64,7 +61,7 @@
 
 .title_Analysis {
   text-align: left;
-  font-size: 22px;
+  font-size: 1.4rem;
   margin-bottom: 13%;
 }
 
@@ -115,7 +112,7 @@
 }
 
 p {
-  font-size: 12px;
+  font-size: 1rem;
   font-style: italic;
   margin-top: 2px;
 }

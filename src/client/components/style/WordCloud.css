@@ -13,9 +13,19 @@ body span{
   text-align: center;
   margin-left: 3%;
   margin-right: 3%;
-  margin-top: 23%;
+  margin-top: 11rem;
 }
 
 span.tag-cloud-tag:hover, span.tag-cloud-tag:active {
   font-weight: bold ! important;
+}
+
+
+@media screen
+  and (max-width: 1000px)
+  and (min-width: 320px) {
+    .tag-cloud{
+      margin-top: 4rem;
+      margin-bottom: 4rem;
+    }
 }

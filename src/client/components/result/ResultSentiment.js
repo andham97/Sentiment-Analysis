@@ -6,6 +6,7 @@ import {
 import Header from '../Header';
 import Dropdown from '../Dropdown';
 // import Checkbox from '../Checkbox';
+import DatePickerInterval from '../DatePickerInterval';
 import Datepicker from './DatePicker';
 import Exportpdf from './ExportPDF';
 import Parameteres from './Parameters';
@@ -37,7 +38,9 @@ class ResultSentiment extends Component {
     super(props);
     this.state = {
       averageArray: [],
+      checkedSentiment: [],
     };
+    this.handleCheckedSentiment = this.handleCheckedSentiment.bind(this);
   }
 
   componentWillMount() {
@@ -51,7 +54,23 @@ class ResultSentiment extends Component {
     }
   }
 
+  handleCheckedSentiment(sentiment) {
+    const item = sentiment.target.value;
+    const isChecked = sentiment.target.checked;
+    const cs = this.state.checkedSentiment;
+    if (isChecked)
+      cs.push(item);
+    else
+      cs.splice(cs.indexOf(item), 1);
+    this.setState({ ...this.state, checkedSentiment: cs });
+  }
+
   render() {
+    const sentimentSearch = this.context.search.docs;
+    const filterSentiment = this.state.checkedSentiment.length === 0
+      ? sentimentSearch : sentimentSearch.filter(
+        item => this.state.checkedSentiment.indexOf(item.analysis.sentiment.label) > -1,
+      );
     return (
       <React.Fragment>
         <Header class='resultSentiment_header' name='Sentiment Analysis' />
@@ -64,9 +83,10 @@ class ResultSentiment extends Component {
                     this.context.graphData.map((item, i) => <Checkbox
                         key={i}
                         value={item.title}
+                        onChange={sentiment => this.handleCheckedSentiment(sentiment)}
                       />)
                   } />
-                  <Dropdown titleList='Time Interval' items={'test'} />
+                  <Dropdown titleList='Time Interval' items={<DatePickerInterval />} />
                 </div>
                 <div>
                   <Exportpdf className='exportpdf'/>
@@ -90,10 +110,11 @@ class ResultSentiment extends Component {
           </div>
 
           {this.context.graphData.map((element, i) => {
+            console.log('hei1');
             const name = className(element.title);
             return (<div key={i} className = {`resultSentiment_graphs_${name}`}>
               <Card>
-                <div className='graphs' style={{ marginLeft: '70px', marginRight: '70px' }} >
+                <div align='center' className='graphs' >
                   <DonutChart chart={`${name}_chart`} label={`label_${name}`} name={element.title} data={[element]}/>
                 </div>
               </Card>
@@ -124,24 +145,21 @@ class ResultSentiment extends Component {
 
           <div className='resultSentiment_articles'>
           <Card>
-          { this.context.search.docs.map((article, i) => {
+          { this.context.search.docs.map((article) => {
             if (!article)
               return '';
-            let analysis = {};
-            if (article.analysis)
-              analysis = article.analysis;
             return (
-              <NewsArticleSentiment
+              filterSentiment.map((item, i) => <NewsArticleSentiment
                 key={i}
-                date={new Date(article.date).toLocaleDateString()} // ER HARD KODET
-                title={article.headline}
-                newssource={article.sourceID}
-                domSentiment={analysis.sentiment.label}
-                sentiments= {analysis.sentiment ? analysis.sentiment : {
+                date={new Date(item.date).toLocaleDateString()}
+                title={item.headline}
+                newssource={item.sourceID}
+                domSentiment={item.analysis.sentiment.label}
+                sentiments= {item.analysis.sentiment ? item.analysis.sentiment : {
                   negative: 0, neutral: 0, positive: 0,
                 }}
                 onClick= {() => this.makeRedirect(article.url)}
-              />
+              />)
             );
           }) }
           </Card>
