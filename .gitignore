@@ -72,3 +72,4 @@ src/twitterFetch.js
 src/twitterAnalyze.js
 dataset.txt
 cache/
+*.csv

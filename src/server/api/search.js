@@ -107,11 +107,10 @@ const getSources = () => new Promise((resolve, reject) => {
         cloudant.db.use('sa-meta').find({ selector: { type: 'ws' } }).then(({ docs }) => {
           const hosts = Object.keys(docs[0]).filter(key => docs[0][key].sourceID);
           const keys = data.rows.map(e => e.key);
-          resolve(keys.map((key) => {
-            const ret = {};
-            ret[key] = docs[0][hosts.filter(k => docs[0][k].sourceID === key)[0]].name;
-            return ret;
-          }));
+          resolve(keys.map(key => ({
+            key,
+            value: docs[0][hosts.filter(k => docs[0][k].sourceID === key)[0]].name,
+          })));
         }).catch((err) => {
           if (!err.reason)
             return reject(err);

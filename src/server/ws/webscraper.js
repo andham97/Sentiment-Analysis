@@ -37,7 +37,13 @@ const ws = (path, cb) => {
     }
     rp(path).then((html) => {
       const page = cheerio.load(html);
-      const headline = page(index[hostname].headline).text();
+      const host = index[hostname];
+      let headline = '';
+      for (let i = 0; i < host.headlines.length; i++) {
+        headline = page(host.headlines[i]).text();
+        if (headline.length > 0)
+          break;
+      }
       const m = new Module();
       m._compile(`module.exports = ${index[hostname].date.function}`, '');
       const months = ['January', 'February', 'March', 'April', 'May', 'June',

@@ -2,8 +2,6 @@ import cfenv from 'cfenv';
 import fs from 'fs';
 
 const appEnv = cfenv.getAppEnv();
-console.log('AppENV');
-console.log(appEnv);
 let serviceParameters;
 if (appEnv.isLocal) {
   if (process.env.isTravis) {

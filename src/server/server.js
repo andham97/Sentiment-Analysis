@@ -11,7 +11,6 @@ import WebScraper from './routes/webscraper';
 import Auth from './routes/auth';
 import { getCloudant } from './ics';
 
-
 dotenv.config();
 
 passport.use(new Auth0Security({
@@ -29,7 +28,7 @@ app.use(express.static(path.resolve(process.cwd(), 'build/client')));
 app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  cookie: {},
+  cookie: { secure: true },
   resave: false,
   saveUninitialized: true,
 }));
@@ -61,7 +60,7 @@ app.use('/api/wordcloud', Wordcloud);
 app.use('/api/search', Search);
 
 app.use('/api', (req, res, next) => {
-  if (req.user || req.body.api_key === process.env.SCRAPER_API_KEY)
+  if (req.user || req.headers.api_key === process.env.SCRAPER_API_KEY)
     return next();
   req.session.returnTo = req.originalUrl;
   res.redirect('/api/auth/login');

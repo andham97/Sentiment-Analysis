@@ -1,9 +1,12 @@
 import { Router } from 'express';
 import rp from 'request-promise';
+import dotenv from 'dotenv';
 import ws from '../ws';
 import nluProcess from '../ws/nlu';
 import API from '../api';
 import { isWhitelisted } from './auth';
+
+dotenv.config();
 
 const router = new Router();
 
@@ -49,7 +52,7 @@ router.post('/hosts', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  if (!req.user || !isWhitelisted(req.user))
+  if (!isWhitelisted(req.user) || req.headers.api_key !== process.env.SCRAPER_API_KEY)
     return res.status(403).send('Access denied');
   console.log('Performing URL validation');
   const len = req.body.urls.length;

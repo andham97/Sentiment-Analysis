@@ -15,8 +15,6 @@ router.get('/login', passport.authenticate('auth0', {
 
 router.get('/callback', (req, res, next) => {
   passport.authenticate('auth0', (err, user) => {
-    console.log(err);
-    console.log(user);
     if (err)
       return next(err);
     if (!user)
@@ -37,6 +35,7 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/whitelist', (req, res) => {
+  console.log(req.user);
   if (!req.user)
     return res.json(false);
   res.json(isWhitelisted(req.user));
