@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import '../style/NewSearch.css';
 import { FaTimes } from 'react-icons/fa';
-import { DateRangePicker } from 'react-dates';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+import DatePickerInterval from '../DatePickerInterval';
 import { checkboxesNews } from './checkboxes_news';
 import checkboxesEmotions from './checkboxes_emotions';
 import Checkbox from '../Checkbox';
@@ -13,9 +12,7 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import '../style/react_dates_overrides.css';
 import { SearchContext } from './SearchStore';
-
 import 'react-datepicker/dist/react-datepicker.css';
-
 
 class NewSearch extends Component {
   constructor(props) {
@@ -24,8 +21,6 @@ class NewSearch extends Component {
       checkedItemsNews: new Map(),
       checkedItemsEmotion: new Map(),
       show: false,
-      startDate: moment(),
-      endDate: moment(),
       news_search: '',
       search: '',
     };
@@ -38,6 +33,7 @@ class NewSearch extends Component {
   }
 
   updateSearch(event) {
+    console.log(event.target.value);
     this.setState({ news_search: event.target.value });
   }
 
@@ -97,7 +93,6 @@ class NewSearch extends Component {
     );
     const { buttonclicked } = this.state;
     const searchdata = this.state;
-
     return (
       <div className='content' >
         <div className='container_top'>
@@ -184,7 +179,7 @@ class NewSearch extends Component {
                         placeholder=' News Source...'
                       />
                         {
-                          filterNews.map(item => <Checkbox
+                          this.context.sources.map(item => <Checkbox
                               key={item.key}
                               value={item.value}
                               checked={this.state.checkedItemsNews.get(item.value) || false}
@@ -195,21 +190,7 @@ class NewSearch extends Component {
                   </div>
                 <div className='filter_time'>
                   <div className='title_Analysis'> Time Interval </div>
-                   <DateRangePicker
-                      startDate={this.state.startDate}
-                      startDateId="your_unique_start_date_id"
-                      endDate={this.state.endDate}
-                      endDateId="your_unique_end_date_id"
-                      onDatesChange={({
-                        startDate,
-                        endDate,
-                      }) => this.setState({
-                        startDate,
-                        endDate,
-                      })}
-                      focusedInput={this.state.focusedInput}
-                      onFocusChange={focusedInput => this.setState({ focusedInput })}
-                    />
+                  <DatePickerInterval style={'../style/DatePickerInterval.css'} />
                     <p>Choose from and to date</p>
                 </div>
               </div>

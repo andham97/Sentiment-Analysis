@@ -4,8 +4,8 @@ body {
 }
 
 .dashboard_header {
-  padding: 30px;
+  padding: 1rem;
   text-align: left;
   background: white;
-  font-size: 28px;
+  font-size: 2rem;
 }

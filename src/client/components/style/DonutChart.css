@@ -3,57 +3,57 @@ text[fill="#F7E8D9"] {
 }
 
 div.label_anger {
-  padding-top: 20px;
+  padding-top: 1.5rem;
   color: #E26D5A;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-family: 'sans-serif';
 }
 
 div.label_sadness {
-  padding-top: 20px;
+  padding-top: 1.5rem;
   color: #3D70B2;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-family: 'sans-serif';
 }
 
 div.label_fear {
-  padding-top: 20px;
+  padding-top: 1.5rem;
   color: #3A405A;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-family: 'sans-serif';
 }
 
 div.label_joy {
-  padding-top: 20px;
+  padding-top: 1.5rem;
   color: #D3C0CD;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-family: 'sans-serif';
 }
 
 div.label_disgust {
-  padding-top: 20px;
+  padding-top: 1.5rem;
   color: #9FAF90;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-family: 'sans-serif';
 }
 
 div.label_negative {
-  padding-top: 20px;
+  padding-top: 1.5rem;
   color: #FF5C54;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-family: 'sans-serif';
 }
 
 div.label_neutral {
-  padding-top: 20px;
+  padding-top: 1.5rem;
   color: #AFBE8F;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-family: 'sans-serif';
 }
 
 div.label_positive {
-  padding-top: 20px;
+  padding-top: 1.5rem;
   color: #5EA3DB;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-family: 'sans-serif';
 }

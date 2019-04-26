@@ -1,31 +1,63 @@
 .wrapper {
+  margin: 5rem;
   display: grid;
-  grid-template-rows: 590px; /*Må endres når data taes inn*/
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  grid-gap: 40px;
-  grid-template-areas:
-    "NewSearch"
-    "WordCloud";
-  padding: 70px;
+  grid-gap: 2rem;
   justify-content: center;
-}
-
-@media (min-width: 700px) {
- .leading {
-    display: flex;
-    align-items: center;
-  }
+  grid-template-areas: "newsearch wordcloud";
+  grid-template-columns: repeat(2, 1fr);
+  height: 72vh;
 }
 
 .new_search {
-  gird-area: 'NewSearch';
+  grid-area: newsearch;
   display: inline;
   background-color: white;
-
 }
 
 .wordcloud {
-  grid-area: 'WordCloud';
+  grid-area: wordcloud;
   display: inline;
   background-color: white;
+}
+
+@media screen
+  and (max-width: 1000px)
+  and (min-width: 500px) {
+    .wrapper {
+      margin: 0px;
+      margin-top: 2rem;
+      margin-left: 2rem;
+      margin-right: 2rem;
+      height: 100%;
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-areas: "newsearch"
+            "wordcloud";
+    }
+
+    input.searchfield{
+      margin-top: 4rem;
+    }
+    .new_search{
+      padding-bottom: 4rem;
+    }
+}
+
+@media screen
+  and (max-width: 500px)
+  and (min-width: 320px) {
+    .wrapper {
+      height: 100%;
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-areas: "newsearch"
+            "wordcloud";
+      margin: 0px;
+      margin-top: 2rem;
+    }
+
+    input.searchfield{
+      margin-top: 4rem;
+    }
+    .new_search{
+      padding-bottom: 4rem;
+    }
 }

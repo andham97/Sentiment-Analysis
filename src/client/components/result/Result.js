@@ -4,6 +4,7 @@ import {
 } from 'recharts';
 import Card from '../Card';
 import Header from '../Header';
+import DatePickerInterval from '../DatePickerInterval';
 import DonutChart from './graph/DonutChart';
 import Parameteres from './Parameters';
 import '../style/Result.css';
@@ -42,7 +43,9 @@ class Result extends Component {
     super(props);
     this.state = {
       averageArray: [],
+      checkedEmotion: [],
     };
+    this.handleCheckedEmotion = this.handleCheckedEmotion.bind(this);
   }
 
   componentWillMount() {
@@ -56,7 +59,28 @@ class Result extends Component {
     }
   }
 
+  handleCheckedEmotion(emotion) {
+    const item = emotion.target.value;
+    const isChecked = emotion.target.checked;
+    const cs = this.state.checkedEmotion;
+    if (isChecked)
+      cs.push(item);
+    else
+      cs.splice(cs.indexOf(item), 1);
+    this.setState({ ...this.state, checkedEmotion: cs });
+  }
+
   render() {
+    const emotionSearch = this.context.search.docs;
+    console.log(emotionSearch);
+    const filterEmotion = this.state.checkedEmotion.length === 0
+      ? emotionSearch : emotionSearch.filter(
+        item => this.state.checkedEmotion.indexOf(
+          Object.keys(item.analysis.emotion).sort((a, b) => Math.abs(item.analysis.emotion[b]) - Math.abs(item.analysis.emotion[a]))[0],
+        ) > -1,
+      );
+    console.log(filterEmotion);
+    console.log(this.state.checkedEmotion);
     return (
       <React.Fragment>
         <Header class='result_header' name='Sentiment Analysis' />
@@ -69,10 +93,11 @@ class Result extends Component {
                     this.context.graphData.map((item, i) => <Checkbox
                         key={i}
                         value={item.title}
+                        onChange={emotion => this.handleCheckedEmotion(emotion)}
                       />)
                   } />
                   <Dropdown titleList='Time Interval' items={
-                    this.context.graphData.map((item, i) => <ul key={i}>{item.title}</ul>)
+                    <DatePickerInterval />
                   } />
                 </div>
                 <div>
@@ -98,9 +123,9 @@ class Result extends Component {
 
             {this.context.graphData.map((element, i) => {
               const name = classNameMap(element.title);
-              return (<div key={i} className = {`result_graphs_${name}`}>
+              return (<div key={i} align="center" className = {`result_graphs_${name}`}>
                 <Card>
-                  <div className='graphs' style={{ margin: '20px' }} >
+                  <div className='graphs' >
                     <DonutChart chart={`${name}_chart`} label={`label_${name}`} name={element.title} data={[element]}/>
                   </div>
                 </Card>
@@ -133,25 +158,22 @@ class Result extends Component {
 
           <div className = 'result_news'>
             <Card>
-            { this.context.search.docs.map((article, i) => {
+            { this.context.search.docs.map((article) => {
               if (!article)
                 return '';
-              let analysis = {};
-              if (article.analysis)
-                analysis = article.analysis;
               return (
-                <NewsArticle
+                filterEmotion.map((item, i) => <NewsArticle
                   key={i}
-                  date={new Date(article.date).toLocaleDateString()} // ER HARD KODET
-                  title={article.headline}
-                  newssource={article.sourceID}
-                  domFeeling={analysis.emotion ? Object.keys(analysis.emotion)
-                    .sort((a, b) => analysis.emotion[b] - analysis.emotion[a])[0] : 'None'}
-                  feelings= {analysis.emotion ? analysis.emotion : {
+                  date={new Date(item.date).toLocaleDateString()} // ER HARD KODET
+                  title={item.headline}
+                  newssource={item.sourceID}
+                  domFeeling={item.analysis.emotion ? Object.keys(item.analysis.emotion)
+                    .sort((a, b) => item.analysis.emotion[b] - item.analysis.emotion[a])[0] : 'None'}
+                  feelings= {item.analysis.emotion ? item.analysis.emotion : {
                     anger: 0, joy: 0, disgust: 0, fear: 0, sadness: 0,
                   }}
                   onClick= {() => this.makeRedirect(article.url)}
-                />
+                />)
               );
             }) }
             </Card>

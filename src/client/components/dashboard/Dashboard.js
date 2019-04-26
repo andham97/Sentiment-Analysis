@@ -10,10 +10,10 @@ class Dashboard extends Component {
     return [
       <Header key={1} class='dashboard_header' name = 'Dashboard'/>,
       <div key={2} className='wrapper'>
-        <Card class='new_search'>
+        <Card class='new_search' cName='new_search'>
             <NewSearch />
         </Card>
-        <Card class='wordcloud'>
+        <Card class='wordcloud' cName='wordcloud'>
             <WordCloud />
         </Card>
       </div>,

@@ -11,9 +11,9 @@ class Datepicker extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(date) {
+  handleChange(start) {
     this.setState({
-      startDate: date,
+      startDate: start,
     });
   }
 
