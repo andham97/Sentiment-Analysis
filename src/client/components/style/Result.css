@@ -155,6 +155,10 @@ div.recharts-wrapper{
   float: left;
 }
 
+div.react-datepicker__current-month{
+  margin-left: 35%;
+}
+
 .filter_bar{
   display: flex;
   flex-direction: row;

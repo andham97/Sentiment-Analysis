@@ -76,7 +76,9 @@ class Result extends Component {
     const filterEmotion = this.state.checkedEmotion.length === 0
       ? emotionSearch : emotionSearch.filter(
         item => this.state.checkedEmotion.indexOf(
-          Object.keys(item.analysis.emotion).sort((a, b) => Math.abs(item.analysis.emotion[b]) - Math.abs(item.analysis.emotion[a]))[0],
+          Object.keys(item.analysis.emotion).sort(
+            (a, b) => Math.abs(item.analysis.emotion[b]) - Math.abs(item.analysis.emotion[a]),
+          )[0],
         ) > -1,
       );
     console.log(filterEmotion);
@@ -158,24 +160,18 @@ class Result extends Component {
 
           <div className = 'result_news'>
             <Card>
-            { this.context.search.docs.map((article) => {
-              if (!article)
-                return '';
-              return (
-                filterEmotion.map((item, i) => <NewsArticle
-                  key={i}
-                  date={new Date(item.date).toLocaleDateString()} // ER HARD KODET
-                  title={item.headline}
-                  newssource={item.sourceID}
-                  domFeeling={item.analysis.emotion ? Object.keys(item.analysis.emotion)
-                    .sort((a, b) => item.analysis.emotion[b] - item.analysis.emotion[a])[0] : 'None'}
-                  feelings= {item.analysis.emotion ? item.analysis.emotion : {
-                    anger: 0, joy: 0, disgust: 0, fear: 0, sadness: 0,
-                  }}
-                  onClick= {() => this.makeRedirect(article.url)}
-                />)
-              );
-            }) }
+            { filterEmotion.map((item, i) => <NewsArticle
+              key={i}
+              date={new Date(item.date).toLocaleDateString()} // ER HARD KODET
+              title={item.headline}
+              newssource={item.sourceID}
+              domFeeling={item.analysis.emotion ? Object.keys(item.analysis.emotion)
+                .sort((a, b) => item.analysis.emotion[b] - item.analysis.emotion[a])[0] : 'None'}
+              feelings= {item.analysis.emotion ? item.analysis.emotion : {
+                anger: 0, joy: 0, disgust: 0, fear: 0, sadness: 0,
+              }}
+              onClick= {() => this.makeRedirect(item.url)}
+            />) }
             </Card>
           </div>
         </div>

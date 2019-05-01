@@ -32,6 +32,10 @@ class NewSearch extends Component {
     this.handleInput = this.handleInput.bind(this);
   }
 
+  componentWillMount() {
+    this.context.getSources();
+  }
+
   updateSearch(event) {
     console.log(event.target.value);
     this.setState({ news_search: event.target.value });
@@ -86,7 +90,8 @@ class NewSearch extends Component {
   }
 
   render() {
-    const filterNews = checkboxesNews.filter(
+    console.log(this.context.sources);
+    const filterNews = this.context.sources.filter(
       item => item.value.toLowerCase().indexOf(
         this.state.news_search.toLowerCase(),
       ) !== -1,
@@ -179,7 +184,7 @@ class NewSearch extends Component {
                         placeholder=' News Source...'
                       />
                         {
-                          this.context.sources.map(item => <Checkbox
+                          filterNews.map(item => <Checkbox
                               key={item.key}
                               value={item.value}
                               checked={this.state.checkedItemsNews.get(item.value) || false}

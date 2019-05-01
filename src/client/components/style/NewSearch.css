@@ -125,3 +125,7 @@ p {
 .ProgressBar {
   flex: 1;
 }
+
+.filter_source{
+  min-width: 10.2rem;
+}

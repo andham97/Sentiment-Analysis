@@ -39,8 +39,10 @@ class ResultSentiment extends Component {
     this.state = {
       averageArray: [],
       checkedSentiment: [],
+      startDate: new Date(),
     };
     this.handleCheckedSentiment = this.handleCheckedSentiment.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
@@ -65,11 +67,19 @@ class ResultSentiment extends Component {
     this.setState({ ...this.state, checkedSentiment: cs });
   }
 
+  handleChange(date) {
+    this.setState({
+      startDate: date,
+    });
+  }
+
   render() {
+    console.log(this.state.startDate);
     const sentimentSearch = this.context.search.docs;
     const filterSentiment = this.state.checkedSentiment.length === 0
       ? sentimentSearch : sentimentSearch.filter(
         item => this.state.checkedSentiment.indexOf(item.analysis.sentiment.label) > -1,
+        // && this.state.startDate === item.date,
       );
     return (
       <React.Fragment>
@@ -78,7 +88,7 @@ class ResultSentiment extends Component {
           <div className='resultSentiment_filter'>
               <div className= 'filterSentiment_bar'>
                 <div className='test'>
-                  <Dropdown titleList='Date' items={ <Datepicker /> }/>
+                  <Dropdown titleList='Date' items={ <Datepicker startDate={this.state.startDate} onChange={this.handleChange} /> }/>
                   <Dropdown titleList='Sentiment' items={
                     this.context.graphData.map((item, i) => <Checkbox
                         key={i}
@@ -110,7 +120,6 @@ class ResultSentiment extends Component {
           </div>
 
           {this.context.graphData.map((element, i) => {
-            console.log('hei1');
             const name = className(element.title);
             return (<div key={i} className = {`resultSentiment_graphs_${name}`}>
               <Card>
@@ -145,23 +154,17 @@ class ResultSentiment extends Component {
 
           <div className='resultSentiment_articles'>
           <Card>
-          { this.context.search.docs.map((article) => {
-            if (!article)
-              return '';
-            return (
-              filterSentiment.map((item, i) => <NewsArticleSentiment
-                key={i}
-                date={new Date(item.date).toLocaleDateString()}
-                title={item.headline}
-                newssource={item.sourceID}
-                domSentiment={item.analysis.sentiment.label}
-                sentiments= {item.analysis.sentiment ? item.analysis.sentiment : {
-                  negative: 0, neutral: 0, positive: 0,
-                }}
-                onClick= {() => this.makeRedirect(article.url)}
-              />)
-            );
-          }) }
+          { filterSentiment.map((item, i) => <NewsArticleSentiment
+            key={i}
+            date={new Date(item.date).toLocaleDateString()}
+            title={item.headline}
+            newssource={item.sourceID}
+            domSentiment={item.analysis.sentiment.label}
+            onClick= {() => this.makeRedirect(item.url)}
+            sentiments= {item.analysis.sentiment ? item.analysis.sentiment : {
+              negative: 0, neutral: 0, positive: 0,
+            }}
+          />)}
           </Card>
           </div>
         </div>

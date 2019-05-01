@@ -14,6 +14,7 @@ class SearchStore extends React.Component {
     };
     this.getSearch = this.getSearch.bind(this);
     this.getWords = this.getWords.bind(this);
+    this.getSources = this.getSources.bind(this);
     this.getEmotionalTone = this.getEmotionalTone.bind(this);
     this.getEmotionalToneSentiment = this.getEmotionalToneSentiment.bind(this);
   }
@@ -119,6 +120,7 @@ class SearchStore extends React.Component {
 
   getSources() {
     fetch('/api/search/sources').then(res => res.json()).then((data) => {
+      console.log(data);
       this.setState({
         ...this.state,
         sources: data,
@@ -248,6 +250,7 @@ class SearchStore extends React.Component {
         ...this.state,
         getSearch: this.getSearch,
         getWords: this.getWords,
+        getSources: this.getSources,
         getEmotionalTone: this.getEmotionalTone,
         getEmotionalToneSentiment: this.getEmotionalToneSentiment,
       }}>

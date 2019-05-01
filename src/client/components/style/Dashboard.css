@@ -57,7 +57,56 @@
     input.searchfield{
       margin-top: 4rem;
     }
+
     .new_search{
       padding-bottom: 4rem;
+    }
+
+    div.filter_source{
+      min-width: 0rem;
+      width: 7.9rem;
+      margin-left: 5px;
+    }
+
+    div.each_Checkbox{
+      font-size: 0.9rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+
+    div.datepickerinterval{
+      font-size: 0.9rem;
+    }
+    input.searchNews {
+      width: 80%;
+    }
+
+    div.title_Analysis{
+      font-size: 1.2rem;
+    }
+
+    div.filter_time{
+      min-width: 0rem;
+      width: 8rem;
+    }
+
+    div.react-datepicker__input-container{
+      width: 90%;
+      padding: 0px;
+    }
+
+    div.analysis-check{
+      font-size: 0.9rem;
+    }
+
+    div#filter.flexContainer.apply_filter{
+      margin: 0px;
+      margin-left: 0.6rem
+    }
+
+    div.react-datepicker{
+      display: none;
     }
 }

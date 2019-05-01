@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import './style/DatePickerInterval.css';
+import Proptypes from 'prop-types';
 
 class DatePickerInterval extends Component {
   constructor(props) {
@@ -53,5 +54,9 @@ class DatePickerInterval extends Component {
     );
   }
 }
+
+DatePickerInterval.propTypes = {
+  style: Proptypes.any,
+};
 
 export default DatePickerInterval;
