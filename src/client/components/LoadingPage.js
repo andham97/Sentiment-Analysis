@@ -7,6 +7,11 @@ import ResultSentiment from './result/ResultSentiment';
 import NoResult from './result/NoResult';
 
 class LoadingPage extends Component {
+  componentDidMount() {
+    if (!this.context.search && localStorage.getItem('prev-search') && !this.context.searchOpts)
+      this.context.getSearch(JSON.parse(localStorage.getItem('prev-search')));
+  }
+
   render() {
     if (!this.context.search)
       return (
@@ -15,6 +20,8 @@ class LoadingPage extends Component {
           <div>{ this.context.search }</div>
         </React.Fragment>
       );
+    if (this.context.search.docs.length === 0)
+      return <NoResult />;
     if (this.context.searchType === 'emotion')
       return <Result />;
     if (this.context.searchType === 'sentiment')

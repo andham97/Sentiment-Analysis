@@ -14,12 +14,39 @@ class Scraper extends Component {
       let body = 'Error';
       let date = 'Error';
       try {
-        if (activeHost.headline !== '')
-          headline = testPage(activeHost.headline).text();
-        if (activeHost.body !== '')
-          body = testPage(activeHost.body).text();
-        if (activeHost.date.function !== '')
-          date = eval(activeHost.date.function)(testPage(activeHost.date.sel).text(), months);
+        let text = '';
+        if (activeHost.headlines.length > 0) {
+          for (let i = 0; i < activeHost.headlines.length; i++) {
+            text = testPage(activeHost.headlines[i]).text();
+            if (text.length > 0)
+              break;
+          }
+          if (text.length > 0)
+            headline = text;
+        }
+        text = '';
+        if (activeHost.body.length) {
+          for (let i = 0; i < activeHost.body.length; i++) {
+            text = testPage(activeHost.body[i]).text();
+            if (text.length > 0)
+              break;
+          }
+          if (text.length > 0)
+            body = text;
+        }
+        text = '';
+        if (activeHost.date.function !== '') {
+          for (let i = 0; i < activeHost.date.sel.length; i++) {
+            if (activeHost.date.sel[i].attr === '')
+              text = testPage(activeHost.date.sel[i].sel).text();
+            else
+              text = testPage(activeHost.date.sel[i].sel).attr(activeHost.date.sel[i].attr);
+            if (text.length > 0)
+              break;
+          }
+          if (text.length > 0)
+            date = eval(activeHost.date.function)(text, months);
+        }
       }
       catch (e) {
         if (!date)

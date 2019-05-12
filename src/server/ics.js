@@ -32,5 +32,4 @@ const cloudant = Cloudant({
 const newsapi = new NP(env.getServiceCredentials('newsapi').apikey);
 
 const getCloudant = () => (cloudantReady ? cloudant : undefined);
-
 export { nlu, getCloudant, newsapi };

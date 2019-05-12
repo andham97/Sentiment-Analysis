@@ -9,7 +9,7 @@ class Checkbox extends Component {
     } = this.props;
     return (
       <div className='each_Checkbox'>
-        <input type='checkbox' key= { id } name= { name } value= { value } checked= {checked} className= { className } onChange= { onChange }/> { value }
+        <ul style= {{ margin: '0rem', paddingLeft: '0.2rem' }}><input type='checkbox' key= { id } name= { name } value= { id } checked= {checked} className= { className } onChange= { onChange }/> { value }</ ul>
       </div>
     );
   }

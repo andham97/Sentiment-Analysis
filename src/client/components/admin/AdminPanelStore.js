@@ -5,18 +5,21 @@ import cheerio from 'cheerio';
 
 const AdminPanelContext = React.createContext();
 const hostBoilerplate = {
-  body: '',
+  body: [],
   date: {
     sel: '',
-    function: '',
+    function: '(date, months) => {\n  return new Date();\n};',
     attribute: '',
   },
   exclude: [],
-  headline: '',
+  headlines: [],
   name: '',
   sourceID: '',
   hostnames: [],
   hostDeletions: [],
+  headlineDeletions: [],
+  bodyDeletions: [],
+  excludeDelections: [],
 };
 
 const clone = object => JSON.parse(JSON.stringify(object));
@@ -29,6 +32,9 @@ class AdminPanelStore extends React.Component {
       activeHost: hostBoilerplate,
       activeIndex: -1,
       testURL: '',
+      whitelist: false,
+      termCount: -1,
+      urlCount: -1,
     };
     this.getHosts = this.getHosts.bind(this);
     this.setActiveHost = this.setActiveHost.bind(this);
@@ -37,6 +43,64 @@ class AdminPanelStore extends React.Component {
     this.testURLChange = this.testURLChange.bind(this);
     this.loadTestURL = this.loadTestURL.bind(this);
     this.clearActiveHost = this.clearActiveHost.bind(this);
+    this.isWhitelisted = this.isWhitelisted.bind(this);
+    this.fetchNews = this.fetchNews.bind(this);
+    this.getUrlCount = this.getUrlCount.bind(this);
+    this.getTermCount = this.getTermCount.bind(this);
+  }
+
+  getUrlCount() {
+    fetch('/api/ws/urlCount', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(res => res.json())
+      .then(data => this.setState({ ...this.state, urlCount: data.count }))
+      .catch(console.error);
+  }
+
+  getTermCount() {
+    fetch('/api/ws/termCount', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(res => res.json())
+      .then(data => this.setState({ ...this.state, termCount: data.count }))
+      .catch(console.error);
+  }
+
+  fetchNews(sources) {
+    fetch('/api/ws/fetchNews', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        sources,
+      }),
+    }).then(() => console.log('success')).catch(console.error); // TODO: ALERT
+  }
+
+  scrapeURL(url) {
+    if (typeof url !== 'string')
+      return;
+    fetch('/api/ws', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        urls: [url],
+      }),
+    });
+  }
+
+  isWhitelisted() {
+    fetch('/api/auth/whitelist').then(resp => resp.json()).then((wl) => {
+      this.setState({ ...this.state, whitelist: wl });
+    }).catch(console.error);
   }
 
   clearActiveHost() {
@@ -79,7 +143,6 @@ class AdminPanelStore extends React.Component {
           },
         }))
         .sort((a, b) => ([a.sourceID, b.sourceID].sort()[0] === a.sourceID ? -1 : 1));
-      console.log(hosts);
       this.setState({ ...this.state, hosts });
     });
   }
@@ -107,6 +170,7 @@ class AdminPanelStore extends React.Component {
     else
       hosts.push(clone(this.state.activeHost));
     hosts.sort((a, b) => ([a.sourceID, b.sourceID].sort()[0] === a.sourceID ? -1 : 1));
+    console.log(this.state.activeHost);
     fetch('/api/ws/hosts', {
       method: 'POST',
       headers: {
@@ -114,7 +178,7 @@ class AdminPanelStore extends React.Component {
       },
       body: JSON.stringify(this.state.activeHost),
     }).then((data) => {
-      console.log(data);
+      console.log(data); // TODO: add alert
     }).catch(console.error);
     this.setState({
       ...this.state, hosts,
@@ -132,6 +196,11 @@ class AdminPanelStore extends React.Component {
         testURLChange: this.testURLChange,
         loadTestURL: this.loadTestURL,
         clearActiveHost: this.clearActiveHost,
+        isWhitelisted: this.isWhitelisted,
+        scrapeURL: this.scrapeURL,
+        fetchNews: this.fetchNews,
+        getTermCount: this.getTermCount,
+        getUrlCount: this.getUrlCount,
       }}>
       {this.props.children}
       </AdminPanelContext.Provider>

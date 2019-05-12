@@ -3,60 +3,56 @@ body {
 }
 
 .resultSentiment {
-  margin-top: 30px;
+  margin: 25px;
   display: grid;
-  grid-template-columns: 10px 380px 30px 290px 40px 290px 40px 290px 10px;
-  height: 100px;
-  justify-content: center;
-  grid-row-gap: 15px;
+  grid-gap: 22px;
+  grid-template-areas: "filter filter filter filter filter filter"
+        "param param param neg neu pos"
+        "tone tone tone news news news";
 }
 
 .resultSentiment > .resultSentiment_filter {
-  grid-column: 2 / 9;
-  grid-row: 1 / 2;
+  grid-area: filter;
   background-color: white;
-  height: 50px;
+  height: 2.8rem;
 }
 
 .resultSentiment > .resultSentiment_parameters {
-  grid-column: 2 / 3;
-  grid-row: 3 / 4;
+  grid-area: param;
   background-color: white;
-  height: 220px;
+  height: 15rem;
 }
 
 .resultSentiment > .resultSentiment_graphs_negative {
-  grid-column: 4 / 5;
-  grid-row: 3 / 4;
-  height: 220px;
+  grid-area: neg;
+  height: 15rem;
+  min-width: 4rem;
   background-color: white;
 }
 
 .resultSentiment > .resultSentiment_graphs_neutral {
-  grid-column: 6 / 7;
-  grid-row: 3 / 4;
-  height: 220px;
+  grid-area: neu;
+  height: 15rem;
   background-color: white;
+  min-width: 4rem;
 }
 
 .resultSentiment > .resultSentiment_graphs_positive {
-  grid-column: 8 / 9;
-  grid-row: 3 / 4;
-  height: 220px;
+  grid-area: pos;
+  height: 15rem;
   background-color: white;
+  min-width: 4rem;
 }
 
 .resultSentiment > .resultSentiment_emotionalTone {
-  grid-column: 2 / 3;
-  grid-row: 5 / 6;
-  height: 330px;
+  grid-area: tone;
+  height: 20.6rem;
   background-color: white;
 }
 
 .resultSentiment > .resultSentiment_articles {
-  grid-column: 4 / 9;
-  grid-row: 5 / 6;
-  height: 330px;
+  grid-area: news;
+  height: 20.6rem;
   background-color: white;
   overflow-y:scroll;
 }
@@ -79,23 +75,27 @@ body {
 
 }
 
-.graphs {
-  margin-bottom: 20px;
-  margin-left: 20px;
-  margin-right: 20px
+div.positive_chart{
+  padding-top: 0.4rem;
+  max-width: 10rem;
 }
 
-.graph {
-  margin: 20%;
+div.negative_chart{
+  padding-top: 0.4rem;
+  max-width: 10rem;
+}
+
+div.neutral_chart{
+  padding-top: 0.4rem;
+  max-width: 10rem;
 }
 
 .param_card {
   margin: 5%;
-  width: 85%;
 }
 
 .title_param {
-  font-size: 21px;
+  font-size: 1.5rem;
   margin-left: 5%;
   margin-top: 5%;
 }
@@ -103,3 +103,30 @@ body {
 li {
   margin-top: 2%;
 }
+
+div.recharts-wrapper{
+  max-height: 18rem ! important;
+  margin-right: 10px;
+}
+
+div.graphs{
+  max-height: 15rem;
+}
+
+@media screen
+  and (max-width: 500px)
+  and (min-width: 320px) {
+    .resultSentiment > .resultSentiment_filter{
+      display: none;
+    }
+    .resultSentiment {
+      grid-template-areas: "filter filter filter"
+            "param param param"
+            "tone tone tone"
+            "neg neu pos"
+            "news news news";
+      margin: 0px;
+      overflow-y: hidden;
+
+    }
+  }

@@ -1,93 +1,118 @@
 body {
   font-style: Optima, sans-serif;
 }
+
 .result {
-  margin-top: 30px;
+  margin: 25px;
   display: grid;
-  grid-template-columns: 10px 380px 30px 170px 30px 170px 30px 170px 30px 170px 30px 170px 10px;
-  height: 100px;
-  justify-content: center;
-  grid-row-gap: 15px;
+  grid-gap: 22px;
+  grid-template-areas: "filter filter filter filter filter filter filter"
+        "param param joy anger disgust sad fear"
+        "tone tone news news news news news";
 }
 
 .result > .result_filter {
-  grid-column: 2 / 13;
-  grid-row: 1 / 2;
+  grid-area: filter;
   background-color: white;
-  height: 50px;
+  height: 2.8rem;
 }
 
 .result > .result_parameters {
-  grid-column: 2 / 3;
-  grid-row: 3 / 4;
+  grid-area: param;
   background-color: white;
-  height: 220px;
+  height: 15rem;
+  min-width: 20rem;
 }
 
 .result > .result_graphs_joy {
-  grid-column: 4 / 5;
-  grid-row: 3 / 4;
-  height: 220px;
+  grid-area: joy;
+  height: 15rem;
   background-color: white;
+  min-width: 4rem;
 }
 
 .result > .result_graphs_anger {
-  grid-column: 6 / 7;
-  grid-row: 3 / 4;
-  height: 220px;
+  grid-area: anger;
+  height: 15rem;
   background-color: white;
+  min-width: 4rem;
 }
 
 .result > .result_graphs_disgust {
-  grid-column: 8 / 9;
-  grid-row: 3 / 4;
-  height: 220px;
+  grid-area: disgust;
+  height: 15rem;
   background-color: white;
+  min-width: 4rem;
 }
 
 .result > .result_graphs_sadness {
-  grid-column: 10 / 11;
-  grid-row: 3 / 4;
-  height: 220px;
+  grid-area: sad;
+  height: 15rem;
   background-color: white;
+  min-width: 4rem;
 }
 
 .result > .result_graphs_fear {
-  grid-column: 12 / 13;
-  grid-row: 3 / 4;
-  height: 220px;
+  grid-area: fear;
+  height: 15rem;
   background-color: white;
+  min-width: 4rem;
 }
 
 .result > .result_graph{
-  grid-column: 2 / 3;
-  grid-row: 5 / 6;
+  grid-area: tone;
   background-color: white;
-  height: 330px;
+  height: 22rem;
+  min-width: 20rem;
 }
 
 .result > .result_news {
-  grid-column: 4 / 13;
-  grid-row: 5 / 6;
+  grid-area: news;
   background-color: white;
-  max-height: 330px;
+  height: 22rem;
   overflow-y:scroll;
 }
 
-.graphs {
-  margin: 20px;
+div.joy_chart{
+  padding-top: 0.4rem;
+  max-width: 10rem;
+  min-width: 4rem;
 }
 
-.graph {
-  margin: 20%;
+div.fear_chart{
+  padding-top: 0.4rem;
+  max-width: 10rem;
+  min-width: 4rem;
+}
+
+div.disgust_chart{
+  padding-top: 0.4rem;
+  max-width: 10rem;
+  min-width: 4rem;
+}
+
+div.anger_chart{
+  padding-top: 0.4rem;
+  max-width: 10rem;
+  min-width: 4rem;
+}
+
+div.sadness_chart{
+  padding-top: 0.4rem;
+  max-width: 10rem;
+  min-width: 4rem;
+}
+
+
+div.graphs{
+  max-height: 15rem;
 }
 
 .exportPDF {
   margin-top: 8px;
   float: right;
   padding-top: 4px;
-  margin-right: auto;
-
+  margin-right: 8px;
 }
 
 .param_card {
@@ -96,7 +121,7 @@ body {
 }
 
 .title_param {
-  font-size: 21px;
+  font-size: 1.5rem;
   margin-left: 5%;
   margin-top: 5%;
 }
@@ -117,10 +142,21 @@ li {
   visibility: hidden;
 }
 
+div.recharts-wrapper{
+  max-height: 18rem ! important;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 .emotionalTone{
-  font-size: 21px;
+  font-size: 1.5rem;
   margin-left: 5%;
   margin-top: 5%;
+  float: left;
+}
+
+div.react-datepicker__current-month{
+  margin-left: 35%;
 }
 
 .filter_bar{
@@ -132,3 +168,44 @@ li {
 .filter_bar div {
   float: left;
 }
+
+@media screen
+  and (max-width: 730px)
+  and (min-width: 320px) {
+    .result > .result_filter{
+      display: none;
+    }
+    .result {
+      grid-template-areas: "filter filter filter"
+            "param param param"
+            "joy anger disgust"
+            "sad fear ."
+            "tone tone tone"
+            "news news news";
+      margin: 0px;
+      overflow-y: hidden;
+
+    }
+  }
+
+@media screen
+  and (max-width: 1000px)
+  and (min-width: 730px) {
+    .result {
+      grid-template-areas: "filter filter filter filter filter filter"
+            "param param param tone tone tone"
+            "joy joy anger anger disgust disgust"
+            "sad sad sad fear fear fear"
+            "news news news news news news";
+      margin: 0px;
+      overflow-y: hidden;
+    }
+
+    div.result_filter{
+      margin-top: 10px;
+    }
+
+    div.result_parameters{
+      min-height: 22rem;
+    }
+  }

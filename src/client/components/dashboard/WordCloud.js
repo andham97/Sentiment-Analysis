@@ -3,7 +3,6 @@ import '../style/WordCloud.css';
 import { TagCloud } from 'react-tagcloud';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import { SearchContext } from './SearchStore';
 
 class WordCloud extends Component {
@@ -13,18 +12,24 @@ class WordCloud extends Component {
   }
 
   componentWillMount() {
-    this.context.getWords();
+    let count = 30;
+    if (window.screen.width >= 550)
+      count = 50;
+    if (window.screen.width >= 2000)
+      count = 70;
+    this.context.getWords(count);
   }
 
   performSearchOnClick(searchword) {
     const opts = {
-      checkedItemsNews: new Map(),
-      checkedItemsEmotion: new Map(),
+      checkedItemsNews: [],
+      checkedItemsEmotion: [],
       show: false,
-      startDate: new Date(1),
-      endDate: moment(),
+      startDate: 0,
+      endDate: new Date().getTime(),
       news_search: '',
       search: searchword,
+      neutralThreshold: 0.2,
     };
     this.context.getSearch(opts);
     this.props.history.push('/result');

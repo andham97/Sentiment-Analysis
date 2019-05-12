@@ -3,7 +3,7 @@
   margin-right: 2%;
 }
 .newsarticle_title {
-  font-size: 26px;
+  font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 1.5%;
   margin-top: 3%;
@@ -12,25 +12,25 @@
 
 .newsarticle_highest_sentiment_text {
   font-style: italic;
-  font-size: 14px;
+  font-size: 1rem;
 }
 
 .newsarticle_highest_sentiment{
   margin-top: 4px;
   margin-left: 2%;
-  font-size: 14px;
+  font-size: 1rem;
 }
 
 .newsarticle_newssource{
   margin-left: 2%;
-  font-size: 14px;
+  font-size: 1rem;
 }
 
 .newsarticle_sentiment {
   margin-top: 4px;
   font-style: italic;
   margin-left: 2%;
-  font-size: 14px;
+  font-size: 1rem;
 }
 
 hr {
@@ -48,7 +48,7 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 12px;
+  font-size: 0.8rem;
   cursor: pointer;
   width: 93px;
   height: 33px;

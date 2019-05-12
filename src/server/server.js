@@ -28,7 +28,7 @@ app.use(express.static(path.resolve(process.cwd(), 'build/client')));
 app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  cookie: { secure: true },
+  cookie: { secure: false },
   resave: false,
   saveUninitialized: true,
 }));

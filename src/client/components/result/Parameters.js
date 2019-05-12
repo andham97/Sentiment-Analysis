@@ -7,7 +7,7 @@ class Paramteres extends Component {
     const {
       searchtext,
     } = this.props;
-    const arr = ['date', 'sentiment', 'timeinterval', 'amount'];
+    const arr = ['sentiment', 'timeinterval', 'amount', 'threshold'];
     return (
       <div className='parameters'>
         <div><span className='search_text'>You searched for:</span> { searchtext }</div>
@@ -22,9 +22,9 @@ class Paramteres extends Component {
 Paramteres.propTypes = {
   searchtext: PropTypes.any,
   sentiment: PropTypes.any,
-  date: PropTypes.any,
   timeinterval: PropTypes.any,
   amount: PropTypes.any,
+  threshold: PropTypes.any,
 };
 
 export default Paramteres;
