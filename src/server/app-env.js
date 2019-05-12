@@ -1,5 +1,8 @@
 import cfenv from 'cfenv';
+import dotenv from 'dotenv';
 import fs from 'fs';
+
+dotenv.config();
 
 const appEnv = cfenv.getAppEnv();
 let serviceParameters;

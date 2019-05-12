@@ -3,12 +3,11 @@ import '../style/ResultSentiment.css';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import stt from 'search-text-tokenizer';
 import Header from '../Header';
 import Dropdown from '../Dropdown';
-// import Checkbox from '../Checkbox';
 import DatePickerInterval from '../DatePickerInterval';
-import Datepicker from './DatePicker';
-import Exportpdf from './ExportPDF';
+import Button from '../Button';
 import Parameteres from './Parameters';
 import Card from '../Card';
 import Checkbox from '../Checkbox';
@@ -39,15 +38,8 @@ class ResultSentiment extends Component {
     this.state = {
       averageArray: [],
       checkedSentiment: [],
-      startDate: new Date(),
     };
     this.handleCheckedSentiment = this.handleCheckedSentiment.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentWillMount() {
-    if (!this.context.search && localStorage.getItem('prev-search'))
-      this.context.getSearch(localStorage.getItem('prev-search'));
   }
 
   makeRedirect(url) {
@@ -60,46 +52,87 @@ class ResultSentiment extends Component {
     const item = sentiment.target.value;
     const isChecked = sentiment.target.checked;
     const cs = this.state.checkedSentiment;
-    if (isChecked)
+    if (isChecked && cs.indexOf(item) === -1)
       cs.push(item);
-    else
+    else if (!isChecked && cs.indexOf(item) > -1)
       cs.splice(cs.indexOf(item), 1);
     this.setState({ ...this.state, checkedSentiment: cs });
   }
 
-  handleChange(date) {
+  dateChange(date) {
+    const opts = JSON.parse(JSON.stringify(this.context.searchOpts));
+    let { startDate, endDate } = date || this.state;
+    if (!startDate)
+      startDate = this.context.searchOpts.startDate;
+    if (!endDate)
+      endDate = this.context.searchOpts.endDate;
+    if (!startDate.getTime)
+      startDate = new Date(startDate);
+    if (!endDate.getTime)
+      endDate = new Date(endDate);
+    startDate.setHours(0);
+    startDate.setMinutes(0);
+    startDate.setSeconds(0);
+    endDate.setHours(23);
+    endDate.setMinutes(59);
+    endDate.setSeconds(59);
+    startDate = startDate.getTime();
+    endDate = endDate.getTime();
+    opts.startDate = startDate;
+    opts.endDate = endDate;
+    this.context.computeSearch(this.context.search, opts);
     this.setState({
-      startDate: date,
+      ...this.state,
+      startDate,
+      endDate,
     });
   }
 
   render() {
-    console.log(this.state.startDate);
-    const sentimentSearch = this.context.search.docs;
-    const filterSentiment = this.state.checkedSentiment.length === 0
-      ? sentimentSearch : sentimentSearch.filter(
-        item => this.state.checkedSentiment.indexOf(item.analysis.sentiment.label) > -1,
-        // && this.state.startDate === item.date,
-      );
+    let { startDate, endDate } = this.state;
+    if (!startDate)
+      startDate = this.context.searchOpts.startDate;
+    if (!endDate)
+      endDate = this.context.searchOpts.endDate;
+    if (startDate.getTime)
+      startDate = startDate.getTime();
+    if (endDate.getTime)
+      endDate = endDate.getTime();
+    let filterSentiment = (this.state.checkedSentiment.length === 0
+      ? this.context.search.docs : this.context.search.docs
+        .filter(doc => (this.state.checkedSentiment.indexOf(doc.analysis.sentiment.label) > -1)));
+    filterSentiment = (startDate || endDate)
+      ? filterSentiment.filter(doc => (startDate ? doc.date >= startDate : true)
+        && (endDate ? doc.date <= endDate : true)) : filterSentiment;
     return (
       <React.Fragment>
         <Header class='resultSentiment_header' name='Sentiment Analysis' />
         <div className='resultSentiment'>
           <div className='resultSentiment_filter'>
               <div className= 'filterSentiment_bar'>
-                <div className='test'>
-                  <Dropdown titleList='Date' items={ <Datepicker startDate={this.state.startDate} onChange={this.handleChange} /> }/>
+                <div>
                   <Dropdown titleList='Sentiment' items={
                     this.context.graphData.map((item, i) => <Checkbox
-                        key={i}
-                        value={item.title}
-                        onChange={sentiment => this.handleCheckedSentiment(sentiment)}
-                      />)
+                      key={i}
+                      id={item.title}
+                      value={item.title[0].toUpperCase() + item.title.slice(1)}
+                      checked={this.state.checkedSentiment.indexOf(item.title) > -1}
+                      onChange={sentiment => this.handleCheckedSentiment(sentiment)}
+                    />)
                   } />
-                  <Dropdown titleList='Time Interval' items={<DatePickerInterval />} />
+                  <Dropdown titleList='Date Interval' items={<DatePickerInterval change={(date) => {
+                    this.setState({
+                      ...this.state,
+                      ...date,
+                    });
+                    this.dateChange(date);
+                  }} startDate={this.state.startDate ? new Date(this.state.startDate) : undefined}
+                  endDate={this.state.endDate ? new Date(this.state.endDate) : undefined} />} />
                 </div>
                 <div>
-                  <Exportpdf className='exportpdf'/>
+                  <Button className='exportpdf' title='Export PDF' onClick={() => {
+
+                  }} />
                 </div>
             </div>
           </div>
@@ -109,11 +142,27 @@ class ResultSentiment extends Component {
               <div className='title_param'>Parameters</div>
               <div className='param_card'>
                 <Parameteres
-                  searchtext={this.context.searchOpts.search}
-                  sentiment='Sentiment: Positive, Neagtive, Neutral'
-                  date='Date: 23.05.19'
-                  timeinterval='Time Interval: 23.05.19-25.05.19'
-                  amount='Amount: 1000'
+                  searchtext={stt(this.context.searchOpts.search.replace(/[^a-zA-Z\s-]/g, ''))
+                    .reduce((acc, val) => {
+                      if (acc !== '')
+                        acc += ', ';
+                      if (val.exclude)
+                        acc += `-${val.term}`;
+                      else if (val.phrase)
+                        acc += `"${val.term}"`;
+                      else
+                        acc += val.term;
+                      return acc;
+                    }, '')}
+                  sentiment={`Sentiment: ${this.state.checkedSentiment.length === 0
+                    ? 'Positive, Neagtive, Neutral'
+                    : `${this.state.checkedSentiment.slice(0, -1)
+                      .map(s => s[0].toUpperCase() + s.slice(1)).join(', ')}${this.state.checkedSentiment.slice(0, -1).length > 0
+                      ? ', '
+                      : ''}${this.state.checkedSentiment.slice(-1).map(s => s[0].toUpperCase() + s.slice(1))[0]}`}`}
+                  timeinterval={`Date Interval: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()}`}
+                  threshold={`Neutral threshold: \xB1 ${this.context.searchOpts.neutralThreshold}`}
+                  amount={`Amount: ${filterSentiment.length}`}
                 />
               </div>
             </Card>
@@ -139,6 +188,16 @@ class ResultSentiment extends Component {
                 data={this.context.emotionalTone}
                 margin={{
                   top: 20,
+                }} onClick={(data) => {
+                  if (data
+                    && data.activePayload
+                    && data.activePayload[0]
+                    && data.activePayload[0].payload
+                    && data.activePayload[0].payload.date)
+                    this.dateChange({
+                      startDate: new Date(data.activePayload[0].payload.date),
+                      endDate: new Date(data.activePayload[0].payload.date),
+                    });
                 }}>
                 <XAxis dataKey="date"/>
                 <YAxis/>
@@ -154,17 +213,17 @@ class ResultSentiment extends Component {
 
           <div className='resultSentiment_articles'>
           <Card>
-          { filterSentiment.map((item, i) => <NewsArticleSentiment
-            key={i}
-            date={new Date(item.date).toLocaleDateString()}
-            title={item.headline}
-            newssource={item.sourceID}
-            domSentiment={item.analysis.sentiment.label}
-            onClick= {() => this.makeRedirect(item.url)}
-            sentiments= {item.analysis.sentiment ? item.analysis.sentiment : {
-              negative: 0, neutral: 0, positive: 0,
-            }}
-          />)}
+            { filterSentiment.map((item, i) => <NewsArticleSentiment
+              key={i}
+              date={new Date(item.date).toLocaleDateString()}
+              title={item.headline}
+              newssource={item.sourceID}
+              domSentiment={item.analysis.sentiment.label}
+              onClick= {() => this.makeRedirect(item.url)}
+              sentiments= {item.analysis.sentiment ? item.analysis.sentiment : {
+                negative: 0, neutral: 0, positive: 0,
+              }}
+            />)}
           </Card>
           </div>
         </div>
@@ -174,6 +233,5 @@ class ResultSentiment extends Component {
 }
 
 ResultSentiment.contextType = SearchContext;
-
 
 export default ResultSentiment;

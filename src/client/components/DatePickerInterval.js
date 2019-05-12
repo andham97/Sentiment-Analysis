@@ -7,21 +7,32 @@ class DatePickerInterval extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: props.startDate,
+      endDate: props.endDate,
     };
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
     this.handleChangeStart = this.handleChangeStart.bind(this);
   }
 
-  handleChangeStart(start) {
+  componentWillMount() {
     this.setState({
+      startDate: this.props.startDate ? this.props.startDate : undefined,
+      endDate: this.props.endDate ? this.props.endDate : undefined,
+    });
+  }
+
+  handleChangeStart(start) {
+    this.props.change({ startDate: start, endDate: this.state.endDate });
+    this.setState({
+      ...this.state,
       startDate: start,
     });
   }
 
   handleChangeEnd(end) {
+    this.props.change({ startDate: this.state.startDate, endDate: end });
     this.setState({
+      ...this.state,
       endDate: end,
     });
   }
@@ -29,7 +40,7 @@ class DatePickerInterval extends Component {
   render() {
     return (
       <div className='datepickerinterval'>
-      From: <DatePicker
+        From: <DatePicker
            selected={this.state.startDate}
            selectsStart
            startDate={this.state.startDate}
@@ -37,6 +48,7 @@ class DatePickerInterval extends Component {
            onChange={this.handleChangeStart}
            className={'daterangestart'}
            style={this.props.style}
+           isClearable={true}
         />
 
         <br />
@@ -49,6 +61,7 @@ class DatePickerInterval extends Component {
            onChange={this.handleChangeEnd}
            className={'daterangeend'}
            style={this.props.style}
+           isClearable={true}
         />
       </div>
     );
@@ -57,6 +70,9 @@ class DatePickerInterval extends Component {
 
 DatePickerInterval.propTypes = {
   style: Proptypes.any,
+  change: Proptypes.any,
+  startDate: Proptypes.any,
+  endDate: Proptypes.any,
 };
 
 export default DatePickerInterval;

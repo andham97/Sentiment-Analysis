@@ -1,4 +1,4 @@
-import { getCloudant } from '../ics';
+import { getCloudant, newsapi } from '../ics';
 
 const getWebscraperHosts = () => new Promise((resolve, reject) => {
   const cloudant = getCloudant();
@@ -18,7 +18,6 @@ const updateWebscraperHost = host => new Promise((resolve, reject) => {
   cloudant.db.use('sa-meta').find({ selector: { type: 'ws' } }, (err, result) => {
     if (err)
       return reject(err);
-    console.log(host);
     const index = result.docs[0];
     host.hostnames.forEach((hostname) => {
       if (!index[hostname])
@@ -39,4 +38,27 @@ const updateWebscraperHost = host => new Promise((resolve, reject) => {
   });
 });
 
-export default { getWebscraperHosts, updateWebscraperHost };
+const getNewsSourceURLs = sources => new Promise((resolve, reject) => {
+  if (typeof sources === 'string')
+    sources = sources.split(',');
+  getWebscraperHosts().then((hsts) => {
+    const hosts = Object.keys(hsts).filter(key => key.indexOf('_') !== 0 && key !== 'type').map(key => hsts[key].sourceID);
+    sources = sources.filter(source => hosts.indexOf(source) > -1);
+    Promise.all(sources.map((source) => {
+      const opts = {
+        language: 'en',
+        sources: source,
+        pageSize: 100,
+      };
+
+      return newsapi.v2.everything(opts);
+    })).then((data) => {
+      resolve(data.reduce((acc, val) => {
+        val.articles.map(a => a.url).forEach(url => acc.push(url));
+        return acc;
+      }, []));
+    }).catch(reject);
+  });
+});
+
+export default { getWebscraperHosts, updateWebscraperHost, getNewsSourceURLs };

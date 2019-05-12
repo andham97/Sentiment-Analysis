@@ -5,11 +5,13 @@ const search = (query, options) => new Promise((resolve, reject) => {
   const cloudant = getCloudant();
   if (!cloudant)
     return reject();
+  query = query.replace(/[^a-zA-Z\s-]/g, '');
   if (query === '')
     return reject({ code: 400, err: new Error('Error: Empty query not supported') });
   const tokens = stt(query);
-  const includes = tokens.filter(token => !token.exclude).map(token => token.term.replace(/[^a-zA-Z\s]/g, ''));
+  const includes = tokens.filter(token => !token.exclude).map(token => token.term);
   const regex = includes.reduce((acc, val, i) => `${i === 0 ? '(' : ''}${acc + val}${i === includes.length - 1 ? ')' : '|'}`, '');
+  console.log(regex);
   try {
     RegExp(regex);
   }
@@ -54,6 +56,7 @@ const search = (query, options) => new Promise((resolve, reject) => {
     },
     fields: [
       '_id',
+      '_rev',
       'date',
       'headline',
       'analysis',
@@ -83,6 +86,19 @@ const search = (query, options) => new Promise((resolve, reject) => {
     });
   const find = () => {
     cloudant.db.use('sa-index').find(opts).then((data) => {
+      data.docs = data.docs.map((doc) => {
+        if (doc.date < 0) {
+          doc.date = new Date().getTime();
+          cloudant.db.use('sa-index').insert(doc, (err) => {
+            if (err)
+              console.error(err);
+            else
+              console.log('insert complete');
+          });
+        }
+        delete doc._rev;
+        return doc;
+      });
       resolve({ ...data, params: includes });
     }).catch((err) => {
       console.log(err);

@@ -6,6 +6,7 @@ import 'brace/theme/tomorrow';
 import '../style/AdminPanel.css';
 import Header from '../Header';
 import Card from '../Card';
+import HostMultiListInput from './HostMultiListInput';
 import { AdminPanelContext } from './AdminPanelStore';
 import Scraper from './Scraper';
 
@@ -13,24 +14,34 @@ class AdminPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tempHost: '',
-      tempExclude: '',
+      tempScrapeURL: '',
+      tempDateSel: '',
+      tempDateAttr: '',
+      tempSelection: [],
     };
 
-    this.hostChange = this.hostChange.bind(this);
-    this.excludeChange = this.excludeChange.bind(this);
+    this.scrapeURLChange = this.scrapeURLChange.bind(this);
+    this.dateAttrChange = this.dateAttrChange.bind(this);
+    this.dateSelChange = this.dateSelChange.bind(this);
   }
 
-  hostChange(e) {
-    this.setState({ ...this.state, tempHost: e.target.value });
+  dateSelChange(e) {
+    this.setState({ ...this.state, tempDateSel: e.target.value });
   }
 
-  excludeChange(e) {
-    this.setState({ ...this.state, tempExclude: e.target.value });
+  dateAttrChange(e) {
+    this.setState({ ...this.state, tempDateAttr: e.target.value });
+  }
+
+  scrapeURLChange(e) {
+    this.setState({ ...this.state, tempScrapeURL: e.target.value });
   }
 
   componentWillMount() {
     this.context.getHosts();
+    this.context.isWhitelisted();
+    this.context.getUrlCount();
+    this.context.getTermCount();
   }
 
   selectHost(i) {
@@ -42,7 +53,7 @@ class AdminPanel extends Component {
   render() {
     const { hosts, activeHost } = this.context;
     return <React.Fragment>
-      <Header name='Webscraper administrator tool' />
+      <Header name='Webscraper administration tool' />
       <div className='wrapper'>
         <Card>
           <ul>
@@ -53,33 +64,72 @@ class AdminPanel extends Component {
         </Card>
         <Card>
           Name: <input placeholder='Source name' value={activeHost.name} onChange={e => this.context.updateActiveHost({ ...activeHost, name: e.target.value })} /><br />
-          Headline CSS-selector: <input placeholder='Headline selector' value={activeHost.headline} onChange={e => this.context.updateActiveHost({ ...activeHost, headline: e.target.value })} /><br />
-          Body CSS-selector: <input placeholder='Body selector' value={activeHost.body} onChange={e => this.context.updateActiveHost({ ...activeHost, body: e.target.value })} /><br />
-          Date CSS-selector: <input placeholder='Date selector' value={activeHost.date.sel} onChange={e => this.context.updateActiveHost({ ...activeHost, date: { ...activeHost.date, sel: e.target.value } })} /><br />
-          <strong>Hostnames</strong><br />
+          <HostMultiListInput
+            title='Headline selectors'
+            addButton='Add selector'
+            emptyText='No selectors'
+            newText='New selector'
+            delButton='Delete'
+            placeholder='Headline selector'
+            propname='headlines'
+            activeHost={activeHost}
+            update={this.context.updateActiveHost} /><br />
+          <HostMultiListInput
+            title='Body selectors'
+            addButton='Add selector'
+            emptyText='No selectors'
+            newText='New selector'
+            delButton='Delete'
+            placeholder='Body selector'
+            propname='body'
+            activeHost={activeHost}
+            update={this.context.updateActiveHost} /><br />
+          <HostMultiListInput
+            title='Hostnames'
+            addButton='Add host'
+            emptyText='No hostnames'
+            newText='New host'
+            delButton='Delete'
+            placeholder='Hostname'
+            propname='hostnames'
+            propnameDel='hostDeletions'
+            activeHost={activeHost}
+            update={this.context.updateActiveHost} /><br />
+          <HostMultiListInput
+            title='Body exclude CSS-selector'
+            addButton='Add selector'
+            emptyText='No exclude selectors'
+            newText='New exclusion selector'
+            delButton='Delete'
+            placeholder='Exclude selector'
+            propname='exclude'
+            activeHost={activeHost}
+            update={this.context.updateActiveHost} /><br />
+          <strong>Date selectors</strong><br />
           <ul>
-            {activeHost.hostnames.length === 0 ? <i>No hostnames</i> : activeHost.hostnames
-              .map((val, i) => <li key={i}>{val}<button onClick={() => {
-                activeHost.hostDeletions.push(activeHost.hostnames[i]);
-                activeHost.hostnames.splice(i, 1);
-                this.context.updateActiveHost(activeHost);
+            {activeHost.date.sel.length === 0 ? <i>No selectors</i> : activeHost.date.sel
+              .map((val, i) => <li key={i}>{val.sel} : {val.attr === '' ? '<no attribute>' : val.attr}<button onClick={() => {
+                activeHost.date.sel.splice(i, 1);
+                this.context.updateActiveHost({ ...activeHost });
               }}>Delete</button></li>)}
           </ul>
-          New host: <input placeholder='Hostname' value={this.state.tempHost} onChange={this.hostChange} /><button onClick={() => {
-            activeHost.hostnames.push(this.state.tempHost);
-            this.setState({ ...this.state, tempHost: '' });
+          New selector: <input
+            placeholder='Date selector'
+            value={this.state.tempDateSel}
+            onChange={this.dateSelChange} /><br />
+          Attribute (optional)<input
+              placeholder='Attribute name'
+              value={this.state.tempDateAttr}
+              onChange={this.dateAttrChange} />
+          <button onClick={() => {
+            activeHost.date.sel
+              .push({ sel: this.state.tempDateSel, attr: this.state.tempDateAttr });
+            this.setState({ ...this.state, tempDateSel: '', tempDateAttr: '' });
             this.context.updateActiveHost({ ...activeHost });
-          }}>Add host</button><br />
-          <strong>Body exclude CSS-selector</strong>
-          <ul>
-            {activeHost.exclude.length === 0 ? <i>No exclude patterns</i> : activeHost.exclude
-              .map((val, i) => <li key={i}>{val}</li>)}
-          </ul>
-          New exclusion pattern: <input placeholder='Pattern' value={this.state.tempExclude} onChange={this.excludeChange} /><button onClick={() => {
-            activeHost.exclude.push(this.state.tempExclude);
-            this.setState({ ...this.state, tempExclude: '' });
-            this.context.updateActiveHost({ ...activeHost });
-          }}>Add pattern</button><br />
+          }}>Add selector</button><br /><br />
+          <i>If using attribute, the value contained in the attribute will
+            be passed to the date function instead of the text in the selected element.
+            The element is selected with the CSS-selector above</i>
           <button onClick={() => this.context.saveHost()}>Save host</button>
           <button onClick={() => this.context.clearActiveHost()}>Clear fields</button>
         </Card>
@@ -117,6 +167,41 @@ class AdminPanel extends Component {
           <button onClick={() => this.context.loadTestURL()}>Load page</button><br />
           <Scraper />
         </Card>
+        {this.context.whitelist ? (
+          <React.Fragment>
+            <Card>
+              <h1>Management</h1><br/>
+              Scrape URL: <input type="text" placeholder="URL" onChange={this.scrapeURLChange} />
+              <button
+                onClick={() => this.context.scrapeURL(this.state.tempScrapeURL)}>
+                Scrape URL</button><br />
+              {hosts.map((val, i) => (<div key={i}>
+                <input
+                  type='checkbox'
+                  value={val.sourceID}
+                  onClick={(e) => {
+                    const { tempSelection } = this.state;
+                    if (tempSelection.indexOf(e.target.value) > -1)
+                      tempSelection.splice(tempSelection.indexOf(e.target.value), 1);
+                    else
+                      tempSelection.push(e.target.value);
+                    this.setState({ ...this.state, tempSelection });
+                  }}
+                  defaultChecked={this.state.tempSelection.indexOf(val.sourceID) > -1} />
+                {val.name}<br />
+              </div>))}
+              <button
+                onClick={() => this.context.fetchNews(this.state.tempSelection)}>
+              Scrape news sources</button>
+              <h1>Schedule</h1>
+            </Card>
+            <Card>
+              <h1>Statistics</h1>
+              <p>{`Number of articles indexed: ${this.context.urlCount === -1 ? 'Loading...' : this.context.urlCount}`}</p>
+              <p>{`Number of terms indexed: ${this.context.termCount === -1 ? 'Loading...' : this.context.termCount}`}</p>
+            </Card>
+          </React.Fragment>
+        ) : ''}
       </div>
     </React.Fragment>;
   }

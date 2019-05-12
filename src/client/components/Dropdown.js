@@ -19,6 +19,8 @@ class Dropdown extends Component {
   }
 
   handleClickOutside() {
+    if (this.props.onClose)
+      this.props.onClose();
     this.setState({
       dropdownList: false,
     });
@@ -49,6 +51,7 @@ class Dropdown extends Component {
 Dropdown.propTypes = {
   titleList: PropTypes.any,
   items: PropTypes.any,
+  onClose: PropTypes.any,
 };
 
 export default onClickOutside(Dropdown);

@@ -5,7 +5,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const router = new Router();
-const isWhitelisted = user => process.env.ADMIN_WHITELIST.split(',').filter(email => user.emails.filter(val => email === val.value).length > 0).length > 0;
+const isWhitelisted = (req) => {
+  if (!req.user)
+    return false;
+  return req.headers.api_key === process.env.SCRAPER_API_KEY || process.env.ADMIN_WHITELIST.split(',').filter(email => req.user.emails.filter(val => email === val.value).length > 0).length > 0;
+};
 
 router.get('/login', passport.authenticate('auth0', {
   scope: 'openid email profile',
@@ -35,10 +39,7 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/whitelist', (req, res) => {
-  console.log(req.user);
-  if (!req.user)
-    return res.json(false);
-  res.json(isWhitelisted(req.user));
+  res.json(isWhitelisted(req));
 });
 
 export default router;

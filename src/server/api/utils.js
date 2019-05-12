@@ -29,4 +29,42 @@ const urlCheck = urls => new Promise((resolve, reject) => {
   find();
 });
 
-export default { urlCheck };
+const urlCount = () => new Promise((resolve, reject) => {
+  const cloudant = getCloudant();
+  if (!cloudant)
+    return reject();
+  const find = () => {
+    cloudant.db.use('sa-index').view('searches', 'url-view', {
+      group: true,
+    }).then((data) => {
+      resolve(data.rows.length);
+    }).catch((err) => {
+      if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
+        find();
+      else
+        reject(err);
+    });
+  };
+  find();
+});
+
+const termCount = () => new Promise((resolve, reject) => {
+  const cloudant = getCloudant();
+  if (!cloudant)
+    return reject();
+  const find = () => {
+    cloudant.db.use('sa-index').view('searches', 'term-view', {
+      group: true,
+    }).then((data) => {
+      resolve(data.rows.length);
+    }).catch((err) => {
+      if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
+        find();
+      else
+        reject(err);
+    });
+  };
+  find();
+});
+
+export default { urlCheck, urlCount, termCount };

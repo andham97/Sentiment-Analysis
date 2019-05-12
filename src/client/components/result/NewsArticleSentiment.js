@@ -23,7 +23,7 @@ class NewsArticle extends Component {
             color={ sentiments.label ? 'FF5C54' : 0 }
           />
           Neutral: <br /><ProgressBar
-            perc={ sentiments.label === 'neutral' ? sentiments.score * 100 : 0 }
+            perc={ sentiments.label === 'neutral' ? 100 : 0 }
             color={ sentiments.label ? 'AFBE8F' : 0 }
           />
           Positive: <br /><ProgressBar
