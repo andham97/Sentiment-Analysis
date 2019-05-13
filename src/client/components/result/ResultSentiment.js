@@ -104,6 +104,7 @@ class ResultSentiment extends Component {
     filterSentiment = (startDate || endDate)
       ? filterSentiment.filter(doc => (startDate ? doc.date >= startDate : true)
         && (endDate ? doc.date <= endDate : true)) : filterSentiment;
+    filterSentiment = filterSentiment.filter(item => item.analysis.sentiment);
     return (
       <React.Fragment>
         <Header class='resultSentiment_header' name='Sentiment Analysis' />
@@ -193,10 +194,10 @@ class ResultSentiment extends Component {
                     && data.activePayload
                     && data.activePayload[0]
                     && data.activePayload[0].payload
-                    && data.activePayload[0].payload.date)
+                    && data.activePayload[0].payload.time)
                     this.dateChange({
-                      startDate: new Date(data.activePayload[0].payload.date),
-                      endDate: new Date(data.activePayload[0].payload.date),
+                      startDate: new Date(data.activePayload[0].payload.time),
+                      endDate: new Date(data.activePayload[0].payload.time),
                     });
                 }}>
                 <XAxis dataKey="date"/>
