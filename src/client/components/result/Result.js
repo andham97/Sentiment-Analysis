@@ -119,12 +119,13 @@ class Result extends Component {
       endDate = endDate.getTime();
     const emotionSearch = this.state.checkedEmotion.length === 0
       ? this.context.search.docs : this.context.search.docs
-        .filter(item => this.state.checkedEmotion.indexOf(Object.keys(item.analysis.emotion)
-          .sort((a, b) => Math.abs(item.analysis.emotion[b])
-            - Math.abs(item.analysis.emotion[a]))[0]) > -1);
-    const filterEmotion = (startDate || endDate) ? emotionSearch : emotionSearch
+        .filter(item => item.analysis.emotion
+          && this.state.checkedEmotion.indexOf(Object.keys(item.analysis.emotion)
+            .sort((a, b) => Math.abs(item.analysis.emotion[b])
+              - Math.abs(item.analysis.emotion[a]))[0]) > -1);
+    const filterEmotion = ((startDate || endDate) ? emotionSearch : emotionSearch
       .filter(doc => (startDate ? doc.date >= startDate : true)
-      && (endDate ? doc.date <= endDate : true));
+      && (endDate ? doc.date <= endDate : true))).filter(item => item.analysis.emotion);
     return (
       <React.Fragment>
         <Header class='result_header' name='Sentiment Analysis' />
@@ -212,10 +213,10 @@ class Result extends Component {
                     && data.activePayload
                     && data.activePayload[0]
                     && data.activePayload[0].payload
-                    && data.activePayload[0].payload.date)
+                    && data.activePayload[0].payload.time)
                     this.dateChange({
-                      startDate: new Date(data.activePayload[0].payload.date),
-                      endDate: new Date(data.activePayload[0].payload.date),
+                      startDate: new Date(data.activePayload[0].payload.time),
+                      endDate: new Date(data.activePayload[0].payload.time),
                     });
                 }}>
                 <XAxis dataKey="date"/>

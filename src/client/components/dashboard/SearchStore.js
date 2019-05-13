@@ -212,6 +212,7 @@ class SearchStore extends React.Component {
         id: i,
         date: new Date(Number(key)).toLocaleDateString(),
         emotions,
+        time: new Date(Number(key)).getTime(),
       });
     });
     return ret;
@@ -259,6 +260,7 @@ class SearchStore extends React.Component {
       id: i,
       date: new Date(Number(val.key)).toLocaleDateString(),
       sentiments: val.sentiments,
+      time: new Date(Number(val.key)).getTime(),
     }));
   }
 
