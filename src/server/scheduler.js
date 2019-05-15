@@ -52,7 +52,6 @@ const run = item => ((cb) => {
     return new Promise(resolve => resolve(item.task));
   })().then((sources) => {
     API.getNewsSourceURLs(sources).then((urls) => {
-      const len = urls.length;
       API.urlCheck(urls).then((list) => {
         cb();
         if (item.recurring) {
@@ -113,6 +112,7 @@ const update = () => {
   console.log(`Active scheduled items: ${activeSchedule.length}\n`);
   activeSchedule.forEach(item => console.log(`${item.id}\n\tTime until invocation: ${msToString((item.timeout.wait + item.timestamp) - new Date().getTime())}`));
   console.log('');
+  API.getWebscraperHosts().then(() => {}).catch(console.error);
   setTimeout(update, interval * 1000);
 };
 
