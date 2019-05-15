@@ -52,9 +52,11 @@ class SearchStore extends React.Component {
       this.setState({
         ...this.state,
         search: data,
+        searchOpts: opts,
+        searchType: opts.show ? 'emotion' : 'sentiment',
       });
     }
-    else if (this.state.searchType === 'sentiment') {
+    else if (!opts.show) {
       const colors = ['#5EA3DB', '#FF5C54', '#AFBE8F'];
       const average = search.docs.reduce((acc, val) => {
         let sentiment = val.analysis.sentiment;
@@ -95,9 +97,11 @@ class SearchStore extends React.Component {
         ),
         search: data,
         emotionalTone: this.getEmotionalToneSentiment(search, opts),
+        searchOpts: opts,
+        searchType: opts.show ? 'emotion' : 'sentiment',
       });
     }
-    else if (this.state.searchType === 'emotion') {
+    else if (opts.show) {
       const colors = ['#D3C0CD', '#9FAF90', '#3A405A', '#3D70B2', '#E26D5A'];
       const average = search.docs.reduce((acc, val) => {
         let emotion = val.analysis.emotion;
@@ -139,6 +143,8 @@ class SearchStore extends React.Component {
         ),
         search: data,
         emotionalTone: this.getEmotionalTone(search),
+        searchOpts: opts,
+        searchType: opts.show ? 'emotion' : 'sentiment',
       });
     }
   }

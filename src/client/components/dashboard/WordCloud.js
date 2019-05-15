@@ -47,6 +47,7 @@ class WordCloud extends Component {
           minSize={18}
           maxSize={45}
           tags={words}
+          className='tag-cloud clickable'
           colorOptions= {colorOpinions}
           onClick={tag => this.performSearchOnClick(tag.value)}
         />)

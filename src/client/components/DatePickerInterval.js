@@ -22,6 +22,11 @@ class DatePickerInterval extends Component {
   }
 
   handleChangeStart(start) {
+    if (start && start.getTime) {
+      start.setHours(0);
+      start.setMinutes(0);
+      start.setSeconds(0);
+    }
     this.props.change({ startDate: start, endDate: this.state.endDate });
     this.setState({
       ...this.state,
@@ -30,6 +35,11 @@ class DatePickerInterval extends Component {
   }
 
   handleChangeEnd(end) {
+    if (end && end.getTime) {
+      end.setHours(23);
+      end.setMinutes(59);
+      end.setSeconds(59);
+    }
     this.props.change({ startDate: this.state.startDate, endDate: end });
     this.setState({
       ...this.state,
@@ -40,7 +50,7 @@ class DatePickerInterval extends Component {
   render() {
     return (
       <div className='datepickerinterval'>
-        From: <DatePicker
+        From: <br /><DatePicker
            selected={this.state.startDate}
            selectsStart
            startDate={this.state.startDate}
@@ -53,7 +63,7 @@ class DatePickerInterval extends Component {
 
         <br />
 
-        To: <DatePicker
+        To: <br /><DatePicker
            selected={this.state.endDate}
            selectsEnd
            startDate={this.state.startDate}

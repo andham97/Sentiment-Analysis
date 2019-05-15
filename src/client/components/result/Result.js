@@ -3,16 +3,17 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import stt from 'search-text-tokenizer';
+import Alert from 'react-s-alert';
 import Card from '../Card';
 import Header from '../Header';
 import DatePickerInterval from '../DatePickerInterval';
 import DonutChart from './graph/DonutChart';
 import Parameteres from './Parameters';
 import '../style/Result.css';
-import Exportpdf from './ExportPDF';
 import NewsArticle from './NewsArticle';
 import Dropdown from '../Dropdown';
 import Checkbox from '../Checkbox';
+import Button from '../Button';
 import { SearchContext } from '../dashboard/SearchStore';
 
 const classNameMap = (name) => {
@@ -44,6 +45,7 @@ class Result extends Component {
     this.state = {
       averageArray: [],
       checkedEmotion: [],
+      etSelection: false,
     };
     this.handleCheckedEmotion = this.handleCheckedEmotion.bind(this);
   }
@@ -76,7 +78,12 @@ class Result extends Component {
 
   dateChange(date) {
     const opts = JSON.parse(JSON.stringify(this.context.searchOpts));
-    let { startDate, endDate } = date || this.state;
+    let startDate = !date || !date.startDate ? this.state.startDate : date.startDate;
+    let endDate = !date || !date.endDate ? this.state.endDate : date.endDate;
+    if (!date) {
+      startDate = new Date(0);
+      endDate = new Date();
+    }
     if (!startDate)
       startDate = this.context.searchOpts.startDate;
     if (!endDate)
@@ -91,23 +98,20 @@ class Result extends Component {
     endDate.setHours(23);
     endDate.setMinutes(59);
     endDate.setSeconds(59);
-    if (startDate.getTime)
-      startDate = startDate.getTime();
-    if (endDate.getTime)
-      endDate = endDate.getTime();
+    startDate = startDate.getTime();
+    endDate = endDate.getTime();
+    if (date && date.startDate && this.context.search.docs[this.context.search.docs.length - 1]
+      .date - (24 * 60 * 60 * 1000) > startDate && this.state.startDate)
+      Alert.warning('Provided "from" date is outside current search results', { position: 'top' });
+    else if (date && date.endDate && this.context.search.docs[0]
+      .date + (24 * 60 * 60 * 1000) < endDate && this.state.endDate)
+      Alert.warning('Provided "to" date is outside current search results', { position: 'top' });
     opts.startDate = startDate;
     opts.endDate = endDate;
     this.context.computeSearch(this.context.search, opts);
-    this.setState({
-      ...this.state,
-      startDate,
-      endDate,
-    });
   }
 
   render() {
-    console.log(this.state.checkedEmotion);
-    console.log(this.state.checkedEmotion);
     let { startDate, endDate } = this.state;
     if (!startDate)
       startDate = this.context.searchOpts.startDate;
@@ -123,9 +127,10 @@ class Result extends Component {
           && this.state.checkedEmotion.indexOf(Object.keys(item.analysis.emotion)
             .sort((a, b) => Math.abs(item.analysis.emotion[b])
               - Math.abs(item.analysis.emotion[a]))[0]) > -1);
-    const filterEmotion = ((startDate || endDate) ? emotionSearch : emotionSearch
-      .filter(doc => (startDate ? doc.date >= startDate : true)
-      && (endDate ? doc.date <= endDate : true))).filter(item => item.analysis.emotion);
+    const filterEmotion = ((startDate || endDate)
+      ? emotionSearch.filter(doc => (startDate ? doc.date >= startDate : true)
+        && (endDate ? doc.date <= endDate : true)) : emotionSearch)
+      .filter(item => item.analysis.emotion);
     return (
       <React.Fragment>
         <Header class='result_header' name='Sentiment Analysis' />
@@ -133,7 +138,7 @@ class Result extends Component {
           <div className = 'result_filter'>
               <div className= 'filter_bar'>
                 <div className='test'>
-                  <Dropdown titleList='Emotion' items={
+                  <Dropdown className='clickable' titleList='Emotion' items={
                     this.context.graphData.map((item, i) => <Checkbox
                         key={i}
                         id={item.title}
@@ -142,17 +147,28 @@ class Result extends Component {
                         onChange={emotion => this.handleCheckedEmotion(emotion)}
                       />)
                   } />
-                  <Dropdown titleList='Date Interval' items={<DatePickerInterval change={(date) => {
+                  <Dropdown className='clickable' titleList='Date Interval' items={<DatePickerInterval change={(date) => {
                     this.setState({
                       ...this.state,
-                      ...date,
+                      etSelection: false,
+                      startDate: date.startDate === null ? undefined : date.startDate,
+                      endDate: date.endDate === null ? undefined : date.endDate,
                     });
-                    this.dateChange(date);
+                    this.dateChange({
+                      startDate: date.startDate === null
+                        ? this.context.search.docs[this.context.search.docs.length - 1].date
+                        : date.startDate,
+                      endDate: date.endDate === null
+                        ? this.context.search.docs[0].date
+                        : date.endDate,
+                    });
                   }} startDate={this.state.startDate ? new Date(this.state.startDate) : undefined}
                   endDate={this.state.endDate ? new Date(this.state.endDate) : undefined} />} />
                 </div>
                 <div>
-                  <Exportpdf className='exportpdf'/>
+                  <Button className='exportpdf' title='Print result' onClick={() => {
+                    window.print();
+                  }} />
                 </div>
               </div>
           </div>
@@ -180,8 +196,14 @@ class Result extends Component {
                       .map(s => s[0].toUpperCase() + s.slice(1)).join(', ')}${this.state.checkedEmotion.slice(0, -1).length > 0
                       ? ', '
                       : ''}${this.state.checkedEmotion.slice(-1).map(s => s[0].toUpperCase() + s.slice(1))[0]}`}`}
-                  timeinterval={`Date Interval: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()}`}
+                  timeinterval={`Date Interval: ${new Date(this.state.startDate ? this.state.startDate : filterEmotion[filterEmotion.length - 1].date).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()}`}
                   amount={`Amount: ${filterEmotion.length}`}
+                  emotion={this.context.searchOpts.show}
+                  emotionClick={() => {
+                    const opts = JSON.parse(JSON.stringify(this.context.searchOpts));
+                    opts.show = !opts.show;
+                    this.context.computeSearch(this.context.search, opts);
+                  }}
                 />
               </div>
             </Card>
@@ -189,8 +211,16 @@ class Result extends Component {
 
             {this.context.graphData.map((element, i) => {
               const name = classNameMap(element.title);
-              return (<div key={i} align="center" className = {`result_graphs_${name}`}>
-                <Card>
+              return (<div key={i} align="center" className = {`result_graphs_${name} clickable clickable-color`}>
+                <Card onClick={() => {
+                  if (this.state.checkedEmotion[0] === name
+                    && this.state.checkedEmotion.length === 1)
+                    return this.setState({ ...this.state, checkedEmotion: [] });
+                  this.setState({
+                    ...this.state,
+                    checkedEmotion: [name],
+                  });
+                }}>
                   <div className='graphs' >
                     <DonutChart chart={`${name}_chart`} label={`label_${name}`} name={element.title} data={[element]}/>
                   </div>
@@ -200,7 +230,7 @@ class Result extends Component {
 
           <div className = 'result_graph'>
             <Card>
-            <div className='emotionalTone'>Emotional Tone </div>
+            <div className='emotionalTone'>Emotional Tone</div>
               <LineChart
                 width={350}
                 height={300}
@@ -208,16 +238,39 @@ class Result extends Component {
                 margin={{
                   top: 20,
                 }} onClick={(data) => {
-                  console.log(data);
-                  if (data
+                  if (this.state.etSelection) {
+                    this.setState({
+                      ...this.state,
+                      etSelection: false,
+                      startDate: undefined,
+                      endDate: undefined,
+                    });
+                    this.dateChange();
+                  }
+                  else if (data
                     && data.activePayload
                     && data.activePayload[0]
                     && data.activePayload[0].payload
-                    && data.activePayload[0].payload.time)
-                    this.dateChange({
-                      startDate: new Date(data.activePayload[0].payload.time),
-                      endDate: new Date(data.activePayload[0].payload.time),
+                    && data.activePayload[0].payload.time) {
+                    const sd = new Date(data.activePayload[0].payload.time);
+                    const ed = new Date(data.activePayload[0].payload.time);
+                    sd.setHours(0);
+                    sd.setMinutes(0);
+                    sd.setSeconds(0);
+                    ed.setHours(23);
+                    ed.setMinutes(59);
+                    ed.setSeconds(59);
+                    this.setState({
+                      ...this.state,
+                      etSelection: true,
+                      startDate: sd,
+                      endDate: ed,
                     });
+                    this.dateChange({
+                      startDate: sd,
+                      endDate: ed,
+                    });
+                  }
                 }}>
                 <XAxis dataKey="date"/>
                 <YAxis/>
@@ -235,9 +288,9 @@ class Result extends Component {
 
           <div className = 'result_news'>
             <Card>
-            { filterEmotion.map((item, i) => <NewsArticle
+            { filterEmotion.length === 0 ? 'No articles found with provided filters' : filterEmotion.map((item, i) => <NewsArticle
               key={i}
-              date={new Date(item.date).toLocaleDateString()} // ER HARD KODET
+              date={new Date(item.date).toLocaleDateString()}
               title={item.headline}
               newssource={item.sourceID}
               domFeeling={item.analysis.emotion ? Object.keys(item.analysis.emotion)

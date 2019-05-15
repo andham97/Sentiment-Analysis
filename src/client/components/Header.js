@@ -8,7 +8,7 @@ class Header extends Component {
     const { name, children } = this.props;
     return (
       <div className="header">
-        <div><span onClick={() => this.props.history.push('/')}>{ name }</span> { children }</div>
+        <div><span className="clickable" onClick={() => this.props.history.push('/')}>{ name }</span> { children }<span className='clickable admin-button' onClick={() => this.props.history.push('/admin')}>Admin?</span></div>
       </div>
     );
   }

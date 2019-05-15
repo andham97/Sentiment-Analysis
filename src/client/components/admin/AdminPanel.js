@@ -3,12 +3,22 @@ import AceEditor from 'react-ace';
 import brace from 'brace'; // eslint-disable-line no-unused-vars
 import 'brace/mode/javascript';
 import 'brace/theme/tomorrow';
+import Alert from 'react-s-alert';
 import '../style/AdminPanel.css';
 import Header from '../Header';
 import Card from '../Card';
-import HostMultiListInput from './HostMultiListInput';
+import MultiListInput from './MultiListInput';
 import { AdminPanelContext } from './AdminPanelStore';
 import Scraper from './Scraper';
+import Button from '../Button';
+
+const sItemBoilerplate = {
+  task: '',
+  recurring: false,
+  occurences: [],
+};
+
+const clone = o => JSON.parse(JSON.stringify(o));
 
 class AdminPanel extends Component {
   constructor(props) {
@@ -18,6 +28,8 @@ class AdminPanel extends Component {
       tempDateSel: '',
       tempDateAttr: '',
       tempSelection: [],
+      tempSItem: clone(sItemBoilerplate),
+      tempSItemShow: -1,
     };
 
     this.scrapeURLChange = this.scrapeURLChange.bind(this);
@@ -41,7 +53,7 @@ class AdminPanel extends Component {
     this.context.getHosts();
     this.context.isWhitelisted();
     this.context.getUrlCount();
-    this.context.getTermCount();
+    this.context.getSchedule();
   }
 
   selectHost(i) {
@@ -54,7 +66,7 @@ class AdminPanel extends Component {
     const { hosts, activeHost } = this.context;
     return <React.Fragment>
       <Header name='Webscraper administration tool' />
-      <div className='wrapper'>
+      <div className='wrapper admin'>
         <Card>
           <ul>
             {hosts.length === 0 ? 'Loading hosts...' : hosts.map((host, i) => <li key={i}>
@@ -62,9 +74,9 @@ class AdminPanel extends Component {
             </li>)}
           </ul>
         </Card>
-        <Card>
+        <Card cName="admin-host-edit">
           Name: <input placeholder='Source name' value={activeHost.name} onChange={e => this.context.updateActiveHost({ ...activeHost, name: e.target.value })} /><br />
-          <HostMultiListInput
+          <MultiListInput
             title='Headline selectors'
             addButton='Add selector'
             emptyText='No selectors'
@@ -74,7 +86,7 @@ class AdminPanel extends Component {
             propname='headlines'
             activeHost={activeHost}
             update={this.context.updateActiveHost} /><br />
-          <HostMultiListInput
+          <MultiListInput
             title='Body selectors'
             addButton='Add selector'
             emptyText='No selectors'
@@ -84,7 +96,7 @@ class AdminPanel extends Component {
             propname='body'
             activeHost={activeHost}
             update={this.context.updateActiveHost} /><br />
-          <HostMultiListInput
+          <MultiListInput
             title='Hostnames'
             addButton='Add host'
             emptyText='No hostnames'
@@ -95,7 +107,7 @@ class AdminPanel extends Component {
             propnameDel='hostDeletions'
             activeHost={activeHost}
             update={this.context.updateActiveHost} /><br />
-          <HostMultiListInput
+          <MultiListInput
             title='Body exclude CSS-selector'
             addButton='Add selector'
             emptyText='No exclude selectors'
@@ -133,7 +145,7 @@ class AdminPanel extends Component {
           <button onClick={() => this.context.saveHost()}>Save host</button>
           <button onClick={() => this.context.clearActiveHost()}>Clear fields</button>
         </Card>
-        <Card>
+        <Card cName='admin-editor-panel'>
           <AceEditor
             placeholder='Create function with signatur (date: string, months: array)'
             mode='javascript'
@@ -159,7 +171,7 @@ class AdminPanel extends Component {
               showLineNumbers: true,
               tabSize: 2,
             }}
-            className='admin'
+            className='admin-editor'
             editorProps={{ $blockScrolling: Infinity }}/>
         </Card>
         <Card>
@@ -190,15 +202,145 @@ class AdminPanel extends Component {
                   defaultChecked={this.state.tempSelection.indexOf(val.sourceID) > -1} />
                 {val.name}<br />
               </div>))}
-              <button
-                onClick={() => this.context.fetchNews(this.state.tempSelection)}>
-              Scrape news sources</button>
-              <h1>Schedule</h1>
-            </Card>
-            <Card>
+              <Button
+                title='Scrape news sources'
+                onClick={() => this.context.fetchNews(this.state.tempSelection, hosts
+                  .filter(h => this.state.tempSelection.indexOf(h.sourceID) > -1)
+                  .reduce((acc, h) => {
+                    acc[h.sourceID] = h.name;
+                    return acc;
+                  }, {}))} />
               <h1>Statistics</h1>
               <p>{`Number of articles indexed: ${this.context.urlCount === -1 ? 'Loading...' : this.context.urlCount}`}</p>
-              <p>{`Number of terms indexed: ${this.context.termCount === -1 ? 'Loading...' : this.context.termCount}`}</p>
+            </Card>
+            <Card cName='admin-schedule'>
+              <h1>Schedule</h1>
+              <div className='admin-add-sitem'>
+                <input
+                  type='checkbox'
+                  onClick={({ target }) => {
+                    this.setState({
+                      ...this.state,
+                      tempSItem: {
+                        ...this.state.tempSItem,
+                        recurring: target.checked,
+                      },
+                    });
+                  }} /> Recurring job<br />
+                <MultiListInput
+                  title='Occurences'
+                  addButton='Add occurence'
+                  emptyText='No occurences'
+                  newText='New occurence (UTC)'
+                  delButton='Delete'
+                  placeholder='Occurence (hh:mm:ss)'
+                  propname='occurences'
+                  activeHost={this.state.tempSItem}
+                  validate={(input) => {
+                    const nums = input.split(':');
+                    if (nums.length !== 3
+                      || nums.filter(n => n.length !== 2 && n.length !== 1).length > 0
+                      || nums.reduce((acc, val, i) => {
+                        if (acc)
+                          return acc;
+                        return Number.isNaN(val)
+                          || Number(val) < 0
+                          || Number(val) > (i === 0 ? 23 : 59);
+                      }, false)) {
+                      Alert.error('Occurence is invalid, use (hh:mm:ss) in the range 00:00:00 to 23:59:59', { position: 'top' });
+                      return false;
+                    }
+                    return true;
+                  }} /><br />
+                  Time difference: {new Date().getHours() - new Date().getUTCHours()} hours<br />
+                <h3>Select news sources for new job</h3>
+                <input
+                  type='checkbox'
+                  onClick={(e) => {
+                    this.setState({
+                      ...this.state,
+                      tempSItem: {
+                        ...this.state.tempSItem,
+                        task: e.target.checked ? 'all' : [...document.querySelectorAll('.admin-add-sitem input:checked')].map(item => item.value).join(','),
+                      },
+                    });
+                  }} />
+                  All sources<br />
+                {hosts.map((val, i) => (<div key={i}>
+                  <input
+                    disabled={this.state.tempSItem.task === 'all'}
+                    type='checkbox'
+                    value={val.sourceID}
+                    onClick={(e) => {
+                      const { tempSItem } = this.state;
+                      const { checked, value } = e.target;
+                      const task = tempSItem.task.split(',').filter(t => t !== '');
+                      if (!checked && task.indexOf(value) > -1)
+                        task.splice(task.indexOf(value), 1);
+                      else if (checked && task.indexOf(value) === -1)
+                        task.push(value);
+                      this.setState({
+                        ...this.state,
+                        tempSItem: {
+                          ...tempSItem,
+                          task: task.join(','),
+                        },
+                      });
+                    }} />
+                  {val.name}
+                </div>))}
+                <Button
+                  title='Add job'
+                  onClick={() => {
+                    const { tempSItem } = this.state;
+                    tempSItem.occurences = tempSItem.occurences.map((occ) => {
+                      const nums = occ.split(':');
+                      return {
+                        hour: Number(nums[0]),
+                        minute: Number(nums[1]),
+                        second: Number(nums[2]),
+                      };
+                    });
+                    Alert.info('Adding job to schedule');
+                    this.context.addScheduleItem(tempSItem);
+                    this.setState({
+                      ...this.state,
+                      tempSItem: clone(sItemBoilerplate),
+                    });
+                  }} />
+              </div>
+              <div className='admin-show-sitem'>
+                <ul>
+                  {this.context.scheduleItems.map((item, i) => <li key={i} onClick={() => {
+                    this.setState({
+                      ...this.state,
+                      tempSItemShow: this.state.tempSItemShow === i ? -1 : i,
+                    });
+                  }}>
+                    Sources to fetch: {item.task}, recurring: {item.recurring ? 'true' : 'false'}
+                    {this.state.tempSItemShow === i
+                      ? <React.Fragment>
+                        <ul>
+                          {item.occurences.map((occ, j) => <li key={j}>
+                            {occ.hour < 10 ? `0${occ.hour}` : occ.hour}:
+                            {occ.minute < 10 ? `0${occ.minute}` : occ.minute}:
+                            {occ.second < 10 ? `0${occ.second}` : occ.second}
+                          </li>)
+                          }
+                        </ul>
+                        <Button
+                          title='Remove job'
+                          onClick={() => {
+                            Alert.info('Removing job from schedule');
+                            this.context.deleteScheduleItem(item.id);
+                          }
+                        } />
+                      </React.Fragment>
+                      : ''
+                    }
+                  </li>)}
+                </ul>
+              </div>
             </Card>
           </React.Fragment>
         ) : ''}

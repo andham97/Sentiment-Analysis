@@ -169,6 +169,14 @@ div.react-datepicker__current-month{
   float: left;
 }
 
+.clickable-color *:hover, .clickable-color:hover *, .clickable-color:hover {
+  background-color: #f8f8f8;
+}
+
+.clear-et-selection {
+  float: right;
+}
+
 @media screen
   and (max-width: 730px)
   and (min-width: 320px) {

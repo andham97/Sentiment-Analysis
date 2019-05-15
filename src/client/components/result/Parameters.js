@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../style/Parameters.css';
+import Button from '../Button';
 
 class Paramteres extends Component {
   render() {
@@ -14,6 +15,9 @@ class Paramteres extends Component {
         <ul className='applied_filters'>
           {arr.filter((e => this.props[e])).map(e => <li key={e}>{this.props[e]}</li>)}
         </ul>
+        <Button
+          title={this.props.emotion ? 'View sentiment' : 'View emotion'}
+          onClick={this.props.emotionClick} />
       </div>
     );
   }
@@ -25,6 +29,8 @@ Paramteres.propTypes = {
   timeinterval: PropTypes.any,
   amount: PropTypes.any,
   threshold: PropTypes.any,
+  emotion: PropTypes.any,
+  emotionClick: PropTypes.any,
 };
 
 export default Paramteres;

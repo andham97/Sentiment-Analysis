@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       res.status(err.code || 500).send(err.err ? (err.err.message || 'ERROR') : 'ERROR');
     });
 });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class HostMultiListInput extends Component {
+class MultiListInput extends Component {
   constructor(props) {
     super(props);
 
@@ -27,17 +27,17 @@ class HostMultiListInput extends Component {
       newText,
       delButton,
       placeholder,
+      validate,
     } = this.props;
 
     if (!propname
-      || !update
       || !activeHost
       || !title
       || !emptyText
       || !addButton
       || !newText
       || !placeholder)
-      throw new Error('Error: HostMultiListInput not configured');
+      throw new Error('Error: MultiListInput not configured');
 
     return (<React.Fragment>
       <strong>{title}</strong><br />
@@ -47,7 +47,8 @@ class HostMultiListInput extends Component {
             if (propnameDel)
               activeHost[propnameDel].push(activeHost[propname][i]);
             activeHost[propname].splice(i, 1);
-            update({ ...activeHost });
+            if (update)
+              update({ ...activeHost });
           }}>{delButton}</button></li>)}
       </ul>
       {newText}: <input
@@ -55,15 +56,18 @@ class HostMultiListInput extends Component {
         value={this.state.tempInput}
         onChange={this.inputChange} />
       <button onClick={() => {
+        if (validate && !validate(this.state.tempInput))
+          return;
         activeHost[propname].push(this.state.tempInput);
         this.setState({ ...this.state, tempInput: '' });
-        update({ ...activeHost });
+        if (update)
+          update({ ...activeHost });
       }}>{addButton}</button><br />
     </React.Fragment>);
   }
 }
 
-HostMultiListInput.propTypes = {
+MultiListInput.propTypes = {
   activeHost: PropTypes.any,
   addButton: PropTypes.any,
   title: PropTypes.any,
@@ -74,6 +78,7 @@ HostMultiListInput.propTypes = {
   newText: PropTypes.any,
   delButton: PropTypes.any,
   placeholder: PropTypes.any,
+  validate: PropTypes.any,
 };
 
-export default HostMultiListInput;
+export default MultiListInput;

@@ -33,7 +33,7 @@ class NewsArticle extends Component {
           </div>
           <br />
         </div>
-        <button onClick = { onClick } className='to_article'>To Article</button>
+        <button onClick = { onClick } className='newsarticle_button to_article'>To Article</button>
         <br />
         <hr />
       </div>

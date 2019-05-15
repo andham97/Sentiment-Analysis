@@ -5,10 +5,7 @@ import Module from 'module';
 import { getCloudant } from '../ics';
 
 let db;
-
 let index;
-
-// const EventEmitter = require('events');
 
 const loadIndex = (cb) => {
   if (!db)
@@ -109,30 +106,6 @@ const ws = (path, cb) => {
     cb(`Error: ${err}`);
   });
 };
-
-/* const EE = new EventEmitter();
-
-EE.on('data', (data) => {
-  process.stdout.write(JSON.stringify(data));
-});
-
-EE.on('end', () => {
-  EE.removeAllListeners();
-});
-
-const processInput = (i) => {
-  if (i >= process.argv.length)
-    return EE.emit('end');
-  ws(process.argv[i], (err, data) => {
-    if (err)
-      process.stderr.write(JSON.stringify(err));
-    else
-      EE.emit('data', data);
-    processInput(i + 1);
-  });
-};
-
-processInput(2); */
 
 export default ws;
 export { loadIndex };

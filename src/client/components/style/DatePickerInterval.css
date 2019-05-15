@@ -1,11 +1,32 @@
-.daterangeend{
-  margin-left: 2.1rem;
-}
-
-.daterangestart{
-  margin-left:1rem;
-}
-
 .react-datepicker-wrapper{
   width: 5rem;
+}
+
+.react-datepicker-popper{
+  width: 250px;
+}
+
+.react-datepicker__today-button{
+  width: 100%;
+}
+
+.react-datepicker-ignore-onclickoutside{
+  width: 100%;
+  padding: 5%;
+}
+
+.react-datepicker__input-container{
+  width: 100%;
+  padding: 5%;
+}
+
+.react-datepicker__input-container input{
+  width: 100%;
+  padding: 5%;
+}
+
+.chooseDate{
+  font-style: italic;
+  margin-left: 5%;
+  margin-top: 2%
 }

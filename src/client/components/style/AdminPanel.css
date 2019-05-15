@@ -1,3 +1,39 @@
-.admin {
+.admin-editor {
   min-height: 35em;
+}
+
+.admin-host-edit {
+
+}
+
+.admin > div {
+  padding: 20px;
+}
+
+.admin ul {
+  margin: 0;
+}
+
+.admin-editor-panel {
+  padding: 0 !important;
+}
+
+.admin button {
+  float:right;
+  margin-left: 10px;
+}
+
+.admin-add-sitem {
+  width: 49%;
+  display: inline-block;
+}
+
+.admin-show-sitem {
+  width: 49%;
+  display: inline-block;
+  float: right;
+}
+
+.admin-schedule {
+  min-height: 25em;
 }

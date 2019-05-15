@@ -5,12 +5,10 @@ import PropTypes from 'prop-types';
 class Button extends Component {
   render() {
     return (
-      <div>
-          <button
-            onClick={this.props.onClick}
-            className={this.props.className}>
-          {this.props.title}</button>
-      </div>
+      <button
+        onClick={this.props.onClick}
+        className={this.props.className}>
+      {this.props.title}</button>
     );
   }
 }

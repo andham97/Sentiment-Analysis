@@ -46,9 +46,7 @@ const analyze = (urlData, cb) => {
             sourceID: page.sourceID,
           }, (err) => {
             if (err)
-              console.log(err);
-            else
-              console.log(`Finished analysing page: ${e.text} ${page.url}`);
+              console.error(err);
             cb(null);
           });
         });
@@ -65,7 +63,6 @@ export default (urlData, cb) => {
       return cb(err);
     if (!urlData.slice)
       urlData = [urlData];
-    console.log(`Analysing pages ${urlData.length}`);
     if (urlData.length === 0)
       return cb(null);
     analyze(urlData, cb);

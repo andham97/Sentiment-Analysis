@@ -1,0 +1,29 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc","closure"]
+    },
+    "source": {
+        "include": [ "src" ],
+        "exclude": [ "node_modules" ],
+        "includePattern": ".+\\.js"
+    },
+    "plugins": [
+      "node_modules/jsdoc-babel",
+      "node_modules/jsdoc-route-plugin"
+    ],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    },
+    "opts": {
+      "recurse": true
+    },
+    "babel": {
+      "presets": [
+        "@babel/preset-env",
+        "@babel/preset-react"
+      ],
+      "plugins": []
+    }
+}

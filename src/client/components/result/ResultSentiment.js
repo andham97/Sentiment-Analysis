@@ -4,6 +4,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import stt from 'search-text-tokenizer';
+import Alert from 'react-s-alert';
 import Header from '../Header';
 import Dropdown from '../Dropdown';
 import DatePickerInterval from '../DatePickerInterval';
@@ -38,6 +39,7 @@ class ResultSentiment extends Component {
     this.state = {
       averageArray: [],
       checkedSentiment: [],
+      etSelection: false,
     };
     this.handleCheckedSentiment = this.handleCheckedSentiment.bind(this);
   }
@@ -61,7 +63,12 @@ class ResultSentiment extends Component {
 
   dateChange(date) {
     const opts = JSON.parse(JSON.stringify(this.context.searchOpts));
-    let { startDate, endDate } = date || this.state;
+    let startDate = !date || !date.startDate ? this.state.startDate : date.startDate;
+    let endDate = !date || !date.endDate ? this.state.endDate : date.endDate;
+    if (!date) {
+      startDate = new Date(0);
+      endDate = new Date();
+    }
     if (!startDate)
       startDate = this.context.searchOpts.startDate;
     if (!endDate)
@@ -78,14 +85,15 @@ class ResultSentiment extends Component {
     endDate.setSeconds(59);
     startDate = startDate.getTime();
     endDate = endDate.getTime();
+    if (date.startDate && this.context.search.docs[this.context.search.docs.length - 1]
+      .date - (24 * 60 * 60 * 1000) > startDate && this.state.startDate)
+      Alert.warning('Provided "from" date is outside current search results', { position: 'top' });
+    else if (date.endDate && this.context.search.docs[0]
+      .date + (24 * 60 * 60 * 1000) < endDate && this.state.endDate)
+      Alert.warning('Provided "to" date is outside current search results', { position: 'top' });
     opts.startDate = startDate;
     opts.endDate = endDate;
     this.context.computeSearch(this.context.search, opts);
-    this.setState({
-      ...this.state,
-      startDate,
-      endDate,
-    });
   }
 
   render() {
@@ -101,10 +109,10 @@ class ResultSentiment extends Component {
     let filterSentiment = (this.state.checkedSentiment.length === 0
       ? this.context.search.docs : this.context.search.docs
         .filter(doc => (this.state.checkedSentiment.indexOf(doc.analysis.sentiment.label) > -1)));
-    filterSentiment = (startDate || endDate)
+    filterSentiment = ((startDate || endDate)
       ? filterSentiment.filter(doc => (startDate ? doc.date >= startDate : true)
-        && (endDate ? doc.date <= endDate : true)) : filterSentiment;
-    filterSentiment = filterSentiment.filter(item => item.analysis.sentiment);
+        && (endDate ? doc.date <= endDate : true)) : filterSentiment)
+      .filter(item => item.analysis.sentiment);
     return (
       <React.Fragment>
         <Header class='resultSentiment_header' name='Sentiment Analysis' />
@@ -112,7 +120,7 @@ class ResultSentiment extends Component {
           <div className='resultSentiment_filter'>
               <div className= 'filterSentiment_bar'>
                 <div>
-                  <Dropdown titleList='Sentiment' items={
+                  <Dropdown className='clickable' titleList='Sentiment' items={
                     this.context.graphData.map((item, i) => <Checkbox
                       key={i}
                       id={item.title}
@@ -121,18 +129,50 @@ class ResultSentiment extends Component {
                       onChange={sentiment => this.handleCheckedSentiment(sentiment)}
                     />)
                   } />
-                  <Dropdown titleList='Date Interval' items={<DatePickerInterval change={(date) => {
+                  <Dropdown className='clickable' titleList='Date Interval' items={<DatePickerInterval change={(date) => {
                     this.setState({
                       ...this.state,
-                      ...date,
+                      etSelection: false,
+                      startDate: date.startDate === null ? undefined : date.startDate,
+                      endDate: date.endDate === null ? undefined : date.endDate,
                     });
-                    this.dateChange(date);
+                    this.dateChange({
+                      startDate: date.startDate === null
+                        ? this.context.search.docs[this.context.search.docs.length - 1].date
+                        : date.startDate,
+                      endDate: date.endDate === null
+                        ? this.context.search.docs[0].date
+                        : date.endDate,
+                    });
                   }} startDate={this.state.startDate ? new Date(this.state.startDate) : undefined}
                   endDate={this.state.endDate ? new Date(this.state.endDate) : undefined} />} />
+                  <Dropdown className='clickable' titleList='Neutral threshold' items={<div>Neutral sentiment threshold: {`\xB1 ${this.state.neutralThreshold && this.state.neutralThreshold !== 0 ? this.state.neutralThreshold : this.context.searchOpts.neutralThreshold}`}<br />
+                    <input
+                      type='range'
+                      min={0}
+                      max={20}
+                      value={(this.state.neutralThreshold && this.state.neutralThreshold !== 0
+                        ? this.state.neutralThreshold
+                        : this.context.searchOpts.neutralThreshold) * 20}
+                      onChange={(e) => {
+                        this.setState({
+                          ...this.state,
+                          neutralThreshold: Number(e.target.value / 20),
+                        });
+                      }} />
+                    <Button title='Apply' onClick={() => {
+                      if ((!this.state.neutralThreshold && this.state.neutralThreshold !== 0)
+                        || this.state.neutralThreshold === this.context.searchOpts.neutralThreshold)
+                        return;
+                      const opts = JSON.parse(JSON.stringify(this.context.searchOpts));
+                      opts.neutralThreshold = Number(this.state.neutralThreshold);
+                      this.context.computeSearch(this.context.search, opts);
+                    }} />
+                    </div>} />
                 </div>
                 <div>
-                  <Button className='exportpdf' title='Export PDF' onClick={() => {
-
+                  <Button className='exportpdf' title='Print result' onClick={() => {
+                    window.print();
                   }} />
                 </div>
             </div>
@@ -161,9 +201,15 @@ class ResultSentiment extends Component {
                       .map(s => s[0].toUpperCase() + s.slice(1)).join(', ')}${this.state.checkedSentiment.slice(0, -1).length > 0
                       ? ', '
                       : ''}${this.state.checkedSentiment.slice(-1).map(s => s[0].toUpperCase() + s.slice(1))[0]}`}`}
-                  timeinterval={`Date Interval: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()}`}
+                  timeinterval={`Date Interval: ${new Date(this.state.startDate ? this.state.startDate : filterSentiment[filterSentiment.length - 1].date).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()}`}
                   threshold={`Neutral threshold: \xB1 ${this.context.searchOpts.neutralThreshold}`}
                   amount={`Amount: ${filterSentiment.length}`}
+                  emotion={this.context.searchOpts.show}
+                  emotionClick={() => {
+                    const opts = JSON.parse(JSON.stringify(this.context.searchOpts));
+                    opts.show = !opts.show;
+                    this.context.computeSearch(this.context.search, opts);
+                  }}
                 />
               </div>
             </Card>
@@ -171,8 +217,16 @@ class ResultSentiment extends Component {
 
           {this.context.graphData.map((element, i) => {
             const name = className(element.title);
-            return (<div key={i} className = {`resultSentiment_graphs_${name}`}>
-              <Card>
+            return (<div key={i} className = {`resultSentiment_graphs_${name} clickable clickable-color`}>
+              <Card onClick={() => {
+                if (this.state.checkedSentiment[0] === name
+                  && this.state.checkedSentiment.length === 1)
+                  return this.setState({ ...this.state, checkedSentiment: [] });
+                this.setState({
+                  ...this.state,
+                  checkedSentiment: [name],
+                });
+              }}>
                 <div align='center' className='graphs' >
                   <DonutChart chart={`${name}_chart`} label={`label_${name}`} name={element.title} data={[element]}/>
                 </div>
@@ -182,23 +236,48 @@ class ResultSentiment extends Component {
 
           <div className='resultSentiment_emotionalTone'>
             <Card>
-            <div className='emotionalTone'>Emotional Tone </div>
+            <div className='emotionalTone'>Emotional Tone</div>
               <LineChart
+                className='clickable'
                 width={350}
                 height={300}
                 data={this.context.emotionalTone}
                 margin={{
                   top: 20,
                 }} onClick={(data) => {
-                  if (data
+                  if (this.state.etSelection) {
+                    this.setState({
+                      ...this.state,
+                      etSelection: false,
+                      startDate: undefined,
+                      endDate: undefined,
+                    });
+                    this.dateChange();
+                  }
+                  else if (data
                     && data.activePayload
                     && data.activePayload[0]
                     && data.activePayload[0].payload
-                    && data.activePayload[0].payload.time)
-                    this.dateChange({
-                      startDate: new Date(data.activePayload[0].payload.time),
-                      endDate: new Date(data.activePayload[0].payload.time),
+                    && data.activePayload[0].payload.time) {
+                    const sd = new Date(data.activePayload[0].payload.time);
+                    const ed = new Date(data.activePayload[0].payload.time);
+                    sd.setHours(0);
+                    sd.setMinutes(0);
+                    sd.setSeconds(0);
+                    ed.setHours(23);
+                    ed.setMinutes(59);
+                    ed.setSeconds(59);
+                    this.setState({
+                      ...this.state,
+                      etSelection: true,
+                      startDate: sd,
+                      endDate: ed,
                     });
+                    this.dateChange({
+                      startDate: sd,
+                      endDate: ed,
+                    });
+                  }
                 }}>
                 <XAxis dataKey="date"/>
                 <YAxis/>
@@ -213,19 +292,19 @@ class ResultSentiment extends Component {
           </div>
 
           <div className='resultSentiment_articles'>
-          <Card>
-            { filterSentiment.map((item, i) => <NewsArticleSentiment
-              key={i}
-              date={new Date(item.date).toLocaleDateString()}
-              title={item.headline}
-              newssource={item.sourceID}
-              domSentiment={item.analysis.sentiment.label}
-              onClick= {() => this.makeRedirect(item.url)}
-              sentiments= {item.analysis.sentiment ? item.analysis.sentiment : {
-                negative: 0, neutral: 0, positive: 0,
-              }}
-            />)}
-          </Card>
+            <Card>
+              { filterSentiment.length === 0 ? 'No articles found with provided filters' : filterSentiment.map((item, i) => <NewsArticleSentiment
+                key={i}
+                date={new Date(item.date).toLocaleDateString()}
+                title={item.headline}
+                newssource={item.sourceID}
+                domSentiment={item.analysis.sentiment.label}
+                onClick= {() => this.makeRedirect(item.url)}
+                sentiments= {item.analysis.sentiment ? item.analysis.sentiment : {
+                  negative: 0, neutral: 0, positive: 0,
+                }}
+              />)}
+            </Card>
           </div>
         </div>
       </React.Fragment>

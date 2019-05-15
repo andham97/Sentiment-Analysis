@@ -41,6 +41,8 @@ const updateWebscraperHost = host => new Promise((resolve, reject) => {
 const getNewsSourceURLs = sources => new Promise((resolve, reject) => {
   if (typeof sources === 'string')
     sources = sources.split(',');
+  if (!sources.length || sources.length === 0)
+    return resolve([]);
   getWebscraperHosts().then((hsts) => {
     const hosts = Object.keys(hsts).filter(key => key.indexOf('_') !== 0 && key !== 'type').map(key => hsts[key].sourceID);
     sources = sources.filter(source => hosts.indexOf(source) > -1);
@@ -52,7 +54,7 @@ const getNewsSourceURLs = sources => new Promise((resolve, reject) => {
       };
 
       return newsapi.v2.everything(opts);
-    })).then((data) => {
+    }).map(promise => promise.then(val => val, () => ({ articles: [] })))).then((data) => {
       resolve(data.reduce((acc, val) => {
         val.articles.map(a => a.url).forEach(url => acc.push(url));
         return acc;

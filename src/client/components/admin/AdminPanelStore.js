@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import beautify from 'js-beautify';
 import cheerio from 'cheerio';
+import Alert from 'react-s-alert';
 
 const AdminPanelContext = React.createContext();
 const hostBoilerplate = {
@@ -33,8 +34,8 @@ class AdminPanelStore extends React.Component {
       activeIndex: -1,
       testURL: '',
       whitelist: false,
-      termCount: -1,
       urlCount: -1,
+      scheduleItems: [],
     };
     this.getHosts = this.getHosts.bind(this);
     this.setActiveHost = this.setActiveHost.bind(this);
@@ -46,7 +47,48 @@ class AdminPanelStore extends React.Component {
     this.isWhitelisted = this.isWhitelisted.bind(this);
     this.fetchNews = this.fetchNews.bind(this);
     this.getUrlCount = this.getUrlCount.bind(this);
-    this.getTermCount = this.getTermCount.bind(this);
+    this.getSchedule = this.getSchedule.bind(this);
+    this.addScheduleItem = this.addScheduleItem.bind(this);
+    this.deleteScheduleItem = this.deleteScheduleItem.bind(this);
+  }
+
+  addScheduleItem(item) {
+    fetch('/api/ws/schedule', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    }).then(res => res.json()).then((nItem) => {
+      const { scheduleItems } = this.state;
+      scheduleItems.push(nItem);
+      this.setState({
+        ...this.state,
+        scheduleItems,
+      });
+    }).catch(console.error);
+  }
+
+  deleteScheduleItem(id) {
+    fetch(`/api/ws/schedule/${id}`, {
+      method: 'DELETE',
+    }).then(res => res.json()).then((did) => {
+      let { scheduleItems } = this.state;
+      scheduleItems = scheduleItems.filter(item => item.id !== did);
+      this.setState({
+        ...this.state,
+        scheduleItems,
+      });
+    }).catch(console.error);
+  }
+
+  getSchedule() {
+    fetch('/api/ws/schedule').then(res => res.json()).then((items) => {
+      this.setState({
+        ...this.state,
+        scheduleItems: items,
+      });
+    }).catch(console.error);
   }
 
   getUrlCount() {
@@ -60,18 +102,8 @@ class AdminPanelStore extends React.Component {
       .catch(console.error);
   }
 
-  getTermCount() {
-    fetch('/api/ws/termCount', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(res => res.json())
-      .then(data => this.setState({ ...this.state, termCount: data.count }))
-      .catch(console.error);
-  }
-
-  fetchNews(sources) {
+  fetchNews(sources, hsts) {
+    Alert.info(`Fetching news from ${sources.reduce((acc, src) => `${acc} ${hsts[src]},`, '')}`.slice(0, -1), { position: 'top' });
     fetch('/api/ws/fetchNews', {
       method: 'POST',
       headers: {
@@ -80,7 +112,9 @@ class AdminPanelStore extends React.Component {
       body: JSON.stringify({
         sources,
       }),
-    }).then(() => console.log('success')).catch(console.error); // TODO: ALERT
+    }).then(res => res.json()).then((data) => {
+      Alert.success(`${data} articles started to load`, { position: 'top' });
+    }).catch(console.error);
   }
 
   scrapeURL(url) {
@@ -170,7 +204,7 @@ class AdminPanelStore extends React.Component {
     else
       hosts.push(clone(this.state.activeHost));
     hosts.sort((a, b) => ([a.sourceID, b.sourceID].sort()[0] === a.sourceID ? -1 : 1));
-    console.log(this.state.activeHost);
+    Alert.info('Saving host...', { postiion: 'top' });
     fetch('/api/ws/hosts', {
       method: 'POST',
       headers: {
@@ -178,6 +212,7 @@ class AdminPanelStore extends React.Component {
       },
       body: JSON.stringify(this.state.activeHost),
     }).then((data) => {
+      Alert.success('Host saved', { postiion: 'top' });
       console.log(data); // TODO: add alert
     }).catch(console.error);
     this.setState({
@@ -199,8 +234,10 @@ class AdminPanelStore extends React.Component {
         isWhitelisted: this.isWhitelisted,
         scrapeURL: this.scrapeURL,
         fetchNews: this.fetchNews,
-        getTermCount: this.getTermCount,
         getUrlCount: this.getUrlCount,
+        getSchedule: this.getSchedule,
+        addScheduleItem: this.addScheduleItem,
+        deleteScheduleItem: this.deleteScheduleItem,
       }}>
       {this.props.children}
       </AdminPanelContext.Provider>

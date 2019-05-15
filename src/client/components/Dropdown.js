@@ -14,7 +14,7 @@ class Dropdown extends Component {
 
   droppedList() {
     this.setState({
-      dropdownList: true,
+      dropdownList: !this.state.dropdownList,
     });
   }
 
@@ -30,14 +30,17 @@ class Dropdown extends Component {
     const { titleList, items } = this.props;
     const { dropdownList } = this.state;
     return (
-        <div className='dropdown' onClick={() => this.droppedList()}>
-          <div className='dropdown_title'>{ titleList }
+        <div className={`dropdown ${this.props.className ? this.props.className : ''}`} onClick={(e) => {
+          if (e.target.className === `dropdown ${this.props.className ? this.props.className : ''}`)
+            this.droppedList();
+        }}>
+          <div className='dropdown_title' onClick={() => this.droppedList()}>{ titleList }
             {dropdownList ? <span className='arrowDown'> <FaAngleUp /> </span> : <span className='arrowDown'> <FaAngleDown /> </span> }
           </div>
           <br />
           <br />
             {dropdownList ? (
-              <div>{ items }</div>
+              <div className='dropdown dropdown-items'>{ items }</div>
             )
               : (
                 null
@@ -52,6 +55,7 @@ Dropdown.propTypes = {
   titleList: PropTypes.any,
   items: PropTypes.any,
   onClose: PropTypes.any,
+  className: PropTypes.any,
 };
 
 export default onClickOutside(Dropdown);

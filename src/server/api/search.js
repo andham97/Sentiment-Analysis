@@ -10,14 +10,9 @@ const search = (query, options) => new Promise((resolve, reject) => {
     return reject({ code: 400, err: new Error('Error: Empty query not supported') });
   const tokens = stt(query);
   const includes = tokens.filter(token => !token.exclude).map(token => token.term);
+  const excludes = tokens.filter(token => token.exclude).map(token => token.term);
   const regex = includes.reduce((acc, val, i) => `${i === 0 ? '(' : ''}${acc + val}${i === includes.length - 1 ? ')' : '|'}`, '');
-  console.log(regex);
-  try {
-    RegExp(regex);
-  }
-  catch (e) {
-    return reject({ code: 400, err: new Error('Error: Invalid query parameters') });
-  }
+  const negRegex = excludes.reduce((acc, val, i) => `${i === 0 ? '(' : ''}${acc + val}${i === excludes.length - 1 ? ')' : '|'}`, '');
   let sources = '';
   let sourceRegex = '';
   if (options && options.sources && typeof options.sources === 'string') {
@@ -32,12 +27,14 @@ const search = (query, options) => new Promise((resolve, reject) => {
     const sTokens = stt(sources);
     const sourceList = sTokens.filter(token => !token.exclude).map(token => token.term.replace(/[^a-zA-Z-]/g, ''));
     sourceRegex = sourceList.reduce((acc, val, i) => `${i === 0 ? '(' : ''}${acc + val}${i === sourceList.length - 1 ? ')' : '|'}`, '');
-    try {
-      RegExp(sourceRegex);
-    }
-    catch (e) {
-      return reject({ code: 400, err: new Error('Error: Invalid query parameters') });
-    }
+  }
+  try {
+    RegExp(sourceRegex);
+    RegExp(regex);
+    RegExp(negRegex);
+  }
+  catch (e) {
+    return reject({ code: 400, err: new Error('Error: Invalid query parameters') });
   }
   const opts = {
     selector: {
@@ -84,6 +81,14 @@ const search = (query, options) => new Promise((resolve, reject) => {
         $lte: Number(options.intervalEnd),
       },
     });
+  if (negRegex !== '')
+    opts.selector.$and.push({
+      $not: {
+        'analysis.text': {
+          $regex: `(?i)${negRegex}`,
+        },
+      },
+    });
   const find = () => {
     cloudant.db.use('sa-index').find(opts).then((data) => {
       data.docs = data.docs.map((doc) => {
@@ -92,8 +97,6 @@ const search = (query, options) => new Promise((resolve, reject) => {
           cloudant.db.use('sa-index').insert(doc, (err) => {
             if (err)
               console.error(err);
-            else
-              console.log('insert complete');
           });
         }
         delete doc._rev;
@@ -101,7 +104,7 @@ const search = (query, options) => new Promise((resolve, reject) => {
       });
       resolve({ ...data, params: includes });
     }).catch((err) => {
-      console.log(err);
+      console.error(err);
       if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
         find();
       else

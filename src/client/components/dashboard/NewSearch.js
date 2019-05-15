@@ -9,8 +9,6 @@ import Checkbox from '../Checkbox';
 import SearchButton from '../Button';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-import 'react-s-alert/dist/s-alert-default.css';
-import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
 import '../style/react_dates_overrides.css';
 import { SearchContext } from './SearchStore';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -143,7 +141,6 @@ class NewSearch extends Component {
     const searchdata = this.state;
     return (
       <div className='content' >
-        <Alert stack={{ limit: 1 }} />
         <div className='container_top'>
           <div className='title'>New Search</div>
         </div>
