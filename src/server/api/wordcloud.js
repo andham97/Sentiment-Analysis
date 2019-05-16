@@ -2,11 +2,10 @@ import { getCloudant } from '../ics';
 import API from '../api';
 
 const getWordcloud = () => new Promise((resolve, reject) => {
-  const cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     reject();
   const find = () => {
-    cloudant.db.use('sa-index').search('searches', 'basic-search', {
+    getCloudant().db.use('sa-index').search('searches', 'basic-search', {
       q: '*:*',
       counts: ['key'],
       limit: 0,

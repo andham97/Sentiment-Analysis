@@ -2,8 +2,7 @@ import stt from 'search-text-tokenizer';
 import { getCloudant } from '../ics';
 
 const search = (query, options) => new Promise((resolve, reject) => {
-  const cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     return reject();
   query = query.replace(/[^a-zA-Z\s-]/g, '');
   if (query === '')
@@ -90,11 +89,11 @@ const search = (query, options) => new Promise((resolve, reject) => {
       },
     });
   const find = () => {
-    cloudant.db.use('sa-index').find(opts).then((data) => {
+    getCloudant().db.use('sa-index').find(opts).then((data) => {
       data.docs = data.docs.map((doc) => {
         if (doc.date < 0) {
           doc.date = new Date().getTime();
-          cloudant.db.use('sa-index').insert(doc, (err) => {
+          getCloudant().db.use('sa-index').insert(doc, (err) => {
             if (err)
               console.error(err);
           });
@@ -115,15 +114,14 @@ const search = (query, options) => new Promise((resolve, reject) => {
 });
 
 const getSources = () => new Promise((resolve, reject) => {
-  const cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     return reject();
   const find = () => {
-    cloudant.db.use('sa-index').view('searches', 'source-view', {
+    getCloudant().db.use('sa-index').view('searches', 'source-view', {
       group: true,
     }).then((data) => {
       const find2 = () => {
-        cloudant.db.use('sa-meta').find({ selector: { type: 'ws' } }).then(({ docs }) => {
+        getCloudant().db.use('sa-meta').find({ selector: { type: 'ws' } }).then(({ docs }) => {
           const hosts = Object.keys(docs[0]).filter(key => docs[0][key].sourceID);
           const keys = data.rows.map(e => e.key);
           resolve(keys.map(key => ({

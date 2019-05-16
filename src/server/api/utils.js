@@ -1,14 +1,13 @@
 import { getCloudant } from '../ics';
 
 const urlCheck = urls => new Promise((resolve, reject) => {
-  const cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     return reject();
   let arr = urls;
   if (typeof arr === 'string')
     arr = [arr];
   const find = () => {
-    cloudant.db.use('sa-index').view('searches', 'url-view', {
+    getCloudant().db.use('sa-index').view('searches', 'url-view', {
       group: true,
     }).then((data) => {
       const u = data.rows.map(row => row.key);
@@ -30,11 +29,10 @@ const urlCheck = urls => new Promise((resolve, reject) => {
 });
 
 const urlCount = () => new Promise((resolve, reject) => {
-  const cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     return reject();
   const find = () => {
-    cloudant.db.use('sa-index').view('searches', 'url-view', {
+    getCloudant().db.use('sa-index').view('searches', 'url-view', {
       group: true,
     }).then((data) => {
       resolve(data.rows.length);

@@ -40,10 +40,9 @@ const objectEqual = (a, b) => {
  * @return {Array} Central Schedule
  */
 const getSchedule = () => new Promise((resolve, reject) => {
-  const cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     return reject();
-  cloudant.db.use('sa-meta').find({ selector: { type: 'schedule' }, fields: ['schedule'] }).then((data) => {
+  getCloudant().db.use('sa-meta').find({ selector: { type: 'schedule' }, fields: ['schedule'] }).then((data) => {
     if (data && data.docs && data.docs.length > 0 && data.docs[0].schedule)
       resolve(data.docs[0].schedule);
     else
@@ -63,17 +62,16 @@ const registerScheduleListener = (listener) => {
 };
 
 const deleteScheduleItem = id => new Promise((resolve, reject) => {
-  const cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     return reject();
-  cloudant.db.use('sa-meta').find({ selector: { type: 'schedule' } }).then((data) => {
+  getCloudant().db.use('sa-meta').find({ selector: { type: 'schedule' } }).then((data) => {
     if (data && data.docs && data.docs.length > 0 && data.docs[0].schedule) {
       const doc = data.docs[0];
       if (doc.schedule.filter(item => item.id === id).length === 0)
         return resolve();
       doc.schedule = doc.schedule.filter(item => item.id !== id);
       listeners.forEach(listener => listener(doc.schedule));
-      cloudant.db.use('sa-meta').insert(doc).then(() => resolve(id)).catch(reject);
+      getCloudant().db.use('sa-meta').insert(doc).then(() => resolve(id)).catch(reject);
     }
   }).catch(reject);
 });
@@ -84,10 +82,9 @@ const addScheduleItem = item => new Promise((resolve, reject) => {
     || (!item.task || item.task === '')
     || (!item.occurences || item.occurences.length === 0))
     return reject();
-  const cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     return reject();
-  cloudant.db.use('sa-meta').find({ selector: { type: 'schedule' } }).then((data) => {
+  getCloudant().db.use('sa-meta').find({ selector: { type: 'schedule' } }).then((data) => {
     if (data && data.docs && data.docs.length > 0 && data.docs[0].schedule) {
       const doc = data.docs[0];
       if (!doc.schedule.reduce((acc, val) => {
@@ -98,7 +95,7 @@ const addScheduleItem = item => new Promise((resolve, reject) => {
         const nItem = { id: uuid(), ...item };
         doc.schedule.push(nItem);
         listeners.forEach(listener => listener(doc.schedule));
-        cloudant.db.use('sa-meta').insert(doc).then(() => resolve(nItem)).catch(reject);
+        getCloudant().db.use('sa-meta').insert(doc).then(() => resolve(nItem)).catch(reject);
       }
       else
         reject();

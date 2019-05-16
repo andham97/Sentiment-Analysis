@@ -1,10 +1,9 @@
 import { getCloudant, newsapi } from '../ics';
 
 const getWebscraperHosts = () => new Promise((resolve, reject) => {
-  const cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     return reject();
-  cloudant.db.use('sa-meta').find({ selector: { type: 'ws' } }, (err, result) => {
+  getCloudant().db.use('sa-meta').find({ selector: { type: 'ws' } }, (err, result) => {
     if (err)
       return reject(err);
     resolve(result.docs[0]);
@@ -12,8 +11,7 @@ const getWebscraperHosts = () => new Promise((resolve, reject) => {
 });
 
 const getWebscraperSources = () => new Promise((resolve, reject) => {
-  const cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     return reject();
   getWebscraperHosts()
     .then(data => resolve(Object.keys(data).filter(key => key.indexOf('_') !== 0 && key !== 'type').reduce((acc, key) => {
@@ -32,10 +30,9 @@ const getWebscraperSources = () => new Promise((resolve, reject) => {
 });
 
 const updateWebscraperHost = host => new Promise((resolve, reject) => {
-  const cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     return reject(new Error('Cloudant'));
-  cloudant.db.use('sa-meta').find({ selector: { type: 'ws' } }, (err, result) => {
+  getCloudant().db.use('sa-meta').find({ selector: { type: 'ws' } }, (err, result) => {
     if (err)
       return reject(err);
     const index = result.docs[0];
@@ -50,7 +47,7 @@ const updateWebscraperHost = host => new Promise((resolve, reject) => {
       if (index[hostname])
         delete index[hostname];
     });
-    cloudant.db.use('sa-meta').insert(index, (err) => {
+    getCloudant().db.use('sa-meta').insert(index, (err) => {
       if (err)
         return reject(err);
       resolve();
