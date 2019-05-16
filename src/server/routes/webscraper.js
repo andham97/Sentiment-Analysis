@@ -28,6 +28,12 @@ router.get('/hosts', (req, res) => {
   });
 });
 
+router.get('/sources', (req, res) => {
+  API.getWebscraperSources()
+    .then(data => res.json(data))
+    .catch(() => res.status(500).send('ERROR'));
+});
+
 router.get('/urlCount', (req, res) => {
   if (!isWhitelisted(req) && req.headers.api_key !== process.env.SCRAPER_API_KEY)
     return res.status(403).send('Access denied');
@@ -39,10 +45,13 @@ router.get('/urlCount', (req, res) => {
   });
 });
 
-router.get('/load/:url', (req, res) => {
-  rp(req.params.url)
-    .then(data => res.status(200).send(data))
-    .catch(err => res.status(400).send(err));
+router.get('/load', (req, res) => {
+  console.log(req.query.url);
+  if (!req.query.url)
+    return res.status(400).send('');
+  rp(req.query.url)
+    .then(data => res.status(200).json({ statusCode: 200, data }))
+    .catch(err => res.status(err.statusCode || 500).json(err));
 });
 
 const clone = object => JSON.parse(JSON.stringify(object));
@@ -58,17 +67,16 @@ const patternExists = (object, pattern) => {
 };
 
 router.post('/hosts', (req, res) => {
-  const requirements = ['hostnames', 'hostDeletions', 'name', 'headlines', 'body', 'sourceID', 'exclude', 'date.sel', 'date.function'];
+  const requirements = ['hostnames', 'hostDeletions', 'name', 'headlines', 'body', 'sourceID', 'exclude', 'date.sel', 'date.function', 'validationURL'];
   if (requirements.filter(e => !patternExists(req.body, e)).length !== 0)
     return res.status(400).send('Error: requires hostname, headline, body, sourceID and date');
   if (!req.body.exclude)
     req.body.exclude = [];
-  API.updateWebscraperHost(req.body)
-    .then(data => res.json(data))
-    .catch((err) => {
-      console.error(err);
-      res.status(400).send(JSON.stringify(err));
-    });
+  rp(req.body.validationURL)
+    .then(() => API.updateWebscraperHost(req.body)
+      .then(data => res.json(data))
+      .catch(err => res.status(400).send(JSON.stringify(err))))
+    .catch(err => res.status(err.statusCode || 500).json(err));
 });
 
 router.post('/fetchNews', (req, res) => {

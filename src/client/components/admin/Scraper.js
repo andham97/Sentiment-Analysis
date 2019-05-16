@@ -9,6 +9,8 @@ class Scraper extends Component {
     const { testPage, activeHost } = this.context;
     if (testPage === 1)
       return 'Loading page...';
+    if (typeof testPage === 'string')
+      return testPage;
     if (testPage) {
       let headline = 'Error';
       let body = 'Error';
@@ -27,7 +29,11 @@ class Scraper extends Component {
         text = '';
         if (activeHost.body.length) {
           for (let i = 0; i < activeHost.body.length; i++) {
-            text = testPage(activeHost.body[i]).text();
+            let sub = testPage(activeHost.body[i]);
+            activeHost.exclude.forEach((sel) => {
+              sub = sub.not(sel);
+            });
+            text = sub.text();
             if (text.length > 0)
               break;
           }
@@ -49,17 +55,19 @@ class Scraper extends Component {
         }
       }
       catch (e) {
+        console.log(e);
         if (!date)
           date = 'Error';
       }
-      return <React.Fragment>
-        Headline: {headline}<br/>
-        Date: {date ? date.toLocaleString() : date}<br />
-        Main text: {body}
-      </React.Fragment>;
+      if (headline !== 'Error' || date !== 'Error' || body !== 'Error')
+        return <React.Fragment>
+          Headline: {headline}<br/>
+          Date: {date ? date.toLocaleString() : date}<br />
+          Main text:<br /><div className='scroll admin-scraper-body'>{body}</div>
+        </React.Fragment>;
     }
     if (testPage && this.context.activeIndex === -1)
-      return 'Page loaded, select a host';
+      return 'Page loaded, select a host or start creating a new definition';
     return '';
   }
 }

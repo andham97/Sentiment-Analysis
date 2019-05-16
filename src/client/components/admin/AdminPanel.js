@@ -67,14 +67,14 @@ class AdminPanel extends Component {
     return <React.Fragment>
       <Header name='Webscraper administration tool' />
       <div className='wrapper admin'>
-        <Card>
+        <Card cName='scroll'>
           <ul>
             {hosts.length === 0 ? 'Loading hosts...' : hosts.map((host, i) => <li key={i}>
               <span onClick={this.selectHost(i).bind(this)}><strong>{host.sourceID}</strong>:{host.hostnames.map((name, j) => `${j > 0 ? ',' : ''} ${name}`)}</span>
             </li>)}
           </ul>
         </Card>
-        <Card cName="admin-host-edit">
+        <Card cName="admin-host-edit scroll">
           Name: <input placeholder='Source name' value={activeHost.name} onChange={e => this.context.updateActiveHost({ ...activeHost, name: e.target.value })} /><br />
           <MultiListInput
             title='Headline selectors'
@@ -126,19 +126,28 @@ class AdminPanel extends Component {
               }}>Delete</button></li>)}
           </ul>
           New selector: <input
+            type='text'
             placeholder='Date selector'
             value={this.state.tempDateSel}
             onChange={this.dateSelChange} /><br />
           Attribute (optional)<input
-              placeholder='Attribute name'
-              value={this.state.tempDateAttr}
-              onChange={this.dateAttrChange} />
+            type='text'
+            placeholder='Attribute name'
+            value={this.state.tempDateAttr}
+            onChange={this.dateAttrChange} />
           <button onClick={() => {
             activeHost.date.sel
               .push({ sel: this.state.tempDateSel, attr: this.state.tempDateAttr });
             this.setState({ ...this.state, tempDateSel: '', tempDateAttr: '' });
             this.context.updateActiveHost({ ...activeHost });
           }}>Add selector</button><br /><br />
+          Validation URL: <input
+            type='text'
+            placeholder='Validation URL'
+            value={activeHost.validationURL}
+            onChange={(e) => {
+              this.context.updateActiveHost({ ...activeHost, validationURL: e.target.value });
+            }} /><br />
           <i>If using attribute, the value contained in the attribute will
             be passed to the date function instead of the text in the selected element.
             The element is selected with the CSS-selector above</i>
@@ -187,21 +196,23 @@ class AdminPanel extends Component {
               <button
                 onClick={() => this.context.scrapeURL(this.state.tempScrapeURL)}>
                 Scrape URL</button><br />
-              {hosts.map((val, i) => (<div key={i}>
-                <input
-                  type='checkbox'
-                  value={val.sourceID}
-                  onClick={(e) => {
-                    const { tempSelection } = this.state;
-                    if (tempSelection.indexOf(e.target.value) > -1)
-                      tempSelection.splice(tempSelection.indexOf(e.target.value), 1);
-                    else
-                      tempSelection.push(e.target.value);
-                    this.setState({ ...this.state, tempSelection });
-                  }}
-                  defaultChecked={this.state.tempSelection.indexOf(val.sourceID) > -1} />
-                {val.name}<br />
-              </div>))}
+              <div className='scroll'>
+                {hosts.map((val, i) => (<div key={i}>
+                  <input
+                    type='checkbox'
+                    value={val.sourceID}
+                    onClick={(e) => {
+                      const { tempSelection } = this.state;
+                      if (tempSelection.indexOf(e.target.value) > -1)
+                        tempSelection.splice(tempSelection.indexOf(e.target.value), 1);
+                      else
+                        tempSelection.push(e.target.value);
+                      this.setState({ ...this.state, tempSelection });
+                    }}
+                    defaultChecked={this.state.tempSelection.indexOf(val.sourceID) > -1} />
+                  {val.name}<br />
+                </div>))}
+              </div>
               <Button
                 title='Scrape news sources'
                 onClick={() => this.context.fetchNews(this.state.tempSelection, hosts
@@ -216,17 +227,6 @@ class AdminPanel extends Component {
             <Card cName='admin-schedule'>
               <h1>Schedule</h1>
               <div className='admin-add-sitem'>
-                <input
-                  type='checkbox'
-                  onClick={({ target }) => {
-                    this.setState({
-                      ...this.state,
-                      tempSItem: {
-                        ...this.state.tempSItem,
-                        recurring: target.checked,
-                      },
-                    });
-                  }} /> Recurring job<br />
                 <MultiListInput
                   title='Occurences'
                   addButton='Add occurence'
@@ -254,41 +254,54 @@ class AdminPanel extends Component {
                   }} /><br />
                   Time difference: {new Date().getHours() - new Date().getUTCHours()} hours<br />
                 <h3>Select news sources for new job</h3>
+                <div className='admin-add-sitem-list scroll'>
+                  <input
+                    type='checkbox'
+                    onClick={(e) => {
+                      this.setState({
+                        ...this.state,
+                        tempSItem: {
+                          ...this.state.tempSItem,
+                          task: e.target.checked ? 'all' : [...document.querySelectorAll('.admin-add-sitem input:checked')].map(item => item.value).join(','),
+                        },
+                      });
+                    }} />
+                    All sources<br />
+                  {hosts.map((val, i) => (<div key={i}>
+                    <input
+                      disabled={this.state.tempSItem.task === 'all'}
+                      type='checkbox'
+                      value={val.sourceID}
+                      onClick={(e) => {
+                        const { tempSItem } = this.state;
+                        const { checked, value } = e.target;
+                        const task = tempSItem.task.split(',').filter(t => t !== '');
+                        if (!checked && task.indexOf(value) > -1)
+                          task.splice(task.indexOf(value), 1);
+                        else if (checked && task.indexOf(value) === -1)
+                          task.push(value);
+                        this.setState({
+                          ...this.state,
+                          tempSItem: {
+                            ...tempSItem,
+                            task: task.join(','),
+                          },
+                        });
+                      }} />
+                    {val.name}
+                    </div>))}
+                  </div><br /><br />
                 <input
                   type='checkbox'
-                  onClick={(e) => {
+                  onClick={({ target }) => {
                     this.setState({
                       ...this.state,
                       tempSItem: {
                         ...this.state.tempSItem,
-                        task: e.target.checked ? 'all' : [...document.querySelectorAll('.admin-add-sitem input:checked')].map(item => item.value).join(','),
+                        recurring: target.checked,
                       },
                     });
-                  }} />
-                  All sources<br />
-                {hosts.map((val, i) => (<div key={i}>
-                  <input
-                    disabled={this.state.tempSItem.task === 'all'}
-                    type='checkbox'
-                    value={val.sourceID}
-                    onClick={(e) => {
-                      const { tempSItem } = this.state;
-                      const { checked, value } = e.target;
-                      const task = tempSItem.task.split(',').filter(t => t !== '');
-                      if (!checked && task.indexOf(value) > -1)
-                        task.splice(task.indexOf(value), 1);
-                      else if (checked && task.indexOf(value) === -1)
-                        task.push(value);
-                      this.setState({
-                        ...this.state,
-                        tempSItem: {
-                          ...tempSItem,
-                          task: task.join(','),
-                        },
-                      });
-                    }} />
-                  {val.name}
-                </div>))}
+                  }} /> Recurring job
                 <Button
                   title='Add job'
                   onClick={() => {
@@ -309,7 +322,7 @@ class AdminPanel extends Component {
                     });
                   }} />
               </div>
-              <div className='admin-show-sitem'>
+              <div className='admin-show-sitem scroll'>
                 <ul>
                   {this.context.scheduleItems.map((item, i) => <li key={i} onClick={() => {
                     this.setState({

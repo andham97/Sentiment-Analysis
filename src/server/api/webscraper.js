@@ -11,6 +11,26 @@ const getWebscraperHosts = () => new Promise((resolve, reject) => {
   });
 });
 
+const getWebscraperSources = () => new Promise((resolve, reject) => {
+  const cloudant = getCloudant();
+  if (!cloudant)
+    return reject();
+  getWebscraperHosts()
+    .then(data => resolve(Object.keys(data).filter(key => key.indexOf('_') !== 0 && key !== 'type').reduce((acc, key) => {
+      const selection = acc.filter(e => e.sourceID === data[key].sourceID);
+      if (selection.length === 0) {
+        const d = data[key];
+        d.hostnames = [key];
+        d.hostDeletions = [];
+        acc.push(d);
+      }
+      else
+        selection[0].hostnames.push(key);
+      return acc;
+    }, []).map(v => ({ key: v.name, value: v.sourceID }))))
+    .catch(reject);
+});
+
 const updateWebscraperHost = host => new Promise((resolve, reject) => {
   const cloudant = getCloudant();
   if (!cloudant)
@@ -63,4 +83,9 @@ const getNewsSourceURLs = sources => new Promise((resolve, reject) => {
   });
 });
 
-export default { getWebscraperHosts, updateWebscraperHost, getNewsSourceURLs };
+export default {
+  getWebscraperHosts,
+  updateWebscraperHost,
+  getNewsSourceURLs,
+  getWebscraperSources,
+};

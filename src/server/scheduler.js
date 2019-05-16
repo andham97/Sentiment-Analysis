@@ -44,29 +44,30 @@ const getTimeToNextRun = (item) => {
 
 const run = item => ((cb) => {
   console.log(`Executing ${item.id}`);
+  if (item.recurring) {
+    activeSchedule.push({
+      id: item.id,
+      timeout: new Timeout(run(item), getTimeToNextRun(item)),
+      recurring: item.recurring,
+      timestamp: new Date().getTime(),
+    });
+  }
+  else {
+    API.deleteScheduleItem(item.id).then(() => {
+      schedule = schedule.filter(i => i.id !== item.id);
+    }).catch(() => {});
+  }
   (() => {
     if (item.task === 'all')
-      return new Promise(resolve => API.getSources()
+      return new Promise(resolve => API.getWebscraperSources()
         .then(srcs => resolve(srcs.map(h => h.key)))
         .catch(() => resolve([])));
     return new Promise(resolve => resolve(item.task));
   })().then((sources) => {
+    console.log(sources);
     API.getNewsSourceURLs(sources).then((urls) => {
       API.urlCheck(urls).then((list) => {
         cb();
-        if (item.recurring) {
-          activeSchedule.push({
-            id: item.id,
-            timeout: new Timeout(run(item), getTimeToNextRun(item)),
-            recurring: item.recurring,
-            timestamp: new Date().getTime(),
-          });
-        }
-        else {
-          API.deleteScheduleItem(item.id).then(() => {
-            schedule = schedule.filter(i => i.id !== item.id);
-          }).catch(() => {});
-        }
         if (list.length > 0) {
           ws(list, (data) => {
             if (!data)

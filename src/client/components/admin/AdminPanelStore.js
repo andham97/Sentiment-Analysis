@@ -8,9 +8,8 @@ const AdminPanelContext = React.createContext();
 const hostBoilerplate = {
   body: [],
   date: {
-    sel: '',
+    sel: [],
     function: '(date, months) => {\n  return new Date();\n};',
-    attribute: '',
   },
   exclude: [],
   headlines: [],
@@ -21,6 +20,7 @@ const hostBoilerplate = {
   headlineDeletions: [],
   bodyDeletions: [],
   excludeDelections: [],
+  validationURL: '',
 };
 
 const clone = object => JSON.parse(JSON.stringify(object));
@@ -30,7 +30,7 @@ class AdminPanelStore extends React.Component {
     super(props);
     this.state = {
       hosts: [],
-      activeHost: hostBoilerplate,
+      activeHost: clone(hostBoilerplate),
       activeIndex: -1,
       testURL: '',
       whitelist: false,
@@ -143,8 +143,11 @@ class AdminPanelStore extends React.Component {
 
   loadTestURL() {
     this.setState({ ...this.state, testPage: 1 });
-    fetch(`/api/ws/load/${encodeURIComponent(this.state.testURL)}`).then(resp => resp.text()).then((data) => {
-      this.setState({ ...this.state, testPage: cheerio.load(data) });
+    fetch(`/api/ws/load?url=${encodeURIComponent(this.state.testURL)}`).then(resp => resp.json()).then((data) => {
+      this.setState({
+        ...this.state,
+        testPage: data.statusCode === 200 ? cheerio.load(data.data) : 'Unable to access news source',
+      });
     });
   }
 
@@ -198,13 +201,15 @@ class AdminPanelStore extends React.Component {
   }
 
   saveHost() {
+    if (!this.state.activeHost.validationURL || this.state.activeHost.validationURL === '')
+      return Alert.error('Please provide a validation URL');
     const { hosts } = this.state;
     if (this.state.activeIndex > -1)
       hosts[this.state.activeIndex] = clone(this.state.activeHost);
     else
       hosts.push(clone(this.state.activeHost));
     hosts.sort((a, b) => ([a.sourceID, b.sourceID].sort()[0] === a.sourceID ? -1 : 1));
-    Alert.info('Saving host...', { postiion: 'top' });
+    Alert.info('Saving host...', { position: 'top' });
     fetch('/api/ws/hosts', {
       method: 'POST',
       headers: {
@@ -212,11 +217,20 @@ class AdminPanelStore extends React.Component {
       },
       body: JSON.stringify(this.state.activeHost),
     }).then((data) => {
-      Alert.success('Host saved', { postiion: 'top' });
-      console.log(data); // TODO: add alert
+      if (data.status === 200) {
+        Alert.success('Host saved', { postiion: 'top' });
+        this.setState({
+          ...this.state,
+          activeIndex: -1,
+          activeHost: clone(hostBoilerplate),
+        });
+      }
+      else
+        Alert.error(`Host not saved, an error occured.${data.status > 400 && data.status < 410 ? 'host blocks scraping' : ''}`, { position: 'top' });
     }).catch(console.error);
     this.setState({
-      ...this.state, hosts,
+      ...this.state,
+      hosts,
     });
   }
 
