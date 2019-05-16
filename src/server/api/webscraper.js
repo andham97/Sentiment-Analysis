@@ -27,7 +27,7 @@ const getWebscraperSources = () => new Promise((resolve, reject) => {
       else
         selection[0].hostnames.push(key);
       return acc;
-    }, []).map(v => ({ key: v.name, value: v.sourceID }))))
+    }, []).map(v => ({ key: v.sourceID, value: v.name }))))
     .catch(reject);
 });
 

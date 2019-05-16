@@ -243,7 +243,7 @@ class AdminPanel extends Component {
                       || nums.reduce((acc, val, i) => {
                         if (acc)
                           return acc;
-                        return Number.isNaN(val)
+                        return isNaN(val)
                           || Number(val) < 0
                           || Number(val) > (i === 0 ? 23 : 59);
                       }, false)) {

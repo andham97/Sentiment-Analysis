@@ -158,7 +158,8 @@
       "no-plusplus": 0,
       "prefer-promise-reject-errors": 0,
       "no-eval": 0,
-      "no-await-in-loop": 0
+      "no-await-in-loop": 0,
+      "no-restricted-globals": 0
     },
     "settings": {
       "react": {
