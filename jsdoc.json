@@ -6,18 +6,20 @@
     "source": {
         "include": [ "src" ],
         "exclude": [ "node_modules" ],
-        "includePattern": ".+\\.js"
+        "includePattern": ".+\\.js(doc|x)?$"
     },
     "plugins": [
       "node_modules/jsdoc-babel",
       "node_modules/jsdoc-route-plugin"
     ],
     "templates": {
-        "cleverLinks": false,
-        "monospaceLinks": false
+        "cleverLinks": true,
+        "monospaceLinks": true
     },
     "opts": {
-      "recurse": true
+      "recurse": true,
+      "template": "node_modules/loke-jsdoc-theme",
+      "encoding": "utf-8"
     },
     "babel": {
       "presets": [

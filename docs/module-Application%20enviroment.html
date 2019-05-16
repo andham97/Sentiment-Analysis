@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Server entry - Documentation</title>
+    <title>Application enviroment - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Server entry</h1>
+    <h1 class="page-title">Application enviroment</h1>
     
 
     <!--container.tmpl-->
@@ -49,7 +49,7 @@
 
 <header data-tmpl="container.tmpl">
     
-      <h2>Module: Server entry</h2>
+      <h2>Module: Application enviroment</h2>
         
     
 
@@ -59,13 +59,9 @@
         <br />
         <dl class="dl-horizontal methods-members">
         <dt>Fields &amp; Properties</dt><dd><ul>
-            <li><a href="#app">app</a></li>
+            <li><a href="#appEnv">appEnv</a></li>
             
-            <li><a href="#Auth API Error">Auth API Error</a></li>
-            
-            <li><a href="#Database connection check">Database connection check</a></li>
-            
-            <li><a href="#server">server</a></li>
+            <li><a href="#serviceParameters">serviceParameters</a></li>
             </ul></dd></dl></div>
 </header>
 
@@ -104,21 +100,21 @@
 <div class="pull-right source-link-container">
   <code class="source-link" data-tmpl="method-tmpl(1)">
     <i class="fa fa-file-o"></i>
-    <a href="server_server.js.html">server.js</a>:<a href="server_server.js.html#line29">29</a>
+    <a href="server_app-env.js.html">app-env.js</a>:<a href="server_app-env.js.html#line10">10</a>
   </code>
 </div>
 
 
 
-<h4 class="name" id="~app">
-  <span class="type-signature">(inner) </span>app<span class="type-signature"> :express-server</span>
+<h4 class="name" id="~appEnv">
+  <span class="type-signature">(inner) </span>appEnv<span class="type-signature"> :Object</span>
 </h4>
 
 
 
 
 <div class="description">
-    Express application
+    Cloud Foundry enviroment
 </div>
 
 
@@ -187,203 +183,21 @@
 <div class="pull-right source-link-container">
   <code class="source-link" data-tmpl="method-tmpl(1)">
     <i class="fa fa-file-o"></i>
-    <a href="server_server.js.html">server.js</a>:<a href="server_server.js.html#line49">49</a>
+    <a href="server_app-env.js.html">app-env.js</a>:<a href="server_app-env.js.html#line16">16</a>
   </code>
 </div>
 
 
 
-<h4 class="name" id="AuthAPIError">
-  <span class="type-signature">(route) </span>Auth API Error<span class="type-signature"></span>
+<h4 class="name" id="~serviceParameters">
+  <span class="type-signature">(inner) </span>serviceParameters<span class="type-signature"> :Object</span>
 </h4>
 
 
 
 
 <div class="description">
-    <h5>Route:</h5>
-                            <table class="params">
-                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
-                            <tr>
-                            <td class="type">ANY</td>
-                            <td class="name last">/api/auth</td>
-                            </tr>
-                            </table>
-                            Auth API common error message
-</div>
-
-
-<div>
-
-<!-- details.tmpl -->
-
-
-
-
-
-
-
-
-<dl class="dl-horizontal">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
-</div>
-
-        
-            <!--members.tmpl-->
-<div class="member-details">
-
-
-
-
-  <!--source-link.tmpl-->
-
-
-<div class="pull-right source-link-container">
-  <code class="source-link" data-tmpl="method-tmpl(1)">
-    <i class="fa fa-file-o"></i>
-    <a href="server_server.js.html">server.js</a>:<a href="server_server.js.html#line58">58</a>
-  </code>
-</div>
-
-
-
-<h4 class="name" id="Databaseconnectioncheck">
-  <span class="type-signature">(route) </span>Database connection check<span class="type-signature"></span>
-</h4>
-
-
-
-
-<div class="description">
-    <h5>Route:</h5>
-                            <table class="params">
-                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
-                            <tr>
-                            <td class="type">ANY</td>
-                            <td class="name last">/api</td>
-                            </tr>
-                            </table>
-                            Database connection check
-</div>
-
-
-<div>
-
-<!-- details.tmpl -->
-
-
-
-
-
-
-
-
-<dl class="dl-horizontal">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
-</div>
-
-        
-            <!--members.tmpl-->
-<div class="member-details">
-
-
-
-
-  <!--source-link.tmpl-->
-
-
-<div class="pull-right source-link-container">
-  <code class="source-link" data-tmpl="method-tmpl(1)">
-    <i class="fa fa-file-o"></i>
-    <a href="server_server.js.html">server.js</a>:<a href="server_server.js.html#line123">123</a>
-  </code>
-</div>
-
-
-
-<h4 class="name" id="~server">
-  <span class="type-signature">(inner) </span>server<span class="type-signature"> :http-server</span>
-</h4>
-
-
-
-
-<div class="description">
-    The server object for export to test suite
+    Service parameters for cloudant, NLU, NewsAPI
 </div>
 
 

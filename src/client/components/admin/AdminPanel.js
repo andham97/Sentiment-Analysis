@@ -160,15 +160,13 @@ class AdminPanel extends Component {
             mode='javascript'
             theme='tomorrow'
             name='editor'
-            onChange={(code) => {
-              this.context.updateActiveHost({
-                ...activeHost,
-                date: {
-                  ...activeHost.date,
-                  function: code,
-                },
-              });
-            }}
+            onChange={code => this.context.updateActiveHost({
+              ...activeHost,
+              date: {
+                ...activeHost.date,
+                function: code,
+              },
+            })}
             fontSize={14}
             showGutter
             wrapEnabled

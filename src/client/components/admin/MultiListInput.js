@@ -1,3 +1,6 @@
+/**
+ * @module MultiListInput
+ */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -11,10 +14,20 @@ class MultiListInput extends Component {
     this.inputChange = this.inputChange.bind(this);
   }
 
+  /**
+   * Update state when input onChange
+   *
+   * @name inputChange
+   * @param  {Object} e Event object
+   */
   inputChange(e) {
     this.setState({ tempInput: e.target.value });
   }
 
+  /**
+   * Render the component
+   * @return {String} Component HTML
+   */
   render() {
     const {
       activeHost,

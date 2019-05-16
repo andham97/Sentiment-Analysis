@@ -1,10 +1,23 @@
+/**
+ * @module Application enviroment
+ */
 import cfenv from 'cfenv';
 import dotenv from 'dotenv';
 import fs from 'fs';
 
 dotenv.config();
 
+/**
+ * Cloud Foundry enviroment
+ * @type {Object}
+ */
 const appEnv = cfenv.getAppEnv();
+
+/**
+ * Service parameters for cloudant, NLU, NewsAPI
+ *
+ * @type {Object}
+ */
 let serviceParameters;
 if (appEnv.isLocal) {
   if (process.env.isTravis) {

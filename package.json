@@ -19,7 +19,8 @@
     "debug-ws": "nodemon --exec babel-node src/server/ws/webscraper.js",
     "ws": "babel-node src/server/ws/webscraper.js",
     "prod-ws": "node build/server/ws/webscraper.js",
-    "gen-docs": "jsdoc -c jsdoc.json -d docs"
+    "jsdoc": "jsdoc -c jsdoc.json -d docs --verbose",
+    "esdoc": "jsdoc -h"
   },
   "repository": {
     "type": "git",
@@ -97,6 +98,11 @@
     "css-loader": "^2.1.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.8.0",
+    "esdoc": "^1.1.0",
+    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+    "esdoc-jsx-plugin": "^1.0.0",
+    "esdoc-react-plugin": "^1.0.1",
+    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.15.0",
@@ -108,6 +114,7 @@
     "jsdoc-babel": "^0.5.0",
     "jsdoc-route-plugin": "^0.1.0",
     "jsdoc-to-markdown": "^5.0.0",
+    "loke-jsdoc-theme": "^2.1.0",
     "nock": "^10.0.6",
     "nodemon": "^1.18.9",
     "path": "^0.12.7",
@@ -119,8 +126,7 @@
     "extends": [
       "airbnb-base",
       "plugin:jest/recommended",
-      "plugin:react/recommended",
-      "plugin:jsdoc/recommended"
+      "plugin:react/recommended"
     ],
     "parser": "babel-eslint",
     "env": {
@@ -130,8 +136,7 @@
     },
     "plugins": [
       "jest",
-      "react",
-      "jsdoc"
+      "react"
     ],
     "rules": {
       "class-methods-use-this": 0,
@@ -159,7 +164,8 @@
       "prefer-promise-reject-errors": 0,
       "no-eval": 0,
       "no-await-in-loop": 0,
-      "no-restricted-globals": 0
+      "no-restricted-globals": 0,
+      "import/no-unresolved": 0
     },
     "settings": {
       "react": {
@@ -168,7 +174,8 @@
     }
   },
   "eslintIgnore": [
-    "node_modules"
+    "node_modules",
+    "docs"
   ],
   "jest": {
     "setupFilesAfterEnv": [

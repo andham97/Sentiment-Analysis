@@ -1,11 +1,10 @@
-import { nlu, getCloudant } from '../ics';
+import { nlu, getCloudant, connectCloudant } from '../ics';
 
 let excludes;
-let cloudant;
 
 const loadExclude = (cb) => {
   if (excludes === undefined)
-    cloudant.db.use('sa-meta').find({ selector: { type: 'nlu' } }, (err, result) => {
+    getCloudant().db.use('sa-meta').find({ selector: { type: 'nlu' } }, (err, result) => {
       if (err)
         return cb(err);
       excludes = result.docs[0].excludeType.map(entry => entry.toLowerCase());
@@ -45,10 +44,14 @@ const analyze = (urlData, cb) => {
             sourceID: page.sourceID,
           };
           const ins = (d) => {
-            cloudant.db.use('sa-index').insert(d, (err) => {
+            getCloudant().db.use('sa-index').insert(d, (err) => {
               if (err) {
                 if (err.statusCode && err.statusCode !== 429)
                   console.error(err);
+                else if (err.statusCode === 401) {
+                  if (getCloudant())
+                    connectCloudant();
+                }
                 setTimeout(() => {
                   ins(doc);
                 }, 400);
@@ -64,8 +67,7 @@ const analyze = (urlData, cb) => {
 };
 
 export default (urlData, cb) => {
-  cloudant = getCloudant();
-  if (!cloudant)
+  if (!getCloudant())
     return cb(new Error('Cloudant not connected'));
   loadExclude((err) => {
     if (err)
