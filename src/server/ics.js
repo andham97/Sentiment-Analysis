@@ -54,6 +54,8 @@ const connectCloudant = () => {
   });
 };
 
+connectCloudant();
+
 /**
  * NewsAPI instance
  * @type {NP}
