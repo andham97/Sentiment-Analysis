@@ -57,6 +57,7 @@ const getTimeToNextRun = (item) => {
 const run = item => ((cb) => {
   console.log(`Executing ${item.id ? item.id : 'independent job'}`);
   if (item.recurring) {
+    activeSchedule = activeSchedule.filter(i => item.id !== i);
     activeSchedule.push({
       id: item.id,
       timeout: new Timeout(run(item), getTimeToNextRun(item)),
@@ -114,7 +115,8 @@ const update = (extra) => {
   });
   activeSchedule = activeSchedule
     .filter(aItem => schedule
-      .filter(item => item.id === aItem.id && !aItem.timeout.executed).length > 0);
+      .filter(item => item.id === aItem.id && !aItem.timeout.executed).length > 0)
+    .filter(aItem => (aItem.timeout.wait + aItem.timestamp) - new Date().getTime() >= 0);
   schedule
     .filter(item => activeSchedule
       .filter(aItem => aItem.id === item.id).length === 0
@@ -135,7 +137,7 @@ const update = (extra) => {
     }).catch(() => {});
   });
   if (toggle.update) {
-    console.log(`Active scheduled items: ${activeSchedule.length}`);
+    console.log(`Active scheduled jobs: ${activeSchedule.length}`);
     activeSchedule.forEach(item => console.log(`${item.id}\n\tTime until invocation: ${msToString((item.timeout.wait + item.timestamp) - new Date().getTime())}`));
   }
   API.getWebscraperHosts().then(() => {}).catch(console.error);
@@ -215,11 +217,11 @@ const processInput = (data) => {
                 second: Number(options[4]),
               }],
             }).then((item) => {
-              console.log('Item addded');
+              console.log('Job addded');
               if (toggle.schedule)
                 console.log(item);
             }).catch((err) => {
-              console.log('Item not added');
+              console.log('Job not added');
               console.log(err);
             });
           }
@@ -278,7 +280,7 @@ const processInput = (data) => {
             timestamp: new Date().getTime(),
             timeout: new Timeout(run(nItem), getTimeToNextRun(nItem)),
           });
-          console.log(`Added item:\n${toggle.run ? JSON.stringify(nItem, null, 2) : ''}\n`);
+          console.log(`Added job:\n${toggle.run ? JSON.stringify(nItem, null, 2) : ''}\n`);
         }
       }
       else if (options.length === 2 && options[1] === 'now') {
@@ -313,7 +315,7 @@ const processInput = (data) => {
         }
       }
       else if (options.length === 1 && options[0] === 'show') {
-        console.log(`Locally scheduled items: ${selfInvoked.length}\n`);
+        console.log(`Locally scheduled jobs: ${selfInvoked.length}\n`);
         selfInvoked.forEach(item => console.log(`${item.id}\n\tTime until invocation: ${msToString((item.timeout.wait + item.timestamp) - new Date().getTime())}`));
         console.log('');
       }
