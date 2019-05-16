@@ -31,24 +31,30 @@ const analyze = (urlData, cb) => {
       data.entities.filter(entry => excludes
         .indexOf(entry.type.toLowerCase()) === -1)
         .forEach((entry) => {
-          const e = {
-            text: entry.text,
-            sentiment: entry.sentiment,
-            relevance: entry.relevance,
-            emotion: entry.emotion,
-            count: entry.count,
-          };
-          cloudant.db.use('sa-index').insert({
+          const doc = {
             headline: page.headline,
             url: page.url,
             date: page.date,
-            analysis: e,
+            analysis: {
+              text: entry.text,
+              sentiment: entry.sentiment,
+              relevance: entry.relevance,
+              emotion: entry.emotion,
+              count: entry.count,
+            },
             sourceID: page.sourceID,
-          }, (err) => {
-            if (err)
-              console.error(err);
-            cb(null);
-          });
+          };
+          const ins = (d) => {
+            cloudant.db.use('sa-index').insert(d, (err) => {
+              if (err)
+                setTimeout(() => {
+                  ins(doc);
+                }, 400);
+              else
+                cb(null);
+            });
+          };
+          ins(doc);
         });
     });
   });
