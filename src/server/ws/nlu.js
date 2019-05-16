@@ -46,10 +46,13 @@ const analyze = (urlData, cb) => {
           };
           const ins = (d) => {
             cloudant.db.use('sa-index').insert(d, (err) => {
-              if (err)
+              if (err) {
+                if (err.statusCode && err.statusCode !== 429)
+                  console.error(err);
                 setTimeout(() => {
                   ins(doc);
                 }, 400);
+              }
               else
                 cb(null);
             });
