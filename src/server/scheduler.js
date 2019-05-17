@@ -13,6 +13,7 @@ const toggle = {
   update: false,
   schedule: true,
   run: true,
+  stats: true,
 };
 
 const msToString = (ms) => {
@@ -356,6 +357,7 @@ const processInput = (data) => {
 \t\t- update (the ongoing update)
 \t\t- schedule
 \t\t- run
+\t\t- stats
 \t\t- all (toggle all labels)
 \t- toggle help (display this help section)`);
       else if (label === 'all') {
@@ -370,6 +372,23 @@ const processInput = (data) => {
       else if (toggle[label] || toggle[label] === false) {
         toggle[label] = !toggle[label];
         console.log(`${label} set to ${toggle[label]}`);
+      }
+    }
+    else if (line.indexOf('stats') === 0) {
+      const label = line.split(' ')[1];
+      if (label === 'help' || label === 'h')
+        console.log(`
+          Usage:
+\t- stats <label> (show statistics)
+\t\t- article(s)
+\t- stats help (display this help section)`);
+      else if (label === 'articles' || label === 'article') {
+        if (toggle.stats)
+          console.log('Fetching article count');
+        API.urlCount().then(count => console.log(`Number of indexed articles: ${count}`)).catch((err) => {
+          console.log(err);
+          console.log('Error fetching article count');
+        });
       }
     }
     else

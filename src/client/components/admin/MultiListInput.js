@@ -1,10 +1,19 @@
 /**
- * @module MultiListInput
+ * @module Multi List Input
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Component class
+ * @class MultiListInput
+ * @extends Component
+ */
 class MultiListInput extends Component {
+  /**
+   * @method constructor
+   * @param {Props} props
+   */
   constructor(props) {
     super(props);
 
@@ -16,8 +25,6 @@ class MultiListInput extends Component {
 
   /**
    * Update state when input onChange
-   *
-   * @name inputChange
    * @param  {Object} e Event object
    */
   inputChange(e) {
@@ -26,7 +33,7 @@ class MultiListInput extends Component {
 
   /**
    * Render the component
-   * @return {String} Component HTML
+   * @return {ReactElement}
    */
   render() {
     const {
@@ -80,6 +87,9 @@ class MultiListInput extends Component {
   }
 }
 
+/**
+ * @type {Object}
+ */
 MultiListInput.propTypes = {
   activeHost: PropTypes.any,
   addButton: PropTypes.any,

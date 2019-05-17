@@ -19,8 +19,9 @@
     "debug-ws": "nodemon --exec babel-node src/server/ws/webscraper.js",
     "ws": "babel-node src/server/ws/webscraper.js",
     "prod-ws": "node build/server/ws/webscraper.js",
-    "jsdoc": "jsdoc -c jsdoc.json -d docs --verbose",
-    "esdoc": "jsdoc -h"
+    "jsdoc": "jsdoc -c jsdoc.json -d docs",
+    "djsdoc": "nodemon --exec npm run jsdoc --watch src",
+    "esdoc": "esdoc"
   },
   "repository": {
     "type": "git",

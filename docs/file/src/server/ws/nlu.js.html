@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">src/server/ws/nlu.js | sentiment-analysis</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/andham97/Sentiment-Analysis"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#client">client</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/App.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#client-components">client/components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/Button.js~Button.html">Button</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/Card.js~Card.html">Card</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/Checkbox.js~Checkbox.html">Checkbox</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/DatePickerInterval.js~DatePickerInterval.html">DatePickerInterval</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/ErrorBoundary.js~ErrorBoundary.html">ErrorBoundary</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/Filter.js~Filter.html">Filter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/LoadingPage.js~LoadingPage.html">LoadingPage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/TimeInterval.js~TimeInterval.html">TimeInterval</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#client-components-admin">client/components/admin</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/admin/AdminPanelStore.js~AdminPanelStore.html">AdminPanelStore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/admin/MultiListInput.js~MultiListInput.html">MultiListInput</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/admin/Scraper.js~Scraper.html">Scraper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AdminPanelContext">AdminPanelContext</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#client-components-dashboard">client/components/dashboard</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/dashboard/Dashboard.js~Dashboard.html">Dashboard</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/dashboard/SearchStore.js~SearchStore.html">SearchStore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SearchContext">SearchContext</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#client-components-result">client/components/result</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/result/NewsArticle.js~NewsArticle.html">NewsArticle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/result/NewsArticleSentiment.js~NewsArticle.html">NewsArticle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/result/NoResult.js~NoResult.html">NoResult</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/result/Parameters.js~Paramteres.html">Paramteres</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/result/Result.js~Result.html">Result</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/result/ResultSentiment.js~ResultSentiment.html">ResultSentiment</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#client-components-result-graph">client/components/result/graph</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/client/components/result/graph/DonutChart.js~DonutChart.html">DonutChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ProgressBar">ProgressBar</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#server">server</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-connectCloudant">connectCloudant</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getCloudant">getCloudant</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-start">start</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-newsapi">newsapi</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-nlu">nlu</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-server">server</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#server-routes">server/routes</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isWhitelisted">isWhitelisted</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#server-ws">server/ws</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-index">index</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-nlu">nlu</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadIndex">loadIndex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ws">ws</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/server/ws/nlu.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { nlu, getCloudant, connectCloudant } from &apos;../ics&apos;;
+
+let excludes;
+
+const loadExclude = (cb) =&gt; {
+  if (excludes === undefined)
+    getCloudant().db.use(&apos;sa-meta&apos;).find({ selector: { type: &apos;nlu&apos; } }, (err, result) =&gt; {
+      if (err)
+        return cb(err);
+      excludes = result.docs[0].excludeType.map(entry =&gt; entry.toLowerCase());
+      cb();
+    });
+  else
+    cb();
+};
+
+const analyze = (urlData, cb) =&gt; {
+  urlData.forEach((page) =&gt; {
+    nlu.analyze({
+      text: page.body,
+      features: {
+        entities: {
+          sentiment: true,
+          emotion: true,
+        },
+      },
+    }, (err, data) =&gt; {
+      if (err)
+        return cb(err);
+      data.entities.filter(entry =&gt; excludes
+        .indexOf(entry.type.toLowerCase()) === -1)
+        .forEach((entry) =&gt; {
+          const doc = {
+            headline: page.headline,
+            url: page.url,
+            date: page.date,
+            analysis: {
+              text: entry.text,
+              sentiment: entry.sentiment,
+              relevance: entry.relevance,
+              emotion: entry.emotion,
+              count: entry.count,
+            },
+            sourceID: page.sourceID,
+          };
+          const ins = (d) =&gt; {
+            getCloudant().db.use(&apos;sa-index&apos;).insert(d, (err) =&gt; {
+              if (err) {
+                if (err.statusCode &amp;&amp; err.statusCode !== 429)
+                  console.error(err);
+                else if (err.statusCode === 401) {
+                  if (getCloudant())
+                    connectCloudant();
+                }
+                setTimeout(() =&gt; {
+                  ins(doc);
+                }, 400);
+              }
+              else
+                cb(null);
+            });
+          };
+          ins(doc);
+        });
+    });
+  });
+};
+
+export default (urlData, cb) =&gt; {
+  if (!getCloudant())
+    return cb(new Error(&apos;Cloudant not connected&apos;));
+  loadExclude((err) =&gt; {
+    if (err)
+      return cb(err);
+    if (!urlData.slice)
+      urlData = [urlData];
+    if (urlData.length === 0)
+      return cb(null);
+    analyze(urlData, cb);
+  });
+};
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
