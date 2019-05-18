@@ -5,6 +5,14 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const router = new Router();
+
+/**
+ * Check if user is whitelisted
+ *
+ * @function isWhitelisted
+ * @param  {Object}      req
+ * @returns {boolean}
+ */
 const isWhitelisted = (req) => {
   if (!req.user)
     return false;

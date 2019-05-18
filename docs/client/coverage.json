@@ -1,0 +1,226 @@
+{
+  "coverage": "60.81%",
+  "expectCount": 148,
+  "actualCount": 90,
+  "files": {
+    "client/App.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        19
+      ]
+    },
+    "client/components/Button.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        14
+      ]
+    },
+    "client/components/Card.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        15
+      ]
+    },
+    "client/components/Checkbox.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        17
+      ]
+    },
+    "client/components/DatePickerInterval.js": {
+      "expectCount": 7,
+      "actualCount": 3,
+      "undocumentLines": [
+        16,
+        18,
+        26,
+        71
+      ]
+    },
+    "client/components/Dropdown.js": {
+      "expectCount": 6,
+      "actualCount": 1,
+      "undocumentLines": [
+        17,
+        19,
+        24,
+        30,
+        38
+      ]
+    },
+    "client/components/ErrorBoundary.js": {
+      "expectCount": 6,
+      "actualCount": 2,
+      "undocumentLines": [
+        11,
+        13,
+        27,
+        32
+      ]
+    },
+    "client/components/Filter.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        13
+      ]
+    },
+    "client/components/Header.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        15
+      ]
+    },
+    "client/components/LoadingPage.js": {
+      "expectCount": 3,
+      "actualCount": 1,
+      "undocumentLines": [
+        14,
+        19
+      ]
+    },
+    "client/components/TimeInterval.js": {
+      "expectCount": 5,
+      "actualCount": 2,
+      "undocumentLines": [
+        10,
+        12,
+        33
+      ]
+    },
+    "client/components/admin/AdminPanel.js": {
+      "expectCount": 11,
+      "actualCount": 7,
+      "undocumentLines": [
+        39,
+        41,
+        85,
+        104
+      ]
+    },
+    "client/components/admin/AdminPanelStore.js": {
+      "expectCount": 21,
+      "actualCount": 18,
+      "undocumentLines": [
+        51,
+        53,
+        338
+      ]
+    },
+    "client/components/admin/MultiListInput.js": {
+      "expectCount": 5,
+      "actualCount": 2,
+      "undocumentLines": [
+        22,
+        25,
+        40
+      ]
+    },
+    "client/components/admin/Scraper.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        16
+      ]
+    },
+    "client/components/dashboard/Dashboard.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        13
+      ]
+    },
+    "client/components/dashboard/NewSearch.js": {
+      "expectCount": 14,
+      "actualCount": 10,
+      "undocumentLines": [
+        55,
+        57,
+        73,
+        192
+      ]
+    },
+    "client/components/dashboard/SearchStore.js": {
+      "expectCount": 11,
+      "actualCount": 8,
+      "undocumentLines": [
+        17,
+        19,
+        322
+      ]
+    },
+    "client/components/dashboard/WordCloud.js": {
+      "expectCount": 5,
+      "actualCount": 2,
+      "undocumentLines": [
+        15,
+        20,
+        50
+      ]
+    },
+    "client/components/result/NewsArticle.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        20
+      ]
+    },
+    "client/components/result/NewsArticleSentiment.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        19
+      ]
+    },
+    "client/components/result/NoResult.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "client/components/result/Parameters.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        19
+      ]
+    },
+    "client/components/result/Result.js": {
+      "expectCount": 14,
+      "actualCount": 10,
+      "undocumentLines": [
+        78,
+        80,
+        88,
+        167
+      ]
+    },
+    "client/components/result/ResultSentiment.js": {
+      "expectCount": 11,
+      "actualCount": 8,
+      "undocumentLines": [
+        62,
+        64,
+        142
+      ]
+    },
+    "client/components/result/graph/DonutChart.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        16
+      ]
+    },
+    "client/components/result/graph/ProgressbarGraph.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    }
+  }
+}

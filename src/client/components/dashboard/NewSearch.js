@@ -13,6 +13,10 @@ import '../style/react_dates_overrides.css';
 import { SearchContext } from './SearchStore';
 import 'react-datepicker/dist/react-datepicker.css';
 
+/**
+ * Emotion checkbox
+ * @type {Array<Object>}
+ */
 const checkboxesEmotions = [
   {
     name: 'analysis_filter_emotions',
@@ -41,6 +45,12 @@ const checkboxesEmotions = [
   },
 ];
 
+/**
+ * @class
+ * @extends Component
+ *
+ * @reactProps {Object} history
+ */
 class NewSearch extends Component {
   constructor(props) {
     super(props);
@@ -64,15 +74,31 @@ class NewSearch extends Component {
     this.context.getSources();
   }
 
+  /**
+   * Update search text
+   *
+   * @function updateSearch
+   * @param  {Object}     event
+   */
   updateSearch(event) {
     this.setState({ news_search: event.target.value });
   }
 
+  /**
+   * Advanced filter
+   *
+   * @function handleFilterClick
+   */
   handleFilterClick() {
     const { buttonclicked } = this.state;
     this.setState({ buttonclicked: !buttonclicked });
   }
 
+  /**
+   * Checkbox click
+   *
+   * @function handleChecked
+   */
   handleChecked() {
     this.setState({
       show: !this.state.show,
@@ -80,6 +106,12 @@ class NewSearch extends Component {
     });
   }
 
+  /**
+   * News checkbox click
+   *
+   * @function handleChangeCheckboxNews
+   * @param  {Object}                 e
+   */
   handleChangeCheckboxNews(e) {
     const item = e.target.value;
     const { checkedItemsNews } = this.state;
@@ -93,6 +125,12 @@ class NewSearch extends Component {
     });
   }
 
+  /**
+   * Emotion checkbox click handle
+   *
+   * @function handleChangeCheckboxEmotion
+   * @param  {Object}                    e
+   */
   handleChangeCheckboxEmotion(e) {
     const item = e.target.value;
     const { checkedItemsEmotion } = this.state;
@@ -106,7 +144,13 @@ class NewSearch extends Component {
     });
   }
 
-
+  /**
+   * Date change handler
+   *
+   * @function dateChange
+   * @param  {Date}   startDate
+   * @param  {Date}   endDate
+   */
   dateChange(startDate, endDate) {
     this.setState({
       ...this.state,
@@ -115,6 +159,12 @@ class NewSearch extends Component {
     });
   }
 
+  /**
+   * Performes the search
+   *
+   * @function handleSearch
+   * @param  {string}     searchdata
+   */
   handleSearch(searchdata) {
     if (!searchdata.search || searchdata.search === '' || searchdata.search.split(' ').filter(elem => elem !== '').length === 0)
       return Alert.error('The provided search query is empty', {
@@ -126,6 +176,12 @@ class NewSearch extends Component {
     this.props.history.push('/result');
   }
 
+  /**
+   * Handle search update
+   *
+   * @function handleInput
+   * @param  {Object}    event
+   */
   handleInput(event) {
     this.setState({
       ...this.state,

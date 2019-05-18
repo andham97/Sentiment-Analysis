@@ -45,21 +45,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api/auth', Auth);
-
-/**
- * Auth API common error message
- * @name Auth API Error
- * @route {ANY} /api/auth
- */
 app.use('/api/auth', (err, req, res) => {
   res.status(500).send(JSON.stringify(err, null, 2));
 });
-
-/**
- * Database connection check
- * @name Database connection check
- * @route {ANY} /api
- */
 app.use('/api', (req, res, next) => {
   const start = new Date().getTime();
   const timeLimit = 5000;
@@ -78,12 +66,6 @@ app.use('/api/wordcloud', Wordcloud);
 
 app.use('/api/search', Search);
 
-/**
- * Check for authenticated for some api access
- * @route {ANY} /api
- * @authentication This route require login to Auth0 session
- * @headerparam {string} API-key if no Auth0 session
- */
 app.use('/api', (req, res, next) => {
   if (req.user || req.headers.api_key === process.env.SCRAPER_API_KEY)
     return next();
@@ -92,19 +74,9 @@ app.use('/api', (req, res, next) => {
 });
 
 app.use('/api/ws', WebScraper);
-
-/**
- * Endpoint not found
- * @route {ANY} /api
- */
 app.use('/api', (req, res) => {
   res.status(404).send('API endpoint not found');
 });
-
-/**
- * Redirect on admin route if no Auth0 session
- * @route {GET} /admin
- */
 app.get('/admin', (req, res, next) => {
   if (req.user)
     return next();
@@ -112,17 +84,13 @@ app.get('/admin', (req, res, next) => {
   res.redirect('/api/auth/login');
 });
 
-/**
- * Serve frontend
- * @route {GET} *
- */
 app.get('*', (req, res) => {
   res.sendFile(path.join(process.cwd(), '/src/client/index.html'));
 });
 
 /**
  * The server object for export to test suite
- * @type {http-server}
+ * @type {HTTPServer}
  */
 const server = app.listen(process.env.PORT || 3000, () => {
   process.stdout.write(`listening on port ${process.env.PORT || 3000}\n`);

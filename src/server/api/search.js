@@ -1,6 +1,14 @@
 import stt from 'search-text-tokenizer';
 import { getCloudant } from '../ics';
 
+/**
+ * Search for documents matchin given query
+ *
+ * @function search
+ * @param  {string} query
+ * @param  {Object} options
+ * @returns {Promise<Object>}
+ */
 const search = (query, options) => new Promise((resolve, reject) => {
   if (!getCloudant())
     return reject();
@@ -113,6 +121,12 @@ const search = (query, options) => new Promise((resolve, reject) => {
   find();
 });
 
+/**
+ * Get all sources with indexed articles
+ *
+ * @function getSources
+ * @returns {Array<Object>}
+ */
 const getSources = () => new Promise((resolve, reject) => {
   if (!getCloudant())
     return reject();

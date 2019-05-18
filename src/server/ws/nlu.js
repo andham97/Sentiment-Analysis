@@ -1,7 +1,17 @@
 import { nlu, getCloudant, connectCloudant } from '../ics';
 
+/**
+ * Exclude types
+ * @type {Array}
+ */
 let excludes;
 
+/**
+ * Get the exclude types from database
+ *
+ * @function loadExclude
+ * @param  {Function}  cb
+ */
 const loadExclude = (cb) => {
   if (excludes === undefined)
     getCloudant().db.use('sa-meta').find({ selector: { type: 'nlu' } }, (err, result) => {
@@ -14,6 +24,13 @@ const loadExclude = (cb) => {
     cb();
 };
 
+/**
+ * Analyze provided URL data
+ *
+ * @function analyze
+ * @param  {Object}   urlData
+ * @param  {Function} cb
+ */
 const analyze = (urlData, cb) => {
   urlData.forEach((page) => {
     nlu.analyze({
@@ -46,12 +63,12 @@ const analyze = (urlData, cb) => {
           const ins = (d) => {
             getCloudant().db.use('sa-index').insert(d, (err) => {
               if (err) {
-                if (err.statusCode && err.statusCode !== 429)
-                  console.error(err);
-                else if (err.statusCode === 401) {
+                if (err.statusCode === 401) {
                   if (getCloudant())
                     connectCloudant();
                 }
+                else if (err.statusCode && err.statusCode !== 429)
+                  console.error(err);
                 setTimeout(() => {
                   ins(doc);
                 }, 400);
@@ -66,6 +83,13 @@ const analyze = (urlData, cb) => {
   });
 };
 
+/**
+ * Load exclude and analyze provided data
+ *
+ * @function nlu
+ * @param  {Object}   urlData
+ * @param  {Function} cb
+ */
 export default (urlData, cb) => {
   if (!getCloudant())
     return cb(new Error('Cloudant not connected'));

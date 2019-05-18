@@ -3,6 +3,10 @@ import Card from '../Card';
 import { SearchContext } from '../dashboard/SearchStore';
 import Header from '../Header';
 
+/**
+ * @class NoResult
+ * @extends Component
+ */
 class NoResult extends Component {
   render() {
     return (

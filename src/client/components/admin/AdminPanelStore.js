@@ -4,12 +4,21 @@ import beautify from 'js-beautify';
 import cheerio from 'cheerio';
 import Alert from 'react-s-alert';
 
+/**
+ * Admin Panel store context
+ * @type {Context}
+ */
 const AdminPanelContext = React.createContext();
+
+/**
+ * Host boilerplate
+ * @type {Object}
+ */
 const hostBoilerplate = {
   body: [],
   date: {
     sel: [],
-    function: '(date, months) => {\n  return new Date();\n};',
+    fn: '(date, months) => {\n  return new Date();\n};',
   },
   exclude: [],
   headlines: [],
@@ -23,8 +32,21 @@ const hostBoilerplate = {
   validationURL: '',
 };
 
+/**
+ * Clone object
+ *
+ * @function clone
+ * @param  {Object} object
+ * @returns {Object}
+ */
 const clone = object => JSON.parse(JSON.stringify(object));
 
+/**
+ * @class AdminPanelStore
+ * @extends React
+ *
+ * @reactProps children {Array}
+ */
 class AdminPanelStore extends React.Component {
   constructor(props) {
     super(props);
@@ -52,6 +74,12 @@ class AdminPanelStore extends React.Component {
     this.deleteScheduleItem = this.deleteScheduleItem.bind(this);
   }
 
+  /**
+   * Add job to schedule
+   *
+   * @function addScheduleItem
+   * @param  {Object}        item
+   */
   addScheduleItem(item) {
     fetch('/api/ws/schedule', {
       method: 'POST',
@@ -69,6 +97,12 @@ class AdminPanelStore extends React.Component {
     }).catch(console.error);
   }
 
+  /**
+   * Remove job from schedule
+   *
+   * @function deleteScheduleItem
+   * @param  {string}           id
+   */
   deleteScheduleItem(id) {
     fetch(`/api/ws/schedule/${id}`, {
       method: 'DELETE',
@@ -82,6 +116,11 @@ class AdminPanelStore extends React.Component {
     }).catch(console.error);
   }
 
+  /**
+   * Get central schedule
+   *
+   * @function getSchedule
+   */
   getSchedule() {
     fetch('/api/ws/schedule').then(res => res.json()).then((items) => {
       this.setState({
@@ -91,6 +130,11 @@ class AdminPanelStore extends React.Component {
     }).catch(console.error);
   }
 
+  /**
+   * Get URL count
+   *
+   * @function getUrlCount
+   */
   getUrlCount() {
     fetch('/api/ws/urlCount', {
       method: 'GET',
@@ -102,6 +146,13 @@ class AdminPanelStore extends React.Component {
       .catch(console.error);
   }
 
+  /**
+   * Fetch news articles
+   *
+   * @function fetchNews
+   * @param  {Array<string>}  sources
+   * @param  {Object}  hsts    - [description]
+   */
   fetchNews(sources, hsts) {
     Alert.info(`Fetching news from ${sources.reduce((acc, src) => `${acc} ${hsts[src]},`, '')}`.slice(0, -1), { position: 'top' });
     fetch('/api/ws/fetchNews', {
@@ -117,6 +168,12 @@ class AdminPanelStore extends React.Component {
     }).catch(console.error);
   }
 
+  /**
+   * Scrape URL
+   *
+   * @function scrapeURL
+   * @param  {string}  url
+   */
   scrapeURL(url) {
     if (typeof url !== 'string')
       return;
@@ -131,16 +188,32 @@ class AdminPanelStore extends React.Component {
     });
   }
 
+  /**
+   * Is the user whitelisted
+   *
+   * @function isWhitelisted
+   * @returns {boolean}
+   */
   isWhitelisted() {
     fetch('/api/auth/whitelist').then(resp => resp.json()).then((wl) => {
       this.setState({ ...this.state, whitelist: wl });
     }).catch(console.error);
   }
 
+  /**
+   * Clear the active host
+   *
+   * @function clearActiveHost
+   */
   clearActiveHost() {
     this.setState({ ...this.state, activeIndex: -1, activeHost: clone(hostBoilerplate) });
   }
 
+  /**
+   * Load the content of the test URL
+   *
+   * @function loadTestURL
+   */
   loadTestURL() {
     this.setState({ ...this.state, testPage: 1 });
     fetch(`/api/ws/load?url=${encodeURIComponent(this.state.testURL)}`).then(resp => resp.json()).then((data) => {
@@ -151,10 +224,21 @@ class AdminPanelStore extends React.Component {
     });
   }
 
+  /**
+   * Test URL state Change
+   *
+   * @function testURLChange
+   * @param  {string}      testURL
+   */
   testURLChange(testURL) {
     this.setState({ ...this.state, testURL });
   }
 
+  /**
+   * Get hosts
+   *
+   * @function getHosts
+   */
   getHosts() {
     fetch('/api/ws/hosts').then(response => response.json()).then((data) => {
       const hosts = Object.keys(data).filter(key => key.indexOf('_') !== 0 && key !== 'type').reduce((acc, key) => {
@@ -173,7 +257,7 @@ class AdminPanelStore extends React.Component {
           ...val,
           date: {
             ...val.date,
-            function: beautify.js(val.date.function, {
+            fn: beautify.js(val.date.fn, {
               indent_size: 2,
               space_in_empty_parent: false,
             }),
@@ -184,6 +268,12 @@ class AdminPanelStore extends React.Component {
     });
   }
 
+  /**
+   * Set the active host
+   *
+   * @function setActiveHost
+   * @param  {number}      i
+   */
   setActiveHost(i) {
     this.setState({
       ...this.state,
@@ -192,6 +282,12 @@ class AdminPanelStore extends React.Component {
     });
   }
 
+  /**
+   * Update the active host
+   *
+   * @function updateActiveHost
+   * @param  {Object}         host
+   */
   updateActiveHost(host) {
     host.sourceID = host.name.split(' ').join('-').toLowerCase();
     this.setState({
@@ -200,6 +296,11 @@ class AdminPanelStore extends React.Component {
     });
   }
 
+  /**
+   * Save the active host
+   *
+   * @function saveHost
+   */
   saveHost() {
     if (!this.state.activeHost.validationURL || this.state.activeHost.validationURL === '')
       return Alert.error('Please provide a validation URL');

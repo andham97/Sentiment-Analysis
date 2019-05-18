@@ -4,9 +4,9 @@
         "dictionaries": ["jsdoc","closure"]
     },
     "source": {
-        "include": [ "src" ],
+        "include": [ "src/server" ],
         "exclude": [ "node_modules" ],
-        "includePattern": ".+\\.js(doc|x)?$"
+        "includePattern": ".*\\.js"
     },
     "plugins": [
       "node_modules/jsdoc-babel",

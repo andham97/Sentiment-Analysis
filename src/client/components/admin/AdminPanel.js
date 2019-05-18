@@ -12,14 +12,29 @@ import { AdminPanelContext } from './AdminPanelStore';
 import Scraper from './Scraper';
 import Button from '../Button';
 
+/**
+ * Job object boilerplate
+ * @type {Object}
+ */
 const sItemBoilerplate = {
   task: '',
   recurring: false,
   occurences: [],
 };
 
+/**
+ * Clone object
+ *
+ * @function clone
+ * @param  {Object} o
+ * @returns {Object}
+ */
 const clone = o => JSON.parse(JSON.stringify(o));
 
+/**
+ * @class AdminPanel
+ * @extends Component
+ */
 class AdminPanel extends Component {
   constructor(props) {
     super(props);
@@ -37,14 +52,32 @@ class AdminPanel extends Component {
     this.dateSelChange = this.dateSelChange.bind(this);
   }
 
+  /**
+   * Update date selector input
+   *
+   * @function dateSelChange
+   * @param  {Object}      e
+   */
   dateSelChange(e) {
     this.setState({ ...this.state, tempDateSel: e.target.value });
   }
 
+  /**
+   * Update date attribute input
+   *
+   * @function dateAttrChange
+   * @param  {Object}      e
+   */
   dateAttrChange(e) {
     this.setState({ ...this.state, tempDateAttr: e.target.value });
   }
 
+  /**
+   * Update scrape URL input
+   *
+   * @function scrapeURLChange
+   * @param  {Object}      e
+   */
   scrapeURLChange(e) {
     this.setState({ ...this.state, tempScrapeURL: e.target.value });
   }
@@ -56,6 +89,12 @@ class AdminPanel extends Component {
     this.context.getSchedule();
   }
 
+  /**
+   * Select active host
+   *
+   * @function selectHost
+   * @param  {number}      i
+   */
   selectHost(i) {
     return () => {
       this.context.setActiveHost(i);
@@ -164,7 +203,7 @@ class AdminPanel extends Component {
               ...activeHost,
               date: {
                 ...activeHost.date,
-                function: code,
+                fn: code,
               },
             })}
             fontSize={14}
@@ -173,7 +212,7 @@ class AdminPanel extends Component {
             highlightActiveLine
             width='100%'
             height='100%'
-            value={activeHost.date.function}
+            value={activeHost.date.fn}
             setOptions={{
               showLineNumbers: true,
               tabSize: 2,

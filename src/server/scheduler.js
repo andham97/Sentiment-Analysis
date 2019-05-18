@@ -1,14 +1,60 @@
+/**
+ *
+ * Scheduler
+ * @module Local scheduler
+ */
 import uuid from 'uuid/v1';
 import API from './api';
 import ws from './ws';
 import nluProcess from './ws/nlu';
 
+/**
+ *
+ * Update interval for flushing and printing
+ * @type {Number}
+ */
 const interval = 60;
+
+/**
+ *
+ * Central schedule
+ * @type {Array}
+ */
 let schedule = [];
+
+/**
+ *
+ * Currently running jobs
+ * @type {Array}
+ */
 let activeSchedule = [];
+
+/**
+ *
+ * IDs for removal from central schedule
+ * @type {Array}
+ */
 const ignoreIDs = [];
+
+/**
+ *
+ * Self invoked jobs
+ * @type {Array}
+ */
 let selfInvoked = [];
+
+/**
+ *
+ * Stopped jobs for local running
+ * @type {Array}
+ */
 const selfStop = [];
+
+/**
+ *
+ * Output toggle
+ * @type {Object}
+ */
 const toggle = {
   update: false,
   schedule: true,
@@ -16,13 +62,30 @@ const toggle = {
   stats: true,
 };
 
+/**
+ *
+ * @function msToString
+ * @param  {number}   ms - Number of milliseconds
+ * @returns {string}
+ */
 const msToString = (ms) => {
   const hrs = Math.floor(ms / (60 * 60 * 1000));
   ms -= hrs * 60 * 60 * 1000;
   return `${hrs}h ${Math.floor(ms / (60 * 1000))}min`;
 };
 
+/**
+ *
+ * Wrapper for standard js timeout
+ *
+ * @class Timeout
+ */
 class Timeout {
+  /**
+   * @function constructor
+   * @param  {Function}  fn   - Method to run on timeout
+   * @param  {number}    wait - Number of milliseconds to wait for execution
+   */
   constructor(fn, wait) {
     this.wait = wait;
     if (wait === -1)
@@ -35,11 +98,22 @@ class Timeout {
     }, wait);
   }
 
+  /**
+   * Ends execution
+   *
+   * @function stop
+   */
   stop() {
     clearTimeout(this.id);
   }
 }
 
+/**
+ *
+ * @function getTimeToNextRun
+ * @param  {Object}         item
+ * @returns {number}         ms to item run
+ */
 const getTimeToNextRun = (item) => {
   const ref = new Date();
   return item.occurences.map((val) => {
@@ -55,6 +129,12 @@ const getTimeToNextRun = (item) => {
   }).sort((a, b) => a - b)[0] - ref.getTime();
 };
 
+/**
+ *
+ * @function run
+ * @param  {Object} item
+ * @returns {Function} execute run and callback
+ */
 const run = item => ((cb) => {
   console.log(`Executing ${item.id ? item.id : 'independent job'}`);
   if (item.recurring) {
@@ -81,7 +161,6 @@ const run = item => ((cb) => {
         .catch(() => resolve([])));
     return new Promise(resolve => resolve(item.task));
   })().then((sources) => {
-    console.log(sources);
     API.getNewsSourceURLs(sources).then((urls) => {
       API.urlCheck(urls).then((list) => {
         if (cb)
@@ -109,6 +188,12 @@ const run = item => ((cb) => {
   });
 });
 
+/**
+ * Run every interval for updating arrays
+ *
+ * @function update
+ * @param  {boolean} extra - if it is an extra run
+ */
 const update = (extra) => {
   activeSchedule.forEach((item) => {
     if (item.timeout.executed && !item.recurring)
@@ -146,6 +231,12 @@ const update = (extra) => {
     setTimeout(update, interval * 1000);
 };
 
+/**
+ * Process cmd input
+ *
+ * @function processInput
+ * @param  {Buffer}     data
+ */
 const processInput = (data) => {
   data = data.toString('utf-8').split(' ')
     .filter(s => s !== '').join(' ')
@@ -244,6 +335,8 @@ const processInput = (data) => {
 \t- schedule get (force a fetch of the central schedule)
 \t- schedule add <task> <recurring (true | false)> <hour> <minute> <second> (add task to central schedule)
 \t- schedule delete <job-id> (delete the specified task from local and remote schedule)
+\t- schedule show (print the current active jobs)
+\t- schedule show all (print the current central schedule)
 \t- schedule help (show this command description)`,
           );
           break;
@@ -397,6 +490,11 @@ const processInput = (data) => {
   });
 };
 
+/**
+ * Start the scheduler and cmd tool
+ *
+ * @function start
+ */
 const start = () => {
   console.log('Starting scheduler');
   API.registerScheduleListener((items) => {

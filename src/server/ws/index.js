@@ -1,5 +1,12 @@
 import ws, { loadIndex } from './webscraper';
 
+/**
+ * Scrape the provided URLs
+ *
+ * @function scraper
+ * @param  {Array<string>}   urls
+ * @param  {Function} cb
+ */
 export default (urls, cb) => {
   loadIndex(() => {
     urls.forEach((url) => {

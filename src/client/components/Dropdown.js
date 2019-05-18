@@ -4,6 +4,15 @@ import onClickOutside from 'react-onclickoutside';
 import PropTypes from 'prop-types';
 import './style/Dropdown.css';
 
+/**
+ * @class Dropdown
+ * @extends Component
+ *
+ * @reactProps {String} titleList
+ * @reactProps {Object} items
+ * @reactProps {Function} onClose
+ * @reactProps {String} className
+ */
 class Dropdown extends Component {
   constructor(props) {
     super(props);

@@ -6,6 +6,10 @@ import Result from './result/Result';
 import ResultSentiment from './result/ResultSentiment';
 import NoResult from './result/NoResult';
 
+/**
+ * @class LoadingPage
+ * @extends Component
+ */
 class LoadingPage extends Component {
   componentDidMount() {
     if (!this.context.search && localStorage.getItem('prev-search') && !this.context.searchOpts)

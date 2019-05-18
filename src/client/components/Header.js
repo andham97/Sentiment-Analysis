@@ -3,6 +3,14 @@ import './style/Header.css';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 
+/**
+ * @class Header
+ * @extends Component
+ *
+ * @reactProps {String} name
+ * @reactProps {Object} children
+ * @reactProps {Object} history
+ */
 class Header extends Component {
   render() {
     const { name, children } = this.props;

@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './style/Checkbox.css';
 
+/**
+ * @class Checkbox
+ * @extends Component
+ *
+ * @reactProps {String} name
+ * @reactProps {Number} id
+ * @reactProps {String} value
+ * @reactProps {String} className
+ * @reactProps {Function} onChange
+ * @reactProps {Boolean} checked
+ */
 class Checkbox extends Component {
   render() {
     const {

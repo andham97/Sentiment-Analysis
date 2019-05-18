@@ -19,9 +19,10 @@
     "debug-ws": "nodemon --exec babel-node src/server/ws/webscraper.js",
     "ws": "babel-node src/server/ws/webscraper.js",
     "prod-ws": "node build/server/ws/webscraper.js",
-    "jsdoc": "jsdoc -c jsdoc.json -d docs",
-    "djsdoc": "nodemon --exec npm run jsdoc --watch src",
-    "esdoc": "esdoc"
+    "jsdoc": "nodemon --exec npm run jd --watch src/server",
+    "esdoc": "nodemon --exec npm run ed --watch src/client",
+    "jd": "rm -rf docs/server && documentation build src/server/** -f html -o docs/server",
+    "ed": "rm -rf docs/client && esdoc"
   },
   "repository": {
     "type": "git",
@@ -97,6 +98,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
+    "documentation": "^11.0.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.8.0",
     "esdoc": "^1.1.0",
@@ -137,7 +139,8 @@
     },
     "plugins": [
       "jest",
-      "react"
+      "react",
+      "jsdoc"
     ],
     "rules": {
       "class-methods-use-this": 0,
@@ -166,7 +169,21 @@
       "no-eval": 0,
       "no-await-in-loop": 0,
       "no-restricted-globals": 0,
-      "import/no-unresolved": 0
+      "import/no-unresolved": 0,
+      "jsdoc/check-alignment": 1,
+      "jsdoc/check-examples": 1,
+      "jsdoc/check-indentation": 1,
+      "jsdoc/check-param-names": 1,
+      "jsdoc/check-syntax": 1,
+      "jsdoc/check-tag-names": 1,
+      "jsdoc/check-types": 1,
+      "jsdoc/newline-after-description": 1,
+      "jsdoc/require-hyphen-before-param-description": 1,
+      "jsdoc/require-jsdoc": 1,
+      "jsdoc/require-param": 1,
+      "jsdoc/require-param-name": 1,
+      "jsdoc/require-param-type": 1,
+      "jsdoc/valid-types": 1
     },
     "settings": {
       "react": {

@@ -5,6 +5,10 @@ import NewSearch from './NewSearch';
 import WordCloud from './WordCloud';
 import Header from '../Header';
 
+/**
+ * @class Dashboard
+ * @extends Component
+ */
 class Dashboard extends Component {
   render() {
     return [

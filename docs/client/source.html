@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="">
+  <title data-ice="title">Source | sentiment-analysis</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/andham97/Sentiment-Analysis"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/App.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/Button.js~Button.html">Button</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/Card.js~Card.html">Card</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/Checkbox.js~Checkbox.html">Checkbox</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/DatePickerInterval.js~DatePickerInterval.html">DatePickerInterval</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/ErrorBoundary.js~ErrorBoundary.html">ErrorBoundary</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/Filter.js~Filter.html">Filter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/LoadingPage.js~LoadingPage.html">LoadingPage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/TimeInterval.js~TimeInterval.html">TimeInterval</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-admin">components/admin</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/admin/AdminPanel.js~AdminPanel.html">AdminPanel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/admin/AdminPanelStore.js~AdminPanelStore.html">AdminPanelStore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/admin/MultiListInput.js~MultiListInput.html">MultiListInput</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/admin/Scraper.js~Scraper.html">Scraper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AdminPanelContext">AdminPanelContext</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-dashboard">components/dashboard</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/dashboard/Dashboard.js~Dashboard.html">Dashboard</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/dashboard/SearchStore.js~SearchStore.html">SearchStore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SearchContext">SearchContext</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-result">components/result</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/NewsArticle.js~NewsArticle.html">NewsArticle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/NewsArticleSentiment.js~NewsArticle.html">NewsArticle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/NoResult.js~NoResult.html">NoResult</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/Parameters.js~Paramteres.html">Paramteres</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/Result.js~Result.html">Result</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/ResultSentiment.js~ResultSentiment.html">ResultSentiment</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-result-graph">components/result/graph</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/graph/DonutChart.js~DonutChart.html">DonutChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ProgressBar">ProgressBar</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">90/148</span></h1>
+
+<table class="files-summary" data-ice="files" data-use-coverage="true">
+  <thead>
+    <tr>
+      <td>File</td>
+      <td>Identifier</td>
+      <td class="coverage">Document</td>
+      <td style="display: none;">Size</td>
+      <td style="display: none;">Lines</td>
+      <td style="display: none;">Updated</td>
+    </tr>
+  </thead>
+  <tbody>
+    
+  <tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/App.js.html#errorLines=19">client/App.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/App.js~App.html">App</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">1170 byte</td>
+      <td style="display: none;" data-ice="lines">37</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:43:20 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/client.js.html">client/client.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">146 byte</td>
+      <td style="display: none;" data-ice="lines">5</td>
+      <td style="display: none;" data-ice="updated">2019-05-05 10:03:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/Button.js.html#errorLines=14">client/components/Button.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/Button.js~Button.html">Button</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">588 byte</td>
+      <td style="display: none;" data-ice="lines">30</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:40:03 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/Card.js.html#errorLines=15">client/components/Card.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/Card.js~Card.html">Card</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">653 byte</td>
+      <td style="display: none;" data-ice="lines">29</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:40:18 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/Checkbox.js.html#errorLines=17">client/components/Checkbox.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/Checkbox.js~Checkbox.html">Checkbox</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">974 byte</td>
+      <td style="display: none;" data-ice="lines">38</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:41:08 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/DatePickerInterval.js.html#errorLines=16,18,26,71">client/components/DatePickerInterval.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/DatePickerInterval.js~DatePickerInterval.html">DatePickerInterval</a></span></td>
+      <td class="coverage"><span data-ice="coverage">42 %</span><span data-ice="coverageCount" class="coverage-count">3/7</span></td>
+      <td style="display: none;" data-ice="size">2616 byte</td>
+      <td style="display: none;" data-ice="lines">109</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:41:24 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/Dropdown.js.html#errorLines=17,19,24,30,38">client/components/Dropdown.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">16 %</span><span data-ice="coverageCount" class="coverage-count">1/6</span></td>
+      <td style="display: none;" data-ice="size">1798 byte</td>
+      <td style="display: none;" data-ice="lines">70</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:41:47 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/ErrorBoundary.js.html#errorLines=11,13,27,32">client/components/ErrorBoundary.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/ErrorBoundary.js~ErrorBoundary.html">ErrorBoundary</a></span></td>
+      <td class="coverage"><span data-ice="coverage">33 %</span><span data-ice="coverageCount" class="coverage-count">2/6</span></td>
+      <td style="display: none;" data-ice="size">950 byte</td>
+      <td style="display: none;" data-ice="lines">48</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:41:56 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/Filter.js.html#errorLines=13">client/components/Filter.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/Filter.js~Filter.html">Filter</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">568 byte</td>
+      <td style="display: none;" data-ice="lines">28</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:42:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/Header.js.html#errorLines=15">client/components/Header.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">816 byte</td>
+      <td style="display: none;" data-ice="lines">31</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:42:51 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/LoadingPage.js.html#errorLines=14,19">client/components/LoadingPage.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/LoadingPage.js~LoadingPage.html">LoadingPage</a></span></td>
+      <td class="coverage"><span data-ice="coverage">33 %</span><span data-ice="coverageCount" class="coverage-count">1/3</span></td>
+      <td style="display: none;" data-ice="size">1123 byte</td>
+      <td style="display: none;" data-ice="lines">39</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:26:51 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/TimeInterval.js.html#errorLines=10,12,33">client/components/TimeInterval.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/TimeInterval.js~TimeInterval.html">TimeInterval</a></span></td>
+      <td class="coverage"><span data-ice="coverage">40 %</span><span data-ice="coverageCount" class="coverage-count">2/5</span></td>
+      <td style="display: none;" data-ice="size">1033 byte</td>
+      <td style="display: none;" data-ice="lines">43</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:27:54 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/admin/AdminPanel.js.html#errorLines=104,39,41,85">client/components/admin/AdminPanel.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/admin/AdminPanel.js~AdminPanel.html">AdminPanel</a></span></td>
+      <td class="coverage"><span data-ice="coverage">63 %</span><span data-ice="coverageCount" class="coverage-count">7/11</span></td>
+      <td style="display: none;" data-ice="size">15276 byte</td>
+      <td style="display: none;" data-ice="lines">404</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 08:07:35 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/admin/AdminPanelStore.js.html#errorLines=338,51,53">client/components/admin/AdminPanelStore.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-AdminPanelContext">AdminPanelContext</a></span>
+<span><a href="class/client/components/admin/AdminPanelStore.js~AdminPanelStore.html">AdminPanelStore</a></span></td>
+      <td class="coverage"><span data-ice="coverage">85 %</span><span data-ice="coverageCount" class="coverage-count">18/21</span></td>
+      <td style="display: none;" data-ice="size">9314 byte</td>
+      <td style="display: none;" data-ice="lines">370</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 08:28:20 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/admin/MultiListInput.js.html#errorLines=22,25,40">client/components/admin/MultiListInput.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/admin/MultiListInput.js~MultiListInput.html">MultiListInput</a></span></td>
+      <td class="coverage"><span data-ice="coverage">40 %</span><span data-ice="coverageCount" class="coverage-count">2/5</span></td>
+      <td style="display: none;" data-ice="size">2652 byte</td>
+      <td style="display: none;" data-ice="lines">106</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 07:08:04 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/admin/Scraper.js.html#errorLines=16">client/components/admin/Scraper.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/admin/Scraper.js~Scraper.html">Scraper</a></span></td>
+      <td class="coverage"><span data-ice="coverage">66 %</span><span data-ice="coverageCount" class="coverage-count">2/3</span></td>
+      <td style="display: none;" data-ice="size">2587 byte</td>
+      <td style="display: none;" data-ice="lines">85</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 08:29:16 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/dashboard/Dashboard.js.html#errorLines=13">client/components/dashboard/Dashboard.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/dashboard/Dashboard.js~Dashboard.html">Dashboard</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">673 byte</td>
+      <td style="display: none;" data-ice="lines">28</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 08:29:44 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/dashboard/NewSearch.js.html#errorLines=192,55,57,73">client/components/dashboard/NewSearch.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">71 %</span><span data-ice="coverageCount" class="coverage-count">10/14</span></td>
+      <td style="display: none;" data-ice="size">10619 byte</td>
+      <td style="display: none;" data-ice="lines">336</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:37:09 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/dashboard/SearchStore.js.html#errorLines=17,19,322">client/components/dashboard/SearchStore.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-SearchContext">SearchContext</a></span>
+<span><a href="class/client/components/dashboard/SearchStore.js~SearchStore.html">SearchStore</a></span></td>
+      <td class="coverage"><span data-ice="coverage">72 %</span><span data-ice="coverageCount" class="coverage-count">8/11</span></td>
+      <td style="display: none;" data-ice="size">9717 byte</td>
+      <td style="display: none;" data-ice="lines">345</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:37:18 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/dashboard/WordCloud.js.html#errorLines=15,20,50">client/components/dashboard/WordCloud.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">40 %</span><span data-ice="coverageCount" class="coverage-count">2/5</span></td>
+      <td style="display: none;" data-ice="size">1750 byte</td>
+      <td style="display: none;" data-ice="lines">79</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:37:26 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/result/NewsArticle.js.html#errorLines=20">client/components/result/NewsArticle.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/result/NewsArticle.js~NewsArticle.html">NewsArticle</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">2503 byte</td>
+      <td style="display: none;" data-ice="lines">76</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:38:39 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/result/NewsArticleSentiment.js.html#errorLines=19">client/components/result/NewsArticleSentiment.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/result/NewsArticleSentiment.js~NewsArticle.html">NewsArticle</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">2137 byte</td>
+      <td style="display: none;" data-ice="lines">66</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:39:10 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/result/NoResult.js.html#errorLines=11">client/components/result/NoResult.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/result/NoResult.js~NoResult.html">NoResult</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">881 byte</td>
+      <td style="display: none;" data-ice="lines">32</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 08:57:42 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/result/Parameters.js.html#errorLines=19">client/components/result/Parameters.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/result/Parameters.js~Paramteres.html">Paramteres</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">1309 byte</td>
+      <td style="display: none;" data-ice="lines">48</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:39:42 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/result/Result.js.html#errorLines=167,78,80,88">client/components/result/Result.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/result/Result.js~Result.html">Result</a></span></td>
+      <td class="coverage"><span data-ice="coverage">71 %</span><span data-ice="coverageCount" class="coverage-count">10/14</span></td>
+      <td style="display: none;" data-ice="size">13416 byte</td>
+      <td style="display: none;" data-ice="lines">366</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:05:38 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/result/ResultSentiment.js.html#errorLines=142,62,64">client/components/result/ResultSentiment.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/result/ResultSentiment.js~ResultSentiment.html">ResultSentiment</a></span></td>
+      <td class="coverage"><span data-ice="coverage">72 %</span><span data-ice="coverageCount" class="coverage-count">8/11</span></td>
+      <td style="display: none;" data-ice="size">14208 byte</td>
+      <td style="display: none;" data-ice="lines">360</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:08:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/result/graph/DonutChart.js.html#errorLines=16">client/components/result/graph/DonutChart.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/client/components/result/graph/DonutChart.js~DonutChart.html">DonutChart</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">1000 byte</td>
+      <td style="display: none;" data-ice="lines">43</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 09:37:51 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/client/components/result/graph/ProgressbarGraph.js.html">client/components/result/graph/ProgressbarGraph.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-ProgressBar">ProgressBar</a></span></td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">2/2</span></td>
+      <td style="display: none;" data-ice="size">662 byte</td>
+      <td style="display: none;" data-ice="lines">35</td>
+      <td style="display: none;" data-ice="updated">2019-05-07 08:51:06 (UTC)</td>
+    </tr>
+</tbody>
+</table>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

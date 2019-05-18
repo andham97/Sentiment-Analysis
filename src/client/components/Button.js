@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import './style/SearchButton.css';
 import PropTypes from 'prop-types';
 
+/**
+ * @class Button
+ * @extends Component
+ *
+ * @reactProps {Function} onClick
+ * @reactProps {String} className
+ * @reactProps {String} title
+ */
 class Button extends Component {
   render() {
     return (

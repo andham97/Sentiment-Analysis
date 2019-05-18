@@ -1,5 +1,11 @@
 import { getCloudant, newsapi } from '../ics';
 
+/**
+ * Get all the hosts indexed
+ *
+ * @function getWebscraperHosts
+ * @returns {Promise<Array>}
+ */
 const getWebscraperHosts = () => new Promise((resolve, reject) => {
   if (!getCloudant())
     return reject();
@@ -10,6 +16,12 @@ const getWebscraperHosts = () => new Promise((resolve, reject) => {
   });
 });
 
+/**
+ * Get all sources for webscraper
+ *
+ * @function getWebscraperSources
+ * @returns {Promise<Array>}
+ */
 const getWebscraperSources = () => new Promise((resolve, reject) => {
   if (!getCloudant())
     return reject();
@@ -29,6 +41,13 @@ const getWebscraperSources = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+/**
+ * Update a host
+ *
+ * @function updateWebscraperHost
+ * @param  {Object}             host
+ * @returns {Promise<Error?>}
+ */
 const updateWebscraperHost = host => new Promise((resolve, reject) => {
   if (!getCloudant())
     return reject(new Error('Cloudant'));
@@ -55,6 +74,13 @@ const updateWebscraperHost = host => new Promise((resolve, reject) => {
   });
 });
 
+/**
+ * Get all urls from a news source
+ *
+ * @function getNewsSourceURLs
+ * @param  {string|Array<string>}          sources
+ * @returns {Array<string>}
+ */
 const getNewsSourceURLs = sources => new Promise((resolve, reject) => {
   if (typeof sources === 'string')
     sources = sources.split(',');

@@ -1,8 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * SearchStore context
+ * @type {Context}
+ */
 const SearchContext = React.createContext();
 
+/**
+ * @class SearchStore
+ * @extends React
+ *
+ * @reactProps {Array} children
+ */
 class SearchStore extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +29,12 @@ class SearchStore extends React.Component {
     this.computeSearch = this.computeSearch.bind(this);
   }
 
+  /**
+   * Search the index
+   *
+   * @function getSearch
+   * @param  {Object}  opts
+   */
   getSearch(opts) {
     if (opts.startDate && opts.startDate.getTime)
       opts.startDate = opts.startDate.getTime();
@@ -43,6 +59,13 @@ class SearchStore extends React.Component {
     }).catch(console.error);
   }
 
+  /**
+   * Compute the search data fetched
+   *
+   * @function computeSearch
+   * @param  {Object}      data
+   * @param  {Object}      opts
+   */
   computeSearch(data, opts) {
     const search = JSON.parse(JSON.stringify(data));
     search.docs = search.docs
@@ -149,6 +172,11 @@ class SearchStore extends React.Component {
     }
   }
 
+  /**
+   * Fetch the sources indexed
+   *
+   * @function getSources
+   */
   getSources() {
     fetch('/api/search/sources').then(res => res.json()).then((data) => {
       this.setState({
@@ -158,6 +186,12 @@ class SearchStore extends React.Component {
     });
   }
 
+  /**
+   * Update the words for wordcloud
+   *
+   * @function getWords
+   * @param  {number} count
+   */
   getWords(count) {
     if (!count)
       count = 30;
@@ -172,6 +206,13 @@ class SearchStore extends React.Component {
     });
   }
 
+  /**
+   * Get emotional tone for graph
+   *
+   * @function getEmotionalTone
+   * @param  {Object}         search
+   * @returns {Array<Object>}
+   */
   getEmotionalTone(search) {
     const sortArr = search.docs.sort(
       (a, b) => a.date - b.date,
@@ -224,6 +265,14 @@ class SearchStore extends React.Component {
     return ret;
   }
 
+  /**
+   * Get sentiment tone for graph
+   *
+   * @function getEmotionalToneSentiment
+   * @param  {Object}                  search
+   * @param  {Object}                  opts
+   * @returns {Array<Object>}
+   */
   getEmotionalToneSentiment(search, opts) {
     const sortArr = search.docs.sort(
       (a, b) => a.date - b.date,

@@ -5,6 +5,12 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { SearchContext } from './SearchStore';
 
+/**
+ * @class WordCloud
+ * @extends Component
+ *
+ * @reactProps {Object} history
+ */
 class WordCloud extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +26,12 @@ class WordCloud extends Component {
     this.context.getWords(count);
   }
 
+  /**
+   * Search on clicked word
+   *
+   * @function performSearchOnClick
+   * @param  {string}             searchword
+   */
   performSearchOnClick(searchword) {
     const opts = {
       checkedItemsNews: [],

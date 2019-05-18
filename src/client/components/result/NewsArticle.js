@@ -3,6 +3,19 @@ import '../style/NewsArticle.css';
 import Proptypes from 'prop-types';
 import ProgressBar from './graph/ProgressbarGraph';
 
+/**
+ * @class NewsArticle
+ * @extends Component
+ *
+ * @reactProps {String} date
+ * @reactProps {String} title
+ * @reactProps {String} newssource
+ * @reactProps {String} domFeeling
+ * @reactProps {Object} emotions
+ * @reactProps {Object} feelings
+ * @reactProps {Number} persProgress
+ * @reactProps {Function} onClick
+ */
 class NewsArticle extends Component {
   render() {
     const {

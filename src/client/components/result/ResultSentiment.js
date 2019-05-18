@@ -16,6 +16,13 @@ import DonutChart from './graph/DonutChart';
 import { SearchContext } from '../dashboard/SearchStore';
 import NewsArticleSentiment from './NewsArticleSentiment';
 
+/**
+ * Class to name
+ *
+ * @function className
+ * @param  {string}  name
+ * @returns {string}
+ */
 const className = (name) => {
   switch (name) {
     case 'negative':
@@ -29,10 +36,28 @@ const className = (name) => {
   }
 };
 
+/**
+ * Negative color
+ * @type {String}
+ */
 const colornegative = '#FF5C54';
+
+/**
+ * Neutral color
+ * @type {String}
+ */
 const colorneutral = '#AFBE8F';
+
+/**
+ * Positive color
+ * @type {String}
+ */
 const colorpositive = '#5EA3DB';
 
+/**
+ * @class ResultSentiment
+ * @extends Component
+ */
 class ResultSentiment extends Component {
   constructor(props) {
     super(props);
@@ -44,12 +69,24 @@ class ResultSentiment extends Component {
     this.handleCheckedSentiment = this.handleCheckedSentiment.bind(this);
   }
 
+  /**
+   * Redirect to rul
+   *
+   * @function makeRedirect
+   * @param  {string}     url - [description]
+   */
   makeRedirect(url) {
     if (typeof url !== 'undefined') {
       window.open(url, '_blank');
     }
   }
 
+  /**
+   * Handle sentiment checkbox
+   *
+   * @function handleCheckedSentiment
+   * @param  {Object}               sentiment
+   */
   handleCheckedSentiment(sentiment) {
     const item = sentiment.target.value;
     const isChecked = sentiment.target.checked;
@@ -61,6 +98,12 @@ class ResultSentiment extends Component {
     this.setState({ ...this.state, checkedSentiment: cs });
   }
 
+  /**
+   * Date change
+   *
+   * @function dateChange
+   * @param  {Date}   date
+   */
   dateChange(date) {
     const opts = JSON.parse(JSON.stringify(this.context.searchOpts));
     let startDate = !date || !date.startDate ? this.state.startDate : date.startDate;

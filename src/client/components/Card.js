@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import './style/Card.css';
 import PropTypes from 'prop-types';
 
+/**
+ * @class Card
+ * @extends Component
+ *
+ * @reactProps {String} style
+ * @reactProps {Object} children
+ * @reactProps {String} cName
+ * @reactProps {Function} onClick
+ */
 class Card extends Component {
   render() {
     return (

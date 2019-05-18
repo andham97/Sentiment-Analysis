@@ -11,6 +11,10 @@ import ErrorBoundary from './components/ErrorBoundary';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
 
+/**
+ * @class App
+ * @extends Component
+ */
 class App extends Component {
   render() {
     return (

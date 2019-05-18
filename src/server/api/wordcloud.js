@@ -1,6 +1,12 @@
 import { getCloudant } from '../ics';
 import API from '../api';
 
+/**
+ * Get the words for the wordcloud
+ *
+ * @function getWordcloud
+ * @returns {Array<Object>}
+ */
 const getWordcloud = () => new Promise((resolve, reject) => {
   if (!getCloudant())
     reject();

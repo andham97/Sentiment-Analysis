@@ -3,6 +3,15 @@ import ReactMinimalPieChart from 'react-minimal-pie-chart';
 import '../../style/DonutChart.css';
 import Proptypes from 'prop-types';
 
+/**
+ * @class DonutChart
+ * @extends Component
+ *
+ * @reactProps {String} chart
+ * @reactProps {String} label
+ * @reactProps {Array<Object>} data
+ * @reactProps {String} name
+ */
 class DonutChart extends Component {
   render() {
     return (<React.Fragment>

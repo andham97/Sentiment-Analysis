@@ -16,6 +16,13 @@ import Checkbox from '../Checkbox';
 import Button from '../Button';
 import { SearchContext } from '../dashboard/SearchStore';
 
+/**
+ * Class to name map
+ *
+ * @function classNameMap
+ * @param  {string}     name
+ * @returns {string|Array}
+ */
 const classNameMap = (name) => {
   switch (name) {
     case 'anger':
@@ -33,12 +40,40 @@ const classNameMap = (name) => {
   }
 };
 
+/**
+ * Anger color
+ * @type {String}
+ */
 const coloranger = '#E26D5A';
+
+/**
+ * Fear color
+ * @type {String}
+ */
 const colorfear = '#3A405A';
+
+/**
+ * Joy color
+ * @type {String}
+ */
 const colorjoy = '#D3C0CD';
+
+/**
+ * Sad color
+ * @type {String}
+ */
 const colorsad = '#3D70B2';
+
+/**
+ * Disgust color
+ * @type {String}
+ */
 const colordisgust = '#9FAF90';
 
+/**
+ * @class Result
+ * @extends Component
+ */
 class Result extends Component {
   constructor(props) {
     super(props);
@@ -59,12 +94,24 @@ class Result extends Component {
     });
   }
 
+  /**
+   * Redirect to URL
+   *
+   * @function makeRedirect
+   * @param  {string}     url
+   */
   makeRedirect(url) {
     if (typeof url !== 'undefined') {
       window.open(url, '_blank');
     }
   }
 
+  /**
+   * Handle checked emotion checkbox
+   *
+   * @function handleCheckedEmotion
+   * @param  {Object}             emotion
+   */
   handleCheckedEmotion(emotion) {
     const item = emotion.target.value;
     const isChecked = emotion.target.checked;
@@ -76,6 +123,12 @@ class Result extends Component {
     this.setState({ ...this.state, checkedEmotion: cs });
   }
 
+  /**
+   * Date change handler
+   *
+   * @function dateChange
+   * @param  {Object}   date
+   */
   dateChange(date) {
     const opts = JSON.parse(JSON.stringify(this.context.searchOpts));
     let startDate = !date || !date.startDate ? this.state.startDate : date.startDate;

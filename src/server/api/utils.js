@@ -1,5 +1,12 @@
 import { getCloudant } from '../ics';
 
+/**
+ * Check urls if they are already indexed
+ *
+ * @function urlCheck
+ * @param  {Arrray<string>} urls
+ * @returns {Promise<Array<string>>}
+ */
 const urlCheck = urls => new Promise((resolve, reject) => {
   if (!getCloudant())
     return reject();
@@ -28,6 +35,12 @@ const urlCheck = urls => new Promise((resolve, reject) => {
   find();
 });
 
+/**
+ * Count number of indexed urls
+ *
+ * @function urlCount
+ * @returns {number}
+ */
 const urlCount = () => new Promise((resolve, reject) => {
   if (!getCloudant())
     return reject();

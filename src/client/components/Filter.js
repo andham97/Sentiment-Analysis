@@ -3,6 +3,12 @@ import './style/Filter.css';
 import Proptypes from 'prop-types';
 import { FaAngleDown } from 'react-icons/fa';
 
+/**
+ * @class Filter
+ * @extends Component
+ *
+ * @reactProps {String} name
+ */
 class Filter extends Component {
   render() {
     const { name } = this.props;

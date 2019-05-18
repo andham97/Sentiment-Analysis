@@ -3,6 +3,15 @@ import DatePicker from 'react-datepicker';
 import './style/DatePickerInterval.css';
 import Proptypes from 'prop-types';
 
+/**
+ * @class DatePickerInterval
+ * @extends Component
+ *
+ * @reactProps {String} style
+ * @reactProps {Function} change
+ * @reactProps {Date} startDate
+ * @reactProps {Date} endDate
+ */
 class DatePickerInterval extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +30,12 @@ class DatePickerInterval extends Component {
     });
   }
 
+  /**
+   * Start date change
+   *
+   * @function handleChangeStart
+   * @param  {Date}          start
+   */
   handleChangeStart(start) {
     if (start && start.getTime) {
       start.setHours(0);
@@ -34,6 +49,12 @@ class DatePickerInterval extends Component {
     });
   }
 
+  /**
+   * End date change
+   *
+   * @function handleChangeEnd
+   * @param  {Date}        end
+   */
   handleChangeEnd(end) {
     if (end && end.getTime) {
       end.setHours(23);

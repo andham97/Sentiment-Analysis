@@ -64,13 +64,16 @@ const newsapi = new NP(env.getServiceCredentials('newsapi').apikey);
 
 /**
  * Get the current cloudant instance
- * @name getCloudant
- * @return {Cloudant} Cloudant instance if initialized
  *
- * @example
- * getCloudant();
+ * @function getCloudant
+ * @param {boolean} err
+ * @returns {Cloudant} Cloudant instance if initialized
  */
-const getCloudant = () => (cloudantReady ? cloudant : undefined);
+const getCloudant = (err) => {
+  if (err)
+    return connectCloudant();
+  return (cloudantReady ? cloudant : undefined);
+};
 export {
   nlu, getCloudant, newsapi, connectCloudant,
 };

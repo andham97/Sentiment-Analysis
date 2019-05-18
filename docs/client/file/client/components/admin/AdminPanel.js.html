@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">client/components/admin/AdminPanel.js | sentiment-analysis</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/andham97/Sentiment-Analysis"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/App.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/Button.js~Button.html">Button</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/Card.js~Card.html">Card</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/Checkbox.js~Checkbox.html">Checkbox</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/DatePickerInterval.js~DatePickerInterval.html">DatePickerInterval</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/ErrorBoundary.js~ErrorBoundary.html">ErrorBoundary</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/Filter.js~Filter.html">Filter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/LoadingPage.js~LoadingPage.html">LoadingPage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/TimeInterval.js~TimeInterval.html">TimeInterval</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-admin">components/admin</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/admin/AdminPanel.js~AdminPanel.html">AdminPanel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/admin/AdminPanelStore.js~AdminPanelStore.html">AdminPanelStore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/admin/MultiListInput.js~MultiListInput.html">MultiListInput</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/admin/Scraper.js~Scraper.html">Scraper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-AdminPanelContext">AdminPanelContext</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-dashboard">components/dashboard</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/dashboard/Dashboard.js~Dashboard.html">Dashboard</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/dashboard/SearchStore.js~SearchStore.html">SearchStore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SearchContext">SearchContext</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-result">components/result</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/NewsArticle.js~NewsArticle.html">NewsArticle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/NewsArticleSentiment.js~NewsArticle.html">NewsArticle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/NoResult.js~NoResult.html">NoResult</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/Parameters.js~Paramteres.html">Paramteres</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/Result.js~Result.html">Result</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/ResultSentiment.js~ResultSentiment.html">ResultSentiment</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-result-graph">components/result/graph</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/result/graph/DonutChart.js~DonutChart.html">DonutChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ProgressBar">ProgressBar</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">client/components/admin/AdminPanel.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React, { Component } from &apos;react&apos;;
+import AceEditor from &apos;react-ace&apos;;
+import brace from &apos;brace&apos;; // eslint-disable-line no-unused-vars
+import &apos;brace/mode/javascript&apos;;
+import &apos;brace/theme/tomorrow&apos;;
+import Alert from &apos;react-s-alert&apos;;
+import &apos;../style/AdminPanel.css&apos;;
+import Header from &apos;../Header&apos;;
+import Card from &apos;../Card&apos;;
+import MultiListInput from &apos;./MultiListInput&apos;;
+import { AdminPanelContext } from &apos;./AdminPanelStore&apos;;
+import Scraper from &apos;./Scraper&apos;;
+import Button from &apos;../Button&apos;;
+
+/**
+ * Job object boilerplate
+ * @type {Object}
+ */
+const sItemBoilerplate = {
+  task: &apos;&apos;,
+  recurring: false,
+  occurences: [],
+};
+
+/**
+ * Clone object
+ *
+ * @function clone
+ * @param  {Object} o
+ * @returns {Object}
+ */
+const clone = o =&gt; JSON.parse(JSON.stringify(o));
+
+/**
+ * @class AdminPanel
+ * @extends Component
+ */
+class AdminPanel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tempScrapeURL: &apos;&apos;,
+      tempDateSel: &apos;&apos;,
+      tempDateAttr: &apos;&apos;,
+      tempSelection: [],
+      tempSItem: clone(sItemBoilerplate),
+      tempSItemShow: -1,
+    };
+
+    this.scrapeURLChange = this.scrapeURLChange.bind(this);
+    this.dateAttrChange = this.dateAttrChange.bind(this);
+    this.dateSelChange = this.dateSelChange.bind(this);
+  }
+
+  /**
+   * Update date selector input
+   *
+   * @function dateSelChange
+   * @param  {Object}      e
+   */
+  dateSelChange(e) {
+    this.setState({ ...this.state, tempDateSel: e.target.value });
+  }
+
+  /**
+   * Update date attribute input
+   *
+   * @function dateAttrChange
+   * @param  {Object}      e
+   */
+  dateAttrChange(e) {
+    this.setState({ ...this.state, tempDateAttr: e.target.value });
+  }
+
+  /**
+   * Update scrape URL input
+   *
+   * @function scrapeURLChange
+   * @param  {Object}      e
+   */
+  scrapeURLChange(e) {
+    this.setState({ ...this.state, tempScrapeURL: e.target.value });
+  }
+
+  componentWillMount() {
+    this.context.getHosts();
+    this.context.isWhitelisted();
+    this.context.getUrlCount();
+    this.context.getSchedule();
+  }
+
+  /**
+   * Select active host
+   *
+   * @function selectHost
+   * @param  {number}      i
+   */
+  selectHost(i) {
+    return () =&gt; {
+      this.context.setActiveHost(i);
+    };
+  }
+
+  render() {
+    const { hosts, activeHost } = this.context;
+    return &lt;React.Fragment&gt;
+      &lt;Header name=&apos;Webscraper administration tool&apos; /&gt;
+      &lt;div className=&apos;wrapper admin&apos;&gt;
+        &lt;Card cName=&apos;scroll&apos;&gt;
+          &lt;ul&gt;
+            {hosts.length === 0 ? &apos;Loading hosts...&apos; : hosts.map((host, i) =&gt; &lt;li key={i}&gt;
+              &lt;span onClick={this.selectHost(i).bind(this)}&gt;&lt;strong&gt;{host.sourceID}&lt;/strong&gt;:{host.hostnames.map((name, j) =&gt; `${j &gt; 0 ? &apos;,&apos; : &apos;&apos;} ${name}`)}&lt;/span&gt;
+            &lt;/li&gt;)}
+          &lt;/ul&gt;
+        &lt;/Card&gt;
+        &lt;Card cName=&quot;admin-host-edit scroll&quot;&gt;
+          Name: &lt;input placeholder=&apos;Source name&apos; value={activeHost.name} onChange={e =&gt; this.context.updateActiveHost({ ...activeHost, name: e.target.value })} /&gt;&lt;br /&gt;
+          &lt;MultiListInput
+            title=&apos;Headline selectors&apos;
+            addButton=&apos;Add selector&apos;
+            emptyText=&apos;No selectors&apos;
+            newText=&apos;New selector&apos;
+            delButton=&apos;Delete&apos;
+            placeholder=&apos;Headline selector&apos;
+            propname=&apos;headlines&apos;
+            activeHost={activeHost}
+            update={this.context.updateActiveHost} /&gt;&lt;br /&gt;
+          &lt;MultiListInput
+            title=&apos;Body selectors&apos;
+            addButton=&apos;Add selector&apos;
+            emptyText=&apos;No selectors&apos;
+            newText=&apos;New selector&apos;
+            delButton=&apos;Delete&apos;
+            placeholder=&apos;Body selector&apos;
+            propname=&apos;body&apos;
+            activeHost={activeHost}
+            update={this.context.updateActiveHost} /&gt;&lt;br /&gt;
+          &lt;MultiListInput
+            title=&apos;Hostnames&apos;
+            addButton=&apos;Add host&apos;
+            emptyText=&apos;No hostnames&apos;
+            newText=&apos;New host&apos;
+            delButton=&apos;Delete&apos;
+            placeholder=&apos;Hostname&apos;
+            propname=&apos;hostnames&apos;
+            propnameDel=&apos;hostDeletions&apos;
+            activeHost={activeHost}
+            update={this.context.updateActiveHost} /&gt;&lt;br /&gt;
+          &lt;MultiListInput
+            title=&apos;Body exclude CSS-selector&apos;
+            addButton=&apos;Add selector&apos;
+            emptyText=&apos;No exclude selectors&apos;
+            newText=&apos;New exclusion selector&apos;
+            delButton=&apos;Delete&apos;
+            placeholder=&apos;Exclude selector&apos;
+            propname=&apos;exclude&apos;
+            activeHost={activeHost}
+            update={this.context.updateActiveHost} /&gt;&lt;br /&gt;
+          &lt;strong&gt;Date selectors&lt;/strong&gt;&lt;br /&gt;
+          &lt;ul&gt;
+            {activeHost.date.sel.length === 0 ? &lt;i&gt;No selectors&lt;/i&gt; : activeHost.date.sel
+              .map((val, i) =&gt; &lt;li key={i}&gt;{val.sel} : {val.attr === &apos;&apos; ? &apos;&lt;no attribute&gt;&apos; : val.attr}&lt;button onClick={() =&gt; {
+                activeHost.date.sel.splice(i, 1);
+                this.context.updateActiveHost({ ...activeHost });
+              }}&gt;Delete&lt;/button&gt;&lt;/li&gt;)}
+          &lt;/ul&gt;
+          New selector: &lt;input
+            type=&apos;text&apos;
+            placeholder=&apos;Date selector&apos;
+            value={this.state.tempDateSel}
+            onChange={this.dateSelChange} /&gt;&lt;br /&gt;
+          Attribute (optional)&lt;input
+            type=&apos;text&apos;
+            placeholder=&apos;Attribute name&apos;
+            value={this.state.tempDateAttr}
+            onChange={this.dateAttrChange} /&gt;
+          &lt;button onClick={() =&gt; {
+            activeHost.date.sel
+              .push({ sel: this.state.tempDateSel, attr: this.state.tempDateAttr });
+            this.setState({ ...this.state, tempDateSel: &apos;&apos;, tempDateAttr: &apos;&apos; });
+            this.context.updateActiveHost({ ...activeHost });
+          }}&gt;Add selector&lt;/button&gt;&lt;br /&gt;&lt;br /&gt;
+          Validation URL: &lt;input
+            type=&apos;text&apos;
+            placeholder=&apos;Validation URL&apos;
+            value={activeHost.validationURL}
+            onChange={(e) =&gt; {
+              this.context.updateActiveHost({ ...activeHost, validationURL: e.target.value });
+            }} /&gt;&lt;br /&gt;
+          &lt;i&gt;If using attribute, the value contained in the attribute will
+            be passed to the date function instead of the text in the selected element.
+            The element is selected with the CSS-selector above&lt;/i&gt;
+          &lt;button onClick={() =&gt; this.context.saveHost()}&gt;Save host&lt;/button&gt;
+          &lt;button onClick={() =&gt; this.context.clearActiveHost()}&gt;Clear fields&lt;/button&gt;
+        &lt;/Card&gt;
+        &lt;Card cName=&apos;admin-editor-panel&apos;&gt;
+          &lt;AceEditor
+            placeholder=&apos;Create function with signatur (date: string, months: array)&apos;
+            mode=&apos;javascript&apos;
+            theme=&apos;tomorrow&apos;
+            name=&apos;editor&apos;
+            onChange={code =&gt; this.context.updateActiveHost({
+              ...activeHost,
+              date: {
+                ...activeHost.date,
+                fn: code,
+              },
+            })}
+            fontSize={14}
+            showGutter
+            wrapEnabled
+            highlightActiveLine
+            width=&apos;100%&apos;
+            height=&apos;100%&apos;
+            value={activeHost.date.fn}
+            setOptions={{
+              showLineNumbers: true,
+              tabSize: 2,
+            }}
+            className=&apos;admin-editor&apos;
+            editorProps={{ $blockScrolling: Infinity }}/&gt;
+        &lt;/Card&gt;
+        &lt;Card&gt;
+          Test website: &lt;input placeholder=&apos;Test site URL&apos; value={this.context.testURL} onChange={e =&gt; this.context.testURLChange(e.target.value)} /&gt;
+          &lt;button onClick={() =&gt; this.context.loadTestURL()}&gt;Load page&lt;/button&gt;&lt;br /&gt;
+          &lt;Scraper /&gt;
+        &lt;/Card&gt;
+        {this.context.whitelist ? (
+          &lt;React.Fragment&gt;
+            &lt;Card&gt;
+              &lt;h1&gt;Management&lt;/h1&gt;&lt;br/&gt;
+              Scrape URL: &lt;input type=&quot;text&quot; placeholder=&quot;URL&quot; onChange={this.scrapeURLChange} /&gt;
+              &lt;button
+                onClick={() =&gt; this.context.scrapeURL(this.state.tempScrapeURL)}&gt;
+                Scrape URL&lt;/button&gt;&lt;br /&gt;
+              &lt;div className=&apos;scroll&apos;&gt;
+                {hosts.map((val, i) =&gt; (&lt;div key={i}&gt;
+                  &lt;input
+                    type=&apos;checkbox&apos;
+                    value={val.sourceID}
+                    onClick={(e) =&gt; {
+                      const { tempSelection } = this.state;
+                      if (tempSelection.indexOf(e.target.value) &gt; -1)
+                        tempSelection.splice(tempSelection.indexOf(e.target.value), 1);
+                      else
+                        tempSelection.push(e.target.value);
+                      this.setState({ ...this.state, tempSelection });
+                    }}
+                    defaultChecked={this.state.tempSelection.indexOf(val.sourceID) &gt; -1} /&gt;
+                  {val.name}&lt;br /&gt;
+                &lt;/div&gt;))}
+              &lt;/div&gt;
+              &lt;Button
+                title=&apos;Scrape news sources&apos;
+                onClick={() =&gt; this.context.fetchNews(this.state.tempSelection, hosts
+                  .filter(h =&gt; this.state.tempSelection.indexOf(h.sourceID) &gt; -1)
+                  .reduce((acc, h) =&gt; {
+                    acc[h.sourceID] = h.name;
+                    return acc;
+                  }, {}))} /&gt;
+              &lt;h1&gt;Statistics&lt;/h1&gt;
+              &lt;p&gt;{`Number of articles indexed: ${this.context.urlCount === -1 ? &apos;Loading...&apos; : this.context.urlCount}`}&lt;/p&gt;
+            &lt;/Card&gt;
+            &lt;Card cName=&apos;admin-schedule&apos;&gt;
+              &lt;h1&gt;Schedule&lt;/h1&gt;
+              &lt;div className=&apos;admin-add-sitem&apos;&gt;
+                &lt;MultiListInput
+                  title=&apos;Occurences&apos;
+                  addButton=&apos;Add occurence&apos;
+                  emptyText=&apos;No occurences&apos;
+                  newText=&apos;New occurence (UTC)&apos;
+                  delButton=&apos;Delete&apos;
+                  placeholder=&apos;Occurence (hh:mm:ss)&apos;
+                  propname=&apos;occurences&apos;
+                  activeHost={this.state.tempSItem}
+                  validate={(input) =&gt; {
+                    const nums = input.split(&apos;:&apos;);
+                    if (nums.length !== 3
+                      || nums.filter(n =&gt; n.length !== 2 &amp;&amp; n.length !== 1).length &gt; 0
+                      || nums.reduce((acc, val, i) =&gt; {
+                        if (acc)
+                          return acc;
+                        return isNaN(val)
+                          || Number(val) &lt; 0
+                          || Number(val) &gt; (i === 0 ? 23 : 59);
+                      }, false)) {
+                      Alert.error(&apos;Occurence is invalid, use (hh:mm:ss) in the range 00:00:00 to 23:59:59&apos;, { position: &apos;top&apos; });
+                      return false;
+                    }
+                    return true;
+                  }} /&gt;&lt;br /&gt;
+                  Time difference: {new Date().getHours() - new Date().getUTCHours()} hours&lt;br /&gt;
+                &lt;h3&gt;Select news sources for new job&lt;/h3&gt;
+                &lt;div className=&apos;admin-add-sitem-list scroll&apos;&gt;
+                  &lt;input
+                    type=&apos;checkbox&apos;
+                    onClick={(e) =&gt; {
+                      this.setState({
+                        ...this.state,
+                        tempSItem: {
+                          ...this.state.tempSItem,
+                          task: e.target.checked ? &apos;all&apos; : [...document.querySelectorAll(&apos;.admin-add-sitem input:checked&apos;)].map(item =&gt; item.value).join(&apos;,&apos;),
+                        },
+                      });
+                    }} /&gt;
+                    All sources&lt;br /&gt;
+                  {hosts.map((val, i) =&gt; (&lt;div key={i}&gt;
+                    &lt;input
+                      disabled={this.state.tempSItem.task === &apos;all&apos;}
+                      type=&apos;checkbox&apos;
+                      value={val.sourceID}
+                      onClick={(e) =&gt; {
+                        const { tempSItem } = this.state;
+                        const { checked, value } = e.target;
+                        const task = tempSItem.task.split(&apos;,&apos;).filter(t =&gt; t !== &apos;&apos;);
+                        if (!checked &amp;&amp; task.indexOf(value) &gt; -1)
+                          task.splice(task.indexOf(value), 1);
+                        else if (checked &amp;&amp; task.indexOf(value) === -1)
+                          task.push(value);
+                        this.setState({
+                          ...this.state,
+                          tempSItem: {
+                            ...tempSItem,
+                            task: task.join(&apos;,&apos;),
+                          },
+                        });
+                      }} /&gt;
+                    {val.name}
+                    &lt;/div&gt;))}
+                  &lt;/div&gt;&lt;br /&gt;&lt;br /&gt;
+                &lt;input
+                  type=&apos;checkbox&apos;
+                  onClick={({ target }) =&gt; {
+                    this.setState({
+                      ...this.state,
+                      tempSItem: {
+                        ...this.state.tempSItem,
+                        recurring: target.checked,
+                      },
+                    });
+                  }} /&gt; Recurring job
+                &lt;Button
+                  title=&apos;Add job&apos;
+                  onClick={() =&gt; {
+                    const { tempSItem } = this.state;
+                    tempSItem.occurences = tempSItem.occurences.map((occ) =&gt; {
+                      const nums = occ.split(&apos;:&apos;);
+                      return {
+                        hour: Number(nums[0]),
+                        minute: Number(nums[1]),
+                        second: Number(nums[2]),
+                      };
+                    });
+                    Alert.info(&apos;Adding job to schedule&apos;);
+                    this.context.addScheduleItem(tempSItem);
+                    this.setState({
+                      ...this.state,
+                      tempSItem: clone(sItemBoilerplate),
+                    });
+                  }} /&gt;
+              &lt;/div&gt;
+              &lt;div className=&apos;admin-show-sitem scroll&apos;&gt;
+                &lt;ul&gt;
+                  {this.context.scheduleItems.map((item, i) =&gt; &lt;li key={i} onClick={() =&gt; {
+                    this.setState({
+                      ...this.state,
+                      tempSItemShow: this.state.tempSItemShow === i ? -1 : i,
+                    });
+                  }}&gt;
+                    Sources to fetch: {item.task}, recurring: {item.recurring ? &apos;true&apos; : &apos;false&apos;}
+                    {this.state.tempSItemShow === i
+                      ? &lt;React.Fragment&gt;
+                        &lt;ul&gt;
+                          {item.occurences.map((occ, j) =&gt; &lt;li key={j}&gt;
+                            {occ.hour &lt; 10 ? `0${occ.hour}` : occ.hour}:
+                            {occ.minute &lt; 10 ? `0${occ.minute}` : occ.minute}:
+                            {occ.second &lt; 10 ? `0${occ.second}` : occ.second}
+                          &lt;/li&gt;)
+                          }
+                        &lt;/ul&gt;
+                        &lt;Button
+                          title=&apos;Remove job&apos;
+                          onClick={() =&gt; {
+                            Alert.info(&apos;Removing job from schedule&apos;);
+                            this.context.deleteScheduleItem(item.id);
+                          }
+                        } /&gt;
+                      &lt;/React.Fragment&gt;
+                      : &apos;&apos;
+                    }
+                  &lt;/li&gt;)}
+                &lt;/ul&gt;
+              &lt;/div&gt;
+            &lt;/Card&gt;
+          &lt;/React.Fragment&gt;
+        ) : &apos;&apos;}
+      &lt;/div&gt;
+    &lt;/React.Fragment&gt;;
+  }
+}
+
+AdminPanel.contextType = AdminPanelContext;
+
+export default AdminPanel;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

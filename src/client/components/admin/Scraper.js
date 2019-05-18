@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { AdminPanelContext } from './AdminPanelStore';
 
+/**
+ * Month array
+ * @type {Array<String>}
+ */
 const months = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'Desember'];
 
+/**
+ * @class Scraper
+ * @extends Component
+ */
 class Scraper extends Component {
   render() {
     const { testPage, activeHost } = this.context;
@@ -41,7 +49,7 @@ class Scraper extends Component {
             body = text;
         }
         text = '';
-        if (activeHost.date.function !== '') {
+        if (activeHost.date.fn !== '') {
           for (let i = 0; i < activeHost.date.sel.length; i++) {
             if (activeHost.date.sel[i].attr === '')
               text = testPage(activeHost.date.sel[i].sel).text();
@@ -51,7 +59,7 @@ class Scraper extends Component {
               break;
           }
           if (text.length > 0)
-            date = eval(activeHost.date.function)(text, months);
+            date = eval(activeHost.date.fn)(text, months);
         }
       }
       catch (e) {

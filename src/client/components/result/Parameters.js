@@ -3,6 +3,18 @@ import PropTypes from 'prop-types';
 import '../style/Parameters.css';
 import Button from '../Button';
 
+/**
+ * @class Parameters
+ * @extends Component
+ *
+ * @reactProps {String} searchtext
+ * @reactProps {String} sentiment
+ * @reactProps {Number} timeinterval
+ * @reactProps {Number} amount
+ * @reactProps {Number} threshold
+ * @reactProps {Boolean} emotion
+ * @reactProps {Function} emotionClick
+ */
 class Paramteres extends Component {
   render() {
     const {

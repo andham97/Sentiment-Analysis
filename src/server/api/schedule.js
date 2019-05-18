@@ -1,6 +1,3 @@
-/**
- * @module Schedule Internal API
- */
 import uuid from 'uuid/v4';
 import { getCloudant } from '../ics';
 
@@ -14,9 +11,9 @@ const listeners = [];
  * Compare two objects
  *
  * @name objectEqual
- * @param  {Object} a Object1
- * @param  {Object} b Object2
- * @return {Boolean}   Is the objects equal
+ * @param  {Object} a - Object1
+ * @param  {Object} b - Object2
+ * @returns {boolean}   Is the objects equal
  */
 const objectEqual = (a, b) => {
   let ret = true;
@@ -37,7 +34,7 @@ const objectEqual = (a, b) => {
  * Fetch the current central schedule from cloudantReady
  *
  * @name getSchedule
- * @return {Array} Central Schedule
+ * @returns {Array} Central Schedule
  */
 const getSchedule = () => new Promise((resolve, reject) => {
   if (!getCloudant())
@@ -54,7 +51,7 @@ const getSchedule = () => new Promise((resolve, reject) => {
  * Register schedule change listener functions
  *
  * @name registerScheduleListener
- * @param  {function} listener Listener callback function
+ * @param  {Function} listener - Listener callback function
  */
 const registerScheduleListener = (listener) => {
   if (listener instanceof Function)
@@ -76,6 +73,12 @@ const deleteScheduleItem = id => new Promise((resolve, reject) => {
   }).catch(reject);
 });
 
+/**
+ * Add job to central schedule
+ *
+ * @function addScheduleItem
+ * @param  {Object}        item
+ */
 const addScheduleItem = item => new Promise((resolve, reject) => {
   if (!item
     || (!item.recurring && item.recurring !== false)

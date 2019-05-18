@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import './style/TimeInterval.css';
 
+/**
+ * @class TimeInterval
+ * @extends Component
+ */
 class TimeInterval extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +16,13 @@ class TimeInterval extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  /**
+   * Handle date change
+   *
+   * @function handleChange
+   * @param  {Date}     startdate
+   * @param  {Date}     enddate
+   */
   handleChange(startdate, enddate) {
     this.setState({
       startDate: startdate,

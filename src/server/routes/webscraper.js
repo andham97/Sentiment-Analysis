@@ -54,8 +54,23 @@ router.get('/load', (req, res) => {
     .catch(err => res.status(err.statusCode || 500).json(err));
 });
 
+/**
+ * Clone the provided object
+ *
+ * @function clone
+ * @param  {Object} object
+ * @returns {Object}
+ */
 const clone = object => JSON.parse(JSON.stringify(object));
 
+/**
+ * Get value from object pattern
+ *
+ * @function patternExists
+ * @param  {Object}      object
+ * @param  {string}      pattern
+ * @returns {*}
+ */
 const patternExists = (object, pattern) => {
   let temp = clone(object);
   pattern.split('.').forEach((key) => {
@@ -67,7 +82,7 @@ const patternExists = (object, pattern) => {
 };
 
 router.post('/hosts', (req, res) => {
-  const requirements = ['hostnames', 'hostDeletions', 'name', 'headlines', 'body', 'sourceID', 'exclude', 'date.sel', 'date.function', 'validationURL'];
+  const requirements = ['hostnames', 'hostDeletions', 'name', 'headlines', 'body', 'sourceID', 'exclude', 'date.sel', 'date.fn', 'validationURL'];
   if (requirements.filter(e => !patternExists(req.body, e)).length !== 0)
     return res.status(400).send('Error: requires hostname, headline, body, sourceID and date');
   if (!req.body.exclude)

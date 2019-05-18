@@ -4,9 +4,24 @@ import url from 'url';
 import Module from 'module';
 import { getCloudant } from '../ics';
 
+/**
+ * Database instance
+ * @type {Cloudant}
+ */
 let db;
+
+/**
+ * Host index
+ * @type {Object}
+ */
 let index;
 
+/**
+ * Load index from databse
+ *
+ * @function loadIndex
+ * @param  {Function} cb
+ */
 const loadIndex = (cb) => {
   if (!db)
     db = getCloudant().use('sa-meta');
@@ -18,6 +33,13 @@ const loadIndex = (cb) => {
   });
 };
 
+/**
+ * Scrape the givven url (path)
+ *
+ * @function ws
+ * @param  {string}   path
+ * @param  {Function} cb
+ */
 const ws = (path, cb) => {
   db = getCloudant().use('sa-meta');
   let hostname = url.parse(path).hostname;
@@ -39,7 +61,7 @@ const ws = (path, cb) => {
         break;
     }
     const m = new Module();
-    m._compile(`module.exports = ${index[hostname].date.function}`, '');
+    m._compile(`module.exports = ${index[hostname].date.fn}`, '');
     const months = ['January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'Desember'];
     let element;
