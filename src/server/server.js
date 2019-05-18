@@ -8,6 +8,11 @@ import path from 'path';
 import dotenv from 'dotenv';
 import passport from 'passport';
 import Auth0Security from 'passport-auth0';
+import ExpressSanitizer from 'express-sanitizer';
+import Helmet from 'helmet';
+import Https from 'https';
+import Http from 'http';
+import fs from 'fs';
 import Wordcloud from './routes/wordcloud';
 import Search from './routes/search';
 import WebScraper from './routes/webscraper';
@@ -32,6 +37,8 @@ passport.deserializeUser((user, done) => done(null, user));
  */
 const app = express();
 
+app.use(Helmet());
+app.use(ExpressSanitizer());
 app.use(express.static(path.resolve(process.cwd(), 'build/client')));
 app.use(express.json());
 app.use(session({
@@ -39,6 +46,7 @@ app.use(session({
   cookie: { secure: false },
   resave: false,
   saveUninitialized: true,
+  name: '',
 }));
 app.use(morgan('dev'));
 app.use(passport.initialize());
@@ -92,7 +100,13 @@ app.get('*', (req, res) => {
  * The server object for export to test suite
  * @type {HTTPServer}
  */
-const server = app.listen(process.env.PORT || 3000, () => {
+const server = (process.env.SSL_KEY && process.env.SLL_CERT)
+  ? Https.createServer({
+    key: fs.readFileSync(process.env.SSL_KEY),
+    cert: fs.readFileSync(process.env.SSL_CERT),
+  }, app)
+  : Http.createServer(app);
+server.listen(process.env.PORT || 3000, () => {
   process.stdout.write(`listening on port ${process.env.PORT || 3000}\n`);
   if (process.argv.indexOf('--no-scheduler') === -1)
     Scheduler();

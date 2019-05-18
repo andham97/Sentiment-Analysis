@@ -46,7 +46,6 @@ router.get('/urlCount', (req, res) => {
 });
 
 router.get('/load', (req, res) => {
-  console.log(req.query.url);
   if (!req.query.url)
     return res.status(400).send('');
   rp(req.query.url)
