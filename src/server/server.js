@@ -21,15 +21,16 @@ import Scheduler from './scheduler';
 import { getCloudant } from './ics';
 
 dotenv.config();
-
-passport.use(new Auth0Security({
-  domain: process.env.AUTH0_DOMAIN,
-  clientID: process.env.AUTH0_CLIENT_ID,
-  clientSecret: process.env.AUTH0_CLIENT_SECRET,
-  callbackURL: process.env.AUTH0_CALLBACK_URL,
-}, (accessToken, refreshToken, extraParams, profile, done) => done(null, profile)));
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((user, done) => done(null, user));
+if (!global.__DEV__) {
+  passport.use(new Auth0Security({
+    domain: process.env.AUTH0_DOMAIN,
+    clientID: process.env.AUTH0_CLIENT_ID,
+    clientSecret: process.env.AUTH0_CLIENT_SECRET,
+    callbackURL: process.env.AUTH0_CALLBACK_URL,
+  }, (accessToken, refreshToken, extraParams, profile, done) => done(null, profile)));
+  passport.serializeUser((user, done) => done(null, user));
+  passport.deserializeUser((user, done) => done(null, user));
+}
 
 /**
  * Express application
@@ -49,8 +50,10 @@ app.use(session({
   name: '',
 }));
 app.use(morgan('dev'));
-app.use(passport.initialize());
-app.use(passport.session());
+if (!global.__DEV__) {
+  app.use(passport.initialize());
+  app.use(passport.session());
+}
 
 app.use('/api/auth', Auth);
 app.use('/api/auth', (err, req, res) => {
