@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
     else
       res.json(data);
   }).catch((err) => {
+    console.error(err);
     res.status(500).send(JSON.stringify(err));
   });
 });

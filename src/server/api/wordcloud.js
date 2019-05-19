@@ -1,5 +1,5 @@
 import { getCloudant } from '../ics';
-import { getSources } from './search';
+import Search from './search';
 
 /**
  * Get the words for the wordcloud
@@ -16,7 +16,7 @@ const getWordcloud = () => new Promise((resolve, reject) => {
       counts: ['key'],
       limit: 0,
     }).then((data) => {
-      getSources().then((sources) => {
+      Search.getSources().then((sources) => {
         const arr = data.counts.key;
         const result = [];
 
@@ -37,6 +37,9 @@ const getWordcloud = () => new Promise((resolve, reject) => {
         resolve(result
           .filter(o => sources
             .filter(source => source.key === o.key || source.value === o.key).length === 0));
+      }).catch((err) => {
+        console.error(err);
+        reject();
       });
     }).catch((err) => {
       if (err.statusCode === 401 || (err.reason && err.reason.indexOf('_design')) || (err.reason && err.reason.indexOf('_reader')))
