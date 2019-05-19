@@ -9,11 +9,9 @@ import { getCloudant, newsapi } from '../ics';
 const getWebscraperHosts = () => new Promise((resolve, reject) => {
   if (!getCloudant())
     return reject();
-  getCloudant().db.use('sa-meta').find({ selector: { type: 'ws' } }, (err, result) => {
-    if (err)
-      return reject(err);
-    resolve(result.docs[0]);
-  });
+  getCloudant().db.use('sa-meta').find({ selector: { type: 'ws' } })
+    .then(result => resolve(result.docs[0]))
+    .catch(reject);
 });
 
 /**
@@ -51,9 +49,7 @@ const getWebscraperSources = () => new Promise((resolve, reject) => {
 const updateWebscraperHost = host => new Promise((resolve, reject) => {
   if (!getCloudant())
     return reject(new Error('Cloudant'));
-  getCloudant().db.use('sa-meta').find({ selector: { type: 'ws' } }, (err, result) => {
-    if (err)
-      return reject(err);
+  getCloudant().db.use('sa-meta').find({ selector: { type: 'ws' } }).then((result) => {
     const index = result.docs[0];
     host.hostnames.forEach((hostname) => {
       if (!index[hostname])
@@ -66,12 +62,8 @@ const updateWebscraperHost = host => new Promise((resolve, reject) => {
       if (index[hostname])
         delete index[hostname];
     });
-    getCloudant().db.use('sa-meta').insert(index, (err) => {
-      if (err)
-        return reject(err);
-      resolve();
-    });
-  });
+    getCloudant().db.use('sa-meta').insert(index).then(resolve).catch(reject);
+  }).catch(reject);
 });
 
 /**

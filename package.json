@@ -8,8 +8,8 @@
   "description": "",
   "scripts": {
     "start": "node build/server/server.js",
-    "pretest": "eslint . --ext .js --ignore-path .gitignore",
-    "test": "jest",
+    "pretest": "eslint ./src --ext .js --ignore-path .gitignore",
+    "test": "jest --detectOpenHandles",
     "clean": "rm -rf build && mkdir build",
     "build-server": "babel -d ./build/server ./src/server",
     "build-client": "webpack",
@@ -22,7 +22,9 @@
     "jsdoc": "nodemon --exec npm run jd --watch src/server",
     "esdoc": "nodemon --exec npm run ed --watch src/client",
     "jd": "rm -rf docs/server && documentation build src/server/** -f html -o docs/server",
-    "ed": "rm -rf docs/client && esdoc"
+    "ed": "rm -rf docs/client && esdoc",
+    "try": "nodemon --exec babel-node src/server/tst.js --watch src/server",
+    "testing": "nodemon --exec npm test --watch test/"
   },
   "repository": {
     "type": "git",
@@ -124,6 +126,7 @@
     "nodemon": "^1.18.9",
     "path": "^0.12.7",
     "style-loader": "^0.23.1",
+    "supertest": "^4.0.2",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1"
   },
@@ -199,10 +202,19 @@
   ],
   "jest": {
     "setupFilesAfterEnv": [
-      "<rootDir>/enzyme.config.js"
+      "<rootDir>/enzyme.config.js",
+      "<rootDir>/testSetup.js"
     ],
     "moduleNameMapper": {
       "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js"
-    }
+    },
+    "globals": {
+      "__DEV__": true
+    },
+    "coverageDirectory": "<rootDir>/coverage",
+    "collectCoverageFrom": [
+      "src/server/**/*.js"
+    ],
+    "collectCoverage": true
   }
 }

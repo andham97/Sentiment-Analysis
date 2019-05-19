@@ -39,7 +39,7 @@ const getWordcloud = () => new Promise((resolve, reject) => {
             .filter(source => source.key === o.key || source.value === o.key).length === 0));
       });
     }).catch((err) => {
-      if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
+      if (err.statusCode === 401 || (err.reason && err.reason.indexOf('_design')) || (err.reason && err.reason.indexOf('_reader')))
         find();
       else
         reject(err);

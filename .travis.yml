@@ -3,8 +3,21 @@ language: node_js
 node_js:
   - '9'
 
+branches:
+  only:
+    - master
+
 cache:
   directories:
     - node_modules
+
+script:
+  - npm test
+
+after_success:
+  - codecov
+
+before_install:
+  - npm install -g codecov
 
 sudo: false

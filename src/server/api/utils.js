@@ -26,7 +26,7 @@ const urlCheck = urls => new Promise((resolve, reject) => {
       }
       resolve(arr);
     }).catch((err) => {
-      if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
+      if (err.statusCode === 401 || (err.reason && err.reason.indexOf('_design')) || (err.reason && err.reason.indexOf('_reader')))
         find();
       else
         reject(err);
@@ -50,7 +50,7 @@ const urlCount = () => new Promise((resolve, reject) => {
     }).then((data) => {
       resolve(data.rows.length);
     }).catch((err) => {
-      if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
+      if (err.statusCode === 401 || (err.reason && err.reason.indexOf('_design')) || (err.reason && err.reason.indexOf('_reader')))
         find();
       else
         reject(err);

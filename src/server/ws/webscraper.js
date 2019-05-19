@@ -19,12 +19,11 @@ let index;
 const loadIndex = (cb) => {
   if (!getCloudant())
     return cb('no cloudant');
-  getCloudant().use('sa-meta').find({ selector: { type: 'ws' } }, (err, result) => {
-    if (err)
-      return cb(err);
+  getCloudant().use('sa-meta').find({ selector: { type: 'ws' } }).then((result) => {
     index = result.docs[0];
     cb();
-  });
+  })
+    .catch(cb);
 };
 
 /**

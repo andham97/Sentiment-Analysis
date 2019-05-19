@@ -72,10 +72,6 @@ class ResultSentiment extends Component {
   componentWillMount() {
     if (!this.context.search && localStorage.getItem('prev-search'))
       this.context.getSearch(localStorage.getItem('prev-search'));
-    this.setState({
-      ...this.state,
-      checkedEmotion: [...this.context.searchOpts.checkedItemsEmotion],
-    });
   }
 
   /**

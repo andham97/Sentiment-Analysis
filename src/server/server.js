@@ -75,7 +75,7 @@ app.use('/api/wordcloud', Wordcloud);
 app.use('/api/search', Search);
 
 app.use('/api', (req, res, next) => {
-  if (req.user || req.headers.api_key === process.env.SCRAPER_API_KEY)
+  if (req.user || req.headers.api_key === process.env.SCRAPER_API_KEY || global.__DEV__)
     return next();
   req.session.returnTo = req.originalUrl;
   res.redirect('/api/auth/login');
@@ -100,16 +100,19 @@ app.get('*', (req, res) => {
  * The server object for export to test suite
  * @type {HTTPServer}
  */
-const server = (process.env.SSL_KEY && process.env.SLL_CERT)
+const server = (process.env.SSL_KEY && process.env.SSL_CERT)
   ? Https.createServer({
     key: fs.readFileSync(process.env.SSL_KEY),
     cert: fs.readFileSync(process.env.SSL_CERT),
   }, app)
   : Http.createServer(app);
-server.listen(process.env.PORT || 3000, () => {
-  process.stdout.write(`listening on port ${process.env.PORT || 3000}\n`);
-  if (process.argv.indexOf('--no-scheduler') === -1)
-    Scheduler();
-});
+
+if (!global.__DEV__) {
+  server.listen(process.env.PORT || 3000, () => {
+    process.stdout.write(`listening on port ${process.env.PORT || 3000}\n`);
+    if (process.env.SCHEDULE)
+      Scheduler();
+  });
+}
 
 export { app, server };

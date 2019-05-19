@@ -2,3 +2,5 @@ import { configure } from 'enzyme'; // eslint-disable-line import/no-extraneous-
 import Adapter from 'enzyme-adapter-react-16'; // eslint-disable-line import/no-extraneous-dependencies
 
 configure({ adapter: new Adapter() });
+
+process.env = { ...process.env, TEST_FRAMEWORK: true };

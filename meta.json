@@ -1,0 +1,535 @@
+[
+  {
+    "type":"ws",
+    "www.bbc.com":{
+      "name":"BBC",
+      "headlines":[
+        ".story-body__h1"
+      ],
+      "body":[
+        ".story-body__inner p"
+      ],
+      "exclude":[
+
+      ],
+      "sourceID":"bbc-news",
+      "date":{
+        "sel":[
+          {
+            "sel":".story-body .date--v2",
+            "attr":""
+          }
+        ],
+        "fn":"(date, months) => {\n  if (date.indexOf('ago') > -1) return new Date();\n  const tokens = date.split(' ');\n  if (tokens.length === 3) return new Date(`${tokens[2]}-${months.indexOf(months.filter(elm => tokens[1].toLowerCase() === elm.toLowerCase())[0]) + 1}-${tokens[0]} 12:00:00`);\n  return new Date();\n};"
+      }
+    },
+    "www.bbc.co.uk":{
+      "name":"BBC",
+      "headlines":[
+        ".story-body__h1"
+      ],
+      "body":[
+        ".story-body__inner p"
+      ],
+      "exclude":[
+
+      ],
+      "sourceID":"bbc-news",
+      "date":{
+        "sel":[
+          {
+            "sel":".story-body .date--v2",
+            "attr":""
+          }
+        ],
+        "fn":"(date, months) => {\n  if (date.indexOf('ago') > -1) return new Date();\n  const tokens = date.split(' ');\n  if (tokens.length === 3) return new Date(`${tokens[2]}-${months.indexOf(months.filter(elm => tokens[1].toLowerCase() === elm.toLowerCase())[0]) + 1}-${tokens[0]} 12:00:00`);\n  return new Date();\n};"
+      }
+    },
+    "www.nytimes.com":{
+      "name":"The New York Times",
+      "headlines":[
+        "[itemprop=headline]"
+      ],
+      "body":[
+        "[name=articleBody] p"
+      ],
+      "exclude":[
+
+      ],
+      "sourceID":"the-new-york-times",
+      "date":{
+        "sel":[
+          {
+            "sel":"article header time",
+            "attr":"datetime"
+          }
+        ],
+        "fn":"(date, months) => { return new Date(`${date} 12:00:00`); }"
+      }
+    },
+    "abcnews.go.com":{
+      "name":"ABC News",
+      "headlines":[
+        ".article-header h1"
+      ],
+      "body":[
+        ".article-copy p"
+      ],
+      "exclude":[
+        "em"
+      ],
+      "sourceID":"abc-news",
+      "date":{
+        "sel":[
+          {
+            "sel":".StoryPage__bylineSocial--2ZZzF .StoryPage__date--UmODz",
+            "attr":""
+          }
+        ],
+        "fn":"(date, months) => {\n  const tokens = date.split(',').join('').split(' ').slice(0, 3);\n  const month = months.indexOf(months.filter(m => m.indexOf(tokens[0]) > -1)[0]) + 1;\n  return new Date(`${tokens[2]}-${month}-${tokens[1]} 12:00:00`);\n};"
+      }
+    },
+    "www.bloomberg.com":{
+      "name":"Bloomberg",
+      "headlines":[
+        ".lede-text-v2__content h1"
+      ],
+      "body":[
+        ".body-copy-v2 p"
+      ],
+      "exclude":[
+
+      ],
+      "sourceID":"bloomberg",
+      "date":{
+        "sel":[
+          {
+            "sel":".lede-text-v2__times time[itemprop=datePublished]",
+            "attr":"datetime"
+          }
+        ],
+        "fn":"(date, months) => { return new Date(date); }"
+      }
+    },
+    "us.cnn.com":{
+      "name":"CNN",
+      "headlines":[
+        ".pg-headline",
+        ".PageHead__title"
+      ],
+      "body":[
+        ".zn-body__paragraph",
+        ".Paragraph__component"
+      ],
+      "exclude":[
+
+      ],
+      "sourceID":"cnn",
+      "date":{
+        "sel":[
+          {
+            "sel":".update-time",
+            "attr":""
+          },
+          {
+            "sel":".PageHead__published",
+            "attr":""
+          }
+        ],
+        "fn":"(date, months) => {\n  const month = months.filter(elem => date.indexOf(elem) > -1)[0];\n  const year = date.slice(-5).split(' ').join('');\n  let day;\n  if (date.indexOf(',') > -1)\n    day = date.slice(date.indexOf(month)).split(', ')[0].slice(month.length + 1);\n  else\n    day = date.split(' ').filter(elem => (elem.indexOf('th') || elem.indexOf('st') || elem.indexOf('nd') || elem.indexOf('rd')) && elem !== 'Updated')[0].slice(0, 2);\n  return new Date(`${year}-${months.indexOf(month) + 1}-${day} 12:00:00`);\n};"
+      }
+    },
+    "www.cnn.com":{
+      "name":"CNN",
+      "headlines":[
+        ".pg-headline",
+        ".PageHead__title"
+      ],
+      "body":[
+        ".zn-body__paragraph",
+        ".Paragraph__component"
+      ],
+      "exclude":[
+
+      ],
+      "sourceID":"cnn",
+      "date":{
+        "sel":[
+          {
+            "sel":".update-time",
+            "attr":""
+          },
+          {
+            "sel":".PageHead__published",
+            "attr":""
+          }
+        ],
+        "fn":"(date, months) => {\n  const month = months.filter(elem => date.indexOf(elem) > -1)[0];\n  const year = date.slice(-5).split(' ').join('');\n  let day;\n  if (date.indexOf(',') > -1)\n    day = date.slice(date.indexOf(month)).split(', ')[0].slice(month.length + 1);\n  else\n    day = date.split(' ').filter(elem => (elem.indexOf('th') || elem.indexOf('st') || elem.indexOf('nd') || elem.indexOf('rd')) && elem !== 'Updated')[0].slice(0, 2);\n  return new Date(`${year}-${months.indexOf(month) + 1}-${day} 12:00:00`);\n};"
+      }
+    },
+    "edition.cnn.com":{
+      "name":"CNN",
+      "headlines":[
+        ".pg-headline",
+        ".PageHead__title"
+      ],
+      "body":[
+        ".zn-body__paragraph",
+        ".Paragraph__component"
+      ],
+      "exclude":[
+
+      ],
+      "sourceID":"cnn",
+      "date":{
+        "sel":[
+          {
+            "sel":".update-time",
+            "attr":""
+          },
+          {
+            "sel":".PageHead__published",
+            "attr":""
+          }
+        ],
+        "fn":"(date, months) => {\n  const month = months.filter(elem => date.indexOf(elem) > -1)[0];\n  const year = date.slice(-5).split(' ').join('');\n  let day;\n  if (date.indexOf(',') > -1)\n    day = date.slice(date.indexOf(month)).split(', ')[0].slice(month.length + 1);\n  else\n    day = date.split(' ').filter(elem => (elem.indexOf('th') || elem.indexOf('st') || elem.indexOf('nd') || elem.indexOf('rd')) && elem !== 'Updated')[0].slice(0, 2);\n  return new Date(`${year}-${months.indexOf(month) + 1}-${day} 12:00:00`);\n};"
+      }
+    },
+    "www.dailymail.co.uk":{
+      "exclude":[
+
+      ],
+      "sourceID":"daily-mail",
+      "name":"Daily Mail",
+      "headlines":[
+        ".article-text h2"
+      ],
+      "body":[
+        ".mol-para-with-font"
+      ],
+      "date":{
+        "sel":[
+          {
+            "sel":".article-timestamp-published",
+            "attr":""
+          }
+        ],
+        "fn":"(date, months) => {\n  const segments = date.split(', ')[1].split(' ');\n  const year = Number(segments[2]);\n  const month = months.indexOf(segments[1]);\n  const day = Number(segments[0]);\n  return new Date(year, month, day, 12);\n}"
+      }
+    },
+    "www.thesun.co.uk":{
+      "exclude":[
+
+      ],
+      "sourceID":"the-sun",
+      "name":"The Sun",
+      "headlines":[
+        ".article__headline"
+      ],
+      "body":[
+        ".article__content p"
+      ],
+      "date":{
+        "sel":[
+          {
+            "sel":".article__published",
+            "attr":""
+          }
+        ],
+        "fn":"(date, months) => {\n  const segments = date.split(',')[0].split(' ');\n  const month = months.indexOf(segments[1]);\n  const year = Number(segments[2]);\n  const day = Number(segments[0].split('th').join('').split('st').join('').split('nd').join(''));\n  return new Date(year, month, day, 12, 0, 0);\n}"
+      }
+    },
+    "www.aftenposten.no":{
+      "body":[
+        ".article-body p"
+      ],
+      "date":{
+        "sel":[
+          {
+            "sel":".date-publisert",
+            "attr":""
+          }
+        ],
+        "fn":"(date, months) => {\n  if (date.indexOf('siden') > -1)\n    return new Date();\n  return date;\n}"
+      },
+      "exclude":[
+
+      ],
+      "headlines":[
+        ".article-title"
+      ],
+      "name":"Aftenposten",
+      "sourceID":"aftenposten"
+    },
+    "www.mirror.co.uk":{
+      "body":[
+        "div[itemprop=\"articleBody\"] p"
+      ],
+      "date":{
+        "sel":[
+          {
+            "sel":".time-info .date-published",
+            "attr":"datetime"
+          }
+        ],
+        "fn":"(date, months) => {\n  return new Date(date);\n};",
+        "attribute":""
+      },
+      "exclude":[
+
+      ],
+      "headlines":[
+        "h1[itemprop=\"headline name\"]"
+      ],
+      "name":"Mirror",
+      "sourceID":"mirror",
+      "headlineDeletions":[
+
+      ],
+      "bodyDeletions":[
+
+      ],
+      "excludeDelections":[
+
+      ]
+    },
+    "mirror.co.uk":{
+      "body":[
+        "div[itemprop=\"articleBody\"] p"
+      ],
+      "date":{
+        "sel":[
+          {
+            "sel":".time-info .date-published",
+            "attr":"datetime"
+          }
+        ],
+        "fn":"(date, months) => {\n  return new Date(date);\n};",
+        "attribute":""
+      },
+      "exclude":[
+
+      ],
+      "headlines":[
+        "h1[itemprop=\"headline name\"]"
+      ],
+      "name":"Mirror",
+      "sourceID":"mirror",
+      "headlineDeletions":[
+
+      ],
+      "bodyDeletions":[
+
+      ],
+      "excludeDelections":[
+
+      ]
+    },
+    "abc.net.au":{
+      "body":[
+        ".article.section p"
+      ],
+      "date":{
+        "sel":[
+          {
+            "sel":"time",
+            "attr":""
+          }
+        ],
+        "fn":"(date, months) => {\n  return new Date();\n};"
+      },
+      "exclude":[
+        ".topics",
+        ".published"
+      ],
+      "headlines":[
+        ".article.section h1"
+      ],
+      "name":"ABC News AU",
+      "sourceID":"abc-news-au",
+      "headlineDeletions":[
+
+      ],
+      "bodyDeletions":[
+
+      ],
+      "excludeDelections":[
+
+      ]
+    },
+    "www.abc.net.au":{
+      "body":[
+        ".article.section p"
+      ],
+      "date":{
+        "sel":[
+          {
+            "sel":"time",
+            "attr":""
+          }
+        ],
+        "fn":"(date, months) => {\n  return new Date();\n};"
+      },
+      "exclude":[
+        ".topics",
+        ".published"
+      ],
+      "headlines":[
+        ".article.section h1"
+      ],
+      "name":"ABC News AU",
+      "sourceID":"abc-news-au",
+      "headlineDeletions":[
+
+      ],
+      "bodyDeletions":[
+
+      ],
+      "excludeDelections":[
+
+      ]
+    },
+    "_id":"5bb67170-7a01-11e9-990f-2735f1872830"
+  },
+  {
+    "type":"schedule",
+    "schedule":[
+      {
+        "id":"31c57d4d-b342-4e24-9ad2-c5c54486991d",
+        "task":"all",
+        "recurring":true,
+        "occurences":[
+          {
+            "hour":0,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":1,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":2,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":3,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":4,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":5,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":6,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":7,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":8,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":9,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":10,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":11,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":12,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":13,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":14,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":15,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":16,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":17,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":18,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":19,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":20,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":21,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":22,
+            "minute":0,
+            "second":0
+          },
+          {
+            "hour":23,
+            "minute":0,
+            "second":0
+          }
+        ]
+      }
+    ],
+    "_id":"5bb69880-7a01-11e9-990f-2735f1872830"
+  },
+  {
+    "type":"nlu",
+    "excludeType":[
+      "Quantity",
+      "JobTitle"
+    ],
+    "_id":"5bb6bf90-7a01-11e9-990f-2735f1872830"
+  }
+]

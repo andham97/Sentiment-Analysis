@@ -12,7 +12,7 @@ dotenv.config();
 const router = new Router();
 
 router.use('/schedule', (req, res, next) => {
-  if (!isWhitelisted(req) && req.headers.api_key !== process.env.SCRAPER_API_KEY)
+  if (!isWhitelisted(req) && req.headers.api_key !== process.env.SCRAPER_API_KEY && !global.__DEV__)
     return res.status(403).send('Access denied');
   next();
 });
@@ -35,7 +35,7 @@ router.get('/sources', (req, res) => {
 });
 
 router.get('/urlCount', (req, res) => {
-  if (!isWhitelisted(req) && req.headers.api_key !== process.env.SCRAPER_API_KEY)
+  if (!isWhitelisted(req) && req.headers.api_key !== process.env.SCRAPER_API_KEY && !global.__DEV__)
     return res.status(403).send('Access denied');
   API.urlCount().then((data) => {
     res.json({ count: data });
@@ -94,7 +94,7 @@ router.post('/hosts', (req, res) => {
 });
 
 router.post('/fetchNews', (req, res) => {
-  if (!isWhitelisted(req) && req.headers.api_key !== process.env.SCRAPER_API_KEY)
+  if (!isWhitelisted(req) && req.headers.api_key !== process.env.SCRAPER_API_KEY && !global.__DEV__)
     return res.status(403).send('Access denied');
   if (!req.body.sources)
     return res.status(400).send('No sources provided');
@@ -127,7 +127,7 @@ router.post('/fetchNews', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  if (!isWhitelisted(req) && req.headers.api_key !== process.env.SCRAPER_API_KEY)
+  if (!isWhitelisted(req) && req.headers.api_key !== process.env.SCRAPER_API_KEY && !global.__DEV__)
     return res.status(403).send('Access denied');
   if (!req.body.urls)
     return res.status(400).send('No provided URLs');

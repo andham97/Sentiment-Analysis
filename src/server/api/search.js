@@ -101,10 +101,7 @@ const search = (query, options) => new Promise((resolve, reject) => {
       data.docs = data.docs.map((doc) => {
         if (doc.date < 0) {
           doc.date = new Date().getTime();
-          getCloudant().db.use('sa-index').insert(doc, (err) => {
-            if (err)
-              console.error(err);
-          });
+          getCloudant().db.use('sa-index').insert(doc).then(() => {}).catch(console.error);
         }
         delete doc._rev;
         return doc;
@@ -112,7 +109,7 @@ const search = (query, options) => new Promise((resolve, reject) => {
       resolve({ ...data, params: includes });
     }).catch((err) => {
       console.error(err);
-      if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
+      if (err.statusCode === 401 || (err.reason && err.reason.indexOf('_design')) || (err.reason && err.reason.indexOf('_reader')))
         find();
       else
         reject(err);
@@ -145,7 +142,7 @@ const getSources = () => new Promise((resolve, reject) => {
         }).catch((err) => {
           if (!err.reason)
             return reject(err);
-          if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
+          if (err.statusCode === 401 || (err.reason && err.reason.indexOf('_design')) || (err.reason && err.reason.indexOf('_reader')))
             find2();
           else
             reject(err);
@@ -153,7 +150,7 @@ const getSources = () => new Promise((resolve, reject) => {
       };
       find2();
     }).catch((err) => {
-      if (err.statusCode === 401 || err.reason.indexOf('_design') || err.reason.indexOf('_reader'))
+      if (err.statusCode === 401 || (err.reason && err.reason.indexOf('_design')) || (err.reason && err.reason.indexOf('_reader')))
         find();
       else
         reject(err);

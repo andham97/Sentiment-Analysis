@@ -1,0 +1,1642 @@
+{
+  "entities": [
+    {
+      "type": "Location",
+      "text": "Iran",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.884355,
+      "emotion": {
+        "sadness": 0.256336,
+        "joy": 0.047647,
+        "fear": 0.32016,
+        "disgust": 0.469087,
+        "anger": 0.156445
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country"
+        ],
+        "name": "Iran",
+        "dbpedia_resource": "http://dbpedia.org/resource/Iran"
+      },
+      "count": 26
+    },
+    {
+      "type": "Person",
+      "text": "Donald Trump",
+      "sentiment": {
+        "score": -0.582865,
+        "label": "negative"
+      },
+      "relevance": 0.611835,
+      "emotion": {
+        "sadness": 0.510244,
+        "joy": 0.18445,
+        "fear": 0.207669,
+        "disgust": 0.141301,
+        "anger": 0.153061
+      },
+      "disambiguation": {
+        "subtype": [
+          "AwardNominee",
+          "AwardWinner",
+          "Celebrity",
+          "CompanyFounder",
+          "TVPersonality",
+          "TVProducer",
+          "FilmActor",
+          "TVActor"
+        ],
+        "name": "Donald Trump",
+        "dbpedia_resource": "http://dbpedia.org/resource/Donald_Trump"
+      },
+      "count": 16
+    },
+    {
+      "type": "Location",
+      "text": "US",
+      "sentiment": {
+        "score": -0.539189,
+        "label": "negative"
+      },
+      "relevance": 0.577541,
+      "emotion": {
+        "sadness": 0.224278,
+        "joy": 0.147591,
+        "fear": 0.193695,
+        "disgust": 0.149376,
+        "anger": 0.17136
+      },
+      "disambiguation": {
+        "subtype": [
+          "Region",
+          "AdministrativeDivision",
+          "GovernmentalJurisdiction",
+          "FilmEditor",
+          "Country"
+        ],
+        "name": "United States",
+        "dbpedia_resource": "http://dbpedia.org/resource/United_States"
+      },
+      "count": 20
+    },
+    {
+      "type": "JobTitle",
+      "text": "president",
+      "sentiment": {
+        "score": -0.69149,
+        "label": "negative"
+      },
+      "relevance": 0.411909,
+      "emotion": {
+        "sadness": 0.708406,
+        "joy": 0.062343,
+        "fear": 0.20463,
+        "disgust": 0.059695,
+        "anger": 0.03369
+      },
+      "count": 6
+    },
+    {
+      "type": "Person",
+      "text": "Mike Pompeo",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.390194,
+      "emotion": {
+        "sadness": 0.13194,
+        "joy": 0.241619,
+        "fear": 0.148128,
+        "disgust": 0.209712,
+        "anger": 0.072714
+      },
+      "disambiguation": {
+        "subtype": [],
+        "name": "Mike Pompeo",
+        "dbpedia_resource": "http://dbpedia.org/resource/Mike_Pompeo"
+      },
+      "count": 8
+    },
+    {
+      "type": "Company",
+      "text": "Trump",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.345189,
+      "emotion": {
+        "sadness": 0.131318,
+        "joy": 0.217048,
+        "fear": 0.039647,
+        "disgust": 0.23086,
+        "anger": 0.109417
+      },
+      "count": 3
+    },
+    {
+      "type": "Person",
+      "text": "John Bolton",
+      "sentiment": {
+        "score": -0.110101,
+        "label": "negative"
+      },
+      "relevance": 0.332956,
+      "emotion": {
+        "sadness": 0.365259,
+        "joy": 0.177829,
+        "fear": 0.042256,
+        "disgust": 0.171274,
+        "anger": 0.272472
+      },
+      "count": 8
+    },
+    {
+      "type": "Location",
+      "text": "TAIWAN",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.330795,
+      "emotion": {
+        "sadness": 0,
+        "joy": 0,
+        "fear": 0,
+        "disgust": 0,
+        "anger": 0
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country"
+        ]
+      },
+      "count": 8
+    },
+    {
+      "type": "JobTitle",
+      "text": "official",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.325558,
+      "emotion": {
+        "sadness": 0.077478,
+        "joy": 0.527159,
+        "fear": 0.292642,
+        "disgust": 0.002598,
+        "anger": 0.061422
+      },
+      "count": 5
+    },
+    {
+      "type": "Location",
+      "text": "Iraq",
+      "sentiment": {
+        "score": -0.507954,
+        "label": "negative"
+      },
+      "relevance": 0.319364,
+      "emotion": {
+        "sadness": 0.568822,
+        "joy": 0.097219,
+        "fear": 0.102207,
+        "disgust": 0.161434,
+        "anger": 0.100772
+      },
+      "disambiguation": {
+        "subtype": [
+          "GovernmentalJurisdiction",
+          "MilitaryPost",
+          "CityTown",
+          "Country"
+        ],
+        "name": "Iraq",
+        "dbpedia_resource": "http://dbpedia.org/resource/Iraq"
+      },
+      "count": 6
+    },
+    {
+      "type": "JobTitle",
+      "text": "President",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.316004,
+      "emotion": {
+        "sadness": 0,
+        "joy": 0,
+        "fear": 0,
+        "disgust": 0,
+        "anger": 0
+      },
+      "count": 4
+    },
+    {
+      "type": "Person",
+      "text": "Nigel Farage",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.292844,
+      "emotion": {
+        "sadness": 0.112974,
+        "joy": 0.343384,
+        "fear": 0.076149,
+        "disgust": 0.188837,
+        "anger": 0.096472
+      },
+      "disambiguation": {
+        "subtype": [
+          "Politician"
+        ],
+        "name": "Nigel Farage",
+        "dbpedia_resource": "http://dbpedia.org/resource/Nigel_Farage"
+      },
+      "count": 4
+    },
+    {
+      "type": "Person",
+      "text": "Vladimir Putin",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.268072,
+      "emotion": {
+        "sadness": 0.114104,
+        "joy": 0.176308,
+        "fear": 0.569325,
+        "disgust": 0.247745,
+        "anger": 0.050855
+      },
+      "disambiguation": {
+        "subtype": [
+          "Politician",
+          "MartialArtist",
+          "PoliticalAppointer",
+          "TVActor"
+        ],
+        "name": "Vladimir Putin",
+        "dbpedia_resource": "http://dbpedia.org/resource/Vladimir_Putin"
+      },
+      "count": 4
+    },
+    {
+      "type": "Location",
+      "text": "Khartoum",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.26448,
+      "emotion": {
+        "sadness": 0.124009,
+        "joy": 0.21438,
+        "fear": 0.078511,
+        "disgust": 0.081996,
+        "anger": 0.097968
+      },
+      "disambiguation": {
+        "subtype": [
+          "MilitaryPost",
+          "City"
+        ],
+        "name": "Khartoum",
+        "dbpedia_resource": "http://dbpedia.org/resource/Khartoum"
+      },
+      "count": 2
+    },
+    {
+      "type": "Person",
+      "text": "Prince Harry",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.262617,
+      "emotion": {
+        "sadness": 0.226759,
+        "joy": 0.387385,
+        "fear": 0.100797,
+        "disgust": 0.245598,
+        "anger": 0.043216
+      },
+      "disambiguation": {
+        "subtype": [],
+        "name": "Prince Harry of Wales",
+        "dbpedia_resource": "http://dbpedia.org/resource/Prince_Harry_of_Wales"
+      },
+      "count": 4
+    },
+    {
+      "type": "Location",
+      "text": "Sudan",
+      "sentiment": {
+        "score": -0.414997,
+        "label": "negative"
+      },
+      "relevance": 0.262278,
+      "emotion": {
+        "sadness": 0.095936,
+        "joy": 0.017991,
+        "fear": 0.150633,
+        "disgust": 0.478239,
+        "anger": 0.51743
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country"
+        ],
+        "name": "South Sudan",
+        "dbpedia_resource": "http://dbpedia.org/resource/South_Sudan"
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Venezuela",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.257997,
+      "emotion": {
+        "sadness": 0.408283,
+        "joy": 0.11345,
+        "fear": 0.249261,
+        "disgust": 0.147876,
+        "anger": 0.108846
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country"
+        ]
+      },
+      "count": 5
+    },
+    {
+      "type": "Location",
+      "text": "China",
+      "sentiment": {
+        "score": -0.614274,
+        "label": "negative"
+      },
+      "relevance": 0.256718,
+      "emotion": {
+        "sadness": 0,
+        "joy": 0,
+        "fear": 0,
+        "disgust": 0,
+        "anger": 0
+      },
+      "disambiguation": {
+        "subtype": [
+          "Region",
+          "AdministrativeDivision",
+          "GovernmentalJurisdiction",
+          "Kingdom",
+          "FilmScreeningVenue",
+          "Country"
+        ],
+        "name": "China",
+        "dbpedia_resource": "http://dbpedia.org/resource/China"
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Russia",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.255002,
+      "emotion": {
+        "sadness": 0.231393,
+        "joy": 0.088121,
+        "fear": 0.118285,
+        "disgust": 0.045784,
+        "anger": 0.077212
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country"
+        ],
+        "name": "Russia",
+        "dbpedia_resource": "http://dbpedia.org/resource/Russia"
+      },
+      "count": 4
+    },
+    {
+      "type": "Person",
+      "text": "Elliott Abrams",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.254534,
+      "emotion": {
+        "sadness": 0.129062,
+        "joy": 0.31516,
+        "fear": 0.027551,
+        "disgust": 0.460638,
+        "anger": 0.148141
+      },
+      "disambiguation": {
+        "subtype": [],
+        "name": "Elliott Abrams",
+        "dbpedia_resource": "http://dbpedia.org/resource/Elliott_Abrams"
+      },
+      "count": 7
+    },
+    {
+      "type": "Location",
+      "text": "TAIPEI",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.251223,
+      "emotion": {
+        "sadness": 0,
+        "joy": 0,
+        "fear": 0,
+        "disgust": 0,
+        "anger": 0
+      },
+      "disambiguation": {
+        "subtype": [
+          "City"
+        ],
+        "name": "Taipei",
+        "dbpedia_resource": "http://dbpedia.org/resource/Taipei"
+      },
+      "count": 4
+    },
+    {
+      "type": "PrintMedia",
+      "text": "New York Times",
+      "sentiment": {
+        "score": -0.319949,
+        "label": "negative"
+      },
+      "relevance": 0.247233,
+      "emotion": {
+        "sadness": 0.275805,
+        "joy": 0.02322,
+        "fear": 0.036713,
+        "disgust": 0.475022,
+        "anger": 0.326819
+      },
+      "disambiguation": {
+        "subtype": [
+          "Organization",
+          "Company",
+          "AwardPresentingOrganization",
+          "AwardWinner",
+          "CompanyShareholder",
+          "Newspaper"
+        ],
+        "name": "The New York Times",
+        "dbpedia_resource": "http://dbpedia.org/resource/The_New_York_Times"
+      },
+      "count": 4
+    },
+    {
+      "type": "Person",
+      "text": "Matt Mazzoncini",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.245647,
+      "emotion": {
+        "sadness": 0.151763,
+        "joy": 0.409971,
+        "fear": 0.023863,
+        "disgust": 0.08079,
+        "anger": 0.056256
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "UAE",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.244731,
+      "emotion": {
+        "sadness": 0.251415,
+        "joy": 0.130844,
+        "fear": 0.030696,
+        "disgust": 0.341519,
+        "anger": 0.102552
+      },
+      "disambiguation": {
+        "subtype": [
+          "GovernmentalJurisdiction",
+          "Country"
+        ],
+        "name": "United Arab Emirates",
+        "dbpedia_resource": "http://dbpedia.org/resource/United_Arab_Emirates"
+      },
+      "count": 4
+    },
+    {
+      "type": "Location",
+      "text": "Sochi",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.243742,
+      "emotion": {
+        "sadness": 0.296199,
+        "joy": 0.426019,
+        "fear": 0.051246,
+        "disgust": 0.127506,
+        "anger": 0.157105
+      },
+      "disambiguation": {
+        "subtype": [
+          "City"
+        ],
+        "name": "Sochi",
+        "dbpedia_resource": "http://dbpedia.org/resource/Sochi"
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Australia",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.243482,
+      "emotion": {
+        "sadness": 0.506923,
+        "joy": 0.098479,
+        "fear": 0.34745,
+        "disgust": 0.008931,
+        "anger": 0.189798
+      },
+      "disambiguation": {
+        "subtype": [
+          "GovernmentalJurisdiction",
+          "Kingdom",
+          "Country"
+        ],
+        "name": "Australia",
+        "dbpedia_resource": "http://dbpedia.org/resource/Australia"
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "North Korea",
+      "sentiment": {
+        "score": 0.369973,
+        "label": "positive"
+      },
+      "relevance": 0.243061,
+      "emotion": {
+        "sadness": 0.213726,
+        "joy": 0.324859,
+        "fear": 0.131173,
+        "disgust": 0.104857,
+        "anger": 0.178951
+      },
+      "disambiguation": {
+        "subtype": [
+          "GovernmentalJurisdiction",
+          "Country"
+        ],
+        "name": "North Korea",
+        "dbpedia_resource": "http://dbpedia.org/resource/North_Korea"
+      },
+      "count": 3
+    },
+    {
+      "type": "GeographicFeature",
+      "text": "Black Sea",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.239536,
+      "emotion": {
+        "sadness": 0.33661,
+        "joy": 0.140416,
+        "fear": 0.12892,
+        "disgust": 0.217076,
+        "anger": 0.135464
+      },
+      "disambiguation": {
+        "subtype": [
+          "Location",
+          "BodyOfWater",
+          "Lake"
+        ],
+        "name": "Black Sea",
+        "dbpedia_resource": "http://dbpedia.org/resource/Black_Sea"
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Taiwan",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.237104,
+      "emotion": {
+        "sadness": 0.05982,
+        "joy": 0.081374,
+        "fear": 0.023232,
+        "disgust": 0.097029,
+        "anger": 0.017524
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country"
+        ]
+      },
+      "count": 2
+    },
+    {
+      "type": "Person",
+      "text": "Takht Ravanchi",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.233292,
+      "emotion": {
+        "sadness": 0,
+        "joy": 0,
+        "fear": 0,
+        "disgust": 0,
+        "anger": 0
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Kiano",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.233037,
+      "emotion": {
+        "sadness": 0.151763,
+        "joy": 0.409971,
+        "fear": 0.023863,
+        "disgust": 0.08079,
+        "anger": 0.056256
+      },
+      "disambiguation": {
+        "subtype": [
+          "City"
+        ]
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Middle East",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.232149,
+      "emotion": {
+        "sadness": 0,
+        "joy": 0,
+        "fear": 0,
+        "disgust": 0,
+        "anger": 0
+      },
+      "disambiguation": {
+        "subtype": [
+          "Region"
+        ],
+        "name": "Middle East",
+        "dbpedia_resource": "http://dbpedia.org/resource/Middle_East"
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Puerto Rico",
+      "sentiment": {
+        "score": -0.506647,
+        "label": "negative"
+      },
+      "relevance": 0.231598,
+      "emotion": {
+        "sadness": 0.144548,
+        "joy": 0.185315,
+        "fear": 0.087573,
+        "disgust": 0.077654,
+        "anger": 0.090723
+      },
+      "disambiguation": {
+        "subtype": [
+          "City"
+        ]
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Asni",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.231449,
+      "emotion": {
+        "sadness": 0.087527,
+        "joy": 0.600979,
+        "fear": 0.263999,
+        "disgust": 0.014214,
+        "anger": 0.048547
+      },
+      "disambiguation": {
+        "subtype": [
+          "City"
+        ],
+        "name": "Asni",
+        "dbpedia_resource": "http://dbpedia.org/resource/Asni"
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Tehran",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.231282,
+      "emotion": {
+        "sadness": 0.488398,
+        "joy": 0.101563,
+        "fear": 0.108743,
+        "disgust": 0.317901,
+        "anger": 0.190413
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country",
+          "City"
+        ],
+        "name": "Tehran",
+        "dbpedia_resource": "http://dbpedia.org/resource/Tehran"
+      },
+      "count": 2
+    },
+    {
+      "type": "Organization",
+      "text": "EU",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.228365,
+      "emotion": {
+        "sadness": 0.418795,
+        "joy": 0.026246,
+        "fear": 0.16694,
+        "disgust": 0.312722,
+        "anger": 0.127216
+      },
+      "disambiguation": {
+        "subtype": [
+          "Location",
+          "Country",
+          "GovernmentalJurisdiction",
+          "MembershipOrganization",
+          "AwardWinner"
+        ],
+        "name": "European Union",
+        "dbpedia_resource": "http://dbpedia.org/resource/European_Union"
+      },
+      "count": 2
+    },
+    {
+      "type": "Organization",
+      "text": "Education For All&quot",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.227127,
+      "emotion": {
+        "sadness": 0.141996,
+        "joy": 0.446895,
+        "fear": 0.35689,
+        "disgust": 0.006581,
+        "anger": 0.073029
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Asia",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.225642,
+      "emotion": {
+        "sadness": 0.155197,
+        "joy": 0.555216,
+        "fear": 0.042467,
+        "disgust": 0.581023,
+        "anger": 0.072844
+      },
+      "disambiguation": {
+        "subtype": [
+          "FieldOfStudy",
+          "Continent"
+        ],
+        "name": "Asia",
+        "dbpedia_resource": "http://dbpedia.org/resource/Asia"
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Washington",
+      "sentiment": {
+        "score": 0.672149,
+        "label": "positive"
+      },
+      "relevance": 0.223894,
+      "emotion": {
+        "sadness": 0.118933,
+        "joy": 0.323513,
+        "fear": 0.517339,
+        "disgust": 0.128291,
+        "anger": 0.129575
+      },
+      "disambiguation": {
+        "subtype": [
+          "AdministrativeDivision",
+          "GovernmentalJurisdiction",
+          "MilitaryPost",
+          "PlaceWithNeighborhoods",
+          "USCounty",
+          "City"
+        ],
+        "name": "Washington, D.C.",
+        "dbpedia_resource": "http://dbpedia.org/resource/Washington,_D.C."
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Iran.",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.22202,
+      "emotion": {
+        "sadness": 0,
+        "joy": 0,
+        "fear": 0,
+        "disgust": 0,
+        "anger": 0
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country"
+        ]
+      },
+      "count": 2
+    },
+    {
+      "type": "Person",
+      "text": "Nixon",
+      "sentiment": {
+        "score": -0.567584,
+        "label": "negative"
+      },
+      "relevance": 0.220162,
+      "emotion": {
+        "sadness": 0,
+        "joy": 0,
+        "fear": 0,
+        "disgust": 0,
+        "anger": 0
+      },
+      "count": 3
+    },
+    {
+      "type": "Person",
+      "text": "Saddam Hussein",
+      "sentiment": {
+        "score": -0.402148,
+        "label": "negative"
+      },
+      "relevance": 0.217914,
+      "emotion": {
+        "sadness": 0,
+        "joy": 0,
+        "fear": 0,
+        "disgust": 0,
+        "anger": 0
+      },
+      "disambiguation": {
+        "subtype": [
+          "Politician",
+          "OfficeHolder"
+        ],
+        "name": "Saddam Hussein",
+        "dbpedia_resource": "http://dbpedia.org/resource/Saddam_Hussein"
+      },
+      "count": 2
+    },
+    {
+      "type": "JobTitle",
+      "text": "executive",
+      "sentiment": {
+        "score": -0.237529,
+        "label": "negative"
+      },
+      "relevance": 0.217366,
+      "emotion": {
+        "sadness": 0.256336,
+        "joy": 0.047647,
+        "fear": 0.32016,
+        "disgust": 0.469087,
+        "anger": 0.156445
+      },
+      "count": 2
+    },
+    {
+      "type": "Person",
+      "text": "George W. Bush",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.216058,
+      "emotion": {
+        "sadness": 0.314353,
+        "joy": 0.219371,
+        "fear": 0.108693,
+        "disgust": 0.273117,
+        "anger": 0.080628
+      },
+      "disambiguation": {
+        "subtype": [
+          "FilmCharacter",
+          "MusicalArtist",
+          "Politician",
+          "President",
+          "Appointer",
+          "AwardNominee",
+          "AwardWinner",
+          "ChivalricOrderMember",
+          "CompanyFounder",
+          "MilitaryPerson",
+          "PoliticalAppointer",
+          "USPresident",
+          "FilmActor",
+          "TVActor"
+        ],
+        "name": "George W. Bush",
+        "dbpedia_resource": "http://dbpedia.org/resource/George_W._Bush"
+      },
+      "count": 3
+    },
+    {
+      "type": "Person",
+      "text": "Mueller",
+      "sentiment": {
+        "score": 0.328932,
+        "label": "positive"
+      },
+      "relevance": 0.214137,
+      "emotion": {
+        "sadness": 0.30828,
+        "joy": 0.066884,
+        "fear": 0.13138,
+        "disgust": 0.086966,
+        "anger": 0.135349
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Tehran",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.213965,
+      "emotion": {
+        "sadness": 0.488398,
+        "joy": 0.101563,
+        "fear": 0.108743,
+        "disgust": 0.317901,
+        "anger": 0.190413
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country"
+        ]
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Sussex",
+      "sentiment": {
+        "score": 0.36125,
+        "label": "positive"
+      },
+      "relevance": 0.212161,
+      "emotion": {
+        "sadness": 0.199585,
+        "joy": 0.520071,
+        "fear": 0.124647,
+        "disgust": 0.176029,
+        "anger": 0.08456
+      },
+      "disambiguation": {
+        "subtype": [
+          "StateOrCounty"
+        ]
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Sussex",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.212123,
+      "emotion": {
+        "sadness": 0.199585,
+        "joy": 0.520071,
+        "fear": 0.124647,
+        "disgust": 0.176029,
+        "anger": 0.08456
+      },
+      "disambiguation": {
+        "subtype": [
+          "City"
+        ]
+      },
+      "count": 2
+    },
+    {
+      "type": "Person",
+      "text": "Meghan",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.211024,
+      "emotion": {
+        "sadness": 0.102709,
+        "joy": 0.625517,
+        "fear": 0.011494,
+        "disgust": 0.10945,
+        "anger": 0.057497
+      },
+      "count": 2
+    },
+    {
+      "type": "GeographicFeature",
+      "text": "High Atlas Mountain",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.209745,
+      "emotion": {
+        "sadness": 0.116602,
+        "joy": 0.02776,
+        "fear": 0.025183,
+        "disgust": 0.220553,
+        "anger": 0.102739
+      },
+      "count": 2
+    },
+    {
+      "type": "Person",
+      "text": "President Nicolas Maduro",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.205357,
+      "emotion": {
+        "sadness": 0,
+        "joy": 0,
+        "fear": 0,
+        "disgust": 0,
+        "anger": 0
+      },
+      "disambiguation": {
+        "subtype": [
+          "Politician"
+        ],
+        "name": "Nicolás Maduro",
+        "dbpedia_resource": "http://dbpedia.org/resource/Nicolás_Maduro"
+      },
+      "count": 2
+    },
+    {
+      "type": "Location",
+      "text": "Morocco.",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.203853,
+      "emotion": {
+        "sadness": 0.144548,
+        "joy": 0.185315,
+        "fear": 0.087573,
+        "disgust": 0.077654,
+        "anger": 0.090723
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country"
+        ]
+      },
+      "count": 2
+    },
+    {
+      "type": "PrintMedia",
+      "text": "Wall Street Journal",
+      "sentiment": {
+        "score": -0.245989,
+        "label": "negative"
+      },
+      "relevance": 0.193605,
+      "emotion": {
+        "sadness": 0.162335,
+        "joy": 0.028165,
+        "fear": 0.146221,
+        "disgust": 0.41704,
+        "anger": 0.374895
+      },
+      "disambiguation": {
+        "subtype": [
+          "AwardWinner",
+          "Newspaper"
+        ],
+        "name": "The Wall Street Journal",
+        "dbpedia_resource": "http://dbpedia.org/resource/The_Wall_Street_Journal"
+      },
+      "count": 1
+    },
+    {
+      "type": "Company",
+      "text": "CNN",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.190515,
+      "emotion": {
+        "sadness": 0.090937,
+        "joy": 0.307784,
+        "fear": 0.069023,
+        "disgust": 0.018731,
+        "anger": 0.014764
+      },
+      "disambiguation": {
+        "subtype": [
+          "Broadcast",
+          "AwardWinner",
+          "RadioNetwork",
+          "TVNetwork"
+        ],
+        "name": "CNN",
+        "dbpedia_resource": "http://dbpedia.org/resource/CNN"
+      },
+      "count": 1
+    },
+    {
+      "type": "Person",
+      "text": "Obama",
+      "sentiment": {
+        "score": -0.245989,
+        "label": "negative"
+      },
+      "relevance": 0.189825,
+      "emotion": {
+        "sadness": 0.521998,
+        "joy": 0.226369,
+        "fear": 0.13719,
+        "disgust": 0.088582,
+        "anger": 0.193222
+      },
+      "disambiguation": {
+        "subtype": [
+          "Politician",
+          "President",
+          "Appointer",
+          "AwardWinner",
+          "Celebrity",
+          "PoliticalAppointer",
+          "U.S.Congressperson",
+          "USPresident",
+          "TVActor"
+        ],
+        "name": "Barack Obama",
+        "dbpedia_resource": "http://dbpedia.org/resource/Barack_Obama"
+      },
+      "count": 1
+    },
+    {
+      "type": "Location",
+      "text": "UK",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.188208,
+      "emotion": {
+        "sadness": 0.182401,
+        "joy": 0.323048,
+        "fear": 0.023006,
+        "disgust": 0.043713,
+        "anger": 0.035491
+      },
+      "disambiguation": {
+        "subtype": [
+          "AdministrativeDivision",
+          "GovernmentalJurisdiction",
+          "Kingdom",
+          "MeteorologicalService",
+          "Country"
+        ],
+        "name": "United Kingdom",
+        "dbpedia_resource": "http://dbpedia.org/resource/United_Kingdom"
+      },
+      "count": 1
+    },
+    {
+      "type": "JobTitle",
+      "text": "undersecretary",
+      "sentiment": {
+        "score": 0.690894,
+        "label": "positive"
+      },
+      "relevance": 0.183947,
+      "emotion": {
+        "sadness": 0.254189,
+        "joy": 0.091691,
+        "fear": 0.259906,
+        "disgust": 0.241935,
+        "anger": 0.309725
+      },
+      "count": 1
+    },
+    {
+      "type": "Location",
+      "text": "Vietnam",
+      "sentiment": {
+        "score": -0.635031,
+        "label": "negative"
+      },
+      "relevance": 0.179923,
+      "emotion": {
+        "sadness": 0.654479,
+        "joy": 0.004513,
+        "fear": 0.171668,
+        "disgust": 0.268018,
+        "anger": 0.247625
+      },
+      "disambiguation": {
+        "subtype": [
+          "GovernmentalJurisdiction",
+          "Country"
+        ],
+        "name": "Vietnam",
+        "dbpedia_resource": "http://dbpedia.org/resource/Vietnam"
+      },
+      "count": 1
+    },
+    {
+      "type": "Person",
+      "text": "Washington",
+      "sentiment": {
+        "score": -0.47713,
+        "label": "negative"
+      },
+      "relevance": 0.177906,
+      "emotion": {
+        "sadness": 0.118933,
+        "joy": 0.323513,
+        "fear": 0.517339,
+        "disgust": 0.128291,
+        "anger": 0.129575
+      },
+      "count": 1
+    },
+    {
+      "type": "Location",
+      "text": "South America",
+      "sentiment": {
+        "score": -0.268809,
+        "label": "negative"
+      },
+      "relevance": 0.177767,
+      "emotion": {
+        "sadness": 0.213746,
+        "joy": 0.061528,
+        "fear": 0.074775,
+        "disgust": 0.158361,
+        "anger": 0.15334
+      },
+      "disambiguation": {
+        "subtype": [
+          "Continent"
+        ],
+        "name": "South America",
+        "dbpedia_resource": "http://dbpedia.org/resource/South_America"
+      },
+      "count": 1
+    },
+    {
+      "type": "Location",
+      "text": "Caracas",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.175447,
+      "emotion": {
+        "sadness": 0.64213,
+        "joy": 0.074343,
+        "fear": 0.068943,
+        "disgust": 0.248185,
+        "anger": 0.043738
+      },
+      "disambiguation": {
+        "subtype": [
+          "City"
+        ],
+        "name": "Caracas",
+        "dbpedia_resource": "http://dbpedia.org/resource/Caracas"
+      },
+      "count": 1
+    },
+    {
+      "type": "Person",
+      "text": "Rex Tillerson",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.174092,
+      "emotion": {
+        "sadness": 0.159712,
+        "joy": 0.089113,
+        "fear": 0.017186,
+        "disgust": 0.144846,
+        "anger": 0.14377
+      },
+      "disambiguation": {
+        "subtype": [
+          "BoardMember"
+        ],
+        "name": "Rex Tillerson",
+        "dbpedia_resource": "http://dbpedia.org/resource/Rex_Tillerson"
+      },
+      "count": 1
+    },
+    {
+      "type": "Organization",
+      "text": "NSC",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.16851,
+      "emotion": {
+        "sadness": 0.198902,
+        "joy": 0.193794,
+        "fear": 0.190881,
+        "disgust": 0.127159,
+        "anger": 0.330251
+      },
+      "disambiguation": {
+        "subtype": [
+          "GovernmentalBody"
+        ],
+        "name": "United States National Security Council",
+        "dbpedia_resource": "http://dbpedia.org/resource/United_States_National_Security_Council"
+      },
+      "count": 1
+    },
+    {
+      "type": "JobTitle",
+      "text": "officer",
+      "sentiment": {
+        "score": -0.131209,
+        "label": "negative"
+      },
+      "relevance": 0.163983,
+      "emotion": {
+        "sadness": 0.577502,
+        "joy": 0.126833,
+        "fear": 0.13702,
+        "disgust": 0.132976,
+        "anger": 0.08298
+      },
+      "count": 1
+    },
+    {
+      "type": "Person",
+      "text": "Michael Flynn",
+      "sentiment": {
+        "score": 0.126846,
+        "label": "positive"
+      },
+      "relevance": 0.163866,
+      "emotion": {
+        "sadness": 0.55163,
+        "joy": 0.055339,
+        "fear": 0.133278,
+        "disgust": 0.167935,
+        "anger": 0.219235
+      },
+      "count": 1
+    },
+    {
+      "type": "Organization",
+      "text": "hawks",
+      "sentiment": {
+        "score": -0.319949,
+        "label": "negative"
+      },
+      "relevance": 0.161986,
+      "emotion": {
+        "sadness": 0.211933,
+        "joy": 0.031141,
+        "fear": 0.031929,
+        "disgust": 0.393968,
+        "anger": 0.285123
+      },
+      "count": 1
+    },
+    {
+      "type": "Location",
+      "text": "Florida",
+      "sentiment": {
+        "score": -0.519733,
+        "label": "negative"
+      },
+      "relevance": 0.158664,
+      "emotion": {
+        "sadness": 0.173804,
+        "joy": 0.184107,
+        "fear": 0.506218,
+        "disgust": 0.198387,
+        "anger": 0.154349
+      },
+      "disambiguation": {
+        "subtype": [
+          "StateOrCounty"
+        ]
+      },
+      "count": 1
+    },
+    {
+      "type": "Person",
+      "text": "Jim Mattis",
+      "sentiment": {
+        "score": -0.211449,
+        "label": "negative"
+      },
+      "relevance": 0.157214,
+      "emotion": {
+        "sadness": 0.355276,
+        "joy": 0.057292,
+        "fear": 0.157542,
+        "disgust": 0.356669,
+        "anger": 0.089005
+      },
+      "count": 1
+    },
+    {
+      "type": "Location",
+      "text": "Cuba",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.153527,
+      "emotion": {
+        "sadness": 0.224875,
+        "joy": 0.186339,
+        "fear": 0.067092,
+        "disgust": 0.271554,
+        "anger": 0.130439
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country"
+        ]
+      },
+      "count": 1
+    },
+    {
+      "type": "Organization",
+      "text": "White House",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.153023,
+      "emotion": {
+        "sadness": 0.286148,
+        "joy": 0.280317,
+        "fear": 0.197374,
+        "disgust": 0.117003,
+        "anger": 0.033137
+      },
+      "count": 1
+    },
+    {
+      "type": "Location",
+      "text": "Afghanistan",
+      "sentiment": {
+        "score": 0.385938,
+        "label": "positive"
+      },
+      "relevance": 0.147548,
+      "emotion": {
+        "sadness": 0.149693,
+        "joy": 0.192828,
+        "fear": 0.060532,
+        "disgust": 0.453357,
+        "anger": 0.109535
+      },
+      "disambiguation": {
+        "subtype": [
+          "Country"
+        ]
+      },
+      "count": 1
+    },
+    {
+      "type": "Quantity",
+      "text": "$100 million",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.147548,
+      "count": 2
+    },
+    {
+      "type": "Quantity",
+      "text": "two years",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.147548,
+      "count": 1
+    },
+    {
+      "type": "Quantity",
+      "text": "17 years",
+      "sentiment": {
+        "score": 0,
+        "label": "neutral"
+      },
+      "relevance": 0.147548,
+      "count": 1
+    }
+  ]
+}

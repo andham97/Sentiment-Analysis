@@ -14,12 +14,10 @@ let excludes;
  */
 const loadExclude = (cb) => {
   if (excludes === undefined)
-    getCloudant().db.use('sa-meta').find({ selector: { type: 'nlu' } }, (err, result) => {
-      if (err)
-        return cb(err);
+    getCloudant().db.use('sa-meta').find({ selector: { type: 'nlu' } }).then((result) => {
       excludes = result.docs[0].excludeType.map(entry => entry.toLowerCase());
       cb();
-    });
+    }).catch(cb);
   else
     cb();
 };
@@ -61,20 +59,18 @@ const analyze = (urlData, cb) => {
             sourceID: page.sourceID,
           };
           const ins = (d) => {
-            getCloudant().db.use('sa-index').insert(d, (err) => {
-              if (err) {
-                if (err.statusCode === 401) {
-                  if (getCloudant())
-                    connectCloudant();
-                }
-                else if (err.statusCode && err.statusCode !== 429)
-                  console.error(err);
-                setTimeout(() => {
-                  ins(doc);
-                }, 400);
+            getCloudant().db.use('sa-index').insert(d).then(() => {
+              cb(null);
+            }).catch((err) => {
+              if (err.statusCode === 401) {
+                if (getCloudant())
+                  connectCloudant();
               }
-              else
-                cb(null);
+              else if (err.statusCode && err.statusCode !== 429)
+                console.error(err);
+              setTimeout(() => {
+                ins(doc);
+              }, 400);
             });
           };
           ins(doc);

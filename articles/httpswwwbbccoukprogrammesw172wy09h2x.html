@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html class="b-reith-sans-font b-header--black--white b-footer--black--white " lang="en-GB">
+    <head>
+        <meta charset="UTF-8">
+        <title>BBC World Service - BBC News, 2019/05/19 08:01 GMT</title>
+        <link rel="icon" href="https://www.bbc.co.uk/favicon.ico" type="image/x-icon"><link rel="shortcut icon" sizes="196x196" href="https://ichef.bbci.co.uk/images/ic/208x208/p060dh18.jpg">
+        <link rel="shortcut icon" sizes="128x128" href="https://ichef.bbci.co.uk/images/ic/128x128/p060dh18.jpg">
+        <link rel="apple-touch-icon" href="https://ichef.bbci.co.uk/images/ic/80x80/p060dh18.jpg" >
+        <link rel="apple-touch-icon" sizes="120x120" href="https://ichef.bbci.co.uk/images/ic/128x128/p060dh18.jpg">
+        <link rel="apple-touch-icon" sizes="152x152" href="https://ichef.bbci.co.uk/images/ic/160x160/p060dh18.jpg">
+
+                        
+        <script>document.documentElement.className += ' has-js';</script>
+        <!-- iSite2 Project (Tenant space): progs-worldservice -->
+                        <!-- Nav Env: live -->
+<!-- Analytics Web Module: 0.0.1-292.2d933ad -->
+<!-- NavID Web Module: 0.2.0-62.de8f099 -->
+<!-- Searchbox Web Module: 2.0.0-17.7e7753b -->
+<!-- Promo Web Module: 2.0.1-124.1559ace -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta property="fb:admins" content="100004154058350"><link rel="stylesheet" href="https://nav.files.bbci.co.uk/orbit/2.0.0-561.289d4c97/css/orb-ltr.min.css"><!--[if (lt IE 9) & (!IEMobile)]>
+    <link rel="stylesheet" href="https://nav.files.bbci.co.uk/orbit/2.0.0-561.289d4c97/css/orb-ie-ltr.min.css">
+    <![endif]--><script type="text/javascript">/*<![CDATA[*/
+        window.orb = {
+            lang: 'en',
+            bbcBaseUrl: 'https://www.bbc.co.uk',
+            bbcUrlPrefix: 'https://www.',
+            staticHost: 'https://nav.files.bbci.co.uk/orbit/2.0.0-561.289d4c97',
+            figUrl: 'https://fig.bbc.co.uk/frameworks/fig/2/fig.js',
+            partialCookieOvenUrl: 'https://cookie-oven.api.bbc'
+        };
+
+        document.documentElement.className += (document.documentElement.className? ' ' : '') + 'orb-js';
+        window.orb.worldwideNavlinks = '';
+
+
+     /*]]>*/</script><script>// Promise polyfill from https://github.com/bramstein/promis
+        (function(){'use strict';var f,g=[];function l(a){g.push(a);1==g.length&&f()}function m(){for(;g.length;)g[0](),g.shift()}f=function(){setTimeout(m)};function n(a){this.a=p;this.b=void 0;this.f=[];var b=this;try{a(function(a){q(b,a)},function(a){r(b,a)})}catch(c){r(b,c)}}var p=2;function t(a){return new n(function(b,c){c(a)})}function u(a){return new n(function(b){b(a)})}function q(a,b){if(a.a==p){if(b==a)throw new TypeError;var c=!1;try{var d=b&&b.then;if(null!=b&&"object"==typeof b&&"function"==typeof d){d.call(b,function(b){c||q(a,b);c=!0},function(b){c||r(a,b);c=!0});return}}catch(e){c||r(a,e);return}a.a=0;a.b=b;v(a)}} function r(a,b){if(a.a==p){if(b==a)throw new TypeError;a.a=1;a.b=b;v(a)}}function v(a){l(function(){if(a.a!=p)for(;a.f.length;){var b=a.f.shift(),c=b[0],d=b[1],e=b[2],b=b[3];try{0==a.a?"function"==typeof c?e(c.call(void 0,a.b)):e(a.b):1==a.a&&("function"==typeof d?e(d.call(void 0,a.b)):b(a.b))}catch(h){b(h)}}})}n.prototype.g=function(a){return this.c(void 0,a)};n.prototype.c=function(a,b){var c=this;return new n(function(d,e){c.f.push([a,b,d,e]);v(c)})}; function w(a){return new n(function(b,c){function d(c){return function(d){h[c]=d;e+=1;e==a.length&&b(h)}}var e=0,h=[];0==a.length&&b(h);for(var k=0;k<a.length;k+=1)u(a[k]).c(d(k),c)})}function x(a){return new n(function(b,c){for(var d=0;d<a.length;d+=1)u(a[d]).c(b,c)})};window.Promise||(window.Promise=n,window.Promise.resolve=u,window.Promise.reject=t,window.Promise.race=x,window.Promise.all=w,window.Promise.prototype.then=n.prototype.c,window.Promise.prototype["catch"]=n.prototype.g);}());
+    
+    
+        // Polyfill Event constructor for IE ref: https://jira.dev.bbc.co.uk/browse/ORBITEN-919
+        // see: https://stackoverflow.com/questions/26596123
+        (function () {
+          if (typeof window.CustomEvent === "function") {
+            return false;
+          }
+          function CustomEvent(event, params) {
+            params = params || { bubbles: false, cancelable: false, detail: undefined };
+            var evt = document.createEvent('CustomEvent');
+            evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+            return evt;
+          }
+          CustomEvent.prototype = window.Event.prototype;
+          window.Event = CustomEvent;
+        })();
+    
+    
+        //Element.prototype.matches polyfill
+        //from https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
+        if (!Element.prototype.matches) {
+          Element.prototype.matches = Element.prototype.msMatchesSelector ||
+                                      Element.prototype.webkitMatchesSelector;
+        }
+        //NodeList.forEach Polyfill
+        //from https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach#Polyfill
+        if (window.NodeList && !NodeList.prototype.forEach) {
+          NodeList.prototype.forEach = Array.prototype.forEach;
+        }
+    
+        // Object.assign polyfill from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Polyfill
+        if (typeof Object.assign != 'function') {
+          // Must be writable: true, enumerable: false, configurable: true
+          Object.defineProperty(Object, "assign", {
+            value: function assign(target, varArgs) { // .length of function is 2
+              'use strict';
+              if (target == null) { // TypeError if undefined or null
+                throw new TypeError('Cannot convert undefined or null to object');
+              }
+    
+              var to = Object(target);
+    
+              for (var index = 1; index < arguments.length; index++) {
+                var nextSource = arguments[index];
+    
+                if (nextSource != null) { // Skip over if undefined or null
+                  for (var nextKey in nextSource) {
+                    // Avoid bugs when hasOwnProperty is shadowed
+                    if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                      to[nextKey] = nextSource[nextKey];
+                    }
+                  }
+                }
+              }
+              return to;
+            },
+            writable: true,
+            configurable: true
+          });
+        }
+    
+        if (typeof window.CustomEvent !== 'function') {
+    
+          function CustomEvent(event, params) {
+            params = params || { bubbles: false, cancelable: false, detail: null };
+            var evt = document.createEvent('CustomEvent');
+            evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+            return evt;
+          }
+    
+          CustomEvent.prototype = window.Event.prototype;
+    
+          window.CustomEvent = CustomEvent;
+    
+        }
+    
+        (function() {
+    
+            var language = 'en';
+                language = 'en';
+    
+            var modal = false;
+    
+    
+            var istatsLabels = {name: '' || undefined};
+    
+            function getMetaValue(propertyName) {
+              var metaTag = document.querySelector(
+                "meta[property='" + propertyName + "'], " +
+                "meta[name='" + propertyName + "']");
+              if (metaTag) {
+                return metaTag.getAttribute("content");
+              } else {
+                throw new Error('No meta tag called: ' + propertyName)
+              }
+            }
+    
+            function generateCountername() {
+                var pathName = window.location.pathname
+                    .replace(/\/$/, "")
+                    .replace(/^\//, "")
+                    .replace(/\//g, '.');
+                return pathName + '.page';
+            }
+    
+            var additionalPageProperties = {};
+                additionalPageProperties['app_name'] = 'programmes';
+                additionalPageProperties['custom_var_1'] = '2019%2F05%2F19+08%3A01+GMT';
+                additionalPageProperties['custom_var_2'] = 'BBC+News';
+                additionalPageProperties['custom_var_4'] = 'bbc_world_service';
+    
+            var page = {
+                name: '' || istatsLabels.name || generateCountername(),
+                destination: 'ws_programmes' || null,
+                producer: 'WORLD_SERVICE_ENGLISH' || null,
+                section: 'episode' || null,
+                site: '' || istatsLabels.bbc_site || istatsLabels.app_name || istatsLabels.prod_name || null,
+                contentId: 'urn:bbc:pips:w172wy09h2x73pm' || null,
+                contentType: 'episode' || null,
+                edition: '' || null,
+                additionalProperties: additionalPageProperties
+            };
+    
+            function updatePageData(newData) {
+                page = Object.assign(page, newData);
+            }
+    
+            document.addEventListener('bbc-page-reset', function(event) {
+                if (event.detail && event.detail.page) {
+                    updatePageData(event.detail.page);
+                }
+                document.dispatchEvent(new Event('bbc-page-updated'));
+            });
+    
+            window.bbcpage = {
+                loadModule: function(deps) {
+                    return new Promise(function (resolve, reject) {
+                        window.require(deps, function () {
+                            resolve.apply(this, arguments);
+                        },
+                        function (error) {
+                            reject(error);
+                        });
+                    })
+                },
+                loadCSS: function (url, timeout) {
+                    return window.bbcpage.loadModule(['orb/lib/_$'])
+                        .then(function($) {
+                            return new Promise(function(resolve, reject) {
+                                var stylesheet = loadCSS(url);
+                                $.onloadCSS(stylesheet, function() {
+                                    resolve();
+                                });
+                                if (timeout) {
+                                    setTimeout(function () { reject(); }, timeout);
+                                }
+                            });
+                    });
+                },
+                isModal: function () {
+                    return modal;
+                },
+                getLanguage: function () {
+                    return new Promise(function(resolve, reject) {
+                        resolve(language);
+                    });
+                },
+                trackRegion: function (region, labels) {
+                    return window.bbcpage.loadModule(['istats-1'])
+                        .then(function(istats) {
+    
+                            var trackLabels = {
+                                region: region
+                            };
+    
+                            for (var label in labels) {
+                                trackLabels[label] = labels[label];
+                            }
+    
+                            var linkType = labels.linkType || 'internal';
+    
+                            istats.track(linkType, trackLabels);
+                        });
+                },
+                getName: function() {
+                    return Promise.resolve(page.name);
+                },
+                getDestination: function() {
+                    return Promise.resolve(page.destination);
+                },
+                getProducer: function() {
+                    return Promise.resolve(page.producer);
+                },
+                getSite: function() {
+                    return Promise.resolve(page.site);
+                },
+                getSection: function() {
+                    return Promise.resolve(page.section);
+                },
+                getContentType: function() {
+                    return Promise.resolve(page.contentType);
+                },
+                getContentId: function() {
+                    return Promise.resolve(page.contentId);
+                },
+                getEdition: function() {
+                  return new Promise(function (resolve, reject) {
+                    if (page.edition) {
+                      resolve(page.edition);
+                      return;
+                    }
+                    try {
+                      resolve(getMetaValue('x-audience').toLowerCase());
+                    } catch (err){
+                      // This property is related to Chartbeat; see http://support.chartbeat.com/docs/
+                      if (window._sf_async_config) {
+                        resolve(window._sf_async_config.region || null);
+                      }
+                    }
+                    resolve(null);
+                  });
+                },
+                getAdditionalProperties: function() {
+                  return Promise.resolve(page.additionalProperties);
+                }
+            };
+    
+            var country;
+    
+            var sanitiseCountry = function(country) {
+                return country ? country.replace(/ /g, '') : undefined;
+            }
+    
+            window.bbcuser = {
+                getHashedId: function() {
+                    if (modal) {
+                        return undefined;
+                    }
+                    return window.bbcpage.loadModule(['idcta-v2/idcta-1'])
+                        .then(function(idcta) {
+                            return idcta.getCookieInstance().getHidFromCookie();
+                    });
+                },
+                getCountry: function() {
+                    if (country) {
+                        return new Promise(function(resolve, reject) {
+                            resolve(sanitiseCountry(country));
+                        })
+                    }
+                    else {
+                        return window.bbcpage.loadModule(['orb/fig'])
+                            .then(function(orbFig) {
+                                return new Promise(function(resolve, reject) {
+                                    orbFig.load(function (fig) {
+                                        if (fig.geo.isUK()) {
+                                            resolve('GB');
+                                        } else if (fig.geo.isEU()) {
+                                            resolve('EU');
+                                        } else {
+                                            resolve(undefined);
+                                        }
+                                    }, function () {
+                                        reject('Error determining country. Timeout?');
+                                    });
+                                });
+                            });
+    
+                    }
+                },
+                isUKCombined: function(inputCountry) {
+                    return window.bbcpage.loadModule(['orb/bbcuser'])
+                        .then(function(service) {
+                            return new Promise(function(resolve, reject) {
+                                if (inputCountry) {
+                                    resolve(service.isUKCombined(sanitiseCountry(inputCountry)));
+                                }
+                                else {
+                                    window.bbcuser.getCountry().then(function(fetchedCountry){
+                                        resolve(service.isUKCombined(fetchedCountry));
+                                    })
+                                }
+                            });
+                        });
+                },
+                isEU: function(inputCountry) {
+                    return window.bbcpage.loadModule(['orb/bbcuser'])
+                        .then(function(service) {
+                            return new Promise(function(resolve, reject) {
+                                if (inputCountry) {
+                                    resolve(service.isEU(sanitiseCountry(inputCountry)));
+                                }
+                                else {
+                                    window.bbcuser.getCountry().then(function(fetchedCountry){
+                                        resolve(service.isEU(fetchedCountry));
+                                    })
+                                }
+                            });
+                        });
+                },
+                isSignedIn: function() {
+                    return window.bbcpage.loadModule(['idcta-v2/idcta-1'])
+                        .then(function(idcta) {
+                            return (idcta && idcta.getCookieInstance().hasCookie());
+                        });
+                },
+                allowsPerformanceCookies: function() {
+                    return window.bbcpage.loadModule(['orb/cookies'])
+                            .then(function(bbccookies) {
+                                return !!bbccookies.cookiesEnabled() && !!bbccookies.readPolicy('performance');
+                            });
+                },
+                allowsFunctionalCookies: function() {
+                    return window.bbcpage.loadModule(['orb/cookies'])
+                            .then(function(bbccookies) {
+                                return !!bbccookies.cookiesEnabled() && !!bbccookies.readPolicy('personalisation');
+                            });
+                },
+                getCookieValue: function(cookieName) {
+                    return window.bbcpage.loadModule(['orb/cookies'])
+                            .then(function(bbccookies) {
+                                return bbccookies.get(cookieName);
+                            });
+                },
+                resetCookiesPreferences: function() {
+                    return window.bbcpage.loadModule(['orb/cookies'])
+                            .then(function(bbccookies) {
+                                bbccookies.setDefaultCookiesSingleDomain();
+                            });
+                },
+                hasCookiesEnabled: function() {
+                    return window.bbcpage.loadModule(['orb/cookies'])
+                            .then(function(bbccookies) {
+                                return !!bbccookies.cookiesEnabled();
+                            });
+                },
+                hasSeenCookieBanner: function() {
+                    return window.bbcpage.loadModule(['orb/cookies'])
+                            .then(function (bbccookies) {
+                                return !!bbccookies.isCookiePolicySet();
+                            });
+                },
+                logEvent: function (verb, noun, extraLabels) {
+                    return window.bbcuser.hasCookiesEnabled()
+                        .then(function(allowsCookies) {
+                            if (allowsCookies) {
+                                return window.bbcpage.loadModule(['istats-1'])
+                                    .then(function(istats) {
+                                        istats.log(verb, noun, extraLabels);
+                                    });
+                            } else {
+                                throw new Error('User cannot be tracked due to cookies preferences.');
+                            }
+                        });
+                },
+            };
+    
+        }());</script><script src="https://nav.files.bbci.co.uk/orbit/2.0.0-561.289d4c97/js/require.min.js"></script>     <script src="https://nav.files.bbci.co.uk/orbit-webmodules/0.0.1-292.2d933ad/cookie-banner/cookie-library.min.js"></script><script type="text/javascript">define('orb/cookies', function() {
+          return window.bbccookies;
+        });</script> <script src="https://nav.files.bbci.co.uk/orbit/2.0.0-561.289d4c97/js/api.min.js"></script><script type="text/javascript">window.bbcFlagpoles_istats="ON",require.config({paths:{"istats-1":"https://nav.files.bbci.co.uk/orbit-webmodules/0.0.1-292.2d933ad/istats/istats-1"}}),require(["istats-1","orb/cookies"],function(a,t){if(t.isAllowed("s1")){var e=(o=document.location.href.match(/^(?:https|http):\/\/\w*\.(?:(int|test|stage|live|)\.)?bbc\.(?:co\.uk|com)/))?void 0===o[1]||""===o[1]||"live"===o[1]?"//sa.bbc.co.uk/bbc/bbc/s":"//sa.bbc.co.uk/bbc/"+o[1]+"/s":"//sa.bbc.co.uk/bbc/test/s";a.addCollector({name:"default",url:e,separator:"&"});var s="unknown";a.setCountername(s),window.istats_countername&&a.setCountername(window.istats_countername),a.addLabels("ml_name=webmodule&ml_version=0.0.1-292.2d933ad&blq_e=orbit&blq_r=orbit&blq_s=orbit&blq_v=worldservice&language=en")}var o});</script><link rel="stylesheet" href="https://mybbc.files.bbci.co.uk/s/id/account-idcta/1.18.1/style/id-cta.css"><!--[if IE 8]><link href="https://mybbc.files.bbci.co.uk/s/id/account-idcta/1.18.1/style/ie8.css" rel="stylesheet"/> <![endif]--><script type="text/javascript">(function() {if (!window.require) {throw new Error('idcta: could not find require module');}if (typeof(map) == 'undefined') {var map = {};}if (!!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect) {document.documentElement.className += ' id-svg';}var ptrt = new RegExp("[\\?&]ptrt=([^&]*)").exec(document.location.href);var ENDPOINT_URL = 'https://idcta.api.bbc.co.uk';var ENDPOINT_CONFIG = ('/idcta/config?callback=&ptrt=' + encodeURIComponent((ptrt ? ptrt[1] : document.location.href))).replace(/\&amp;/g, '&');var ENDPOINT_TRANSLATIONS = '/idcta/translations?callback=';function hasPromise() {var P = window.Promise;var promiseToString = null;if (P) {try {promiseToString = Object.prototype.toString.call(P.resolve());} catch(e) {/*silently ignored*/}}return (promiseToString === '[object Promise]' && !P.cast);}if (hasPromise()) {define('idcta/es6-promise', function() {return window.Promise;});define('idcta-v2/es6-promise', function() {return window.Promise;});}map['idcta-v2'] = 'https://mybbc.files.bbci.co.uk/s/id/account-idcta/1.18.1/modules/idcta-v2';map['idcta-v2/config'] = ENDPOINT_URL + ENDPOINT_CONFIG;map['idcta-v2/translations'] = ENDPOINT_URL + ENDPOINT_TRANSLATIONS;map['idcta'] = 'https://mybbc.files.bbci.co.uk/s/id/account-idcta/1.8.2/modules/idcta';map['idcta-v2/idcta-1'] = 'https://mybbc.files.bbci.co.uk/s/id/account-idcta/1.18.1/modules/idcta-v2/dist/idcta-1.min';const idctaShim = {deps: ['idcta-v2/idcta-1'],};require({shim: {'idcta-v2/statusbar': idctaShim,'idcta-v2/id-config': idctaShim},map: {'*': {'idcta/idcta-1': 'idcta-v2/idcta-1','idcta': 'idcta-v2',}},paths: map});window.idctaBaseUrl = ENDPOINT_URL;define('idcta/config', ['idcta-v2/config'], function(data) {return data;});define('idcta/translations', ['idcta-v2/translations'], function(data) {return data;});})();</script>  <!-- BBCDOTCOM head --><script type="text/javascript">/*<![CDATA[*/ var _sf_startpt = (new Date()).getTime(); /*]]>*/</script><style type="text/css">.bbccom_display_none{display:none;}</style><script type="text/javascript">/*<![CDATA[*/ var bbcdotcomConfig, googletag = googletag || {}; googletag.cmd = googletag.cmd || [], bbcdotcomScripts = [], tp = window.tp || []; var bbcdotcom = false; (function(){ if(typeof require !== 'undefined') { require({ paths:{ "bbcdotcom":"https://static.bbc.co.uk/bbcdotcom/2.3.0/script" } }); } })(); /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ var bbcdotcom = { adverts: { keyValues: { set: function() {} } }, advert: { write: function () {}, show: function () {}, isActive: function () { return false; }, layout: function() { return { reset: function() {} } } }, config: { init: function() {}, isActive: function() {}, setSections: function() {}, isAdsEnabled: function() {}, setAdsEnabled: function() {}, isAnalyticsEnabled: function() {}, setAnalyticsEnabled: function() {}, setAssetPrefix: function() {}, setVersion: function () {}, setJsPrefix: function() {}, setSwfPrefix: function() {}, setCssPrefix: function() {}, setConfig: function() {}, getAssetPrefix: function() {}, getJsPrefix: function () {}, getSwfPrefix: function () {}, getCssPrefix: function () {}, isOptimizelyEnabled: function() {} }, survey: { init: function(){ return false; } }, data: {}, init: function() {}, objects: function(str) { return false; }, locale: { set: function() {}, get: function() {} }, setAdKeyValue: function() {}, utils: { addEvent: function() {}, addHtmlTagClass: function() {}, log: function () {} }, addLoadEvent: function() {} }; /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ (function(){ if (typeof orb !== 'undefined' && typeof orb.fig === 'function') { if (orb.fig('ad') && orb.fig('uk') == 0) { bbcdotcom.data = { ads: (orb.fig('ad') ? 1 : 0), stats: (orb.fig('uk') == 0 ? 1 : 0), statsProvider: orb.fig('ap') }; } } else { document.write('<script type="text/javascript" src="https://www.bbc.com/wwscripts/data">\x3C/script>'); } })(); /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ (function(){ if (typeof orb === 'undefined' || typeof orb.fig !== 'function') { bbcdotcom.data = { ads: bbcdotcom.data.a, stats: bbcdotcom.data.b, statsProvider: bbcdotcom.data.c }; } if (bbcdotcom.data.ads == 1) { document.write('<script type="text/javascript" src="https://www.bbc.com/wwscripts/flag">\x3C/script>'); } })(); /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ (function(){ if (window.bbcdotcom && (typeof bbcdotcom.flag == 'undefined' || (typeof bbcdotcom.data.ads !== 'undefined' && bbcdotcom.flag.a != 1))) { bbcdotcom.data.ads = 0; } if (/[?|&]ads/.test(window.location.href) || /(^|; )ads=on; /.test(document.cookie) || /; ads=on(; |$)/.test(document.cookie)) { bbcdotcom.data.ads = 1; bbcdotcom.data.stats = 1; } if (window.bbcdotcom && (bbcdotcom.data.ads == 1 || bbcdotcom.data.stats == 1)) { bbcdotcom.assetPrefix = "https://static.bbc.co.uk/bbcdotcom/2.3.0/"; if (/(sandbox|int)(.dev)*.bbc.co*/.test(window.location.href) || /[?|&]ads-debug/.test(window.location.href) || document.cookie.indexOf('ads-debug=') !== -1) { document.write('<script type="text/javascript" src="https://static.bbc.co.uk/bbcdotcom/2.3.0/script/dist/bbcdotcom.dev.js">\x3C/script>'); } else { document.write('<script type="text/javascript" src="https://static.bbc.co.uk/bbcdotcom/2.3.0/script/dist/bbcdotcom.js">\x3C/script>'); } } })(); /*]]>*/</script><script type="text/javascript">if (window.bbcdotcom && bbcdotcom.data.stats == 1) { document.write('<link rel="dns-prefetch" href="//secure-us.imrworldwide.com/">'); document.write('<link rel="dns-prefetch" href="//me-cdn.effectivemeasure.net/">'); document.write('<link rel="dns-prefetch" href="//ssc.api.bbc.com/">'); } if (window.bbcdotcom && bbcdotcom.data.ads == 1) { document.write('<link rel="dns-prefetch" href="//www.googletagservices.com/">'); document.write('<link rel="dns-prefetch" href="//bbc.gscontxt.net/">'); document.write('<link rel="dns-prefetch" href="//tags.crwdcntrl.net/">'); document.write('<link rel="dns-prefetch" href="//ad.crwdcntrl.net/">'); }</script><script type="text/javascript">if (window.bbcdotcom && bbcdotcom.data.ads == 1) { document.write('<meta name="google-site-verification" content="auTeTTwSt_KBY_4iDoR00Lwb7-qzx1IgzJy6ztaWgEI" />'); }</script><script type="text/javascript">/*<![CDATA[*/ (function(){ if (window.bbcdotcom && (bbcdotcom.data.ads == 1 || bbcdotcom.data.stats == 1)) { bbcdotcomConfig = {"adFormat":"standard","adKeyword":"","adMode":"smart","adsEnabled":true,"appAnalyticsSections":"","asyncEnabled":true,"disableInitialLoad":false,"advertInfoPageUrl":"https:\/\/www.bbc.com\/privacy\/cookies\/international\/","advertisementText":"Advertisement","analyticsEnabled":true,"sherlockEnabled":false,"appName":"","assetPrefix":"https:\/\/static.bbc.co.uk\/bbcdotcom\/2.3.0\/","customAdParams":[],"customStatsParams":[],"headline":"","id":"","inAssociationWithText":"in association with","keywords":"","language":"","orbTransitional":false,"lotameWSEnabled":false,"optimizelyEnabled":true,"palEnv":"live","productName":"","sections":[],"comScoreEnabled":true,"comscoreSite":"bbc","comscoreID":"19293874","comscorePageName":"","slots":"","sponsoredByText":"is sponsored by","adsByGoogleText":"Ads by Google","summary":"","type":"","features":{"testfeature":{"name":"testfeature","envs":["sandbox","int","test"],"on":true,"options":{},"override":null},"lxadverts":{"name":"lxadverts","envs":[],"on":true,"options":{},"override":null}},"staticBase":"\/bbcdotcom","staticHost":"https:\/\/static.bbc.co.uk","staticVersion":"2.3.0","staticPrefix":"https:\/\/static.bbc.co.uk\/bbcdotcom\/2.3.0","dataHttp":"tps.bbc.com","dataHttps":"www.bbc.com","flagHttp":"www.bbc.co.uk","flagHttps":"www.bbc.co.uk","analyticsHttp":"sa.bbc.com","analyticsHttps":"ssa.bbc.com"}; bbcdotcom.config.init(bbcdotcomConfig, bbcdotcom.data, window.location, window.document); bbcdotcom.config.setFlagpoles(bbcdotcom.flag || {}); bbcdotcom.config.setAssetPrefix("https://static.bbc.co.uk/bbcdotcom/2.3.0/"); bbcdotcom.config.setVersion("2.3.0"); document.write('<!--[if IE 7]><script type="text/javascript">bbcdotcom.config.setIE7(true);\x3C/script><![endif]-->'); document.write('<!--[if IE 8]><script type="text/javascript">bbcdotcom.config.setIE8(true);\x3C/script><![endif]-->'); document.write('<!--[if IE 9]><script type="text/javascript">bbcdotcom.config.setIE9(true);\x3C/script><![endif]-->'); if (/[?|&]ex-dp/.test(window.location.href) || document.cookie.indexOf('ex-dp=') !== -1) { bbcdotcom.utils.addHtmlTagClass('bbcdotcom-ex-dp'); } } })(); /*]]>*/</script><script type="text/javascript">var initOptimizely = (function(isEnabled){ if(!isEnabled) return; var logger = window.bbcdotcom.Logger('bbcdotcom:head:optimizely'); /* Allow Optimizely in these paths */ var allowPaths = ['/', '/wwhp']; /* Only run on optimizely on homepage */ if (bbcdotcom.utils && allowPaths.indexOf(window.location.pathname) !== -1 && window.bbccookies && bbccookies.readPolicy('performance') ){ /* set correct OptimizelyURL for prod or sandbox */ var optimizelyURL = "https://cdn.optimizely.com/public/4621041136/s/bbccom_sandbox.js"; if(window.location.hostname === 'www.bbc.com') { optimizelyURL = "https://cdn.optimizely.com/public/4621041136/s/bbccom_prod.js"; } /* Set cookie to 1 year */ window['optimizely'] = window['optimizely'] || []; window['optimizely'].push({ "type": "cookieExpiration", "cookieExpirationDays": 365 }); document.write('<script type="text/javascript" src="'+optimizelyURL+'">\x3C/script>'); } })( bbcdotcom.config.isOptimizelyEnabled() );</script><script type="text/javascript">/*<![CDATA[*/ if ( window.bbcdotcom && bbcdotcom.data && bbcdotcom.data.ads && bbcdotcom.data.ads == 1 && bbcdotcom.config && bbcdotcom.config.isGrapeshotEnabled && bbcdotcom.config.isGrapeshotEnabled() && bbcdotcom.config.isWorldService && !bbcdotcom.config.isWorldService() ) { var gs_channels="DEFAULT"; (function () { var gsurl = window.location.href.split("?")[0]; bbcdotcomScripts.push({src:'https://bbc.gscontxt.net/?url='+encodeURIComponent(gsurl)}); })(); } /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ if (window.bbcdotcom && bbcdotcom.data && bbcdotcom.data.stats && bbcdotcom.data.stats == 1 && bbcdotcom.config && bbcdotcom.config.isLotameEnabled && bbcdotcom.config.isLotameEnabled()){ (function () { var clientId, lotameUrl, lotameAudienceUrl; clientId = (bbcdotcom.config.isWorldService && bbcdotcom.config.isWorldService()) ? '10826' : '10816'; lotameUrl = 'https://tags.crwdcntrl.net/c/'+clientId+'/cc.js?ns='+clientId; lotameAudienceUrl = 'https://ad.crwdcntrl.net/5/c=10815/pe=y/var=ccauds'; bbcdotcomScripts.push({src:lotameUrl,id:"LOTCC"+clientId}); bbcdotcomScripts.push({src:lotameAudienceUrl}); })(); } /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ /** * ASYNC waits to make any gpt requests until the bottom of the page */ if ( window.bbcdotcom && bbcdotcom.data && bbcdotcom.data.ads && bbcdotcom.data.ads == 1 && bbcdotcom.config && bbcdotcom.config.isAsync && bbcdotcom.config.isAsync() ) { (function () { bbcdotcomScripts.push({src:'https://www.googletagservices.com/tag/js/gpt.js'}); })(); } /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ /* Load Lotame, Grapeshot and GPT without blocking rendering but executing in order */ if ( bbcdotcomScripts && bbcdotcomScripts.length > 0 ) { (function () { bbcdotcomScripts.forEach(function(item) { var script = document.createElement('script'); script.async = false; if(item.id) script.id = item.id; script.src = item.src; document.head.appendChild(script); }); })(); } /*]]>*/</script><script type="text/javascript" async="true">/*<![CDATA[*/ if (window.bbcdotcom && bbcdotcom.data && bbcdotcom.data.stats && bbcdotcom.data.stats == 1 && bbcdotcom.config && bbcdotcom.config.isLotameEnabled && bbcdotcom.config.isLotameEnabled() && bbcdotcom.lotame){ (function () { bbcdotcom.lotame.callback(); })(); } /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ (function() { window.bbcdotcom.head = true; }()); /*]]>*/</script><script type="text/javascript">// Globally available search context
+  window.SEARCHBOX={"variant":"worldservice","locale":"en","navSearchboxStaticPrefix":"https://nav.files.bbci.co.uk/searchbox/2.0.0-17.7e7753b","searchboxAppStaticPrefix":"https://nav.files.bbci.co.uk/searchbox/2.0.0-17.7e7753b/drawer","searchFormHtml":"<div tabindex=\"-1\" data-reactroot=\"\" data-reactid=\"1\" data-react-checksum=\"729995048\"><div data-reactid=\"2\"><section class=\"se-searchbox-panel\" data-reactid=\"3\"><div class=\"se-g-wrap\" data-reactid=\"4\"><div class=\"se-g-layout\" data-reactid=\"5\"><div class=\"se-g-layout__item se-searchbox-title\" aria-hidden=\"true\" data-reactid=\"6\">search</div><div class=\"se-g-layout__item se-searchbox\" data-reactid=\"7\"><form accept-charset=\"utf-8\" id=\"searchboxDrawerForm\" method=\"get\" action=\"https://search.bbc.co.uk/search\" data-reactid=\"8\"><label class=\"se-searchbox__input\" for=\"se-searchbox-input-field\" data-reactid=\"9\"><span class=\"se-sr-only\" data-reactid=\"10\">Search Term</span><input type=\"text\" name=\"q\" value=\"\" id=\"se-searchbox-input-field\" class=\"se-searchbox__input__field\" maxlength=\"512\" autocomplete=\"off\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"false\" tabindex=\"0\" data-reactid=\"11\"/></label><input type=\"hidden\" name=\"scope\" value=\"\" data-reactid=\"12\"/><button type=\"submit\" class=\"se-searchbox__submit\" tabindex=\"0\" data-reactid=\"13\">Search</button><button type=\"button\" class=\"se-searchbox__clear se-searchbox__clear--visible\" tabindex=\"0\" data-reactid=\"14\">Close</button></form></div></div></div></section><div aria-live=\"polite\" aria-atomic=\"true\" class=\"se-suggestions-container\" data-reactid=\"15\"><section class=\"se-g-wrap\" data-reactid=\"16\"></section></div></div></div>","searchScopePlaceholder":"<input type=\"hidden\" name=\"scope\" id=\"orb-search-scope\" value=\"sounds\">","searchScopeParam":"?scope=sounds","searchScopeTemplate":"sounds","searchPlaceholderWrapperStart":"","searchPlaceholderWrapperEnd":""};
+  window.SEARCHBOX.suppress = false;
+  window.SEARCHBOX.searchScope = SEARCHBOX.searchScopeTemplate.split('-')[0];</script><link rel="stylesheet" href="https://nav.files.bbci.co.uk/searchbox/2.0.0-17.7e7753b/css/main.css"><!--[if IE 8]>
+  <script type="text/javascript" src="https://nav.files.bbci.co.uk/searchbox/2.0.0-17.7e7753b/script/html5shiv.min.js"></script>
+  <script type="text/javascript">window['searchboxIEVersion'] = 8;</script>
+  <link rel="stylesheet" href="https://nav.files.bbci.co.uk/searchbox/2.0.0-17.7e7753b/css/ie8.css">
+<![endif]--><!--[if IE 9]>
+  <script type="text/javascript">window['searchboxIEVersion'] = 9;</script>
+<![endif]--> <script type="text/javascript">"use strict";require.config({paths:{reverb:"https://mybbc-analytics.files.bbci.co.uk/reverb-client-js/reverb-0.8.0"}}),function(){var e=function(a){require(["reverb"],function(e){if(a&&a.detail){var t=a.detail.label,i=a.detail.type,n=a.detail.elem,r=a.detail.originalEvent,c=a.detail.isClick;e.invoke().then(function(){e.userActionEvent(i,t,a.detail,n,r,c)})}})};document.addEventListener("bbc-user-event",e),document.addEventListener("bbc-user-click",e),document.addEventListener("bbc-page-updated",function(){require(["reverb"],function(e){e.invoke().then(function(){e.trackPage()})})})}();</script>
+                <!-- BRANDINGID: br-05367 -->
+        <!--[if (gt IE 8)|!(IE)]><!-->
+        <link rel="stylesheet" href="//branding.files.bbci.co.uk/branding/live/css/1831de99c5a69d7ecd6b92c7e38a1f6e.css" />
+        <!--<![endif]-->
+
+        <!--[if (lt IE 9)&(!IEMobile)]>
+        <link rel="stylesheet" href="//branding.files.bbci.co.uk/branding/live/css/39d40d0ba49bdfb92caf3e5c3c8c7d00.css" />
+        <![endif]-->
+
+        <script>require({paths: {'msi/content-loader': "//rmp.files.bbci.co.uk/radio-msi/latest"}});</script>
+    <link rel="stylesheet" type="text/css" href="https://rmp.files.bbci.co.uk/on-air-panel/css/on-air-panel.9686249984cb3c3de9b8.css">
+<script src="https://rmp.files.bbci.co.uk/on-air-panel/js/polyfill.db8743826a6f63d7e07c.js" defer></script>
+<script src="https://rmp.files.bbci.co.uk/on-air-panel/js/vendors.3aea3d80fecd34b972b0.js" defer></script>
+<script src="https://rmp.files.bbci.co.uk/on-air-panel/js/on-air-panel.9686249984cb3c3de9b8.js" defer></script>
+    <style>
+                                .service-brand-logo-master {
+                display: block;
+                background-color: #BB1919;
+                background-image: url('data: image/png;base64,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');
+
+                            }
+
+            .br-service-brand-box {
+                background-color: #BB1919;
+                        }
+
+            
+            .br-service-brand-box--alt {
+                background: #700F0F;
+            }
+            </style>
+        <!--[if (gt IE 8)|!(IE)]><!-->
+    <style>
+        @media (min-width: 37.5em) {         .service-brand-logo-master {
+        background-image: url('data: image/png;base64,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');
+
+            }
+     }
+    </style>
+    <!--<![endif]-->
+    <!--[if (lt IE 9)&(!IEMobile)]>
+        <style>
+                    .service-brand-logo-master {
+        background-image: url('data: image/png;base64,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');
+
+            }
+    
+        </style>
+    <![endif]-->
+
+        <script>
+            requirejs.config({
+                "paths": {
+                    'jquery-1.9': "https://static.bbci.co.uk/frameworks/jquery/0.4.1/sharedmodules/jquery-1.9.1",
+                    'rv-bootstrap': "https://programmes.files.bbci.co.uk/programmes-frontend/js/rv-bootstrap-15d48c3ecf",
+                    'timezone-notification': "https://programmes.files.bbci.co.uk/programmes-frontend/js/timezone-notification-9476b56a8c",
+                    'episode-guide': "https://programmes.files.bbci.co.uk/programmes-frontend/js/episode-guide-4b10409449",
+                    'gallery': "https://programmes.files.bbci.co.uk/programmes-frontend/js/gallery-e000444170",
+                    'picturefill': "https://programmes.files.bbci.co.uk/programmes-frontend/js/picturefill-29a13ac5b6",
+                    'popup': "https://programmes.files.bbci.co.uk/programmes-frontend/js/popup-e49f2a49fe",
+                    'snippets': "https://programmes.files.bbci.co.uk/programmes-frontend/js/snippets-ab200d5d68",
+                    'bump-3': "//emp.bbci.co.uk/emp/bump-3/bump-3",
+                    'smp/smpFactory': "https://programmes.files.bbci.co.uk/programmes-frontend/js/smp/smpFactory-f57a2ab390",
+                    'stream': "https://programmes.files.bbci.co.uk/programmes-frontend/js/stream-253e218889",
+                    'smp/smp': "https://programmes.files.bbci.co.uk/programmes-frontend/js/smp/smp-ba4cd00e43",
+                    'smp/recommendationsBump': "https://programmes.files.bbci.co.uk/programmes-frontend/js/smp/recommendationsBump-863dd5ec29",
+                    'smp/uasService': "https://programmes.files.bbci.co.uk/programmes-frontend/js/smp/uasService-7933839f1b",
+                    'cookieStore': "https://programmes.files.bbci.co.uk/programmes-frontend/js/cookieStore",
+                    'uasclient': "https://static.bbc.co.uk/uasclient/0.1.42/modules/uasclient",
+                    'relay-1': "https://static.bbc.co.uk/frameworks/relay/0.2.6/sharedmodules/relay-1",
+                    'policy-service': "https://programmes.files.bbci.co.uk/programmes-frontend/js/policy-service-ce822b4a6d",
+                    'third-party': "https://programmes.files.bbci.co.uk/programmes-frontend/js/third-party-f5556772a9",
+                    'kite': 'https://downloads.bbc.co.uk/interactive/embed/',
+                },
+                "priority": ['jquery-1.9', 'rv-bootstrap', 'timezone-notification'],
+                "map": {
+                    "*": {
+                        "jquery": "jquery-1.9"
+                    }
+                }
+            });
+        </script>
+
+        <!--[if (gt IE 8)|!(IE)]><!-->
+            <link rel="stylesheet" href="https://programmes.files.bbci.co.uk/programmes-frontend/css/ds2013-41ee7bbaaf.css" />
+        <!--<![endif]-->
+        <!--[if (lt IE 9)&(!IEMobile)]>
+            <link rel="stylesheet" href="https://programmes.files.bbci.co.uk/programmes-frontend/css/ds2013-ie-46d48e29dd.css" />
+        <![endif]-->
+            
+
+            <link rel="stylesheet" type="text/css" href="https://static.bbci.co.uk/modules/plugin/musicfavourite/3.0.23/style/musicfavourite.min.css"> <link rel="stylesheet" type="text/css" href="https://static.test.bbci.co.uk/gelstyles/0.12.2/style/core.css" />
+    
+        
+                <link rel="canonical" href="https://www.bbc.co.uk/programmes/w172wy09h2x73pm">        <meta name="theme-color" content="#BB1919">
+        <meta name="description" content="The latest five minute news bulletin from BBC World Service."><meta property="fb:pages" content="6025943146,7397061762,7519460786,7833211321,8244244903,8251776107,8585725981,21750735380,80758950658,125309456546,130593816777,154344434967,228735667216,260212261199,260967092113,294662213128,295830058648,304314573046,401538510458,107909022566650,118883634811868,129044383774217,156060587793370,156400551056385,163571453661989,168895963122035,185246968166196,193022337414607,193435954068976,194575130577797,215504865453262,239931389545417,273726292719943,283348121682053,286567251709437,292291897588734,310719525611571,317278538359186,413132078795966,470911516262605,512423982152360,647687225371774,658551547588605,742734325867560,944295152308991,958681370814419,1143803202301544,1159932557403143,1392506827668140,1411916919051820,1477945425811579,1659215157653827,1731770190373618"><meta property="og:site_name" content="BBC">
+        <meta property="og:title" content="BBC World Service - BBC News, 2019/05/19 08:01 GMT">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.bbc.co.uk/programmes/w172wy09h2x73pm">        <meta property="og:description" content="The latest five minute news bulletin from BBC World Service.">
+        <meta property="og:image" content="https://ichef.bbci.co.uk/images/ic/1200x675/p060dh18.jpg">            <meta name="twitter:card" content="summary_large_image">
+        <meta name="msapplication-square150x150logo" content="https://ichef.bbci.co.uk/images/ic/272x272/p060dh18.jpg">
+    </head>
+    <body id="top">
+         <!-- BBCDOTCOM bodyFirst --><div id="bbccom_interstitial_ad" class="bbccom_display_none"></div><div id="bbccom_interstitial" class="bbccom_display_none"><script type="text/javascript">/*<![CDATA[*/ (function() { if (window.bbcdotcom && bbcdotcom.config.isActive('ads')) { googletag.cmd.push(function() { googletag.display('bbccom_interstitial'); }); } }()); /*]]>*/</script></div><div id="bbccom_wallpaper_ad" class="bbccom_display_none"></div><div id="bbccom_wallpaper" class="bbccom_display_none"><script type="text/javascript">/*<![CDATA[*/ (function() { var wallpaper; if (window.bbcdotcom && bbcdotcom.config.isActive('ads')) { if (bbcdotcom.config.isAsync()) { googletag.cmd.push(function() { googletag.display('bbccom_wallpaper'); }); } else if (typeof googletag !== "undefined" && typeof googletag.display === "function") { googletag.display("wallpaper"); } wallpaper = bbcdotcom.adverts.adRegister.getAd('wallpaper'); } }()); /*]]>*/</script></div><script type="text/javascript">/*<![CDATA[*/ (function() { if (window.bbcdotcom && bbcdotcom.config.isActive('ads')) { document.write(unescape('%3Cscript id="gnlAdsEnabled" class="bbccom_display_none"%3E%3C/script%3E')); } if (window.bbcdotcom && bbcdotcom.config.isActive('analytics')) { document.write(unescape('%3Cscript id="gnlAnalyticsEnabled" class="bbccom_display_none"%3E%3C/script%3E')); } }()); /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ (function() { window.bbcdotcom.bodyFirst = true; }()); /*]]>*/</script> <div id="cookiePrompt"></div>  <!--[if (gt IE 8) | (IEMobile)]><!--><header id="orb-banner" role="banner" aria-label="BBC"><!--<![endif]--><!--[if (lt IE 9) & (!IEMobile)]>
+            <![if (IE 8)]>
+                <header id="orb-banner" role="banner" class="orb-old-ie orb-ie8" aria-label="BBC">
+            <![endif]>
+
+            <![if (IE 7)]>
+                <header id="orb-banner" role="banner" class="orb-old-ie orb-ie7" aria-label="BBC">
+            <![endif]>
+
+            <![if (IE 6)]>
+                <header id="orb-banner" role="banner" class="orb-old-ie orb-ie6" aria-label="BBC">
+            <![endif]>
+        <![endif]--><div id="orb-header" class="orb-nav-pri orb-nav-pri-white orb-nav-empty" data-max-d="0" data-max-w="0" dir="ltr"><div class="orb-nav-pri-container b-r b-g-p"><div class="orb-nav-section orb-nav-blocks"><a href="https://www.bbc.co.uk">Homepage</a></div><section><div class="orb-skip-links"><h2>Accessibility links</h2><ul><li><a href="#programmes-content">Skip to content</a></li><li><a id="orb-accessibility-help" href="/accessibility/">Accessibility Help</a></li></ul></div></section><div id="mybbc-wrapper" class="orb-nav-section orb-nav-id orb-nav-focus orb-nav-id-default"><div id="idcta-statusbar" class="orb-nav-section orb-nav-focus"><a id="idcta-link" href="https://account.bbc.com/account"><span id="idcta-username">BBC Account</span></a></div><script type="text/javascript">require(['idcta/statusbar'], function (statusbar) {new statusbar.Statusbar({id: 'idcta-statusbar', publiclyCacheable: true});});</script></div><nav role="navigation" aria-label="BBC" class="orb-nav"><div class="orb-nav-section orb-nav-links orb-nav-focus" id="orb-nav-links"><ul><li class="orb-nav-news"><a href="https://www.bbc.com/news">News</a></li><li class="orb-nav-sport"><a href="https://www.bbc.com/sport">Sport</a></li><li class="orb-nav-weather"><a href="https://www.bbc.com/weather">Weather</a></li><li class="orb-nav-radio"><a href="https://www.bbc.co.uk/worldserviceradio">Radio</a></li><li class="orb-nav-arts"><a href="https://www.bbc.co.uk/arts">Arts</a></li><li id="orb-nav-more" style="width: 88px" aria-controls="orb-panel-more"><a href="#orb-footer" data-alt="More" class="istats-notrack">Menu<span class="orb-icon orb-icon-arrow"></span></a></li></ul></div></nav><div class="orb-nav-section orb-nav-search"><a class="orb-search__button" href="https://search.bbc.co.uk/search?scope&#x3D;sounds" title="Search the BBC">Search</a><form class="b-f" id="orb-search-form" role="search" method="get" action="https://search.bbc.co.uk/search" accept-charset="utf-8"><div><input type="hidden" name="scope" id="orb-search-scope" value="sounds"><label for="orb-search-q">Search the BBC</label><input id="orb-search-q" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" placeholder="Search"><button id="orb-search-button" class="orb-search__button">Search the BBC</button><input type="hidden" name="suggid" id="orb-search-suggid"></div></form></div></div><div id="orb-panels" class="orb-ws-panels"></div></div></header>  <!-- Styling hook for shared modules only -->
+<div id="orb-modules">
+
+                <div class="br-container">
+                        <div class="br-container__inner">
+                                    <div class="br-masthead" id="br-masthead"><div class="br-masthead__inner">
+                        <div class="b-g-p br-masthead__main br-masthead__main--small">
+            <div class="br-masthead__onairpanel" id="onairpanel-container">
+            <div class="on-air-panel on-air-panel--bbc_world_service" data-sid="bbc_world_service" data-polling-dial="on" data-settings="{&quot;url&quot;:&quot;https://rms.api.bbc.co.uk&quot;,&quot;broadcastPollingFeed&quot;:&quot;/v2/broadcasts/poll/&quot;}">
+  <a class="on-air-panel__station-link">
+    <div class="on-air-panel__main  on-air-panel__main--short  on-air-panel__item">
+      <svg aria-hidden="true" class="on-air-panel__speaker on-air-panel__link" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21.099 4.383L19.678 5.85a14.635 14.635 0 0 1 4.017 10.113c0 3.935-1.537 7.505-4.017 10.112l1.42 1.467c2.84-2.981 4.597-7.066 4.597-11.579 0-4.513-1.756-8.6-4.596-11.579"
+        />
+        <path d="M25.344 0l-1.425 1.472c3.567 3.73 5.776 8.847 5.776 14.49 0 5.643-2.21 10.76-5.777 14.49l1.425 1.472c3.926-4.102 6.352-9.737 6.352-15.962 0-6.226-2.425-11.86-6.351-15.962M16 3.575l-6.306 5.92H0v12.387h9.694L16 28.35z"
+        />
+      </svg>
+      <div class="on-air-panel__on-now">
+        <svg aria-hidden="true" class="on-air-panel__pulse" width="42" height="12" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2h1.832v7.313h4.032V11H16V2zm7.156 0h1.832v9h-1.832V2zM34.69 2a290.712 290.712 0 0 1-1.588 4.506c-.543 1.502-1.096 3-1.659 4.494h-1.974a355.714 355.714 0 0 1-1.66-4.494A290.712 290.712 0 0 1 26.222 2h2.01c.365 1.175.733 2.345 1.106 3.512.373 1.166.753 2.333 1.142 3.5.388-1.167.769-2.334 1.142-3.5.372-1.167.741-2.337 1.106-3.512h1.962zm1.233 0h5.852v1.611h-4.02v1.951h3.568v1.611h-3.568V9.39H42V11h-6.078V2zM6 0a6 6 0 1 0 0 12A6 6 0 0 0 6 0m0 1.5c2.481 0 4.5 2.019 4.5 4.5 0 2.482-2.019 4.5-4.5 4.5A4.505 4.505 0 0 1 1.5 6C1.5 3.52 3.52 1.5 6 1.5"
+          />
+          <path class="live-svg-center" d="M9 6c0 1.654-1.346 3-3 3S3 7.654 3 6s1.346-3 3-3 3 1.346 3 3z" />
+        </svg>
+        <span class="on-air-panel__on-now-text"></span>
+      </div>
+    </div>
+  </a>
+  <a href=/schedules/p00fzl9p class="on-air-panel__schedule-link">
+    <div class="on-air-panel__schedule on-air-panel__item">
+      <svg aria-hidden="true" class="on-air-panel__link schedule-svg" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21.886 15.41c3.584 0 6.5 2.916 6.5 6.5 0 3.586-2.916 6.5-6.5 6.5a6.507 6.507 0 0 1-6.5-6.5c0-3.584 2.916-6.5 6.5-6.5zm-13.458.447h8.21c-1.189.929-2.102 1.857-2.623 3.714H8.428v5.572h5.587c1.148 2.786 4.234 5.348 7.871 5.348 4.616 0 8.357-3.63 8.357-8.245 0-2.627-1.214-5.46-3.11-6.389h3.581v-5.571H8.428v5.571zM1 6.571h5.571v-5.57H1zM1 15.857h5.571v-5.57H1zM1 25.142h5.571v-5.57H1zM8.429 6.571h22.285v-5.57H8.43z"
+        />
+        <path d="M26.393 23.954l-3.107-2.508v-3.731H21.43v4.66l3.967 3.064z" />
+      </svg>
+      <span class="on-air-panel__schedule-link-text on-air-panel__link">
+        Schedule
+      </span>
+    </div>
+  </a>
+</div>
+        </div>
+    
+                                <a href="/worldserviceradio" class="br-masthead__masterbrand service-brand-logo-master service-brand-logo-master--bbc_world_service">BBC World Service</a>
+    
+    
+                <div class="br-masthead__title">
+            <a href="/programmes/p002vsmz">BBC News</a>
+        </div>
+    </div>                            <div class="b-g-p"><div id="br-nav-programme" class="br-nav br-box-highlight br-highlight-bg-onbg080"><ul class="br-nav__list"><li class="br-nav__item"><a class="br-nav__link" href="/programmes/p002vsmz" data-linktrack="nav_bbcnewshome">BBC News Home</a></li><li class="br-nav__item"><a class="br-nav__link" href="/programmes/p002vsmz/episodes/player" data-linktrack="nav_episodes">Episodes</a></li><li class="br-nav__item"><a class="br-nav__link" href="/programmes/p02nq0gn/episodes/downloads" data-linktrack="nav_globalnewspodcast">Global News Podcast</a></li><li class="br-nav__item"><a class="br-nav__link" href="/worldserviceradio/newsletter" data-linktrack="nav_subscribetoournewsletter">Subscribe to our Newsletter</a></li><li class="br-nav__item"><a class="br-nav__link" href="http://www.facebook.com/bbcworldservice" data-linktrack="nav_joinusonfacebook">Join us on Facebook</a></li><li class="br-nav__item"><a class="br-nav__link" href="https://twitter.com/bbcworldservice" data-linktrack="nav_followusontwitter">Follow us on Twitter</a></li></ul></div></div><script type="text/javascript">
+        define("branding-responsive-nav",[],function(){var e=function(e){this.setOptions(e)};return e.prototype={options:{},setOptions:function(e){var t={more_link_text:e&&e.more_link_text?e.more_link_text:"More"};this.options=t},getOptions:function(){return this.options},init:function(){function e(){var e=t.getWindowWidth(),n=t.getWindowHeight();(e!=i||n!=o)&&null!==t.local_nav_bar&&(t.processingNavigation=!1,t.processNavigation()),i=e,o=n}var t=this,n=null,i=this.getWindowWidth(),o=this.getWindowHeight();t.setupNavigation(),this.addListener(window,"resize",function(){clearTimeout(n),n=setTimeout(e,300)})},getWindowWidth:function(){var e=0;return"number"==typeof window.innerWidth?e=window.innerWidth:document.documentElement&&document.documentElement.clientWidth?e=document.documentElement.clientWidth:document.body&&document.body.clientWidth&&(e=document.body.clientWidth),e},getWindowHeight:function(){var e=0;return"number"==typeof window.innerHeight?e=window.innerHeight:document.documentElement&&document.documentElement.clientHeight?e=document.documentElement.clientHeight:document.body&&document.body.clientHeight&&(e=document.body.clientHeight),e},addListener:function(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n},setupNavigation:function(){if(this.local_nav_bar=document.getElementById("br-nav-programme"),null!==this.local_nav_bar){var e=document.createElement("button");e.className="br-nav__morelink br-box-highlight",e.setAttribute("data-linktrack","nav_more");var t=document.createTextNode(this.getOptions().more_link_text);e.appendChild(t),e.id="more-link",this.local_nav_bar.insertBefore(e,this.local_nav_bar.firstChild);var n=document.createElement("ul");n.id="more-list",n.className="br-nav__more br-nav__list",this.local_nav_bar.appendChild(n),this.addListener(e,"click",function(){-1!==e.className.indexOf("open")?(e.className=e.className.replace("open",""),n.className=n.className.replace("open","")):(e.className+=" open",n.className+=" open")}),t=null,this.processNavigation()}},processingNavigation:!1,processNavigation:function(){if(null!==this.local_nav_bar){var e=document.getElementById("more-link"),t=this.local_nav_bar.getElementsByTagName("ul");t=t[0];var n=t.getElementsByTagName("li"),i=n[0];this.processingNavigation=!0;var o=document.getElementById("more-list");if(null!==o)for(;o.hasChildNodes();)t.appendChild(o.firstChild);if(!this._navIsTooLong(t,i))return e.className=e.className.replace("visible",""),void(e=t=n=i=o=null);for(e.className=e.className.replace("visible",""),e.className+=" visible";this._navIsTooLong(t,i)&&this.processingNavigation;)this._moveLastNavItem();e=t=n=i=o=null}},_moveLastNavItem:function(){var e=this.local_nav_bar.getElementsByTagName("ul")[0],t=document.getElementById("more-list");t.insertBefore(e.lastChild,t.firstChild),e=nav_items=last_item=t=null},_navIsTooLong:function(e,t){var n=e.getElementsByTagName("li"),i=n.length>1&&e.offsetHeight>t.scrollHeight;return n=null,i}},e});
+        /*<![CDATA[*/
+        require(['branding-responsive-nav'],function(responsiveNav){
+            var nav = new responsiveNav({
+                'more_link_text' : 'More'
+            });
+            nav.init();
+        });
+        /*]]>*/
+    </script>                    </div></div>
+                
+
+        <div class="programmes-page text-base programmes-page--flush" role="main">
+            <div id="programmes-content" class="skip-to-content-destination" tabindex="-1">Main content</div>
+                
+
+    <div class="b-g-p no-margin-vertical">
+    <div class="grid-wrapper grid-wrapper--flush map map--episode map--count-2">
+
+                <div class="grid 2/3@bpw2 2/3@bpe map__column map__column--first">
+            <div class="map__inner br-box-secondary" data-map-column="playout-details">
+                    
+<div class="episode-playout">
+    <div id="episode-playout-w172wy09h2x73pm" class="playout">
+                                    <a class="playout__blocklink" data-linktrack="iplayer_episodepage_playcurrent_calltoaction" href="/sounds/play/w172wy09h2x73pm">
+                        <img class="image " src="https://ichef.bbci.co.uk/images/ic/640x360/p060dh18.jpg" srcset="https://ichef.bbci.co.uk/images/ic/80x45/p060dh18.jpg 80w, https://ichef.bbci.co.uk/images/ic/160x90/p060dh18.jpg 160w, https://ichef.bbci.co.uk/images/ic/320x180/p060dh18.jpg 320w, https://ichef.bbci.co.uk/images/ic/480x270/p060dh18.jpg 480w, https://ichef.bbci.co.uk/images/ic/640x360/p060dh18.jpg 640w" sizes="(min-width: 63em) 64000vw, (min-width: 48em) 66.666666666667vw, (min-width: 0em) 100vw, 100vw" alt="">
+
+                    <div class="playout__overlay">
+                        <div class="playout__message playout__message--icon br-highlight-bg-onbg--hover br-highlight-text-ontext--hover sounds">
+                            <span class="playout__icon"><svg tabindex="-1" aria-hidden="true" focusable="false" class="gelicon gelicon--fill-container"><use xlink:href="#gelicon--audio-visual--listen" /></svg></span>
+                            <span class="playout__messagetext">Listen now</span>
+                        </div>
+                    </div>
+                </a>
+                        </div>
+</div>
+
+
+                    
+<div class="island">
+    <div>
+                    <h1 class="no-margin">2019/05/19 08:01 GMT</h1>
+            <div class="gamma">
+                <div class="">
+                    <a class="context__item" href="/programmes/p002vsmz" tabindex="-1">BBC News</a>
+                </div>
+                            </div>
+            </div>
+    <div class="grid-wrapper">
+        <div class="grid 2/3@bpw 3/4@bpe">
+                <div class="episode-panel__intro">
+                    <div class="map__intro__synopsis centi">    <div class="text--prose longest-synopsis">
+                    <p>The latest five minute news bulletin from BBC World Service.</p>
+            </div>
+</div>
+                            
+            <div id="episode-map-favourites-button" class="favourites-module-wrapper map__buttons favourites-button buttons--favourites-small"></div>
+                    <div class="popup buttons__download">
+            <input class="popup__status" type="checkbox" id="download-popup" checked>
+
+            <div class="buttons__download">
+                <h2 class="popup__button text-base br-linkinvert buttons__download__link" data-clicktrack="podcast_download">
+                    <label for="download-popup">
+                        <span class="buttons__icon"><svg tabindex="-1" aria-hidden="true" focusable="false" class="gelicon gelicon--centi gelicon--leading"><use xlink:href="#gelicon--basics--download" /></svg></span>
+                        Download                    </label>
+                </h2>
+            </div>
+
+            <div class="popup__holder" id="download-popup-holder">
+                <div class="popup__content popup__content--download br-box-secondary br-secondary-link-onbg br-secondary-link-onborder popup__content--js">
+                    <h3 class="popup__header br-secondary-link-onborder--beforeafter br-secondary-linkhover-onborder--hover-beforeafter gamma no-margin deemphasize">
+                        <label class="popup__close island--squashed br-secondary-bg-onborder br-linkinvert" for="download-popup-holder">
+                            <span class="pull--right-spaced"><svg tabindex="-1" aria-hidden="true" focusable="false" class="gelicon gelicon--centi popup__close--button"><use xlink:href="#gelicon--basics--no" /></svg> </span>Choose your file
+                        </label>
+                    </h3>
+                    <ul class="list-unstyled popup__list">
+                                                    <li>
+                                <a class="link-complex popup__list__item island--squashed br-secondary-bg-ontext br-secondary-bg-onbg--hover br-secondary-link-ontext--hover" href="//open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/w1msh1y49xcby2l.mp3"
+                                   download="BBC News, 2019/05/19 08:01 GMT - w172wy09h2x73pm.mp3" aria-label="Download Higher quality (128kbps) ">
+                                    Higher quality (128kbps)
+                                </a>
+                            </li>
+                                                    <li>
+                                <a class="link-complex popup__list__item island--squashed br-secondary-bg-ontext br-secondary-bg-onbg--hover br-secondary-link-ontext--hover" href="//open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/w1msh1y49xcby2l.mp3"
+                                   download="BBC News, 2019/05/19 08:01 GMT - w172wy09h2x73pm.mp3" aria-label="Download Lower quality (64kbps) ">
+                                    Lower quality (64kbps)
+                                </a>
+                            </li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+            </div>
+
+        </div>
+        <div class="grid 1/3@bpw 1/4@bpe">
+                <div class="map__intro">
+                            <p class="episode-panel__meta">
+                                    <span title="Tue 21 May 2019, 08:06">1 day left to listen</span>
+                            </p>
+        
+                    <p class="episode-panel__meta">
+                <svg tabindex="-1" aria-hidden="true" focusable="false" class="gelicon gelicon--centi gelicon--leading"><use xlink:href="#gelicon--core--duration" /></svg>5 minutes
+            </p>
+                    </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+            </div>
+        </div>
+
+                <div class="grid 1/3@bpw2 1/3@bpe map__column map__column--2 map__column--last">
+            <div class="map__inner">                    <div class="br-box-secondary" data-map-column="tx"><div class="island">
+    <h2>Last on</h2><div class="broadcast-event programme">        <div class="programme__img"><a href="https://www.bbc.co.uk/worldserviceradio"><img src="https://programmes.files.bbci.co.uk/programmes-frontend/images/logos/64x36/bbc_world_service-7282872e77.png" alt="" width="64" height="36"/></a></div><div class="programme__body programme__body--flush">
+        <div class="broadcast-event__time beta"
+             data-timezone="true"
+             title="19 May 2019"
+             datatype="xsd:dateTime"
+             content="2019-05-19T09:00:00+01:00">
+            <span class="broadcast-event__date text-base timezone--date">Today</span>
+            <span class="timezone--time">08:00<span class="timezone--note">GMT</span></span>
+        </div>
+        <div class="programme__service box-link__elevated micro text--subtle"><a href="https://www.bbc.co.uk/worldserviceradio">BBC World Service</a></div>
+    </div>
+</div>
+</div>
+</div>                    <div class="br-box-secondary map__column map__fauxcolumn" data-map-column="more"><div class="island">
+    <h2>More episodes</h2>
+    <div class="grid-wrapper">
+                    <div class="grid 1/2@bpw 1/1@bpw2 1/1@bpe">
+                <div class="component--sibling br-keyline">
+                    <h3 class="delta text--shout no-margin">Previous</h3>
+                    <div class="programme programme--radio programme--episode block-link" data-pid="w172wy09h2x6zyh">
+        
+    
+    <div class="programme__img 1/4@bpb1 1/4@bpb2 1/3@bpw programme__img--available programme__img--hasimage programme__img--standalone-cta">
+        
+                                                                    
+<div class="cta cta__standalone">
+            <a href="https://www.bbc.co.uk/sounds/play/w172wy09h2x6zyh"
+           class=""
+           title="1 day left to listen (Tue 21 May 2019, 07:06)"
+           data-linktrack=previous_episode_map_calltoaction
+           tabindex="-1"
+        >
+                            <div class="cta__icon  cta__with-link">
+        <svg tabindex="-1" aria-hidden="true" focusable="false" class="gelicon gelicon--half-container"><use xlink:href="#gelicon--audio-visual--listen" /></svg>
+    </div>
+                    </a>
+    </div>
+                                        </div>
+
+
+    <div class="programme__body">
+                <h4 class="programme__titles"><a href="https://www.bbc.co.uk/programmes/w172wy09h2x6zyh" class="br-blocklink__link block-link__target" data-linktrack="previous_episode_map_eptitle" ><span class="programme__title gamma"><span>2019/05/19 07:01 GMT</span></span></a></h4>
+
+                
+
+
+
+    </div>
+</div>
+
+                </div>
+            </div>
+                            <div class="grid 1/2@bpw 1/1@bpw2 1/1@bpe">
+                    <div class="component--sibling br-keyline">
+                        <h3 class="delta text--shout no-margin">Next</h3>
+                        <div class="programme programme--radio programme--episode block-link" data-pid="w172wy09h2x77fr">
+        
+    
+    <div class="programme__img 1/4@bpb1 1/4@bpb2 1/3@bpw programme__img--available programme__img--hasimage programme__img--standalone-cta">
+        
+                                                                    
+<div class="cta cta__standalone">
+            <a href="https://www.bbc.co.uk/sounds/play/w172wy09h2x77fr"
+           class=""
+           title="1 day left to listen (Tue 21 May 2019, 09:06)"
+           data-linktrack=upcoming_episode_map_calltoaction
+           tabindex="-1"
+        >
+                            <div class="cta__icon  cta__with-link">
+        <svg tabindex="-1" aria-hidden="true" focusable="false" class="gelicon gelicon--half-container"><use xlink:href="#gelicon--audio-visual--listen" /></svg>
+    </div>
+                    </a>
+    </div>
+                                        </div>
+
+
+    <div class="programme__body">
+                <h4 class="programme__titles"><a href="https://www.bbc.co.uk/programmes/w172wy09h2x77fr" class="br-blocklink__link block-link__target" data-linktrack="upcoming_episode_map_eptitle" ><span class="programme__title gamma"><span>2019/05/19 09:01 GMT</span></span></a></h4>
+
+                
+
+
+
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+
+    <p>
+        <a href="/programmes/p002vsmz/episodes" data-linktrack="episode_map_see_all">
+            See all episodes from BBC News
+        </a>
+    </p>
+</div>
+</div></div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="prog-layout programmes-page">
+        <div class="grid-wrapper grid-wrapper--center">
+            
+            <div class="grid grid--bounded 13/24@bpw2 13/24@bpe">
+                <div class="br-box-page prog-box">
+                    
+                                        
+                                        
+                    
+                    
+                    
+                    
+                                            <div class="component component--box component--box--primary" id="broadcasts">
+                            <div class="component__header br-box-page">
+                                <h2>Broadcast</h2>
+                            </div>
+                            <div class="component__body br-box-page">
+                                <div class="ml">
+                                                                        <div class="ml__content">
+                                        <ul class="grid-wrapper highlight-box-wrapper--grid">
+                                                                                            <li class="grid 1/2 1/3@bpb1 1/3@bpb2 1/4@bpw 1/3@bpw2 1/3@bpe"><div class="broadcast-event programme programme--grid highlight-box--grid">        <div class="programme__img"><a href="https://www.bbc.co.uk/worldserviceradio"><img src="https://programmes.files.bbci.co.uk/programmes-frontend/images/logos/64x36/bbc_world_service-7282872e77.png" alt="" width="64" height="36"/></a></div><div class="programme__body programme__body--flush">
+        <div class="broadcast-event__time beta"
+             data-timezone="true"
+             title="19 May 2019"
+             datatype="xsd:dateTime"
+             content="2019-05-19T09:00:00+01:00">
+            <span class="broadcast-event__date text-base timezone--date">Today</span>
+            <span class="timezone--time">08:00<span class="timezone--note">GMT</span></span>
+        </div>
+        <div class="programme__service box-link__elevated micro text--subtle"><a href="https://www.bbc.co.uk/worldserviceradio">BBC World Service</a></div>
+    </div>
+</div>
+</li>
+                                                                                    </ul>
+                                    </div>
+                                                                    </div>
+                            </div>
+                        </div>
+                    
+                                    </div>
+            </div>
+
+            <div class="grid grid--bounded 11/24@bpw2 11/24@bpe">
+                
+                
+                
+                
+                
+                
+                            </div>
+        </div>
+    </div>
+        </div>
+        <div class="br-box-subtle text-base programmes-page programmes-page--flush" id="programmes-footer"><div class="footer-wrapper br-keyline">
+    <div class="footer g-f-l">
+        <h2 class="visually-hidden">Related Content</h2>
+        <div class="grid-wrapper grid-wrapper--flush">
+            <div class="grid grid--flush 1/2@bpw 5/12@bpw2 5/12@bpe"><div class="b-g-p">
+                <!-- (Recommendations) You may also like --><div class="icon-box br-box-page lazy-module"
+                        data-lazyload-inc="/programmes/w172wy09h2x73pm/recommendations.2013inc"
+                        data-lazyload-threshold="320"
+                        data-lazyload-delay="true"
+                    >
+                        <a class="icon-box__link br-box-page__link br-page-link-onbg015 br-page-linkhover-onbg015--hover" href="/programmes/w172wy09h2x73pm/recommendations">
+                            <svg tabindex="-1" aria-hidden="true" focusable="false" class="gelicon icon-box__icon br-pseudolink"><use xlink:href="#gelicon--basics--recommend" /></svg>
+
+                            <div class="icon-box__hgroup">
+                                <h3 class="icon-box__title gamma">You may also like</h3>
+                            </div>
+
+                            <p class="icon-box__note micro">View all</p>
+                        </a>
+                    </div></div></div>
+            <div class="grid grid--flush 1/2@bpw 1/4@bpw2 1/4@bpe"><div class="footer__similar b-g-p component">
+                    <h3 class="beta">Similar programmes</h3><div>
+                        <h4 class="inline micro">By genre:</h4>
+                        <ul class="list-unstyled micro"><li><a href="/programmes/genres/news">News</a></li></ul>
+                    </div><div>
+                        <h4 class="inline micro">By format:</h4>
+                        <ul class="list-unstyled micro"><li>
+                                    <a href="/programmes/formats/bulletins">Bulletins</a>
+                                </li></ul>
+                    </div></div></div><div class="grid grid--flush 1/2 1/6@bpw2 1/6@bpe footer__service centi"><div class="footer__service-island br-service-brand-box fauxcolumn">
+                        <a class="islet--vertical footer__service__logo text--center@bpw" href="/worldserviceradio">
+                            <img alt="BBC World Service homepage" src="https://programmes.files.bbci.co.uk/programmes-frontend/images/logos/112x63/bbc_world_service-131e0fef59.png">
+                        </a>
+                        <div class="footer__watch-live">
+                            <div class="lazy-module" data-lazyload-inc="/schedules/network/worldserviceradio/on-now?partial=2013" data-lazyload-threshold="768" data-lazyload-delay="true">
+                            </div>
+                        </div>
+                    </div></div><div class="grid grid--flush 1/2 1/6@bpw2 1/6@bpe footer__service-nav centi"><div class="footer__service__nav"><div class="br-service-brand-box--alt fauxcolumn">
+                        <ul class="footer__service__nav__list list-unstyled footer__service-island"><li class="footer__service__navitem">
+                                    <a href="/worldserviceradio"
+                                        title="BBC World Service homepage"
+                                        data-linktrack="global_footer_servicenav">
+                                        Home
+                                    </a>
+                                </li><li class="footer__service__navitem">
+                                    <a class="br-text" href="http://www.bbc.co.uk/worldserviceradio/programmes/schedules" data-linktrack="global_footer_servicenav">Online schedule</a>
+                                </li><li class="footer__service__navitem">
+                                    <a class="br-text" href="http://www.bbc.co.uk/podcasts/worldserviceradio" data-linktrack="global_footer_servicenav">Downloads</a>
+                                </li><li class="footer__service__navitem">
+                                    <a class="br-text" href="http://www.bbc.co.uk/programmes/articles/5nCxH0NlsPtyW8WvJ0rwDJP/about-world-service-radio" data-linktrack="global_footer_servicenav">Help &amp; FAQs</a>
+                                </li><li class="footer__service__navitem">
+                                    <a class="br-text" href="http://www.bbc.co.uk/programmes/articles/5nCxH0NlsPtyW8WvJ0rwDJP/about-world-service-radio" data-linktrack="global_footer_servicenav">Contact us</a>
+                                </li><li class="footer__service__navitem">
+                                    <a class="br-text" href="http://www.bbc.co.uk/worldservice/languages/index.shtml" data-linktrack="global_footer_servicenav">News in 39 languages</a>
+                                </li></ul>
+                    </div></div></div></div>
+    </div>
+</div></div>
+        <script>
+            require(['rv-bootstrap']);
+        </script>
+                    <script type="application/ld+json">
+                {"@type":"RadioEpisode","identifier":"w172wy09h2x73pm","episodeNumber":null,"description":"The latest five minute news bulletin from BBC World Service.","datePublished":"2019-05-19","image":"https:\/\/ichef.bbci.co.uk\/images\/ic\/480xn\/p060dh18.jpg","name":"2019\/05\/19 08:01 GMT","url":"https:\/\/www.bbc.co.uk\/programmes\/w172wy09h2x73pm","partOfSeries":{"@type":"RadioSeries","image":"https:\/\/ichef.bbci.co.uk\/images\/ic\/480xn\/p060dh18.jpg","description":"The latest five minute news bulletin from BBC World Service","identifier":"p002vsmz","name":"BBC News","url":"https:\/\/www.bbc.co.uk\/programmes\/p002vsmz"},"publication":{"@type":"OnDemandEvent","publishedOn":{"@type":"BroadcastService","broadcaster":{"@type":"Organization","legalName":"British Broadcasting Corporation","logo":"http:\/\/ichef.bbci.co.uk\/images\/ic\/1200x675\/p01tqv8z.png","name":"BBC","url":"https:\/\/www.bbc.co.uk\/"},"name":"BBC Sounds","url":"https:\/\/www.bbc.co.uk\/sounds"},"duration":"PT5M","url":"https:\/\/www.bbc.co.uk\/sounds\/play\/w172wy09h2x73pm","startDate":"2019-05-19T08:06:00+00:00","endDate":"2019-05-21T08:06:00+00:00"},"@context":"http:\/\/schema.org"}
+            </script>
+                    
+        <div class="p-f-upsell p-f-hide"> <div class="pre-signin-wrapper"> <div class="pre-signin-inner"> <div class="pre-signin-content"> <span class="p-f-dialog-image"></span> <h3 class="p-f-dialog-heading"></h3> <p class="p-f-dialog-text"></p> <span class="p-f-dialog-signin"> <span class="p-f-dialog-signin-buttons">      <p class="id4-cta" id="id4-cta-90980076-c550-4790-9100-3e2e2a5145c9"><span class="id5-cta id4-cta-size-small id4-cta-color-blue id4-cta-small-blue"><a href="https://session.bbc.co.uk/session?ptrt=https%3A%2F%2Fwww.bbc.co.uk%2Fmodules%2Fplugin%2Fmusicfavourite%2Finit" class="id4-cta-signin id4-cta-button">Sign in</a><span class="id4-cta-with"> to the BBC,</span> or <a href="https://session.bbc.co.uk/session?action=register&ptrt=https%3A%2F%2Fwww.bbc.co.uk%2Fmodules%2Fplugin%2Fmusicfavourite%2Finit" class="id4-cta-register">Register</a><script type="text/javascript">if (require.s.contexts._.config.paths['idcta']) {require(['idcta/idcta-1'], function(idcta) {if (idcta && typeof idcta.addUserOrigin === 'function') {idcta.addUserOrigin('id4-cta-90980076-c550-4790-9100-3e2e2a5145c9');}});}</script></span></p><script type="text/javascript">require(['idcta/idcta-1'], function(idcta) {new idcta.Cta({id: 'id4-cta-90980076-c550-4790-9100-3e2e2a5145c9', states: {}, policyname: ''});});</script>                           </span> <span class="p-f-dialog-signin-post-text"></span> </span> </div> </div> </div> </div>  <div class="p-f-confirmation p-f-hide br-secondary-bg-onbg" tabindex="0"> <div class="p-f-added-text-wrapper"> <div class="p-f-item-name-and-quotes-wrapper"> <img class="p-f-item-image" src="" data-default-src="" alt="Added item image"/> <i class="p-f-item-music-icon gelicon gelicon--music-on"></i> <div class="p-f-item-quotes-wrapper"><span>"</span></div> <div class="p-f-item-name-wrapper"><span class="p-f-item-name"></span></div> <div class="p-f-item-quotes-wrapper"><span>"</span></div> </div> <div class="p-f-text-cont"> <span class="p-f-added-text">Added, go to</span> <a href="" class="p-f-added-link">My Music</a> <span class="p-f-added-after-link">to see full list.</span> </div> </div> <div class="p-f-added-text-wrapper p-f-more-from-artist-text"> <div class="p-f-artist-name-wrapper"> <span class="p-f-more-from-text">More from </span> <a class="p-f-artist-name"></a> </div> </div> </div>
+    <script>if (!require) { throw new Error('Music Favourite: Could not find require module'); } if (typeof(bbcRequireMap) === 'undefined') { window.bbcRequireMap = {}; }  window.MUSICFAV_idIsAvailable = true;  bbcRequireMap['plugins/musicfavourite'] = 'https://static.bbci.co.uk/modules/plugin/musicfavourite/3.0.23/' + 'modules/plugins/musicfavourite'; require({paths: bbcRequireMap}); STATIC_HOST_PREFIX = 'https://static.bbci.co.uk/modules/plugin/musicfavourite/3.0.23/'; API_HOST_PREFIX = 'https://ssl.bbc.co.uk';</script>
+    <script>
+        require(['plugins/musicfavourite'], function (fav) {
+                        var elem = document.getElementById('episode-map-favourites-button');
+            fav.render(elem, {
+                'appid': 'radio',
+                'type': 'programme',
+                'id': 'w172wy09h2x73pm',
+                'title': '2019\/05\/19\u002008\u003A01\u0020GMT',
+                'variant': 'small',
+                'lang': 'en-gb',
+                'platform': 'responsiveweb',
+                'context-type': 'network_pid',
+                                'product': 'radio',
+                'context-id': 'w172wy09h2x73pm'
+            });
+                    });
+    </script>
+        <svg xmlns="http://www.w3.org/2000/svg" class="gelicons-source"><defs><symbol id="gelicon--audio-visual--listen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><title>listen</title><path d="M21.4 4.8L20 6.2a14 14 0 0 1 0 19.6l1.4 1.4a16 16 0 0 0 0-22.4z"/><path d="M25.6.5L24.2 2a19.9 19.9 0 0 1 0 28.1l1.4 1.4a22 22 0 0 0 0-31zM16 4l-6 6H0v12h10l6 6V4z"/></symbol><symbol id="gelicon--basics--download" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><title>download</title><path d="M28.2 12.2L19 21.4V0h-6v21.4l-9.2-9.2L0 16l14 14H2v-6H0v8h16l16-16-3.8-3.8zM30 30h-8l-2 2h12v-8h-2v6z"/></symbol><symbol id="gelicon--basics--no" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><title>no</title><path d="M32 3.5L28.5 0 16 12.5 3.5 0 0 3.5 12.5 16 0 28.5 3.5 32 16 19.5 28.5 32l3.5-3.5L19.5 16 32 3.5z"/></symbol><symbol id="gelicon--core--duration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><title>duration</title><path d="M17 15.4V6h-2v10.6l8.8 5.1 1-1.8-7.8-4.5z"/><path d="M16 4A12 12 0 1 1 4 16 12 12 0 0 1 16 4m0-4a16 16 0 1 0 16 16A16 16 0 0 0 16 0z"/></symbol><symbol id="gelicon--basics--recommend" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><title>recommend</title><path d="M16 28a12 12 0 1 1 8.1-20.8l-8.7 10.4-5.4-3.8-3 3.5 8.8 6.8 11-13.1 2.8-3.3A16 16 0 1 0 32 16h-4a12 12 0 0 1-12 12"/></symbol></defs></svg>
+            <script>
+        require(['timezone-notification'], function (timezoneNotification) {
+            var localisedDaysAndMonths = {"days":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"months":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]};
+            var options = {
+                translations: {
+                    localTime: "Local time",
+                    localDaysOfWeek: localisedDaysAndMonths['days'],
+                    localMonths: localisedDaysAndMonths['months']
+                }
+            };
+            new timezoneNotification(options);
+        });
+    </script>
+        </div>                     </div> 
+<!-- BrandingProjectId: "5367", ThemeVersionId: "13625", NavigationVersionId: "9713". Published on 2019-05-19T01:48:24+00:00 -->
+                </div>
+<div id="orb-footer" class="orb-footer" dir="ltr"><aside role="complementary"><div id="orb-aside" class="orb-nav-sec b-r b-g-p"><div class="orb-footer-inner" role="navigation" aria-label="BBC"><h2 class="orb-footer-lead">Explore the BBC</h2><div class="orb-footer-primary-links"><ul><li class="orb-nav-news"><a href="https://www.bbc.com/news">News</a></li><li class="orb-nav-sport"><a href="https://www.bbc.com/sport">Sport</a></li><li class="orb-nav-weather"><a href="https://www.bbc.com/weather">Weather</a></li><li class="orb-nav-radio"><a href="https://www.bbc.co.uk/worldserviceradio">Radio</a></li><li class="orb-nav-arts"><a href="https://www.bbc.co.uk/arts">Arts</a></li></ul></div></div></div></aside><footer role="contentinfo"><div id="orb-contentinfo" class="orb-nav-sec b-r b-g-p"><script>window.orb.worldwideFooterlinks = '<li class="orb-footer-ads"><a href="https://advertising.bbcworldwide.com/">Advertise with us<'+'/a><'+'/li><li class="orb-footer-adchoices"><a href="https://www.bbc.com/usingthebbc/cookies/how-does-the-bbc-use-cookies-for-advertising/">Ad choices<'+'/a><'+'/li>';</script><div class="orb-footer-inner"> <ul><li class="orb-footer-terms"><a href="https://www.bbc.co.uk/usingthebbc/terms/">Terms of Use</a></li><li class="orb-footer-about"><a href="https://www.bbc.co.uk/aboutthebbc">About the BBC</a></li><li class="orb-footer-privacy"><a href="https://www.bbc.co.uk/usingthebbc/privacy/">Privacy Policy</a></li><li class="orb-footer-cookies"><a href="https://www.bbc.co.uk/usingthebbc/cookies/">Cookies</a></li><li class="orb-footer-accessibility"><a href="https://www.bbc.co.uk/accessibility/">Accessibility Help</a></li><li class="orb-footer-parental"><a href="https://www.bbc.co.uk/guidance">Parental Guidance</a></li><li class="orb-footer-contact"><a href="https://www.bbc.co.uk/contact">Contact the BBC</a></li><li class="orb-footer-newsletter"><a href="https://www.bbc.co.uk/bbcnewsletter">Get Personalised Newsletters</a></li></ul><small><em class="orb-hilight">Copyright &copy; 2019 BBC.</em> The BBC is not responsible for the content of external sites. <span class="orb-footer-links"><a href="https://www.bbc.co.uk/help/web/links/" class="orb-hilight">Read about our approach to external linking.</a></span></small></div></div></div></footer></div><script id="orb-js-script" data-assetpath="https://nav.files.bbci.co.uk/orbit/2.0.0-561.289d4c97/" src="https://nav.files.bbci.co.uk/orbit/2.0.0-561.289d4c97/js/orb.min.js"></script>  <script type="text/javascript">/*<![CDATA[*/
+                require(['orb/fig', 'orb/nav'], function(fig, nav) {
+                    fig.load(function(fig) {
+                        if (fig.geo.isUK()) {
+                            nav.loadJs('https://nav.files.bbci.co.uk/orbit/2.0.0-561.289d4c97/js/edr.min.js');
+                        }
+                    });
+                });
+            /*]]>*/</script> <!-- BBCDOTCOM bodyLast --><div class="bbccom_display_none"><script type="text/javascript">/*<![CDATA[*/ if (window.bbcdotcom && window.bbcdotcom.analytics && bbcdotcom.config && !bbcdotcom.config.isSportApp() && !bbcdotcom.config.isReel()) { bbcdotcom.analytics.page(); } /*]]>*/</script><noscript><img src="//ssc.api.bbc.com/?c1=2&c2=19293874&ns_site=bbc&name=" height="1" width="1" alt=""></noscript><script type="text/javascript">/*<![CDATA[*/ if (window.bbcdotcom && bbcdotcom.currencyProviders) { bbcdotcom.currencyProviders.write(); } /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ if (window.bbcdotcom && bbcdotcom.currencyProviders) { bbcdotcom.currencyProviders.postWrite(); } /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ if (window.bbcdotcom && bbcdotcom.data && bbcdotcom.data.stats && bbcdotcom.data.stats === 1 && bbcdotcom.utils && window.location.pathname === '/' && window.bbccookies && bbccookies.readPolicy('performance') ) { var wwhpEdition = bbcdotcom.utils.getMetaPropertyContent('wwhp-edition'); var _sf_async_config={}; /** CONFIGURATION START **/ _sf_async_config.uid = 50924; _sf_async_config.domain = "bbc.co.uk"; _sf_async_config.title = "Homepage"+(wwhpEdition !== '' ? ' - '+wwhpEdition : ''); _sf_async_config.sections = "Homepage"+(wwhpEdition !== '' ? ', Homepage - '+wwhpEdition : ''); _sf_async_config.region = wwhpEdition; _sf_async_config.path = "/"+(wwhpEdition !== '' ? '?'+wwhpEdition : ''); /** CONFIGURATION END **/ (function(){ function loadChartbeat() { window._sf_endpt=(new Date()).getTime(); var e = document.createElement("script"); e.setAttribute("language", "javascript"); e.setAttribute("type", "text/javascript"); e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js'); document.body.appendChild(e); } var oldonload = window.onload; window.onload = (typeof window.onload != "function") ? loadChartbeat : function() { oldonload(); loadChartbeat(); }; })(); } /*]]>*/</script><script type="text/javascript">/*<![CDATA[*/ (function() { window.bbcdotcom.bodyLast = true; }()); /*]]>*/</script></div><!-- BBCDOTCOM all code in page --><script type="text/javascript">if (window.SEARCHBOX.suppress === false && window.SEARCHBOX.locale && /^en-?.*?/.test(window.SEARCHBOX.locale)) {
+    require.config({
+      paths: {
+        "search/searchbox": window.SEARCHBOX.searchboxAppStaticPrefix,
+      }
+    });
+
+    if (bbcuser && bbcuser.isUKCombined) {
+        bbcuser.isUKCombined().then(function (isUK) {
+            if (isUK) {
+                require(['search/searchbox/searchboxDrawer'], function (SearchboxDrawer) {
+                  SearchboxDrawer.run(window.SEARCHBOX);
+                });
+            }
+        });
+    }
+
+  }</script>  <script>"use strict";define("orb/cookies-adapter",["orb/cookies"],function(c){function e(e){return c._setPolicy("ads",e),c._setPolicy("personalisation",e),c._setPolicy("performance",e),c._setPolicy("necessary",e)}return{isOrbitEnvironment:function(){return"object"==typeof bbccookies&&"function"!=typeof bbccookies._getCookieName},set:function(e,n){var o=new Date;if(o.setYear(o.getFullYear()+1),this.isOrbitEnvironment())return c.set(e,n,{domain:c._getCurrentDomain(),path:"/",expires:o});var i=window.location.host.match(/(.bbc(?:\.co\.uk))(:\d+)?(\/.*)?$/i),t=e+"="+n+";domain="+(i&&".bbc.co.uk"===i[1]?".bbc.co.uk":".bbc.com")+";path=/;expires="+o.toUTCString()+";";return c.set(t)},get:function(e){return this.isOrbitEnvironment()?c.get(e):c.getCrumb(e)},copyPolicyCookiesCrossDomain:function(e){if(this.isOrbitEnvironment())return c.copyPolicyCookiesCrossDomain(e);e()},setDefaultCookiesSingleDomain:function(){return this.isOrbitEnvironment()?c.setDefaultCookiesSingleDomain():e(!1)},setDefaultCookiesCrossDomain:function(){return this.isOrbitEnvironment()?c.setDefaultCookiesCrossDomain():e(!1)},optInToAllCookiesCrossDomain:function(){if(this.isOrbitEnvironment()){return c.setCookiePolicyCrossDomain({ads:!0,personalisation:!0,performance:!0,necessary:!0})}return e(!0)},isCookiePolicySet:function(){return this.isOrbitEnvironment()?c.isCookiePolicySet():null!==this.get("ckns_policy")}}}),require(["orb/lib/_script","orb/cookies-adapter"],function(s,r){var a="ckns_privacy",b="ckns_explicit",l="1";function t(){var e=r.get(b);return null!==e&&e===l}function u(e,n){e.style.display="none",n.style.display="none"}function d(e,n){t()||(e.style.display="none",n.style.display="block",window.bbcpage.trackRegion(n,{linkLocation:"nav-banner-cookies"}),window.bbcuser.logEvent("view","nav-banner-cookies"))}function c(){var e=document.getElementById("bbcprivacy"),n=document.getElementById("bbccookies");document.getElementById("bbcprivacy-continue-button").addEventListener("click",function(){u(e,n),d(e,n),window.bbcuser.logEvent("click-cta","nav-banner-privacy")}),document.getElementById("bbccookies-continue-button").addEventListener("click",function(){u(e,n),window.bbcuser.logEvent("click-continue","nav-banner-cookies"),r.optInToAllCookiesCrossDomain(),r.set(b,l)});var o,i,t,c=document.getElementById("bbccookies-settings").getElementsByTagName("a")[0];c.addEventListener("click",(o=!1,function(e){o||(r.copyPolicyCookiesCrossDomain(function(){o=!0,c.click()}),r.set(b,l),e.preventDefault())})),null!==r.get(a)?d(e,n):(t=n,(i=e).style.display="block",t.style.display="none",window.bbcpage.trackRegion(i,{linkLocation:"nav-banner-privacy"}),window.bbcuser.logEvent("view","nav-banner-privacy"),r.set(a,"1"))}function k(e,c,r){var n,o,i="https://nav.files.bbci.co.uk/orbit-webmodules/0.0.1-292.2d933ad/cookie-banner//cookie-prompt/",t=i+(o="en","string"==typeof(n=e)&&2<=n.length&&(o=n.trim().substring(0,2).toLowerCase()),-1!==["en","cy","gd","ga"].indexOf(o)?o:"en")+".min.js";window.bbcpage.loadCSS("https://nav.files.bbci.co.uk/orbit-webmodules/0.0.1-292.2d933ad/cookie-banner//cookie-prompt/bbccookies.min.css").then(function(){s.jsonp(t,function(e){var n=e.replace(/<<bbcUrlPrefix>>/g,function(){if(window.orb.bbcUrlPrefix){var e=window.orb.bbcUrlPrefix+"bbc.com",n=window.location.host.match(/(bbc(?:\.co\.uk))(:\d+)?(\/.*)?$/i);return n&&"bbc.co.uk"===n[1]&&(e=e.replace("bbc.com","bbc.co.uk")),e}return""}());document.getElementById("cookiePrompt").innerHTML=n;for(var o=document.querySelectorAll("[data-region-filter]"),i=0;i<o.length;i++){var t=o[i];t.getAttribute("data-region-filter")!==r&&(t.style.display="none")}c()},{callbackName:"cookiePrompt"})})}Promise.all([window.bbcuser.isUKCombined(),window.bbcuser.isEU(),window.bbcpage.getLanguage()]).then(function(e){var n=e[0];if(e[1]||n){var o=null!==r.get(a);if(!(r.isCookiePolicySet()&&t()&&o)){t()||r.set(b,"0"),r.isCookiePolicySet()||r.setDefaultCookiesSingleDomain();var i=n?"gb":"eu";k(e[2],c,i)}}}).catch(function(){k("en",c,"gb")})});</script><script type="text/javascript">require(["istats-1","orb/cookies"],function(o,t){if(t.isAllowed("s1"))try{if(!require.s.contexts._.config.paths.idcta)return void i();require(["idcta/idcta-1"],function(t){t&&"function"==typeof t.getIStatsLabels&&o.addLabels(t.getIStatsLabels()),i()},function(t){throw t})}catch(t){console&&"function"==typeof console.log&&console.log("an exception occurred while adding idcta labels to istats, invoking istats without them",t),i()}function i(){o.invoke()}});</script><script type="text/javascript">"use strict";require(["reverb"],function(e){return e.invoke()});</script><script>if("function"!=typeof window.CustomEvent){function CustomEvent(t,e){e=e||{bubbles:!1,cancelable:!1,detail:null};var n=document.createEvent("CustomEvent");return n.initCustomEvent(t,e.bubbles,e.cancelable,e.detail),n}CustomEvent.prototype=window.Event.prototype,window.CustomEvent=CustomEvent}require(["detectview","parseContentForEvent"],function(t,n){window.addEventListener("pageshow",function(t){var e=navigator.vendor&&-1<navigator.vendor.indexOf("Apple");t.persisted&&e&&document.location.reload()}),t(["[data-bbc-context]","[data-bbc-container]"],function(t){if(!t.hasAttribute("data-bbc-ignore-views")){var e=new CustomEvent("bbc-user-event",{bubbles:!0,detail:n(t)});t.dispatchEvent(e)}})}),require(["parseContentForEvent","getParentWithSelector"],function(c,l){var d=function(t){return null===t.which?4===t.button:1===t.button},e=function(t){if(0===t.button||d(t)){var e,n,r,i=l(t.target,"[data-bbc-container]"),a=l(t.target,"a");if(i&&a){n=a,r=1500,(e=t).altKey||e.ctrlKey||e.metaKey||e.shiftKey||d(e)||n.target&&!n.target.match(/^_(self|parent|top)$/i)||(e.preventDefault(),setTimeout(function(){window.location.href=n.href},r));var o=c(i);o.elem=a,o.originalEvent=t;var u=new CustomEvent("bbc-user-click",{bubbles:!0,detail:o});a.dispatchEvent(u)}}};["click","auxclick"].forEach(function(t){document.body.addEventListener(t,e)})}),define("getParentWithSelector",function(){return Element.prototype.matches||(Element.prototype.matches=Element.prototype.msMatchesSelector||Element.prototype.webkitMatchesSelector),function t(e,n){return e.matches(n)?e:!!e.parentElement&&t(e.parentElement,n)}}),define("getParentChildPosition",["getParentWithSelector"],function(i){function a(t){var e=i(t,"[data-stats]");return JSON.parse(e.getAttribute("data-stats")).link_location}return function(t){var e=i(t,"[data-stats]"),n=Array.prototype.slice.call(document.querySelectorAll("[data-stats]")).indexOf(e)+1,r=Array.prototype.slice.call(t.parentElement.children).indexOf(t)+1;return{PAR:a(t)+"::"+n,CHD:function(t){var e={"iplayer-video":"iplayer",video:"video",audio:"audio"};if(-1<["message-banner","message-banner-signed-in"].indexOf(a(t)))return"button";var n=t.getAttribute("data-bbc-asset-type");return e[n]?"card-"+e[n]:"card"}(t)+"::"+r}}}),define("parseContentForEvent",["getParentWithSelector","getParentChildPosition"],function(i,a){function r(t){return t.hasAttribute("data-bbc-result")?t.getAttribute("data-bbc-result"):function t(e){if(e.hasAttribute("href"))return encodeURIComponent(e.getAttribute("href"));for(var n=e.children,r=0;r<n.length;r++){var i=t(n[r]);if(null!==i)return i}return null}(t)}return function(t){return{container:t.getAttribute("data-bbc-container")||t.getAttribute("data-bbc-context"),label:(n=t,encodeURIComponent(n.getAttribute("data-bbc-title")||n.getAttribute("data-bbc-content-label")||n.innerText.split("\n")[0])),source:(e=t,e.getAttribute("data-bbc-source")),personalisation:function(t){var e=i(t,"[data-bbc-personalisation]");if(e)return JSON.parse(e.getAttribute("data-bbc-personalisation"));var n=i(t,"[data-stats]");if(!n)return{};var r=JSON.parse(n.getAttribute("data-stats"));return r.hp_sgm_id||r.hp_sgm_user_score?{SEG:r.hp_sgm_id+"::"+r.hp_sgm_user_score}:{}}(t),metadata:function(t){var e=i(t,"[data-bbc-metadata]"),n=e?JSON.parse(e.getAttribute("data-bbc-metadata")):{};if(i(t,"[data-bbc-track-position]")){var r=a(t);if(!n.PAR)return Object.assign({},r,n)}return n}(t),result:r(t)};var e,n}}),define("detectview",["throttle"],function(b){return function(t,i,e){var a=[],n=(e=e||{}).throttleWaitMs||250,o=e.elementViewedFraction||.5,u=e.elementViewedDurationMs||1e3,f="undefined"!=typeof window&&window,r="undefined"!=typeof document&&document,h=r&&r.documentElement;function c(t){return-1<a.indexOf(t)}function l(t){var e,n,r,i,a,o,u,c,l=t.getBoundingClientRect(),d=(e=h.clientWidth,n=f.innerWidth,r=h.clientHeight,i=f.innerHeight,{width:e<n?n:e,height:r<i?i:r}),s=(o=d,0<=(a=l).top&&a.bottom<=o.height?1:a.bottom<0||a.top>o.height?0:a.top<0?a.bottom/a.height:a.bottom>o.height?(o.height-a.top)/a.height:void 0);if(0<s){var b=(c=d,0<=(u=l).left&&u.right<=c.width?1:u.right<0||u.left>c.width?0:u.left<0?u.right/u.width:u.right>c.width?(c.width-u.left)/u.width:void 0);if(0<b)return b*s}return 0}function d(t,e,n,r){l(t)>=e&&setTimeout(function(){l(t)>=e&&!c(t)&&(a.push(t),r(t))},n)}function s(){t.forEach(function(t){for(var e=document.querySelectorAll(t),n=0;n<e.length;n++){var r=e[n];c(r)||d(r,o,u,i)}})}s=b(s,n),["scroll","resize","load"].forEach(function(t){window.addEventListener(t,s)}),s()}}),define("throttle",function(){return function(n,r,i){var a,o,u,c=null,l=0;i||(i={});var d=function(){l=!1===i.leading?0:Date.now(),c=null,u=n.apply(a,o),c||(a=o=null)};return function(){var t=Date.now();l||!1!==i.leading||(l=t);var e=r-(t-l);return a=this,o=arguments,e<=0||r<e?(c&&(clearTimeout(c),c=null),l=t,u=n.apply(a,o),c||(a=o=null)):c||!1===i.trailing||(c=setTimeout(d,e)),u}}});</script>
+                    <!-- Programmes Version: 1228 -->
+            </body>
+            <script type="text/javascript">
+            require(['popup'], function(popup) {
+                new popup({containerSelector: '.popup', useParentContainerWidth: true});
+            });
+        </script>
+    </html>

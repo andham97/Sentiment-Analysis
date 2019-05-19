@@ -16,7 +16,7 @@ const router = new Router();
 const isWhitelisted = (req) => {
   if (!req.user)
     return false;
-  return req.headers.api_key === process.env.SCRAPER_API_KEY || process.env.ADMIN_WHITELIST.split(',').filter(email => req.user.emails.filter(val => email === val.value).length > 0).length > 0;
+  return req.headers.api_key === process.env.SCRAPER_API_KEY || global.__DEV__ || process.env.ADMIN_WHITELIST.split(',').filter(email => req.user.emails.filter(val => email === val.value).length > 0).length > 0;
 };
 
 router.get('/login', passport.authenticate('auth0', {
