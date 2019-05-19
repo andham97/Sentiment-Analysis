@@ -1,5 +1,5 @@
 import { getCloudant } from '../ics';
-import API from '../api';
+import { getSources } from './searcg';
 
 /**
  * Get the words for the wordcloud
@@ -16,7 +16,7 @@ const getWordcloud = () => new Promise((resolve, reject) => {
       counts: ['key'],
       limit: 0,
     }).then((data) => {
-      API.getSources().then((sources) => {
+      getSources().then((sources) => {
         const arr = data.counts.key;
         const result = [];
 
