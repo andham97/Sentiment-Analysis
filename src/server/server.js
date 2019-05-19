@@ -21,7 +21,7 @@ import Scheduler from './scheduler';
 import { getCloudant } from './ics';
 
 dotenv.config();
-if (!global.__DEV__) {
+if (!global.__DEV__ && !process.env.__DEV__) {
   passport.use(new Auth0Security({
     domain: process.env.AUTH0_DOMAIN,
     clientID: process.env.AUTH0_CLIENT_ID,

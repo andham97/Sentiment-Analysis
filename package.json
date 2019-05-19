@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node build/server/server.js",
     "pretest": "eslint ./src --ext .js --ignore-path .gitignore",
-    "test": "jest --detectOpenHandles",
+    "test": "jest",
     "clean": "rm -rf build && mkdir build",
     "build-server": "babel -d ./build/server ./src/server",
     "build-client": "webpack",

@@ -7,8 +7,8 @@ jest.mock('./src/server/ics');
 global.ST = ST;
 global.app = app;
 global.jsonParse = st => st
-  .expect('Content-Type', /json/)
   .expect(200)
+  .expect('Content-Type', /json/)
   .then(data => new Promise(resolve => resolve(JSON.parse(data.res.text))));
 
 global.json = (url, method, inject) => {
