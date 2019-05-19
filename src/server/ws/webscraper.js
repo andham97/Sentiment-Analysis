@@ -5,12 +5,6 @@ import Module from 'module';
 import { getCloudant } from '../ics';
 
 /**
- * Database instance
- * @type {Cloudant}
- */
-let db;
-
-/**
  * Host index
  * @type {Object}
  */
@@ -23,9 +17,9 @@ let index;
  * @param  {Function} cb
  */
 const loadIndex = (cb) => {
-  if (!db)
-    db = getCloudant().use('sa-meta');
-  db.find({ selector: { type: 'ws' } }, (err, result) => {
+  if (!getCloudant())
+    return cb('no cloudant');
+  getCloudant().use('sa-meta').find({ selector: { type: 'ws' } }, (err, result) => {
     if (err)
       return cb(err);
     index = result.docs[0];
@@ -41,7 +35,6 @@ const loadIndex = (cb) => {
  * @param  {Function} cb
  */
 const ws = (path, cb) => {
-  db = getCloudant().use('sa-meta');
   let hostname = url.parse(path).hostname;
   if (index[hostname] === undefined) {
     Object.keys(index).forEach((key) => {
@@ -56,7 +49,13 @@ const ws = (path, cb) => {
     const host = index[hostname];
     let headline = '';
     for (let i = 0; i < host.headlines.length; i++) {
-      headline = page(host.headlines[i]).text();
+      if (host.headlines[i].search(/\[[0-9]+\]/) > -1) {
+        const partSel = host.headlines[i].split(' ').filter(part => part.search(/\[[0-9]+\]/) === -1).join(' ');
+        const selIndex = Number(host.headlines[i].split(' ').filter(part => part.search(/\[[0-9]+\]/) > -1)[0].replace(/(\[|\])/g, ''));
+        headline = page(partSel).get(selIndex).text();
+      }
+      else
+        headline = page(host.headlines[i]).text();
       if (headline.length > 0)
         break;
     }

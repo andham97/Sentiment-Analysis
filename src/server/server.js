@@ -112,4 +112,4 @@ server.listen(process.env.PORT || 3000, () => {
     Scheduler();
 });
 
-export default server;
+export { app, server };
