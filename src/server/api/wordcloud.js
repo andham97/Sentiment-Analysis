@@ -1,5 +1,5 @@
 import { getCloudant } from '../ics';
-import { getSources } from './searcg';
+import { getSources } from './search';
 
 /**
  * Get the words for the wordcloud
