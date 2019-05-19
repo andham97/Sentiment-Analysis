@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../style/ProgressbarGraph.css';
-import PropTypes from 'prop-types';
 
 /**
  * Progress bar graph
@@ -23,13 +22,5 @@ const ProgressBar = input => (
 const Filler = input => (
   <div className="filler" style={{ width: `${input.perc}%`, backgroundColor: `#${input.color}` }} />
 );
-
-ProgressBar.propTypes = {
-  perc: PropTypes.any,
-};
-
-Filler.propTypes = {
-  perc: PropTypes.any,
-};
 
 export default ProgressBar;

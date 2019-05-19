@@ -362,7 +362,6 @@ class AdminPanelStore extends React.Component {
 
 AdminPanelStore.propTypes = {
   children: PropTypes.any,
-  hosts: PropTypes.any,
 };
 
 export default AdminPanelStore;

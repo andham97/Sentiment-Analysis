@@ -69,6 +69,15 @@ class ResultSentiment extends Component {
     this.handleCheckedSentiment = this.handleCheckedSentiment.bind(this);
   }
 
+  componentWillMount() {
+    if (!this.context.search && localStorage.getItem('prev-search'))
+      this.context.getSearch(localStorage.getItem('prev-search'));
+    this.setState({
+      ...this.state,
+      checkedEmotion: [...this.context.searchOpts.checkedItemsEmotion],
+    });
+  }
+
   /**
    * Redirect to rul
    *

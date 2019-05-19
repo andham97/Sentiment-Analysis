@@ -326,8 +326,6 @@ class NewSearch extends Component {
 }
 
 NewSearch.propTypes = {
-  checkboxesNews: PropTypes.any,
-  searchdata: PropTypes.any,
   history: PropTypes.any,
 };
 
