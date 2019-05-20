@@ -8,9 +8,9 @@
   "description": "",
   "scripts": {
     "start": "node build/server/server.js",
-    "pretest": "eslint ./src --ext .js --ignore-path .gitignore && rm -rf coverage",
+    "pretest": "eslint ./src --ext .js --ignore-path .gitignore",
     "test": "jest",
-    "posttest": "codecov",
+    "posttest": "rm -rf coverage && codecov",
     "clean": "rm -rf build && mkdir build",
     "build-server": "babel -d ./build/server ./src/server",
     "build-client": "webpack",
