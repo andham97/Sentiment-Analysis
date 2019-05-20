@@ -19,7 +19,7 @@ let index;
 const loadIndex = (cb) => {
   if (!getCloudant())
     return cb('no cloudant');
-  getCloudant().use('sa-meta').find({ selector: { type: 'ws' } }).then((result) => {
+  getCloudant().db.use('sa-meta').find({ selector: { type: 'ws' } }).then((result) => {
     index = result.docs[0];
     cb();
   })

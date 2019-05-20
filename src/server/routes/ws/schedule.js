@@ -7,7 +7,8 @@ router.get('/', (req, res) => {
   API.getSchedule().then((data) => {
     res.json(data);
   }).catch((err) => {
-    console.error(err);
+    if (!global.__DEV__)
+      console.error(err);
     res.status(500).send('ERROR');
   });
 });
@@ -32,7 +33,8 @@ router.post('/', (req, res) => {
   }).then((item) => {
     res.json(item);
   }).catch((err) => {
-    console.error(err);
+    if (!global.__DEV__)
+      console.error(err);
     res.status(500).send('ERROR');
   });
 });
@@ -41,7 +43,8 @@ router.delete('/:id', (req, res) => {
   API.deleteScheduleItem(req.params.id).then((uid) => {
     res.json(uid);
   }).catch((err) => {
-    console.error(err);
+    if (!global.__DEV__)
+      console.error(err);
     res.status(500).send('ERROR');
   });
 });

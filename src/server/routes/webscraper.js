@@ -23,7 +23,8 @@ router.get('/hosts', (req, res) => {
   API.getWebscraperHosts().then((data) => {
     res.json(data);
   }).catch((err) => {
-    console.error(err);
+    if (!global.__DEV__)
+      console.error(err);
     res.status(500).send('ERROR');
   });
 });
@@ -40,7 +41,8 @@ router.get('/urlCount', (req, res) => {
   API.urlCount().then((data) => {
     res.json({ count: data });
   }).catch((err) => {
-    console.error(err);
+    if (!global.__DEV__)
+      console.error(err);
     res.status(500).send('ERROR');
   });
 });
@@ -81,7 +83,7 @@ const patternExists = (object, pattern) => {
 };
 
 router.post('/hosts', (req, res) => {
-  const requirements = ['hostnames', 'hostDeletions', 'name', 'headlines', 'body', 'sourceID', 'exclude', 'date.sel', 'date.fn', 'validationURL'];
+  const requirements = ['hostnames', 'hostDeletions', 'name', 'headlines', 'body', 'sourceID', 'date.sel', 'date.fn', 'validationURL'];
   if (requirements.filter(e => !patternExists(req.body, e)).length !== 0)
     return res.status(400).send('Error: requires hostname, headline, body, sourceID and date');
   if (!req.body.exclude)
@@ -112,10 +114,11 @@ router.post('/fetchNews', (req, res) => {
         });
       }
     }).catch((err) => {
-      console.error(err);
+      if (!global.__DEV__)
+        console.error(err);
       setTimeout(() => {
         if (!res.headersSent)
-          res.status(200).send('Success');
+          res.status(2400).send('Success');
       }, 500);
     });
   }).catch(() => {
@@ -136,7 +139,7 @@ router.post('/', (req, res) => {
   if (req.body.urls.filter(url => typeof url !== 'string').length > 0)
     return res.status(400).send('Invalid URL');
   API.urlCheck(req.body.urls).then((list) => {
-    res.status(200).send(list.length);
+    res.json(list.length);
     if (list.length > 0) {
       ws(list, (data) => {
         if (!data)
@@ -159,7 +162,8 @@ router.post('/', (req, res) => {
       }, 500);
     }
   }).catch((err) => {
-    console.error(err);
+    if (!global.__DEV__)
+      console.error(err);
     setTimeout(() => {
       if (!res.headersSent)
         res.status(200).send('Success');

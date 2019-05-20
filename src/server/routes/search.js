@@ -8,7 +8,8 @@ router.get('/sources', (req, res) => {
   API.getSources().then((data) => {
     res.json(data);
   }).catch((err) => {
-    console.error(err);
+    if (!global.__DEV__)
+      console.error(err);
     res.status(err.code || 500).send(err.err ? (err.err.message || 'ERROR') : 'ERROR');
   });
 });
@@ -23,7 +24,8 @@ router.get('/', (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      console.error(err);
+      if (!global.__DEV__)
+        console.error(err);
       res.status(err.code || 500).send(err.err ? (err.err.message || 'ERROR') : 'ERROR');
     });
 });

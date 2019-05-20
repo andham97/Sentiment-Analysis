@@ -182,7 +182,8 @@ const run = item => ((cb) => {
           });
         }
       }).catch((err) => {
-        console.error(err);
+        if (!global.__DEV__)
+          console.error(err);
       });
     });
   });
@@ -494,8 +495,9 @@ const processInput = (data) => {
  * Start the scheduler and cmd tool
  *
  * @function start
+ * @param {Function} cb
  */
-const start = () => {
+const start = (cb) => {
   console.log('Starting scheduler');
   API.registerScheduleListener((items) => {
     if (!items)
@@ -508,6 +510,8 @@ const start = () => {
       update();
       console.log('Scheduler commandline tool is ready:');
       process.stdin.on('data', processInput);
+      if (cb)
+        cb();
     }).catch(() => {
       if (schedule.length === 0)
         setTimeout(ft, 2000);

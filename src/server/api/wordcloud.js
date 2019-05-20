@@ -38,7 +38,8 @@ const getWordcloud = () => new Promise((resolve, reject) => {
           .filter(o => sources
             .filter(source => source.key === o.key || source.value === o.key).length === 0));
       }).catch((err) => {
-        console.error(err);
+        if (!global.__DEV__)
+          console.error(err);
         reject();
       });
     }).catch((err) => {

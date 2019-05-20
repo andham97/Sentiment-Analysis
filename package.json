@@ -8,8 +8,9 @@
   "description": "",
   "scripts": {
     "start": "node build/server/server.js",
-    "pretest": "eslint ./src --ext .js --ignore-path .gitignore",
+    "pretest": "eslint ./src --ext .js --ignore-path .gitignore && rm -rf coverage",
     "test": "jest --verbose",
+    "posttest": "codecov",
     "clean": "rm -rf build && mkdir build",
     "build-server": "babel -d ./build/server ./src/server",
     "build-client": "webpack",
@@ -101,6 +102,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
+    "codecov": "^3.5.0",
     "css-loader": "^2.1.0",
     "documentation": "^11.0.0",
     "enzyme": "^3.8.0",

@@ -56,7 +56,7 @@ const indexFunc = {
         const nkey = Object.keys(val[key])[0];
         const pattern = nkey.split('.');
         const dval = pattern.reduce((acc, k) => acc[k], doc);
-        return dval.search(RegExp(val[nkey].$regex.slice(4), 'i')) > -1;
+        return dval.search(RegExp(val.$not[nkey].$regex.slice(4), 'i')) > -1;
       }
       const pattern = key.split('.');
       const dval = pattern.reduce((acc, k) => acc[k], doc);
@@ -118,7 +118,7 @@ const cloudant = {
 };
 
 const nlu = {
-  analyse: (_opts, cb) => cb(null, nluAnalysis),
+  analyze: (_opts, cb) => cb(null, nluAnalysis),
 };
 
 const newsapi = {

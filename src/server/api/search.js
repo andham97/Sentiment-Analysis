@@ -108,7 +108,8 @@ const search = (query, options) => new Promise((resolve, reject) => {
       });
       resolve({ ...data, params: includes });
     }).catch((err) => {
-      console.error(err);
+      if (!global.__DEV__)
+        console.error(err);
       if (err.statusCode === 401 || (err.reason && err.reason.indexOf('_design')) || (err.reason && err.reason.indexOf('_reader')))
         find();
       else

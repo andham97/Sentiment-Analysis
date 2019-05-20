@@ -66,7 +66,7 @@ const analyze = (urlData, cb) => {
                 if (getCloudant())
                   connectCloudant();
               }
-              else if (err.statusCode && err.statusCode !== 429)
+              else if (err.statusCode && err.statusCode !== 429 && !global.__DEV__)
                 console.error(err);
               setTimeout(() => {
                 ins(doc);

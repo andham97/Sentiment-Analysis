@@ -74,3 +74,4 @@ dataset.txt
 cache/
 *.csv
 *.pem
+codecov.yml
