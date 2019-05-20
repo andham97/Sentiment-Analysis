@@ -35,9 +35,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/Checkbox.js~Checkbox.html">Checkbox</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/DatePickerInterval.js~DatePickerInterval.html">DatePickerInterval</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/ErrorBoundary.js~ErrorBoundary.html">ErrorBoundary</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/Filter.js~Filter.html">Filter</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/LoadingPage.js~LoadingPage.html">LoadingPage</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/TimeInterval.js~TimeInterval.html">TimeInterval</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-admin">components/admin</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/admin/AdminPanel.js~AdminPanel.html">AdminPanel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/admin/AdminPanelStore.js~AdminPanelStore.html">AdminPanelStore</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/client/components/admin/MultiListInput.js~MultiListInput.html">MultiListInput</a></span></span></li>
@@ -61,7 +59,6 @@
 <div class="content" data-ice="content"><h1 data-ice="title">client/components/result/graph/ProgressbarGraph.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
 import &apos;../../style/ProgressbarGraph.css&apos;;
-import PropTypes from &apos;prop-types&apos;;
 
 /**
  * Progress bar graph
@@ -84,14 +81,6 @@ const ProgressBar = input =&gt; (
 const Filler = input =&gt; (
   &lt;div className=&quot;filler&quot; style={{ width: `${input.perc}%`, backgroundColor: `#${input.color}` }} /&gt;
 );
-
-ProgressBar.propTypes = {
-  perc: PropTypes.any,
-};
-
-Filler.propTypes = {
-  perc: PropTypes.any,
-};
 
 export default ProgressBar;
 </code></pre>

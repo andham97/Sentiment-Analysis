@@ -66,12 +66,6 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "sentiment-analysis/client/components/filter.js~filter",
-    "class/client/components/Filter.js~Filter.html",
-    "<span>Filter</span> <span class=\"search-result-import-path\">sentiment-analysis/client/components/Filter.js</span>",
-    "class"
-  ],
-  [
     "sentiment-analysis/client/components/loadingpage.js~loadingpage",
     "class/client/components/LoadingPage.js~LoadingPage.html",
     "<span>LoadingPage</span> <span class=\"search-result-import-path\">sentiment-analysis/client/components/LoadingPage.js</span>",
@@ -141,12 +135,6 @@ window.esdocSearchIndex = [
     "sentiment-analysis/client/components/dashboard/searchstore.js~searchstore",
     "class/client/components/dashboard/SearchStore.js~SearchStore.html",
     "<span>SearchStore</span> <span class=\"search-result-import-path\">sentiment-analysis/client/components/dashboard/SearchStore.js</span>",
-    "class"
-  ],
-  [
-    "sentiment-analysis/client/components/timeinterval.js~timeinterval",
-    "class/client/components/TimeInterval.js~TimeInterval.html",
-    "<span>TimeInterval</span> <span class=\"search-result-import-path\">sentiment-analysis/client/components/TimeInterval.js</span>",
     "class"
   ],
   [
@@ -570,18 +558,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "client/components/filter.js",
-    "file/client/components/Filter.js.html",
-    "client/components/Filter.js",
-    "file"
-  ],
-  [
-    "client/components/filter.js~filter#render",
-    "class/client/components/Filter.js~Filter.html#instance-method-render",
-    "client/components/Filter.js~Filter#render",
-    "method"
-  ],
-  [
     "client/components/header.js",
     "file/client/components/Header.js.html",
     "client/components/Header.js",
@@ -604,36 +580,6 @@ window.esdocSearchIndex = [
     "class/client/components/LoadingPage.js~LoadingPage.html#instance-method-render",
     "client/components/LoadingPage.js~LoadingPage#render",
     "method"
-  ],
-  [
-    "client/components/timeinterval.js",
-    "file/client/components/TimeInterval.js.html",
-    "client/components/TimeInterval.js",
-    "file"
-  ],
-  [
-    "client/components/timeinterval.js~timeinterval#constructor",
-    "class/client/components/TimeInterval.js~TimeInterval.html#instance-constructor-constructor",
-    "client/components/TimeInterval.js~TimeInterval#constructor",
-    "method"
-  ],
-  [
-    "client/components/timeinterval.js~timeinterval#handlechange",
-    "class/client/components/TimeInterval.js~TimeInterval.html#instance-method-handleChange",
-    "client/components/TimeInterval.js~TimeInterval#handleChange",
-    "method"
-  ],
-  [
-    "client/components/timeinterval.js~timeinterval#render",
-    "class/client/components/TimeInterval.js~TimeInterval.html#instance-method-render",
-    "client/components/TimeInterval.js~TimeInterval#render",
-    "method"
-  ],
-  [
-    "client/components/timeinterval.js~timeinterval#state",
-    "class/client/components/TimeInterval.js~TimeInterval.html#instance-member-state",
-    "client/components/TimeInterval.js~TimeInterval#state",
-    "member"
   ],
   [
     "client/components/admin/adminpanel.js",
@@ -1024,6 +970,12 @@ window.esdocSearchIndex = [
     "file/client/components/result/ResultSentiment.js.html",
     "client/components/result/ResultSentiment.js",
     "file"
+  ],
+  [
+    "client/components/result/resultsentiment.js~resultsentiment#componentwillmount",
+    "class/client/components/result/ResultSentiment.js~ResultSentiment.html#instance-method-componentWillMount",
+    "client/components/result/ResultSentiment.js~ResultSentiment#componentWillMount",
+    "method"
   ],
   [
     "client/components/result/resultsentiment.js~resultsentiment#constructor",

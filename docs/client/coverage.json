@@ -1,7 +1,7 @@
 {
-  "coverage": "60.81%",
-  "expectCount": 148,
-  "actualCount": 90,
+  "coverage": "61.26%",
+  "expectCount": 142,
+  "actualCount": 87,
   "files": {
     "client/App.js": {
       "expectCount": 2,
@@ -62,13 +62,6 @@
         32
       ]
     },
-    "client/components/Filter.js": {
-      "expectCount": 2,
-      "actualCount": 1,
-      "undocumentLines": [
-        13
-      ]
-    },
     "client/components/Header.js": {
       "expectCount": 2,
       "actualCount": 1,
@@ -82,15 +75,6 @@
       "undocumentLines": [
         14,
         19
-      ]
-    },
-    "client/components/TimeInterval.js": {
-      "expectCount": 5,
-      "actualCount": 2,
-      "undocumentLines": [
-        10,
-        12,
-        33
       ]
     },
     "client/components/admin/AdminPanel.js": {
@@ -202,12 +186,13 @@
       ]
     },
     "client/components/result/ResultSentiment.js": {
-      "expectCount": 11,
+      "expectCount": 12,
       "actualCount": 8,
       "undocumentLines": [
         62,
         64,
-        142
+        72,
+        147
       ]
     },
     "client/components/result/graph/DonutChart.js": {
