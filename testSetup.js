@@ -3,7 +3,7 @@ import { app } from './src/server/server';
 
 jest.mock('request-promise');
 jest.mock('./src/server/ics');
-jest.setTimeout(20000);
+jest.setTimeout(100000);
 
 global.ST = ST;
 global.app = app;
